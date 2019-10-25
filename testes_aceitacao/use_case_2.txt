@@ -1,7 +1,9 @@
 ﻿# Cadastro de Pesquisadores
 
 # - killua zoldyck: estudante ativo
+# - Uzumaki naruto: estudante ativo
 # - Prairie Johnson: externo desativo
+# - Joel: externo ativo
 # - heisenberg: professor ativo
 # - Matheus Gaudencio: professor ativo
 # - Eliane Araujo: professor ativo
@@ -10,6 +12,8 @@
 cadastraPesquisador nome="killua zoldyck" funcao="estudante" biografia="Interessado em eletricidade, o terceiro de cinco filhos da famosa familia Zaoldyeck." email="hunterxhunter@1998" fotoURL="https://godspeed"
 cadastraPesquisador nome="Prairie Johnson" funcao="externo" biografia="Interessada no estudo de multiplas dimensoes e no estudo dos sentidos humanos." email="theoa@2016" fotoURL="https://notblind"
 cadastraPesquisador nome="heisenberg" funcao="professor" biografia="Interresado nos efeitos da metafetamina e no estudo sobre o cancer. Pesquisador principal da pesquisa de radigrafia a fotons, peca fundamental na pesquisa que ganhou um premio nobel. " email="breakingbad@2008" fotoURL="https://iamthedanger"
+cadastraPesquisador nome="Uzumaki naruto" funcao="estudante" biografia="Interresado nos efeitos da marginalizacao de individuos pelo sociedade e seus empactos sociais." email="borutofathers@1997" fotoURL="https://dattebayo"
+cadastraPesquisador nome="Joel" funcao="externo" biografia="Interresado em fungos." email="thelastofus@2013" fotoURL="https://Cordyceps"
 
 desativaPesquisador email="theoa@2016"
 
@@ -39,23 +43,23 @@ cadastraPesquisador nome="vazio" funcao="estudante" biografia="Pesquisador vazio
 expect "vazio (estudante) - Pesquisador vazio para testar as alteracoes dos seus atributos. - vazio@always - https://vazio" exibePesquisador email="vazio@always"
 
 ## Teste para alterar nome do pesquisador
-alteraPesquisador email= "vazio@always" atributo="nome" novoValor="Thomas A. Anderson"
+alteraPesquisador email="vazio@always" atributo="nome" novoValor="Thomas A. Anderson"
 expect "Thomas A. Anderson (estudante) - Pesquisador vazio para testar as alteracoes dos seus atributos. - vazio@always - https://vazio" exibePesquisador email="vazio@always"
 
 ## Teste para alterar funcao do pesquisador
-alteraPesquisador email= "vazio@always" atributo="funcao" novoValor="professor"
+alteraPesquisador email="vazio@always" atributo="funcao" novoValor="professor"
 expect "Thomas A. Anderson (professor) - Pesquisador vazio para testar as alteracoes dos seus atributos. - vazio@always - https://vazio" exibePesquisador email="vazio@always"
 
 ## Teste de alterar biografia do pesquisador
-alteraPesquisador email= "vazio@always" atributo="biografia" novoValor="Profetizado como aquele que libertara a humanidade da matrix em que vive, uma pessoa breathtaking."
+alteraPesquisador email="vazio@always" atributo="biografia" novoValor="Profetizado como aquele que libertara a humanidade da matrix em que vive, uma pessoa breathtaking."
 expect "Thomas A. Anderson (professor) - Profetizado como aquele que libertara a humanidade da matrix em que vive, uma pessoa breathtaking. - vazio@always - https://vazio" exibePesquisador email="vazio@always"
 
 ## Teste de alteracao a foto do pesquisador
-alteraPesquisador email= "vazio@always" atributo="fotoURL" novoValor="https://theOne"
+alteraPesquisador email="vazio@always" atributo="fotoURL" novoValor="https://theOne"
 expect "Thomas A. Anderson (professor) - Profetizado como aquele que libertara a humanidade da matrix em que vive, uma pessoa breathtaking. - vazio@always - https://theOne" exibePesquisador email="vazio@always"
 
 ## Teste de alteracao de email do pesquisador
-alteraPesquisador email= "vazio@always" atributo="email" novoValor="matrix@1999"
+alteraPesquisador email="vazio@always" atributo="email" novoValor="matrix@1999"
 expect "Thomas A. Anderson (professor) - Profetizado como aquele que libertara a humanidade da matrix em que vive, uma pessoa breathtaking. - matrix@1999 - https://theOne" exibePesquisador email="matrix@1999"
 
 
@@ -68,24 +72,24 @@ expectError "Pesquisador nao encontrado" alteraPesquisador email="livinha@ccc.uf
 
 
 ## Erros de vazio ou nulo
-expectError "Campo nome nao pode ser nulo ou vazio." alteraPesquisador email= "matrix@1999" atributo="nome" novoValor=""
-expectError "Campo funcao nao pode ser nulo ou vazio." alteraPesquisador email= "matrix@1999" atributo="funcao" novoValor=""
-expectError "Campo biografia nao pode ser nulo ou vazio." alteraPesquisador email= "matrix@1999" atributo="biografia" novoValor=""
-expectError "Campo email nao pode ser nulo ou vazio." alteraPesquisador email= "matrix@1999" atributo="email" novoValor=""
-expectError "Campo fotoURL nao pode ser nulo ou vazio." alteraPesquisador email= "matrix@1999" atributo="fotoURL" novoValor=""
+expectError "Campo nome nao pode ser nulo ou vazio." alteraPesquisador email="matrix@1999" atributo="nome" novoValor=""
+expectError "Campo funcao nao pode ser nulo ou vazio." alteraPesquisador email="matrix@1999" atributo="funcao" novoValor=""
+expectError "Campo biografia nao pode ser nulo ou vazio." alteraPesquisador email="matrix@1999" atributo="biografia" novoValor=""
+expectError "Campo email nao pode ser nulo ou vazio." alteraPesquisador email="matrix@1999" atributo="email" novoValor=""
+expectError "Campo fotoURL nao pode ser nulo ou vazio." alteraPesquisador email="matrix@1999" atributo="fotoURL" novoValor=""
 
 ## Erros de formato invalido
 
 ### Email invalido
-expectError "Formato de email invalido." alteraPesquisador email= "matrix@1999" atributo="fotoURL" novoValor="@teste"
-expectError "Formato de email invalido." alteraPesquisador email= "matrix@1999" atributo="fotoURL" novoValor="teste@"
-expectError "Formato de email invalido." alteraPesquisador email= "matrix@1999" atributo="fotoURL" novoValor="testeteste"
+expectError "Formato de email invalido." alteraPesquisador email="matrix@1999" atributo="email" novoValor="@teste"
+expectError "Formato de email invalido." alteraPesquisador email="matrix@1999" atributo="email" novoValor="teste@"
+expectError "Formato de email invalido." alteraPesquisador email="matrix@1999" atributo="email" novoValor="testeteste"
 
 ### Foto invalida
-expectError "Formato de foto invalido." alteraPesquisador email= "matrix@1999" atributo="fotoURL" novoValor="sem o necessario"
-expectError "Formato de foto invalido." alteraPesquisador email= "matrix@1999" atributo="fotoURL" novoValor="h t t p semONecesario"
-expectError "Formato de foto invalido." alteraPesquisador email= "matrix@1999" atributo="fotoURL" novoValor="https"
-expectError "Formato de foto invalido." alteraPesquisador email= "matrix@1999" atributo="fotoURL" novoValor="http"
+expectError "Formato de foto invalido." alteraPesquisador email="matrix@1999" atributo="fotoURL" novoValor="sem o necessario"
+expectError "Formato de foto invalido." alteraPesquisador email="matrix@1999" atributo="fotoURL" novoValor="h t t p semONecesario"
+expectError "Formato de foto invalido." alteraPesquisador email="matrix@1999" atributo="fotoURL" novoValor="https"
+expectError "Formato de foto invalido." alteraPesquisador email="matrix@1999" atributo="fotoURL" novoValor="http"
 
 
 #Testes de ativacao e desativacao de pesquisadores
@@ -99,7 +103,6 @@ cadastraPesquisador nome="Livia Sampaio" funcao="professor" biografia="Pense num
 desativaPesquisador email="matheusgr@computacao.ufcg.edu.br"
 desativaPesquisador email="eliane@computacao.ufcg.edu.br"
 desativaPesquisador email="livia@computacao.ufcg.edu.br"
-desativaPesquisador email="theoa@2016"
 
 ## Teste de ativacao de pesquisador
 ativaPesquisador email="matheusgr@computacao.ufcg.edu.br"
@@ -127,9 +130,15 @@ desativaPesquisador email="matheusgr@computacao.ufcg.edu.br"
 desativaPesquisador email="eliane@computacao.ufcg.edu.br"
 desativaPesquisador email="livia@computacao.ufcg.edu.br"
 
-expectError "Pesquisador ja ativado." desativaPesquisador email="matheusgr@computacao.ufcg.edu.br"
-expectError "Pesquisador ja ativado." desativaPesquisador email="eliane@computacao.ufcg.edu.br"
-expectError "Pesquisador ja ativado." desativaPesquisador email="livia@computacao.ufcg.edu.br"
+expectError "Pesquisador inativo." desativaPesquisador email="matheusgr@computacao.ufcg.edu.br"
+expectError "Pesquisador inativo." desativaPesquisador email="eliane@computacao.ufcg.edu.br"
+expectError "Pesquisador inativo." desativaPesquisador email="livia@computacao.ufcg.edu.br"
+
+
+#Ativando pesquisadores
+ativaPesquisador email="matheusgr@computacao.ufcg.edu.br"
+ativaPesquisador email="eliane@computacao.ufcg.edu.br"
+ativaPesquisador email="livia@computacao.ufcg.edu.br"
 
 
 # Teste de exibir
@@ -146,6 +155,13 @@ expect "Matheus Gaudencio (professor) - Um tchuchucador de respeito - matheusgr@
 expect "Eliane Araujo (professor) - A rainha das rainhas - eliane@computacao.ufcg.edu.br - https://penseNumaMulherLinda" exibePesquisador email="eliane@computacao.ufcg.edu.br"
 expect "Livia Sampaio (professor) - Pense numa pesquisadora de respeito - livia@computacao.ufcg.edu.br - https://penseNumaMulherMaravilhosa" exibePesquisador email="livia@computacao.ufcg.edu.br"
 
+
+# verificando ativacao
+
+expectError "Email nao pode ser vazio ou nulo." pesquisadorEhAtivo email=""
+expectError "Pesquisador nao encontrado" pesquisadorEhAtivo email="artur@fazendoOsTestes.ccc.ufcg.edu.br"
+expect true pesquisadorEhAtivo email="hunterxhunter@1998"
+expect false pesquisadorEhAtivo email="theoa@2016"
 
 # Casos de precedencia
 
@@ -170,7 +186,7 @@ expectError "Campo funcao nao pode ser nulo ou vazio." cadastraPesquisador nome=
 ### Biografia no cadastro de pesquisador
 
 expectError "Campo biografia nao pode ser nulo ou vazio." cadastraPesquisador nome="teste" funcao="teste" biografia="" email="" fotoURL=""
-expectError "Campo biografia nao pode ser nulo ou vazio." cadastraPesquisador nome="teste" funcao="teste" biografia="" email="teste@teste" fotoURL="https://teste"
+expectError "Campo biografia nao pode ser nulo ou vazio." cadastraPesquisador nome="teste" funcao="teste" biografia="" email="teste@teste" fotoURL=""
 expectError "Campo biografia nao pode ser nulo ou vazio." cadastraPesquisador nome="teste" funcao="teste" biografia="" email="" fotoURL="https://teste"
 
 ### Email no cadastro de pesquisador
@@ -180,4 +196,4 @@ expectError "Campo email nao pode ser nulo ou vazio." cadastraPesquisador nome="
 
 ### fotoURL no cadastro de pesquisador
 
-expectError "Campo email nao pode ser nulo ou vazio." cadastraPesquisador nome="teste" funcao="teste" biografia="teste" email="teste@teste" fotoURL=""
+expectError "Campo fotoURL nao pode ser nulo ou vazio." cadastraPesquisador nome="teste" funcao="teste" biografia="teste" email="teste@teste" fotoURL=""

@@ -13,7 +13,7 @@ cadastraProblema descricao="A dificuldade da predicao do sistema eleitoral brasi
 #ERRO NO CADASTRO DE NOVOS PROBLEMAS
 
 expectError "Campo descricao nao pode ser nulo ou vazio." cadastraProblema descricao="" viabilidade=2
-expectError "Campo viabilidade nao pode ser nulo ou vazio." cadastraProblema descricao="A dificuldade de gerar dados precisos em experimentos sobre dinamica em gravidade 0" viabilidade=""
+expectError "Campo viabilidade nao pode ser nulo ou vazio." cadastraProblema descricao="A dificuldade de gerar dados precisos em experimentos sobre dinamica em gravidade 0" viabilidade=
 expectError "Valor invalido de viabilidade." cadastraProblema descricao="A dificuldade de gerar dados precisos em experimentos sobre dinamica em gravidade 0" viabilidade="relativo"
 expectError "Valor invalido de viabilidade." cadastraProblema descricao="A dificuldade de gerar dados precisos em experimentos sobre dinamica em gravidade 0" viabilidade=-3
 expectError "Valor invalido de viabilidade." cadastraProblema descricao="A dificuldade de gerar dados precisos em experimentos sobre dinamica em gravidade 0" viabilidade=0
@@ -92,4 +92,23 @@ expect "O4 - GERAL - Aumentar a porcentagem de pessoas que entregam os laborator
 
 expectError "Objetivo nao encontrado" exibeObjetivo codigo="O5"
 expectError "Objetivo nao encontrado" exibeObjetivo codigo="O47"
+
+
+#Precedencia
+
+expectError "Campo descricao nao pode ser nulo ou vazio." cadastraProblema descricao="" viabilidade=2
+expectError "Campo descricao nao pode ser nulo ou vazio." cadastraProblema descricao="" viabilidade=-2
+
+expectError "Campo descricao nao pode ser nulo ou vazio." cadastraProblema descricao="" viabilidade=
+expectError "Campo descricao nao pode ser nulo ou vazio." cadastraProblema descricao="" viabilidade=-2
+
+expectError "Campo tipo nao pode ser nulo ou vazio." cadastraObjetivo tipo="" descricao="" aderencia= viabilidade=
+expectError "Campo tipo nao pode ser nulo ou vazio." cadastraObjetivo tipo="" descricao="" aderencia=-1 viabilidade=-2
+expectError "Campo descricao nao pode ser nulo ou vazio." cadastraObjetivo tipo="GERAL" descricao="" aderencia= viabilidade=
+expectError "Campo descricao nao pode ser nulo ou vazio." cadastraObjetivo tipo="GERAL" descricao="" aderencia=-1 viabilidade=-2
+expectError "Campo aderencia nao pode ser nulo ou vazio." cadastraObjetivo tipo="GERAL" descricao="Diminuir a frequencia de mensagens homofobicas trocadas em chats online entre alunos de todos os periodos de computacao" aderencia= viabilidade=
+expectError "Campo aderencia nao pode ser nulo ou vazio." cadastraObjetivo tipo="GERAL" descricao="Diminuir a frequencia de mensagens homofobicas trocadas em chats online entre alunos de todos os periodos de computacao" aderencia= viabilidade=-2
+expectError "Valor invalido de aderencia" cadastraObjetivo tipo="GERAL" descricao="Diminuir a frequencia de mensagens homofobicas trocadas em chats online entre alunos de todos os periodos de computacao" aderencia=-2 viabilidade=
+expectError "Valor invalido de aderencia" cadastraObjetivo tipo="GERAL" descricao="Diminuir a frequencia de mensagens homofobicas trocadas em chats online entre alunos de todos os periodos de computacao" aderencia=-2 viabilidade=-2
+
 
