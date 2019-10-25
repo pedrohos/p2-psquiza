@@ -1,0 +1,79 @@
+﻿# Cadastro de Pesquisa
+
+# - COM1: ativada
+# - ELE1: ativada
+# - COM2: ativada
+# - FER1: desativada
+# - PSI1: desativada
+
+
+cadastraPesquisa descricao="Homofobia em mensagens online de alunos de computacao do primeiro período." campoDeInteresse="computacao, homofobia"
+cadastraPesquisa descricao="Avaliação de modelos preditivos para a extracao de características significativas nas eleicoes brasileiras." campoDeInteresse="eleicao"
+cadastraPesquisa descricao="Autoavaliacao na Disciplina de Programacao Orientada a Objeto." campoDeInteresse="computacao, poo"
+cadastraPesquisa descricao="Aspectos da fermentacao do mosto cervejeiro por leveduras nao-Saccharomyces." campoDeInteresse="fermentacao, cerveja"
+cadastraPesquisa descricao="Alienacao Parental e o Sistema de Justica Brasileiro." campoDeInteresse="psicologia, sistema juridico, alienacao parental, brasil"
+encerraPesquisa codigo="FER1" motivo="Cerveja causou intoxicacao alimentar"
+encerraPesquisa codigo="PSI1" motivo="Pesquisa concluida"
+
+
+# descricao ou campoDeInteresse vazios no cadastro de pesquisa
+
+expectError "Descricao nao pode ser nula ou vazia." cadastraPesquisa descricao="" campoDeInteresse="computacao, homofobia"
+expectError "Formato do campo de interesse invalido." cadastraPesquisa descricao="Homofobia em mensagens online de alunos de computacao do primeiro periodo." campoDeInteresse=""
+
+
+# Entrada do campo de interesse invalido
+
+expectError "Formato do campo de interesse invalido." cadastraPesquisa descricao="Sistemas automatizados para acessibilidade de deficientes em postos de trabalho." campoDeInteresse="Haruka kanata: Fumikomu ze akuseru Kakehiki wa nai sa, sōda yo Yoru o nukeru Nejikomu-sa saigo ni Sashihiki zero-sa, sōda yo Hibi o kezuru Kokoro o sotto Aite gyu tto Hikiyosetara Todoku yo kitto Tsutau yo motto-sa Iki isoide shiboritotte Motsureru ashida"
+expectError "Formato do campo de interesse invalido." cadastraPesquisa descricao="Sistemas automatizados para acessibilidade de deficientes em postos de trabalho." campoDeInteresse="acessibilidade, , ,automatizacao"
+expectError "Formato do campo de interesse invalido." cadastraPesquisa descricao="Sistemas automatizados para acessibilidade de deficientes em postos de trabalho." campoDeInteresse=" , , ,"
+expectError "Formato do campo de interesse invalido." cadastraPesquisa descricao="Sistemas automatizados para acessibilidade de deficientes em postos de trabalho." campoDeInteresse="acessibilidade, automatizacao, sistema,condicoes de trabalho, mundo melhor"
+expectError "Formato do campo de interesse invalido." cadastraPesquisa descricao="Sistemas automatizados para acessibilidade de deficientes em postos de trabalho." campoDeInteresse="ho"
+
+
+# ativacao e encerramento
+
+expectError "Pesquisa nao encontrada." ativaPesquisa codigo="ENE1"
+expectError "Pesquisa nao encontrada." encerraPesquisa codigo="ENE1"
+expectError "Pesquisa ja ativada." ativaPesquisa codigo="COM1"
+expectError "Pesquisa desativada." encerraPesquisa codigo="PSI1" motivo="quero fechar de novo mesmo"
+encerraPesquisa codigo="COM2" motivo="Pesquisa concluida"
+ativaPesquisa codigo="COM2"
+
+
+# alterar pesquisas
+
+expectError "Pesquisa nao encontrada." alteraPesquisa codigo="ENE1" conteudoASerAlterado="descricao" novoConteudo="Modelagem do motor de inducao em estudos de estabilidade de tensao"
+expectError "Pesquisa nao encontrada." alteraPesquisa codigo="ENE1" conteudoASerAlterado="campoDeInteresse" novoConteudo="age of aquarius"
+expectError "Pesquisa desativada." alteraPesquisa codigo="PSI1" conteudoASerAlterado="campoDeInteresse" novoConteudo="age of aquarius"
+expectError "Formato do campo de interesse invalido." alteraPesquisa codigo="COM1" conteudoASerAlterado="descricao" novoConteudo=""
+alteraPesquisa codigo="ELE1" conteudoASerAlterado="descricao" novoConteudo="Aumento da evasao no numero de eleitores paraibanos."
+alteraPesquisa codigo="ELE1" conteudoASerAlterado="campoDeInteresse" novoConteudo="eleicao, paraiba"
+expect "ELE1 - Aumento da evasao no numero de eleitores paraibanos. - eleicao, paraiba " exibePesquisa codigo="ELE1"
+
+
+# exibir
+expectError "Pesquisa nao encontrada." exibePesquisa codigo="ENE1"
+expect "COM1 - Homofobia em mensagens online de alunos de computação do primeiro período. - computacao, homofobia " exibePesquisa codigo="COM1"
+
+
+# verificando ativacao
+
+expectError "Pesquisa nao encontrada." ehAtiva codigo="ENE1"
+expected true ehAtiva codigo="COM1"
+expected false ehAtiva codigo="FER1"
+
+
+# Caso de precedencia de erros
+
+expectError "Descricao nao pode ser nula ou vazia." cadastraPesquisa descricao="" campoDeInteresse=""
+expectError "Pesquisa nao encontrada." alteraPesquisa codigo="ENE1" conteudoASerAlterado="" novoConteudo=""
+expectError "Pesquisa nao encontrada." alteraPesquisa codigo="ENE1" conteudoASerAlterado="descricao" novoConteudo=""
+expectError "Pesquisa nao encontrada." alteraPesquisa codigo="ENE1" conteudoASerAlterado="" novoConteudo="tesla e legal"
+expectError "Pesquisa desativada." alteraPesquisa codigo="PSI1" conteudoASerAlterado="campoDeInteresse" novoConteudo=""
+expectError "Pesquisa desativada." alteraPesquisa codigo="PSI1" conteudoASerAlterado="" novoConteudo=""
+expectError "Campo de interesse invalido." alteraPesquisa codigo="ELE1" conteudoASerAlterado="" novoConteudo=""
+expectError "Campo de interesse invalido." alteraPesquisa codigo="ELE1" conteudoASerAlterado="" novoConteúdo=""
+expectError "Campo de interesse invalido." alteraPesquisa codigo="ELE1" conteudoASerAlterado="IDADE" novoConteudo=""
+expectError "Pesquisa nao encontrada." encerraPesquisa codigo="ENE1" motivo=""
+expectError "Pesquisa desativada." encerraPesquisa codigo="PSI1" motivo=""
