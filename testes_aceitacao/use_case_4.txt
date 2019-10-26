@@ -41,10 +41,10 @@ expectError "Item nao pode ser nulo ou vazio." cadastraItem codigo="A1" item=""
 
 #exibindo atividades
 
-cadastraAtividade Descricao="Analise das intencoes de votos de diversas pesquisas para comparar com a analise das avaliação de modelos preditivos nas eleicoes brasileiras." nivelRisco="BAIXO" descricaoRisco="Sem grandes riscos, apenas analise de dados."
+cadastraAtividade Descricao="Analise das intencoes de votos de diversas pesquisas para comparar com a analise das avaliaï¿½ï¿½o de modelos preditivos nas eleicoes brasileiras." nivelRisco="BAIXO" descricaoRisco="Sem grandes riscos, apenas analise de dados."
 expect "Monitoramento de chats dos alunos de computacao do primeiro periodo. (BAIXO - Por se tratar de apenas um monitoramento, o risco nao e elevado.)" exibeAtividade codigo="A1"
 expect "Degustacao de uma nova remeca de cervejas, criadas a partir de um novo processo de fermentacao. (MEDIO - Degustadores podem sofrer com problemas de saude nessa atividade, tal como ser alergico a algum ingrediente da cerveja.)" exibeAtividade codigo="A2"
-expect "Analise das intencoes de votos de diversas pesquisas para comparar com a analise das avaliação de modelos preditivos nas eleicoes brasileiras. (BAIXO - Sem grandes riscos, apenas analise de dados.)" exibeAtividade codigo="A4"
+expect "Analise das intencoes de votos de diversas pesquisas para comparar com a analise das avaliaï¿½ï¿½o de modelos preditivos nas eleicoes brasileiras. (BAIXO - Sem grandes riscos, apenas analise de dados.)" exibeAtividade codigo="A4"
 expectError "Atividade nao encontrada" exibeAtividade codigo="A3"
 
 
@@ -68,5 +68,6 @@ expectError "Campo nivelRisco nao pode ser nulo ou vazio." cadastraAtividade Des
 expectError "Valor invalido do nivel do risco." cadastraAtividade Descricao="quantidade de participantes do concurso" nivelRisco="ENOOORME" descricaoRisco=""
 expectError "Valor invalido do nivel do risco." cadastraAtividade Descricao="quantidade de participantes do concurso" nivelRisco="ENOOORME" descricaoRisco="multiplas tentativas de roubo ao premio do concurso elevou o risco do item"
 expectError "Campo descricaoRisco nao pode ser nulo ou vazio." cadastraAtividade Descricao="quantidade de participantes do concurso" nivelRisco="ALTO" descricaoRisco=""
-expectError "Atividade nao encontrada" cadastraItem codigo="" item=""
-expectError "Atividade nao encontrada" cadastraItem codigo="B514" item=""
+expectError "Campo codigo nao pode ser nulo ou vazio." cadastraItem codigo="" item="facebook/messenger/slack"
+expectError "Atividade nao encontrada" cadastraItem codigo="B5555" item="facebook/messenger/slack"
+expectError "Item nao pode ser nulo ou vazio." cadastraItem codigo="B5555" item=""

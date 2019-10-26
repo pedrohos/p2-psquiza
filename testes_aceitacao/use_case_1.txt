@@ -1,4 +1,4 @@
-﻿# Cadastro de Pesquisa
+# Cadastro de Pesquisa
 
 # - COM1: ativada
 # - ELE1: ativada
@@ -54,14 +54,15 @@ expect "ELE1 - Aumento da evasao no numero de eleitores paraibanos. - eleicao, p
 
 # exibir
 expectError "Pesquisa nao encontrada." exibePesquisa codigo="ENE1"
-expect "COM1 - Homofobia em mensagens online de alunos de computação do primeiro período. - computacao, homofobia " exibePesquisa codigo="COM1"
+expect "COM1 - Homofobia em mensagens online de alunos de computação do primeiro período. - computacao, homofobia" exibePesquisa codigo="COM1"
 
 
 # verificando ativacao
 
-expectError "Pesquisa nao encontrada." ehAtiva codigo="ENE1"
-expected true ehAtiva codigo="COM1"
-expected false ehAtiva codigo="FER1"
+expectError "Codigo nao pode ser nulo ou vazio." pesquisaEhAtiva codigo=""
+expectError "Pesquisa nao encontrada." pesquisaEhAtiva codigo="ENE1"
+expected true pesquisaEhAtiva codigo="COM1"
+expected false pesquisaEhAtiva codigo="FER1"
 
 
 # Caso de precedencia de erros

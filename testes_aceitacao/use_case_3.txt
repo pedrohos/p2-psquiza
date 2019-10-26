@@ -21,9 +21,9 @@ expectError "Valor invalido de viabilidade." cadastraProblema descricao="A dific
 
 #CRIANDO NOVOS OBJETIVOS
 
-cadastraObjetivo tipo="GERAL" descricao="Diminuir a frequência de mensagens homofobicas trocadas em chats online entre alunos de primeiro período de computação." aderencia=4 viabilidade=2
+cadastraObjetivo tipo="GERAL" descricao="Diminuir a frequencia de mensagens homofobicas trocadas em chats online entre alunos de primeiro periodo de computacao." aderencia=4 viabilidade=2
 cadastraObjetivo tipo="ESPECIFICO" descricao="Realizar rodas de conversa entre alunos do curso, incluindo especialmente aqueles que emitem mensagens homofobicas e alunos ou pessoas homoafetivas." aderencia=5 viabilidade=4
-cadastraObjetivo tipo="ESPECIFICO" descricao="Detectar, através de bot eletrônico, a presença de mensagens eletrônicas com conteúdo homofóbico." aderencia=2 viabilidade=5
+cadastraObjetivo tipo="ESPECIFICO" descricao="Detectar, atraves de bot eletronico, a presenca de mensagens eletronicas com conteudo homofobico." aderencia=2 viabilidade=5
 cadastraObjetivo tipo="GERAL" descricao="Aumentar a porcentagem de pessoas que entregam os laboratorios na disciplina de LP2." aderencia=4 viabilidade=4
 cadastraObjetivo tipo="GERAL" descricao="Objetivo criado para ser deletado" aderencia=1 viabilidade=5
 
@@ -84,7 +84,7 @@ expectError "Problema nao encontrado" exibeProblema codigo="P666"
 
 expect "O1 - GERAL - Diminuir a frequencia de mensagens homofobicas trocadas em chats online entre alunos de primeiro periodo de computacao. - 6" exibeObjetivo codigo="O1"
 expect "O2 - ESPECIFICO - Realizar rodas de conversa entre alunos do curso, incluindo especialmente aqueles que emitem mensagens homofobicas e alunos ou pessoas homoafetivas. - 9" exibeObjetivo codigo="O2"
-expect "O3 - ESPECIFICO - Detectar, atraves de bot eletronico, a presença de mensagens eletronicas com conteúdo homofobico. - 7" exibeObjetivo codigo="O3"
+expect "O3 - ESPECIFICO - Detectar, atraves de bot eletronico, a presenca de mensagens eletronicas com conteudo homofobico. - 7" exibeObjetivo codigo="O3"
 expect "O4 - GERAL - Aumentar a porcentagem de pessoas que entregam os laboratorios na disciplina de LP2. - 8" exibeObjetivo codigo="O4"
 
 
