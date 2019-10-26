@@ -36,6 +36,7 @@ public class ControladorAtividade {
 
 	public void cadastraItem(String id, String item) {
 		Util.validaAtributo(id, "Campo codigo nao pode ser nulo ou vazio.");
+		Util.validaAtributo(item, "Item nao pode ser nulo ou vazio.");
 		if (!existeAtividade(id))
 			throw new IllegalArgumentException("Atividade nao encontrada");
 
