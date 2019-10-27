@@ -4,12 +4,16 @@ public class Sistema {
 
 	private ControladorAtividade controladorAtividade;
 	private ControladorPesquisa controladorPesquisa;
+	private ControladorMetas controladorMetas;
 	private ControladorPesquisador controladorPesquisador;
+
 
 	public Sistema() {
 		this.controladorAtividade = new ControladorAtividade();
 		this.controladorPesquisa = new ControladorPesquisa();
+		this.controladorMetas = new ControladorMetas();
 		this.controladorPesquisador = new ControladorPesquisador();
+
 	}
 
 	public void cadastraAtividade(String descricao, String nivelRisco, String descricaoRisco) {
@@ -64,6 +68,31 @@ public class Sistema {
 		return controladorPesquisa.ehAtiva(codigo);
 	}
 
+	public void cadastraProblema(String descricao, int viabilidade) {
+		controladorMetas.cadastraProblema(descricao, viabilidade);
+	}
+
+	public void cadastraObjetivo(String tipo, String descricao, int aderencia, int viabilidade) {
+		controladorMetas.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
+	}
+
+	public void apagarProblema(String codigo) {
+		controladorMetas.apagarProblema(codigo);
+	}
+
+	public void apagarObjetivo(String codigo) {
+		controladorMetas.apagarObjetivo(codigo);
+		
+	}
+
+	public String exibeProblema(String codigo) {
+		return controladorMetas.exibeProblema(codigo);
+		
+	}
+
+	public String exibeObjetivo(String codigo) {
+		return controladorMetas.exibeObjetivo(codigo);
+
 	public void cadastraPesquisador(String nome, String funcao, String biografia, String email, String fotoURL) {
 		controladorPesquisador.cadastraPesquisador(nome, funcao, biografia, email, fotoURL);
 	}
@@ -86,5 +115,6 @@ public class Sistema {
 
 	public boolean pesquisadorEhAtivo(String email) {
 		return controladorPesquisador.pesquisadorEhAtivo(email);
+
 	}
 }
