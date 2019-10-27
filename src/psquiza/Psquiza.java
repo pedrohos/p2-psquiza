@@ -62,6 +62,29 @@ public class Psquiza {
 		return sistema.contaItensRealizados(id);
 	}
 	
+	public void cadastraProblema(String descricao, int viabilidade) {
+		sistema.cadastraProblema(descricao, viabilidade);
+	}
+	
+	public void cadastraObjetivo(String tipo, String descricao, int aderencia, int viabilidade) {
+		sistema.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
+	}
+	
+	public void apagarProblema(String codigo) {
+		sistema.apagarProblema(codigo);
+	}
+	
+	public void apagarObjetivo(String codigo) {
+		sistema.apagarObjetivo(codigo);
+	}
+	
+	public String exibeProblema(String codigo) {
+		return sistema.exibeProblema(codigo);
+	}
+	
+	public String exibeObjetivo(String codigo) {
+		return sistema.exibeObjetivo(codigo);
+	}
 
 	public static void main(String[] args) {
 		args = new String[] { "psquiza.Psquiza", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",

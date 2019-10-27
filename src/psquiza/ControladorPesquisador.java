@@ -25,11 +25,12 @@ public class ControladorPesquisador {
 	public void alteraPesquisador(String email, String atributo, String novoValor) {
 		
 	}
-	atributo pode ser NOME, FUNCAO, BIOGRAFIA, EMAIL e FOTO
+	/**atributo pode ser NOME, FUNCAO, BIOGRAFIA, EMAIL e FOTO
 	void desativaPesquisador(String email)
 	void ativaPesquisador(String email)
 	String exibePesquisador(String email)
 	boolean pesquisadorEhAtivo(String email)
+	**/
 	
 	private void validaEmail(String email) {
 		if (!email.contains("@") || email.split("@")[0].trim().isEmpty() || email.split("@")[1].trim().isEmpty()) {
