@@ -116,6 +116,13 @@ public class ControladorPesquisador {
 		return pesquisadores.get(email).ehAtivo();
 	}
 
+	/**atributo pode ser NOME, FUNCAO, BIOGRAFIA, EMAIL e FOTO
+	void desativaPesquisador(String email)
+	void ativaPesquisador(String email)
+	String exibePesquisador(String email)
+	boolean pesquisadorEhAtivo(String email)
+	**/
+  
 	private void validaEmail(String email) {
 		if (!email.contains("@") || email.split("@").length != 2 || email.split("@")[0].trim().isEmpty() || email.split("@")[1].trim().isEmpty()) {
 			throw new IllegalArgumentException("Formato de email invalido.");
