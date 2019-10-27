@@ -9,6 +9,34 @@ public class Psquiza {
 	public Psquiza() {
 		sistema = new Sistema();
 	}
+	
+	public String cadastraPesquisa(String descricao, String campoDeInteresse) {
+		return sistema.cadastraPesquisa(descricao, campoDeInteresse);
+	}
+	
+	public void alteraPesquisa(String codigo, String conteudoASerAlterado, String novoConteudo) {
+		sistema.alteraPesquisa(codigo, conteudoASerAlterado, novoConteudo);
+	}
+	
+	public void encerraPesquisa(String codigo, String motivo) {
+		sistema.encerraPesquisa(codigo, motivo);
+	}
+	
+	public void encerraPesquisa(String codigo) {
+		sistema.encerraPesquisa(codigo);
+	}
+	
+	public void ativaPesquisa(String codigo) {
+		sistema.ativaPesquisa(codigo);
+	}
+	
+	public String exibePesquisa(String codigo) {
+		return sistema.exibePesquisa(codigo);
+	}
+	
+	public String pesquisaEhAtiva(String codigo) {
+		return sistema.pesquisaEhAtiva(codigo);
+	}
 
 	public void cadastraAtividade(String descricao, String nivelRisco, String descricaoRisco) {
 		sistema.cadastraAtividade(descricao, nivelRisco, descricaoRisco);
@@ -33,6 +61,7 @@ public class Psquiza {
 	public int contaItensRealizados(String id) {
 		return sistema.contaItensRealizados(id);
 	}
+	
 
 	public static void main(String[] args) {
 		args = new String[] { "psquiza.Psquiza", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",
