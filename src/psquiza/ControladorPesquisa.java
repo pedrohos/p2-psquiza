@@ -60,13 +60,14 @@ public class ControladorPesquisa {
 		if(!pesquisas.get(codigo).ehAtiva()) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
 		}
-		if (conteudoASerAlterado.equals("descricao")) {
+		if (conteudoASerAlterado.equals("DESCRICAO")) {
 			Util.validaAtributo(novoConteudo, "Descricao nao pode ser nula ou vazia.");
 			pesquisas.get(codigo).setDescricao(novoConteudo);
-		} else {
-			Util.validaAtributo(novoConteudo, "Campo de interesse invalido.");
+		} else if (conteudoASerAlterado.equals("CAMPO")){
 			validaCampoDeInteresse(novoConteudo);
 			pesquisas.get(codigo).setCampoDeInteresse(novoConteudo);
+		}else {
+			throw new IllegalArgumentException("Nao e possivel alterar esse valor de pesquisa.");
 		}
 	}
 
