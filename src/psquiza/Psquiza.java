@@ -37,6 +37,30 @@ public class Psquiza {
 	public String pesquisaEhAtiva(String codigo) {
 		return sistema.pesquisaEhAtiva(codigo);
 	}
+	
+	public void cadastraPesquisador(String nome, String funcao, String biografia, String email, String fotoURL) {
+		sistema.cadastraPesquisador(nome, funcao, biografia, email, fotoURL);
+	}
+
+	public void alteraPesquisador(String email, String atributo, String novoValor) {
+		sistema.alteraPesquisador(email, atributo, novoValor);
+	}
+
+	public void desativaPesquisador(String email) {
+		sistema.desativaPesquisador(email);
+	}
+
+	public void ativaPesquisador(String email) {
+		sistema.ativaPesquisador(email);
+	}
+
+	public String exibePesquisador(String email) {
+		return sistema.exibePesquisador(email);
+	}
+
+	public boolean pesquisadorEhAtivo(String email) {
+		return sistema.pesquisadorEhAtivo(email);
+	}
 
 	public void cadastraAtividade(String descricao, String nivelRisco, String descricaoRisco) {
 		sistema.cadastraAtividade(descricao, nivelRisco, descricaoRisco);

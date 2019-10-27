@@ -15,15 +15,15 @@ public class Pesquisador {
 		this.email = email;
 		this.foto = foto;
 		this.funcao = funcao;
-		ativo = true;
+		this.ativo = true;
 	}
 
 	public boolean ehAtivo() {
 		return ativo;
 	}
 	
-	public void setAtivo(boolean status) {
-		ativo = status;
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 	
 	public void setNome(String nome) {
