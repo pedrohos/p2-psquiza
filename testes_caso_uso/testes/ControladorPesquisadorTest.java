@@ -2,13 +2,18 @@ package testes;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ControladorPesquisadorTest {
+import psquiza.ControladorPesquisador;
 
-	@Test
-	void testControladorPesquisador() {
-		fail("Not yet implemented");
+class ControladorPesquisadorTest {
+	
+	private ControladorPesquisador controle; 
+
+	@BeforeEach
+	void criaContorle() {
+		controle = new ControladorPesquisador();
 	}
 
 	@Test
