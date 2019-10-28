@@ -17,17 +17,21 @@ public class ControladorPesquisador {
 		Util.validaAtributo(biografia, "Campo biografia nao pode ser nulo ou vazio.");
 		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
 		Util.validaAtributo(fotoURL, "Campo fotoURL nao pode ser nulo ou vazio.");
-		validaEmail(email);
-		validaFoto(fotoURL);
+		Util.validaEmail(email);
+		Util.validaFoto(fotoURL);
 
 		pesquisadores.put(email, new Pesquisador(nome, biografia, email, fotoURL, funcao));
 	}
 
 	public void alteraPesquisador(String email, String atributo, String novoValor) {
-		Util.validaAtributo(novoValor, "Campo " + atributo + " nao pode ser nulo ou vazio.");
 		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
-		Util.validaAtributo(atributo, "Campo atributo nao pode ser nulo ou vazio.");
-		validaEmail(email);
+		Util.validaAtributo(atributo, "Atributo nao pode ser vazio ou nulo.");
+		if (atributo.equals("FOTO")) {
+			Util.validaAtributo(novoValor, "Campo " + atributo.toLowerCase() + "URL nao pode ser nulo ou vazio.");
+		} else {
+			Util.validaAtributo(novoValor, "Campo " + atributo.toLowerCase() + " nao pode ser nulo ou vazio.");
+		}
+		Util.validaEmail(email);
 
 		if (!pesquisadores.containsKey(email)) {
 			throw new NoSuchElementException("Pesquisador nao encontrado");
@@ -38,31 +42,33 @@ public class ControladorPesquisador {
 		}
 
 		switch (atributo) {
-		case "nome":
+		case "NOME":
 			pesquisadores.get(email).setNome(novoValor);
 			break;
-		case "funcao":
+		case "FUNCAO":
 			pesquisadores.get(email).setFuncao(novoValor);
 			break;
-		case "biografia":
+		case "BIOGRAFIA":
 			pesquisadores.get(email).setBiografia(novoValor);
 			break;
-		case "email":
-			validaEmail(novoValor);
+		case "EMAIL":
+			Util.validaEmail(novoValor);
 			Pesquisador aux = pesquisadores.remove(email);
 			aux.setEmail(novoValor);
 			pesquisadores.put(novoValor, aux);
 			break;
-		case "fotoURL":
-			validaFoto(novoValor);
+		case "FOTO":
+			Util.validaFoto(novoValor);
 			pesquisadores.get(email).setFoto(novoValor);
 			break;
+		default:
+			throw new IllegalArgumentException("Atributo invalido.");
 		}
 	}
 
 	public void desativaPesquisador(String email) {
 		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
-		validaEmail(email);
+		Util.validaEmail(email);
 
 		if (!pesquisadores.containsKey(email)) {
 			throw new NoSuchElementException("Pesquisador nao encontrado");
@@ -77,7 +83,7 @@ public class ControladorPesquisador {
 
 	public void ativaPesquisador(String email) {
 		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
-		validaEmail(email);
+		Util.validaEmail(email);
 
 		if (!pesquisadores.containsKey(email)) {
 			throw new NoSuchElementException("Pesquisador nao encontrado");
@@ -92,7 +98,7 @@ public class ControladorPesquisador {
 
 	public String exibePesquisador(String email) {
 		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
-		validaEmail(email);
+		Util.validaEmail(email);
 
 		if (!pesquisadores.containsKey(email)) {
 			throw new NoSuchElementException("Pesquisador nao encontrado");
@@ -107,32 +113,13 @@ public class ControladorPesquisador {
 
 	public boolean pesquisadorEhAtivo(String email) {
 		Util.validaAtributo(email, "Email nao pode ser vazio ou nulo.");
-		validaEmail(email);
+		Util.validaEmail(email);
 
 		if (!pesquisadores.containsKey(email)) {
 			throw new NoSuchElementException("Pesquisador nao encontrado");
 		}
 		
 		return pesquisadores.get(email).ehAtivo();
-	}
-
-	/**atributo pode ser NOME, FUNCAO, BIOGRAFIA, EMAIL e FOTO
-	void desativaPesquisador(String email)
-	void ativaPesquisador(String email)
-	String exibePesquisador(String email)
-	boolean pesquisadorEhAtivo(String email)
-	**/
-  
-	private void validaEmail(String email) {
-		if (!email.contains("@") || email.split("@").length != 2 || email.split("@")[0].trim().isEmpty() || email.split("@")[1].trim().isEmpty()) {
-			throw new IllegalArgumentException("Formato de email invalido.");
-		}
-	}
-
-	private void validaFoto(String foto) {
-		if (foto.length() < 7 || (!foto.substring(0, 7).equals("http://") && !foto.substring(0, 8).equals("https://"))) {
-			throw new IllegalArgumentException("Formato de foto invalido.");
-		}
 	}
 
 }
