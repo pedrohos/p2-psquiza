@@ -92,6 +92,7 @@ public class Sistema {
 
 	public String exibeObjetivo(String codigo) {
 		return controladorMetas.exibeObjetivo(codigo);
+	}
 
 	public void cadastraPesquisador(String nome, String funcao, String biografia, String email, String fotoURL) {
 		controladorPesquisador.cadastraPesquisador(nome, funcao, biografia, email, fotoURL);
