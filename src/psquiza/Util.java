@@ -22,5 +22,5 @@ public final class Util {
 		if (foto.length() < 7 || (!foto.substring(0, 7).equals("http://") && !foto.substring(0, 8).equals("https://"))) {
 			throw new IllegalArgumentException("Formato de foto invalido.");
 		}
-	}
+	} 
 }

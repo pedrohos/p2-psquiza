@@ -62,7 +62,7 @@ public class Pesquisa {
 	}
 
 	/**
-	 * Retorna a descricao da pesquisa
+	 * Função que retorna a descricao da pesquisa
 	 * 
 	 * @return descricao da pesquisa
 	 */
@@ -73,7 +73,7 @@ public class Pesquisa {
 	/**
 	 * Função que retorna o campo de Interesse de uma pesquisa
 	 * 
-	 * @return o campo de interesse da pesquisa
+	 * @return campo de interesse da pesquisa
 	 */
 	public String getCampoDeInteresse() {
 		return campoDeInteresse;
@@ -82,7 +82,7 @@ public class Pesquisa {
 	/**
 	 * Função que retorna o código gerado de uma pesquisa
 	 * 
-	 * @return o código de uma pesquisa
+	 * @return código de uma pesquisa
 	 */
 	public String getCodigo() {
 		return codigo;
