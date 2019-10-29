@@ -3,11 +3,17 @@ package psquiza.controladores;
 public class Sistema {
 
 	private ControladorAtividade controladorAtividade;
+	/**
+	 * Controle que gerencia funcionalidades de uma Pesquisa.
+	 */
 	private ControladorPesquisa controladorPesquisa;
 	private ControladorMetas controladorMetas;
 	private ControladorPesquisador controladorPesquisador;
 
-
+	/**
+	 * Constrói um sistema inicializando os controladores de Pesquisa, Atividade,
+	 * Metas e Pesquisador.
+	 */
 	public Sistema() {
 		this.controladorAtividade = new ControladorAtividade();
 		this.controladorPesquisa = new ControladorPesquisa();
@@ -39,30 +45,81 @@ public class Sistema {
 		return controladorAtividade.contaItensRealizados(id);
 	}
 
+	/**
+	 * 
+	 * Função que cadastra uma nova pesquisa no sistema através de uma descrição e
+	 * campo de interesse passados.
+	 * 
+	 * @param descricao        pequeno texto que resume o assunto da pesquisa
+	 * @param campoDeInteresse Campo(s) a que a pesquisa se relaciona
+	 * @return o código da pesquisa cadastrada
+	 */
 	public String cadastraPesquisa(String descricao, String campoDeInteresse) {
 		return controladorPesquisa.cadastraPesquisa(descricao, campoDeInteresse);
 	}
 
+	/**
+	 * 
+	 * Altera um atributo da pesquisa, ou a descrição ou o Campo de Interesse
+	 * 
+	 * @param codigo               Código da pesquisa a ser alterada
+	 * @param conteudoASerAlterado atributo a ser alterado
+	 * @param novoConteudo         novo valor a ser adicionado
+	 */
 	public void alteraPesquisa(String codigo, String conteudoASerAlterado, String novoConteudo) {
 		controladorPesquisa.alteraPesquisa(codigo, conteudoASerAlterado, novoConteudo);
 	}
 
+	/**
+	 * 
+	 * Função que encerra (desativa) uma pesquisa e recebe o motivo da desativação.
+	 * 
+	 * @param codigo codigo da pesquisa
+	 * @param motivo motivo de ser desativada a pesquisa.
+	 */
 	public void encerraPesquisa(String codigo, String motivo) {
 		controladorPesquisa.encerraPesquisa(codigo, motivo);
 	}
 
+	/**
+	 * 
+	 * Função que encerra (desativa) uma pesquisa.
+	 * 
+	 * @param codigo codigo da pesquisa
+	 */
 	public void encerraPesquisa(String codigo) {
 		controladorPesquisa.encerraPesquisa(codigo);
 	}
 
+	/**
+	 * 
+	 * Ativa uma pesquisa desativada, retorna uma excessão caso a pesquisa
+	 * soliciatada já esteja ativada.
+	 * 
+	 * @param codigo codigo da pesquisa
+	 */
 	public void ativaPesquisa(String codigo) {
 		controladorPesquisa.ativaPesquisa(codigo);
 	}
 
+	/**
+	 * 
+	 * Retorna a representação em string de uma pesquisa no formato: "Codigo -
+	 * Descricao - Campo de Interesse."
+	 * 
+	 * @param codigo codigo da pesquisa
+	 * @return string que representa uma pesquisa.
+	 */
 	public String exibePesquisa(String codigo) {
 		return controladorPesquisa.exibePesquisa(codigo);
 	}
 
+	/**
+	 * Retorna o estado de uma pesquisa, se é ativa ou desativa.
+	 * 
+	 * @param codigo codigo da pesquisa
+	 * @return string true caso a pesquisa esteja ativa e false caso não esteja.
+	 */
 	public String pesquisaEhAtiva(String codigo) {
 		return controladorPesquisa.ehAtiva(codigo);
 	}
@@ -80,7 +137,7 @@ public class Sistema {
 	}
 
 	public void apagarObjetivo(String codigo) {
-		controladorMetas.apagarObjetivo(codigo);	
+		controladorMetas.apagarObjetivo(codigo);
 	}
 
 	public String exibeProblema(String codigo) {
@@ -116,4 +173,3 @@ public class Sistema {
 
 	}
 }
- 
