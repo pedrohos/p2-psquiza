@@ -16,9 +16,8 @@ public class TestItem {
 	public void criaItemVazio() {
 		try {
 			Item item = new Item("");
-			assertFalse(false);
+			fail("");
 		} catch (Exception e) {
-			assertTrue(true);
 		}
 	}
 

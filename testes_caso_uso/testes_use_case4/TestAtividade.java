@@ -17,9 +17,8 @@ public class TestAtividade {
 	public void criaAtividadeDescricaoVazia() {
 		try {
 			Atividade ati = new Atividade("", "BAIXO", "fui", "A1");
-			assertFalse(false);
+			fail("");
 		} catch (Exception e) {
-			assertTrue(true);
 		}
 	}
 
@@ -27,9 +26,8 @@ public class TestAtividade {
 	public void criaAtividadeDescricaoRiscoVazio() {
 		try {
 			Atividade ati = new Atividade("aaa", "BAIXO", "", "A1");
-			assertFalse(false);
+			fail("");
 		} catch (Exception e) {
-			assertTrue(true);
 		}
 	}
 
@@ -52,9 +50,8 @@ public class TestAtividade {
 	public void criaAtividadeRiscoDiferente() {
 		try {
 			Atividade ati = new Atividade("aaa", "alto demais", "fui", "A1");
-			assertFalse(false);
+			fail("");
 		} catch (Exception e) {
-			assertTrue(true);
 		}
 	}
 
@@ -69,9 +66,8 @@ public class TestAtividade {
 		try {
 			Atividade ati = new Atividade("aaa", "BAIXO", "fui", "A1");
 			ati.cadastraItem("");
-			assertFalse(false);
+			fail("");
 		} catch (Exception e) {
-			assertTrue(true);
 		}
 	}
 

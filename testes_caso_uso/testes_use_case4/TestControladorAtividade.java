@@ -1,6 +1,7 @@
 package testes_use_case4;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -36,9 +37,8 @@ public class TestControladorAtividade {
 		ControladorAtividade c = new ControladorAtividade();
 		try {
 			c.cadastraAtividade("", "BAIXO", "mais ou menos");
-			assertFalse(false);
+			fail("");
 		} catch (Exception e) {
-			assertTrue(true);
 		}
 	}
 
@@ -47,9 +47,8 @@ public class TestControladorAtividade {
 		ControladorAtividade c = new ControladorAtividade();
 		try {
 			c.cadastraAtividade("bom", "", "mais ou menos");
-			assertFalse(false);
+			fail("");
 		} catch (Exception e) {
-			assertTrue(true);
 		}
 	}
 
@@ -58,9 +57,8 @@ public class TestControladorAtividade {
 		ControladorAtividade c = new ControladorAtividade();
 		try {
 			c.cadastraAtividade("bom", "BAIXO", "");
-			assertFalse(false);
+			fail("");
 		} catch (Exception e) {
-			assertTrue(true);
 		}
 	}
 
@@ -69,9 +67,8 @@ public class TestControladorAtividade {
 		ControladorAtividade c = new ControladorAtividade();
 		try {
 			c.cadastraAtividade("bom", "MUITOALTO", "desas");
-			assertFalse(false);
+			fail("");
 		} catch (Exception e) {
-			assertTrue(true);
 		}
 	}
 
@@ -87,10 +84,9 @@ public class TestControladorAtividade {
 		ControladorAtividade c = new ControladorAtividade();
 		try {
 			c.cadastraAtividade("bom", "BAIXO", "desas");
-			c.apagaAtividade("A1");
-			assertFalse(false);
+			c.apagaAtividade("A2");
+			fail("");
 		} catch (Exception e) {
-			assertTrue(true);
 		}
 	}
 
@@ -107,9 +103,8 @@ public class TestControladorAtividade {
 		try {
 			c.cadastraAtividade("bom", "BAIXO", "desas");
 			c.cadastraItem("", "Monitoramento facebook/messenger");
-			assertFalse(false);
+			fail("");
 		} catch (Exception e) {
-			assertTrue(true);
 		}
 	}
 
@@ -119,9 +114,8 @@ public class TestControladorAtividade {
 		try {
 			c.cadastraAtividade("bom", "BAIXO", "desas");
 			c.cadastraItem("A1", "");
-			assertFalse(false);
+			fail("");
 		} catch (Exception e) {
-			assertTrue(true);
 		}
 	}
 
@@ -142,9 +136,8 @@ public class TestControladorAtividade {
 			c.cadastraAtividade("Monitoramento de chats dos alunos de computacao do primeiro periodo.", "BAIXO",
 					"Por se tratar de apenas um monitoramento, o risco nao e elevado.");
 			c.exibeAtividade("");
-			assertFalse(false);
+			fail("");
 		} catch (Exception e) {
-			assertTrue(true);
 		}
 	}
 
@@ -189,9 +182,8 @@ public class TestControladorAtividade {
 			c.cadastraItem("A1", "cerveja");
 			c.cadastraItem("A1", "carne");
 			assertEquals(6, c.contaItensPendentes(""));
-			assertFalse(false);
+			fail("");
 		} catch (Exception e) {
-			assertTrue(true);
 		}
 	}
 
@@ -224,9 +216,8 @@ public class TestControladorAtividade {
 			c.cadastraItem("A1", "cerveja");
 			c.cadastraItem("A1", "carne");
 			assertEquals(0, c.contaItensRealizados(""));
-			assertFalse(false);
+			fail("");
 		} catch (Exception e) {
-			assertTrue(true);
 		}
 	}
 
