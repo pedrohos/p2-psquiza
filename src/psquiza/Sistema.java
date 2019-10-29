@@ -13,7 +13,6 @@ public class Sistema {
 		this.controladorPesquisa = new ControladorPesquisa();
 		this.controladorMetas = new ControladorMetas();
 		this.controladorPesquisador = new ControladorPesquisador();
-
 	}
 
 	public void cadastraAtividade(String descricao, String nivelRisco, String descricaoRisco) {
@@ -81,13 +80,11 @@ public class Sistema {
 	}
 
 	public void apagarObjetivo(String codigo) {
-		controladorMetas.apagarObjetivo(codigo);
-		
+		controladorMetas.apagarObjetivo(codigo);	
 	}
 
 	public String exibeProblema(String codigo) {
 		return controladorMetas.exibeProblema(codigo);
-		
 	}
 
 	public String exibeObjetivo(String codigo) {

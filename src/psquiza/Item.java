@@ -1,9 +1,33 @@
 package psquiza;
 
+/**
+ * Representacao de um Item de uma Atividade.
+ * 
+ * Cada Item possui um nome e um estado atual.
+ * 
+ * @author Pedro Henrique
+ */
 public class Item {
+	
+	/**
+	 * Armazena o nome do item. 
+	 */
 	private String nome;
+	
+	/**
+	 * Armazena o estado atual do item.
+	 */
 	private Estado estadoAtual;
 	
+	/**
+	 * Constroi um item a partir de seu nome e define por padrao
+	 * o estado deste item como PENDENTE.
+	 * 
+	 * Caso o nome do item seja vazio ou nulo, sera lancada um IllegalArgumentException:
+	 * "Item nao pode ser nulo ou vazio."
+	 * 
+	 * @param nome e o nome do item.
+	 */
 	public Item(String nome) {
 		Util.validaAtributo(nome, "Item nao pode ser nulo ou vazio.");
 		
