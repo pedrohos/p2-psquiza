@@ -31,6 +31,8 @@ public class ControladorMetas {
 	 */
 	private int contadorObjetivo = 1;
 
+	
+	
 	/**
 	 * Constroi um controlador de metas
 	 */

@@ -79,19 +79,7 @@ public class Atividade {
 		Util.validaAtributo(descricao, "Campo Descricao nao pode ser nulo ou vazio.");
 		Util.validaAtributo(nivelRisco, "Campo nivelRisco nao pode ser nulo ou vazio.");
 		Util.validaAtributo(id, "Campo codigo nao pode ser nulo ou vazio.");
-		switch (nivelRisco) {
-		case "BAIXO":
-			this.nivelRisco = Risco.BAIXO;
-			break;
-		case "MEDIO":
-			this.nivelRisco = Risco.MEDIO;
-			break;
-		case "ALTO":
-			this.nivelRisco = Risco.ALTO;
-			break;
-		default:
-			throw new IllegalArgumentException("Valor invalido do nivel do risco.");
-		}
+		this.nivelRisco = Risco.atribuiRisco(nivelRisco);
 		Util.validaAtributo(descricaoRisco, "Campo descricaoRisco nao pode ser nulo ou vazio.");
 
 		this.descricao = descricao;
