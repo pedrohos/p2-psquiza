@@ -1,6 +1,9 @@
-package psquiza;
+package psquiza.controladores;
 
 import java.util.HashMap;
+
+import psquiza.Util;
+import psquiza.entidades.Atividade;
 
 /**
  * Representacao do gerenciador de Atividades no sistema.

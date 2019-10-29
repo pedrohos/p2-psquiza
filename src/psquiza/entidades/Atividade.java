@@ -1,7 +1,10 @@
-package psquiza;
+package psquiza.entidades;
 
 import java.time.Period;
 import java.util.LinkedHashSet;
+
+import psquiza.Util;
+import psquiza.enums.Risco;
 
 /**
  * Representacao de uma Atividade no sistema.

@@ -1,6 +1,9 @@
-package psquiza;
+package psquiza.controladores;
 
 import java.util.HashMap;
+
+import psquiza.Util;
+import psquiza.entidades.Pesquisa;
 
 public class ControladorPesquisa {
 
