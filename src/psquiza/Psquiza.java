@@ -1,6 +1,7 @@
 package psquiza;
 
 import easyaccept.EasyAccept;
+import psquiza.controladores.Sistema;
 
 public class Psquiza {
 

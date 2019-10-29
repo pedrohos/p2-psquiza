@@ -1,4 +1,7 @@
-package psquiza;
+package psquiza.entidades;
+
+import psquiza.Util;
+import psquiza.enums.Estado;
 
 /**
  * Representacao de um Item de uma Atividade.
