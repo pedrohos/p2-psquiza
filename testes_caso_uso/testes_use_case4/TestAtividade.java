@@ -80,7 +80,7 @@ public class TestAtividade {
 		ati.cadastraItem("cachaca");
 		assertEquals(4, ati.getItensPendentes());
 	}
-
+ 
 	@Test
 	public void pegaItensRealizados() {
 		Atividade ati = new Atividade("aaa", "BAIXO", "fui", "A1");

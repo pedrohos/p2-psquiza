@@ -181,6 +181,6 @@ public class ControladorPesquisador {
 		}
 
 		return pesquisadores.get(email).ehAtivo();
-	}
+	} 
 
 }
