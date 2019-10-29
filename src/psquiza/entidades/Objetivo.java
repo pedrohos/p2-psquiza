@@ -1,5 +1,8 @@
 package psquiza.entidades;
 
+import psquiza.Util;
+import psquiza.enums.Tipo;
+
 /**
  * Classe para representar um objetivo
  * 
@@ -23,7 +26,7 @@ public class Objetivo {
 	/**
 	 * Atributo que representa o tipo do objetivo
 	 */
-	private String tipo;
+	private Tipo tipo;
 	/**
 	 * Atributo que representa o codigo de um objetivo
 	 */
@@ -39,7 +42,12 @@ public class Objetivo {
 	 * @param codigo      codigo do objetivo
 	 */
 	public Objetivo(String tipo, String descricao, int aderencia, int viabilidade, String codigo) {
-		this.tipo = tipo;
+		Util.validaAtributo(tipo, "Campo tipo nao pode ser nulo ou vazio.");
+		Util.validaAtributo(descricao, "Campo descricao nao pode ser nulo ou vazio.");
+		Util.validaAtributo(String.valueOf(aderencia), "Campo aderencia nao pode ser nulo ou vazio.");
+		Util.validaAtributo(String.valueOf(viabilidade), "Campo viabilidade nao pode ser nulo ou vazio.");
+		Util.validaAtributo(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		this.tipo = Tipo.atribuiTipo(tipo);
 		this.descricao = descricao;
 		this.aderencia = aderencia;
 		this.viabilidade = viabilidade;

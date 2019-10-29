@@ -37,4 +37,21 @@ public enum Estado {
 	public String getEstado() {
 		return this.estado;
 	}
+	
+	/**
+	 * Retorna o estado real referente ao nome do estado.
+	 * 
+	 * @param estado e o novo estado.
+	 * @return e retornado o estado.
+	 */
+	public static Estado atribuiEstado(String estado) {
+		switch (estado) {
+		case "PENDENTE":
+			return Estado.PENDENTE;
+		case "REALIZADO":
+			return Estado.REALIZADO;
+		default:
+			throw new IllegalArgumentException("Valor invalido do estado.");
+		}
+	}
 }
