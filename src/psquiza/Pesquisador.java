@@ -1,14 +1,52 @@
 package psquiza;
 
+/**
+ * Classe que representa o pesquisador no sistema.
+ * 
+ * @author Eniedson Fabiano Pereira da Silva Junior
+ */
 public class Pesquisador {
 
+	/**
+	 * Atributo que representa o nome do pesquisador.
+	 */
 	private String nome;
+
+	/**
+	 * Atributo que representa a biografia do pesquisador.
+	 */
 	private String biografia;
+
+	/**
+	 * Atributo que representa o email do pesquisador.
+	 */
 	private String email;
+
+	/**
+	 * Atributo que representa o url da foto do pesquisador.
+	 */
 	private String foto;
+
+	/**
+	 * Atributo que representa a função do pesquisador (estudante, professor ou
+	 * externo).
+	 */
 	private String funcao;
+
+	/**
+	 * Atributo que informa se o pesquisador esta ativo ou não.
+	 */
 	private boolean ativo;
 
+	/**
+	 * Metodo responsavel por construir um pesquisador, o pesquisador inicia ativo.
+	 * 
+	 * @param nome      nome do pesquisador.
+	 * @param biografia biografia do pesquisador.
+	 * @param email     email do pesquisador.
+	 * @param foto      url da foto do pesquisador.
+	 * @param funcao    funcao do pesquisador.
+	 */
 	public Pesquisador(String nome, String biografia, String email, String foto, String funcao) {
 		this.nome = nome;
 		this.biografia = biografia;
@@ -18,34 +56,74 @@ public class Pesquisador {
 		this.ativo = true;
 	}
 
+	/**
+	 * Metodo que retorna se o pesquisador e ativo ou nao.
+	 * 
+	 * @return boolean que representa se o pesquisador e ativo ou nao.
+	 */
 	public boolean ehAtivo() {
 		return ativo;
 	}
-	
+
+	/**
+	 * Metodo responsavel por alterar o atributo ativo.
+	 * 
+	 * @param ativo novo valor para ativo.
+	 */
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
-	
+
+	/**
+	 * Metodo responsavel por alterar o atributo nome.
+	 * 
+	 * @param ativo novo valor para nome.
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
+	/**
+	 * Metodo responsavel por alterar o atributo biografia.
+	 * 
+	 * @param ativo novo valor para biografia.
+	 */
 	public void setBiografia(String biografia) {
 		this.biografia = biografia;
 	}
-	
+
+	/**
+	 * Metodo responsavel por alterar o atributo email.
+	 * 
+	 * @param ativo novo valor para email.
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
+	/**
+	 * Metodo responsavel por alterar o atributo foto.
+	 * 
+	 * @param ativo novo valor para foto.
+	 */
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-	
+
+	/**
+	 * Metodo responsavel por alterar o atributo funcao.
+	 * 
+	 * @param ativo novo valor para funcao.
+	 */
 	public void setFuncao(String funcao) {
 		this.funcao = funcao;
 	}
-	
+
+	/**
+	 * Metodo responsavel por gerar e retornar o hashcode do pesquisador.
+	 * 
+	 * @return hashcode do objeto.
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -54,6 +132,13 @@ public class Pesquisador {
 		return result;
 	}
 
+	/**
+	 * Metodo que verifica a igualdade entre o pesquisador e um outro objeto.
+	 * 
+	 * @param obj objeto a ser comparado.
+	 * 
+	 * @return boolean que informa se o objeto e igual ou nao.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -71,6 +156,11 @@ public class Pesquisador {
 		return true;
 	}
 
+	/**
+	 * Metodo que retorna a representacao string do pesquisador.
+	 * 
+	 * @return representacao string do pesquisador.
+	 */
 	@Override
 	public String toString() {
 		return String.format("%s (%s) - %s - %s - %s", nome, funcao, biografia, email, foto);
