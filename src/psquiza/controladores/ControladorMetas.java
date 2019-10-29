@@ -1,7 +1,11 @@
-package psquiza;
+package psquiza.controladores;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import psquiza.Util;
+import psquiza.entidades.Objetivo;
+import psquiza.entidades.Problema;
 
 /**
  * Classe controller responsavel pelos problemas e objetivos do sistema

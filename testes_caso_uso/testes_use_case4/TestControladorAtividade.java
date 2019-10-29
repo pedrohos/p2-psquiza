@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.Test;
 
-import psquiza.ControladorAtividade;
+import psquiza.controladores.ControladorAtividade;
 
 public class TestControladorAtividade {
 

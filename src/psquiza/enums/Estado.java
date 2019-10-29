@@ -1,4 +1,4 @@
-package psquiza;
+package psquiza.enums;
 
 /**
  * Representa o Estado de um item.

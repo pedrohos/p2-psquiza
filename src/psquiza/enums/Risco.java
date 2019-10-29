@@ -1,4 +1,4 @@
-package psquiza;
+package psquiza.enums;
 
 /**
  * Representacao do Risco de uma Atividade.

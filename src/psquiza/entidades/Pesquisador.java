@@ -1,4 +1,4 @@
-package psquiza;
+package psquiza.entidades;
 
 public class Pesquisador {
 
