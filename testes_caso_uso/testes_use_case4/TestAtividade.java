@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import psquiza.Atividade;
+import psquiza.entidades.Atividade;
 
 public class TestAtividade {
 

@@ -3,7 +3,7 @@ package testes_use_case4;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import psquiza.Item;
+import psquiza.entidades.Item;
 
 public class TestItem {
 

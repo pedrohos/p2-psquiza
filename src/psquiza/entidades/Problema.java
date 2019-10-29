@@ -1,4 +1,4 @@
-package psquiza;
+package psquiza.entidades;
 
 /**
  * Clase que representa um problema no sistema

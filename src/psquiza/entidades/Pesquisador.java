@@ -1,4 +1,4 @@
-package psquiza;
+package psquiza.entidades;
 
 /**
  * Classe que representa o pesquisador no sistema.

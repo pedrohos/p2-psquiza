@@ -1,4 +1,4 @@
-package psquiza;
+package psquiza.controladores;
 
 public class Sistema {
 

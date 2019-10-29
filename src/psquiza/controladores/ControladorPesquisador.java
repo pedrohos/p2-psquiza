@@ -1,7 +1,9 @@
-package psquiza;
+package psquiza.controladores;
 
 import java.util.HashMap;
 import java.util.NoSuchElementException;
+import psquiza.Util;
+import psquiza.entidades.Pesquisador;
 
 /**
  * Classe controladora de pesquisadores.
