@@ -41,7 +41,7 @@ public class ControladorPesquisa {
 	 * @param nome      Campo de Interesse da pesquisa a se gerar o código
 	 * @return codigo no formato "SSSI"
 	 */
-	public static String geraCodigo(HashMap<String, Pesquisa> pesquisas, String nome) {
+	private String geraCodigo(HashMap<String, Pesquisa> pesquisas, String nome) {
 
 		int id = 1;
 		String codigo = nome.substring(0, 3).toUpperCase() + id;
@@ -60,7 +60,7 @@ public class ControladorPesquisa {
 	 * @param pesquisas HasMAp que possui todas pesquisas cadastradas
 	 * @param codigo    código da pesquisa solicitada
 	 */
-	public static void existePesquisa(HashMap<String, Pesquisa> pesquisas, String codigo) {
+	private void existePesquisa(HashMap<String, Pesquisa> pesquisas, String codigo) {
 		if (!pesquisas.containsKey(codigo)) {
 			throw new NullPointerException("Pesquisa nao encontrada.");
 		}
@@ -76,19 +76,19 @@ public class ControladorPesquisa {
 	 * 
 	 * @param campoDeInteresse
 	 */
-	public static void validaCampoDeInteresse(String campoDeInteresse) {
-		if (campoDeInteresse.contains(",,") || campoDeInteresse.trim().isEmpty()) {
-			throw new IllegalArgumentException("Formato do campo de interesse invalido.");
-		} else if (campoDeInteresse.length() < 3 || campoDeInteresse.length() >= 255) {
+	private void validaCampoDeInteresse(String campoDeInteresse) {
+		if (campoDeInteresse.contains(",,") || campoDeInteresse.trim().isEmpty()
+				|| (campoDeInteresse.length() < 3 || campoDeInteresse.length() >= 255)) {
 			throw new IllegalArgumentException("Formato do campo de interesse invalido.");
 		} else {
 			String[] campos = campoDeInteresse.split(",");
 			if (campos.length > 4) {
 				throw new IllegalArgumentException("Formato do campo de interesse invalido.");
-			}
-			for (String campo : campos) {
-				if (campo.length() < 3 || campo.trim().isEmpty() || campo.length() >= 255) {
-					throw new IllegalArgumentException("Formato do campo de interesse invalido.");
+			} else {
+				for (String campo : campos) {
+					if (campo.trim().isEmpty()) {
+						throw new IllegalArgumentException("Formato do campo de interesse invalido.");
+					}
 				}
 			}
 		}
@@ -150,7 +150,6 @@ public class ControladorPesquisa {
 		existePesquisa(pesquisas, codigo);
 		pesquisas.get(codigo).encerraPesquisa();
 	}
-
 
 	/**
 	 * 
