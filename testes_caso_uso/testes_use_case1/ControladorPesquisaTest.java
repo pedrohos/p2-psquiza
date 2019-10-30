@@ -26,7 +26,7 @@ class ControladorPesquisaTest {
 	@Test
 	void testCadastraPesquisaMesmosInteresses() {
 		sistema.cadastraPesquisa("computadores legais", "computador");
-		assertEquals("COM2 - computadores legais - computador", sistema.exibePesquisa("BIO1"));
+		assertEquals("COM2 - computadores legais - computador", sistema.exibePesquisa("COM2"));
 	}
 
 	@Test
@@ -45,7 +45,7 @@ class ControladorPesquisaTest {
 	@Test
 	void testValidacaoInteresseTresCaracteres() {
 		sistema.cadastraPesquisa("Pesquisando os animais terrestres", "bio, ciencia, animais, alimentacao");
-		assertEquals("BIO1 - Pesquisando os animais terrestres - biologia, ciencia, animais, alimentacao",
+		assertEquals("BIO1 - Pesquisando os animais terrestres - bio, ciencia, animais, alimentacao",
 				sistema.exibePesquisa("BIO1"));
 	}
 
@@ -141,7 +141,7 @@ class ControladorPesquisaTest {
 
 	@Test
 	void testAlteraPesquisa() {
-		fail("Not yet implemented");
+		sistema.alteraPesquisa("COM1", "descricao", "Uma pesquisa diferenciada.");
 	}
 
 	@Test
