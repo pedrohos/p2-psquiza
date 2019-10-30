@@ -47,15 +47,6 @@ public class Psquiza {
 		sistema.encerraPesquisa(codigo, motivo);
 	}
 
-	/**
-	 * 
-	 * Função que encerra (desativa) uma pesquisa.
-	 * 
-	 * @param codigo codigo da pesquisa
-	 */
-	public void encerraPesquisa(String codigo) {
-		sistema.encerraPesquisa(codigo);
-	}
 
 	/**
 	 * 

@@ -146,21 +146,11 @@ public class ControladorPesquisa {
 	 */
 	public void encerraPesquisa(String codigo, String motivo) {
 		Util.validaAtributo(codigo, "Codigo nao pode ser nulo ou vazio.");
+		Util.validaAtributo(motivo, "Motivo nao pode ser nulo ou vazio.");
 		existePesquisa(pesquisas, codigo);
 		pesquisas.get(codigo).encerraPesquisa();
 	}
 
-	/**
-	 * 
-	 * Função que encerra (desativa) uma pesquisa.
-	 * 
-	 * @param codigo codigo da pesquisa
-	 */
-	public void encerraPesquisa(String codigo) {
-		Util.validaAtributo(codigo, "Codigo nao pode ser nulo ou vazio.");
-		existePesquisa(pesquisas, codigo);
-		pesquisas.get(codigo).encerraPesquisa();
-	}
 
 	/**
 	 * 

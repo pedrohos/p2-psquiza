@@ -36,6 +36,7 @@ expectError "Formato do campo de interesse invalido." cadastraPesquisa descricao
 expectError "Pesquisa nao encontrada." ativaPesquisa codigo="ENE1"
 expectError "Pesquisa nao encontrada." encerraPesquisa codigo="ENE1" motivo="quero acabar a pesquisa no brasil."
 expectError "Pesquisa ja ativada." ativaPesquisa codigo="COM1"
+expectError "Motivo nao pode ser nulo ou vazio." encerraPesquisa codigo="COM1" motivo=""
 expectError "Pesquisa desativada." encerraPesquisa codigo="PSI1" motivo="quero fechar de novo mesmo"
 encerraPesquisa codigo="COM2" motivo="Pesquisa concluida"
 ativaPesquisa codigo="COM2"

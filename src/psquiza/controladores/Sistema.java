@@ -83,16 +83,6 @@ public class Sistema {
 
 	/**
 	 * 
-	 * Função que encerra (desativa) uma pesquisa.
-	 * 
-	 * @param codigo codigo da pesquisa
-	 */
-	public void encerraPesquisa(String codigo) {
-		controladorPesquisa.encerraPesquisa(codigo);
-	}
-
-	/**
-	 * 
 	 * Ativa uma pesquisa desativada, retorna uma excessão caso a pesquisa
 	 * soliciatada já esteja ativada.
 	 * 
