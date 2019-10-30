@@ -64,8 +64,7 @@ class ControladorPesquisadorTest {
 		try {
 			controle.cadastraPesquisador("Lucian", "vagabundo", "Estudante de computacao", "lucian@julo.com",
 					"http://foto.lucian");
-		} catch (IllegalArgumentException e) {
-		}
+		} catch (IllegalArgumentException e) {}
 	}
 
 	@Test
@@ -93,6 +92,23 @@ class ControladorPesquisadorTest {
 		try {
 
 			controle.alteraPesquisador("lucian.costa@ccc.ufcg", "EMAIL", "");
+
+		} catch (IllegalArgumentException e) {
+		}
+
+	}
+	
+	@Test
+	void testAlteraPesquisadorInativo() {
+
+		controle.cadastraPesquisador("Lucian", "estudante", "Estudante de computacao", "lucian.costa@ccc.ufcg",
+				"https://foto.lucian");
+		
+		controle.desativaPesquisador("lucian.costa@ccc.ufcg");
+
+		try {
+
+			controle.alteraPesquisador("lucian.costa@ccc.ufcg", "EMAIL", "junin@eniedson");
 
 		} catch (IllegalArgumentException e) {
 		}
@@ -137,11 +153,10 @@ class ControladorPesquisadorTest {
 
 		try {
 
-			controle.alteraPesquisador("lucian.costa@ccc.ufcg", "email", "emaillll.com");
+			controle.alteraPesquisador("lucian.costa@ccc.ufcg", "EMAIL", "emaillll.com");
 
-		} catch (IllegalArgumentException e) {
-		}
-
+		} catch (IllegalArgumentException e) {}
+		
 	}
 
 	@Test
