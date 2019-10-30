@@ -1,5 +1,8 @@
 package psquiza.entidades;
 
+import psquiza.Util;
+import psquiza.enums.Funcao;
+
 /**
  * Classe que representa o pesquisador no sistema.
  * 
@@ -31,7 +34,7 @@ public class Pesquisador {
 	 * Atributo que representa a função do pesquisador (estudante, professor ou
 	 * externo).
 	 */
-	private String funcao;
+	private Funcao funcao;
 
 	/**
 	 * Atributo que informa se o pesquisador esta ativo ou não.
@@ -48,11 +51,19 @@ public class Pesquisador {
 	 * @param funcao    funcao do pesquisador.
 	 */
 	public Pesquisador(String nome, String biografia, String email, String foto, String funcao) {
+		Util.validaAtributo(nome, "Campo nome nao pode ser nulo ou vazio.");
+		Util.validaAtributo(funcao, "Campo funcao nao pode ser nulo ou vazio.");
+		Util.validaAtributo(biografia, "Campo biografia nao pode ser nulo ou vazio.");
+		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
+		Util.validaAtributo(foto, "Campo fotoURL nao pode ser nulo ou vazio.");
+		Util.validaEmail(email);
+		Util.validaFoto(foto);
+		
 		this.nome = nome;
 		this.biografia = biografia;
 		this.email = email;
 		this.foto = foto;
-		this.funcao = funcao;
+		this.funcao = Funcao.atribuiFuncao(funcao);
 		this.ativo = true;
 	}
 
@@ -80,6 +91,7 @@ public class Pesquisador {
 	 * @param ativo novo valor para nome.
 	 */
 	public void setNome(String nome) {
+		Util.validaAtributo(nome, "Campo nome nao pode ser nulo ou vazio.");
 		this.nome = nome;
 	}
 
@@ -89,6 +101,7 @@ public class Pesquisador {
 	 * @param ativo novo valor para biografia.
 	 */
 	public void setBiografia(String biografia) {
+		Util.validaAtributo(biografia, "Campo biografia nao pode ser nulo ou vazio.");
 		this.biografia = biografia;
 	}
 
@@ -98,6 +111,8 @@ public class Pesquisador {
 	 * @param ativo novo valor para email.
 	 */
 	public void setEmail(String email) {
+		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
+		Util.validaEmail(email);
 		this.email = email;
 	}
 
@@ -107,6 +122,8 @@ public class Pesquisador {
 	 * @param ativo novo valor para foto.
 	 */
 	public void setFoto(String foto) {
+		Util.validaAtributo(foto, "Campo foto nao pode ser nulo ou vazio.");
+		Util.validaFoto(foto);
 		this.foto = foto;
 	}
 
@@ -116,7 +133,8 @@ public class Pesquisador {
 	 * @param ativo novo valor para funcao.
 	 */
 	public void setFuncao(String funcao) {
-		this.funcao = funcao;
+		Util.validaAtributo(funcao, "Campo funcao nao pode ser nulo ou vazio.");
+		this.funcao = Funcao.atribuiFuncao(funcao);
 	}
 
 	/**
@@ -163,6 +181,6 @@ public class Pesquisador {
 	 */
 	@Override
 	public String toString() {
-		return String.format("%s (%s) - %s - %s - %s", nome, funcao, biografia, email, foto);
+		return String.format("%s (%s) - %s - %s - %s", nome, funcao.getFuncao(), biografia, email, foto);
 	}
 }
