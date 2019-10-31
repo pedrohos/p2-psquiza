@@ -11,7 +11,7 @@ public class Sistema {
 	private ControladorPesquisador controladorPesquisador;
 
 	/**
-	 * Constrói um sistema inicializando os controladores de Pesquisa, Atividade,
+	 * Constroi um sistema inicializando os controladores de Pesquisa, Atividade,
 	 * Metas e Pesquisador.
 	 */
 	public Sistema() {
@@ -47,12 +47,12 @@ public class Sistema {
 
 	/**
 	 * 
-	 * Função que cadastra uma nova pesquisa no sistema através de uma descrição e
+	 * Funcao que cadastra uma nova pesquisa no sistema atraves de uma descricao e
 	 * campo de interesse passados.
 	 * 
 	 * @param descricao        pequeno texto que resume o assunto da pesquisa
 	 * @param campoDeInteresse Campo(s) a que a pesquisa se relaciona
-	 * @return o código da pesquisa cadastrada
+	 * @return o codigo da pesquisa cadastrada
 	 */
 	public String cadastraPesquisa(String descricao, String campoDeInteresse) {
 		return controladorPesquisa.cadastraPesquisa(descricao, campoDeInteresse);
@@ -60,9 +60,9 @@ public class Sistema {
 
 	/**
 	 * 
-	 * Altera um atributo da pesquisa, ou a descrição ou o Campo de Interesse
+	 * Altera um atributo da pesquisa, ou a descricao ou o Campo de Interesse
 	 * 
-	 * @param codigo               Código da pesquisa a ser alterada
+	 * @param codigo               codigo da pesquisa a ser alterada
 	 * @param conteudoASerAlterado atributo a ser alterado
 	 * @param novoConteudo         novo valor a ser adicionado
 	 */
@@ -72,7 +72,7 @@ public class Sistema {
 
 	/**
 	 * 
-	 * Função que encerra (desativa) uma pesquisa e recebe o motivo da desativação.
+	 * Funcao que encerra (desativa) uma pesquisa e recebe o motivo da desativacao.
 	 * 
 	 * @param codigo codigo da pesquisa
 	 * @param motivo motivo de ser desativada a pesquisa.
@@ -83,8 +83,8 @@ public class Sistema {
 
 	/**
 	 * 
-	 * Ativa uma pesquisa desativada, retorna uma excessão caso a pesquisa
-	 * soliciatada já esteja ativada.
+	 * Ativa uma pesquisa desativada, retorna uma excessao caso a pesquisa
+	 * soliciatada ja esteja ativada.
 	 * 
 	 * @param codigo codigo da pesquisa
 	 */
@@ -94,7 +94,7 @@ public class Sistema {
 
 	/**
 	 * 
-	 * Retorna a representação em string de uma pesquisa no formato: "Codigo -
+	 * Retorna a representacao em string de uma pesquisa no formato: "Codigo -
 	 * Descricao - Campo de Interesse."
 	 * 
 	 * @param codigo codigo da pesquisa
@@ -105,10 +105,10 @@ public class Sistema {
 	}
 
 	/**
-	 * Retorna o estado de uma pesquisa, se é ativa ou desativa.
+	 * Retorna o estado de uma pesquisa, se e ativa ou desativa.
 	 * 
 	 * @param codigo codigo da pesquisa
-	 * @return string true caso a pesquisa esteja ativa e false caso não esteja.
+	 * @return string true caso a pesquisa esteja ativa e false caso nao esteja.
 	 */
 	public String pesquisaEhAtiva(String codigo) {
 		return controladorPesquisa.ehAtiva(codigo);

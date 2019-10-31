@@ -12,36 +12,21 @@ public class Psquiza {
 	}
 
 	/**
-	 * 
-	 * Função que cadastra uma nova pesquisa no sistema através de uma descrição e
-	 * campo de interesse passados.
-	 * 
-	 * @param descricao        pequeno texto que resume o assunto da pesquisa
-	 * @param campoDeInteresse Campo(s) a que a pesquisa se relaciona
-	 * @return o código da pesquisa cadastrada
+	 * {@link psquiza.controladores.Sistema#cadastraPesquisa(String, String)}}
 	 */
 	public String cadastraPesquisa(String descricao, String campoDeInteresse) {
 		return sistema.cadastraPesquisa(descricao, campoDeInteresse);
 	}
 
 	/**
-	 * 
-	 * Altera um atributo da pesquisa, ou a descrição ou o Campo de Interesse
-	 * 
-	 * @param codigo               Código da pesquisa a ser alterada
-	 * @param conteudoASerAlterado atributo a ser alterado
-	 * @param novoConteudo         novo valor a ser adicionado
+	 * {@link psquiza.controladores.Sistema#alteraPesquisa(String, String, String)}
 	 */
 	public void alteraPesquisa(String codigo, String conteudoASerAlterado, String novoConteudo) {
 		sistema.alteraPesquisa(codigo, conteudoASerAlterado, novoConteudo);
 	}
 
 	/**
-	 * 
-	 * Função que encerra (desativa) uma pesquisa e recebe o motivo da desativação.
-	 * 
-	 * @param codigo codigo da pesquisa
-	 * @param motivo motivo de ser desativada a pesquisa.
+	 * {@link psquiza.controladores.Sistema#encerraPesquisa(String, String)}
 	 */
 	public void encerraPesquisa(String codigo, String motivo) {
 		sistema.encerraPesquisa(codigo, motivo);
@@ -49,22 +34,14 @@ public class Psquiza {
 
 
 	/**
-	 * 
-	 * Ativa uma pesquisa desativada.
-	 * 
-	 * @param codigo codigo da pesquisa
+	 * {@link psquiza.controladores.Sistema#ativaPesquisa(String)}
 	 */
 	public void ativaPesquisa(String codigo) {
 		sistema.ativaPesquisa(codigo);
 	}
 
 	/**
-	 * 
-	 * Retorna a representação em string de uma pesquisa no formato: "Codigo -
-	 * Descricao - Campo de Interesse."
-	 * 
-	 * @param codigo codigo da pesquisa
-	 * @return string que representa uma pesquisa.
+	 * {@link psquiza.controladores.Sistema#exibePesquisa(String)}
 	 */
 
 	public String exibePesquisa(String codigo) {
@@ -72,91 +49,143 @@ public class Psquiza {
 	}
 
 	/**
-	 * Retorna o estado de uma pesquisa, se é ativa ou desativa.
-	 * 
-	 * @param codigo codigo da pesquisa
-	 * @return string true caso a pesquisa esteja ativa e false caso não esteja.
+	 * {@link psquiza.controladores.Sistema#pesquisaEhAtiva(String)}
 	 */
 
 	public String pesquisaEhAtiva(String codigo) {
 		return sistema.pesquisaEhAtiva(codigo);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#cadastraPesquisador(String, String, String, String, String)}
+	 */
 	public void cadastraPesquisador(String nome, String funcao, String biografia, String email, String fotoURL) {
 		sistema.cadastraPesquisador(nome, funcao, biografia, email, fotoURL);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#alteraPesquisador(String, String, String)}
+	 */
 	public void alteraPesquisador(String email, String atributo, String novoValor) {
 		sistema.alteraPesquisador(email, atributo, novoValor);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#desativaPesquisador(String)}
+	 */
 	public void desativaPesquisador(String email) {
 		sistema.desativaPesquisador(email);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#ativaPesquisador(String)}
+	 */
 	public void ativaPesquisador(String email) {
 		sistema.ativaPesquisador(email);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#exibePesquisador(String)}
+	 */
 	public String exibePesquisador(String email) {
 		return sistema.exibePesquisador(email);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#pesquisadorEhAtivo(String)}
+	 */
 	public boolean pesquisadorEhAtivo(String email) {
 		return sistema.pesquisadorEhAtivo(email);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#cadastraAtividade(String, String, String)}
+	 */
 	public void cadastraAtividade(String descricao, String nivelRisco, String descricaoRisco) {
 		sistema.cadastraAtividade(descricao, nivelRisco, descricaoRisco);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#apagaAtividade(String)}
+	 */
 	public void apagaAtividade(String id) {
 		sistema.apagaAtividade(id);
 	}
-
+	
+	/**
+	 * {@link psquiza.controladores.Sistema#cadastraItem(String, String)}
+	 */
 	public void cadastraItem(String id, String item) {
 		sistema.cadastraItem(id, item);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#exibeAtividade(String)}
+	 */
 	public String exibeAtividade(String id) {
 		return sistema.exibeAtividade(id);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#contaItensPendentes(String)}
+	 */
 	public int contaItensPendentes(String id) {
 		return sistema.contaItensPendentes(id);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#contaItensRealizados(String)}
+	 */
 	public int contaItensRealizados(String id) {
 		return sistema.contaItensRealizados(id);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#cadastraProblema(String, int)}
+	 */
 	public void cadastraProblema(String descricao, int viabilidade) {
 		sistema.cadastraProblema(descricao, viabilidade);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#cadastraObjetivo(String, String, int, int)}
+	 */
 	public void cadastraObjetivo(String tipo, String descricao, int aderencia, int viabilidade) {
 		sistema.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#apagarProblema(String)}
+	 */
 	public void apagarProblema(String codigo) {
 		sistema.apagarProblema(codigo);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#apagarObjetivo(String)}
+	 */
 	public void apagarObjetivo(String codigo) {
 		sistema.apagarObjetivo(codigo);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#exibeProblema(String)}
+	 */
 	public String exibeProblema(String codigo) {
 		return sistema.exibeProblema(codigo);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#exibeObjetivo(String)}
+	 */
 	public String exibeObjetivo(String codigo) {
 		return sistema.exibeObjetivo(codigo);
 	}
 
 	public static void main(String[] args) {
-		args = new String[] { "psquiza.Psquiza", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",
-				"testes_aceitacao/use_case_3.txt", "testes_aceitacao/use_case_4.txt" };
+		args = new String[] { "psquiza.Psquiza",
+							  "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",
+					          "testes_aceitacao/use_case_3.txt", "testes_aceitacao/use_case_4.txt" };
 
 		EasyAccept.main(args);
 	}
