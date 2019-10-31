@@ -65,7 +65,7 @@ public class Pesquisador {
 		this.foto = foto;
 		this.funcao = Funcao.atribuiFuncao(funcao);
 		this.ativo = true;
-	}
+	} 
 
 	/**
 	 * Metodo que retorna se o pesquisador e ativo ou nao.

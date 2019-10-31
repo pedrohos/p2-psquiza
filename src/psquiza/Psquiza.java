@@ -8,7 +8,7 @@ public class Psquiza {
 	private Sistema sistema;
 
 	public Psquiza() {
-		sistema = new Sistema();
+		sistema = new Sistema(); 
 	}
 
 	/**
