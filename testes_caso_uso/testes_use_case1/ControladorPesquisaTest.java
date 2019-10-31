@@ -89,7 +89,7 @@ class ControladorPesquisaTest {
 		try {
 			sistema.cadastraPesquisa("Pesquisando os animais terrestres", null);
 			fail("Deve ser lancada uma excessao.");
-		} catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) { 
 		}
 	}
 

@@ -77,8 +77,12 @@ public class ControladorPesquisa {
 	 * @param campoDeInteresse
 	 */
 	private void validaCampoDeInteresse(String campoDeInteresse) {
-		if (campoDeInteresse.contains(",,") || campoDeInteresse.trim().isEmpty()
-				|| (campoDeInteresse.length() < 3 || campoDeInteresse.length() >= 255)) {
+
+		if (campoDeInteresse == null || campoDeInteresse.trim().isEmpty()) {
+			throw new IllegalArgumentException("Formato do campo de interesse invalido.");
+		}
+
+		if (campoDeInteresse.contains(",,") || (campoDeInteresse.length() < 3 || campoDeInteresse.length() > 255)) {
 			throw new IllegalArgumentException("Formato do campo de interesse invalido.");
 		} else {
 			String[] campos = campoDeInteresse.split(",");
@@ -86,7 +90,7 @@ public class ControladorPesquisa {
 				throw new IllegalArgumentException("Formato do campo de interesse invalido.");
 			} else {
 				for (String campo : campos) {
-					if (campo.trim().isEmpty()) {
+					if (campo.trim().isEmpty() || campo.length() < 3) {
 						throw new IllegalArgumentException("Formato do campo de interesse invalido.");
 					}
 				}
