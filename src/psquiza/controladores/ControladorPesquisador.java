@@ -44,7 +44,7 @@ public class ControladorPesquisador {
 		Util.validaFoto(fotoURL);
 
 		pesquisadores.put(email, new Pesquisador(nome, biografia, email, fotoURL, funcao));
-	}
+	} 
 
 	/**
 	 * Metodo responsavel por alterar os atributos do pesquisador e que pode lancar

@@ -23,4 +23,4 @@ public final class Util {
 			throw new IllegalArgumentException("Formato de foto invalido.");
 		}
 	} 
-}
+} 
