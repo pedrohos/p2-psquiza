@@ -26,6 +26,14 @@ class ObjetivoTest {
 		} catch (Exception e) {
 					
 		}
+		
+		// Objetivo com tipo invalido
+		try {
+			Objetivo o =  new Objetivo("Meio Ambiente", "Ajudar animais ameacados pelo vazamento de petroleo", 3, 4, "O12");
+			fail("");
+		} catch (Exception e) {
+					
+		}
 	}
 	
 	@Test
@@ -103,6 +111,7 @@ class ObjetivoTest {
 					
 		}
 	}
+	
 	
 	@Test
 	void testToString() {

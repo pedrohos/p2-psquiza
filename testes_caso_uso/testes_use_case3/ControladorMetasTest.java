@@ -144,5 +144,54 @@ class ControladorMetasTest {
 		cm.cadastraProblema("Preocupacao por classes oprimidas pelo seu status social marcado pelo nascimento oprimido", 3);
 		cm.cadastraProblema("Falta de consciencia sobre o estado social vivenciado pelas pessoas com cor de pele diferente da dominante", 1);
 	}
-
+	
+	@Test
+	void exibeProblema() {
+		ControladorMetas cm = new ControladorMetas();
+		cm.cadastraProblema("Desligar freezer por 12h", 3);
+		assertEquals(cm.exibeProblema("P1"), "P1 - Desligar freezer por 12h - 3");
+	}
+	
+	@Test
+	void exibeObjetivo() {
+		ControladorMetas cm = new ControladorMetas();
+		cm.cadastraObjetivo("GERAL", "Trocar a placa Saborear", 5, 4);
+		assertEquals(cm.exibeObjetivo("O1"), "O1 - GERAL - Trocar a placa Saborear - 9");
+	}
+	
+	@Test
+	void apagaProblema() {
+		ControladorMetas cm = new ControladorMetas();
+		cm.cadastraProblema("Desligar freezer por 12h", 3);
+		try {
+			cm.exibeProblema("P1");
+		} catch (Exception e) {
+			fail("");
+		}
+		cm.apagarProblema("P1");
+		try {
+			cm.exibeProblema("P1");
+			fail("");
+		} catch (Exception e) {
+			
+		}
+	}
+	
+	@Test
+	void apagaObjetivo() {
+		ControladorMetas cm = new ControladorMetas();
+		cm.cadastraObjetivo("GERAL", "Trocar a placa Saborear", 5, 4);
+		try {
+			cm.exibeObjetivo("O1");
+		} catch (Exception e) {
+			fail("");
+		}
+		cm.apagarObjetivo("O1");
+		try {
+			cm.exibeObjetivo("O1");
+			fail("");
+		} catch (Exception e) {
+			
+		}
+	}
 }
