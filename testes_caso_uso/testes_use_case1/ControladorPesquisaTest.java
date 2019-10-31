@@ -15,6 +15,8 @@ class ControladorPesquisaTest {
 	void preparaSistema() {
 		sistema = new Sistema();
 		sistema.cadastraPesquisa("Super computadores resolvendo problemas humanos.", "computadores, IA");
+		sistema.cadastraPesquisa("Outra pesquisa sobre super computadores resolvendo problemas humanos.", "humanos");
+		sistema.encerraPesquisa("HUM1", "Nao sei");
 	}
 
 	@Test
@@ -94,7 +96,7 @@ class ControladorPesquisaTest {
 	}
 
 	@Test
-	void testCValidacaoInteresseVazioInicio() {
+	void testValidacaoInteresseVazioInicio() {
 		try {
 			sistema.cadastraPesquisa("Pesquisando os animais terrestres", " ,biologia");
 			fail("Deve ser lancada uma excessao.");
@@ -140,28 +142,234 @@ class ControladorPesquisaTest {
 	}
 
 	@Test
-	void testAlteraPesquisa() {
-		sistema.alteraPesquisa("COM1", "descricao", "Uma pesquisa diferenciada.");
+	void testAlteraPesquisaDescricao() {
+		sistema.alteraPesquisa("COM1", "DESCRICAO", "Uma pesquisa diferenciada.");
+		assertEquals("COM1 - Uma pesquisa diferenciada. - computadores, IA", sistema.exibePesquisa("COM1"));
+	}
+	
+	@Test
+	void testAlteraPesquisaCamposInteresses() {
+		sistema.alteraPesquisa("COM1", "CAMPO", "biologia");
+		assertEquals("COM1 - Super computadores resolvendo problemas humanos. - biologia", sistema.exibePesquisa("COM1"));
+	}
+	
+	@Test
+	void testAlteraPesquisaEncerrada() {
+		try {
+			sistema.alteraPesquisa("HUM1", "CAMPO", "biologia");
+			fail("Deveria ser lançada uma excessao");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testAlteraPesquisaCodigoNulo() {
+		try {
+			sistema.alteraPesquisa(null, "CAMPO", "biologia");
+			fail("Deveria ser lançada uma excessao");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testAlteraPesquisaCodigoVazio() {
+		try {
+			sistema.alteraPesquisa("", "CAMPO", "biologia");
+			fail("Deveria ser lançada uma excessao");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testAlteraPesquisaConteudoNulo() {
+		try {
+			sistema.alteraPesquisa("COM1", null, "biologia");
+			fail("Deveria ser lançada uma excessao");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testAlteraPesquisaConteudoVazio() {
+		try {
+			sistema.alteraPesquisa("COM1", "", "biologia");
+			fail("Deveria ser lançada uma excessao");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testAlteraPesquisaNovoValorNulo() {
+		try {
+			sistema.alteraPesquisa("COM1", "descricao", null);
+			fail("Deveria ser lançada uma excessao");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testAlteraPesquisaNovoValorVazio() {
+		try {
+			sistema.alteraPesquisa("COM1", "descricao", "");
+			fail("Deveria ser lançada uma excessao");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testAlteraPesquisaCamposInteressesInvalidos() {
+		try {
+			sistema.alteraPesquisa("COM1", "CAMPO", "biologia, , ");
+			fail("Deveria ser lançada uma excessao");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testAlteraPesquisaInexistente() {
+		try {
+			sistema.alteraPesquisa("ALT1", "CAMPO", "biologia");
+			fail("Deveria ser lançada uma excessao");
+		} catch (NullPointerException e) {}
 	}
 
 	@Test
 	void testEncerraPesquisa() {
-		fail("Not yet implemented");
+		sistema.encerraPesquisa("COM1", "Algum");
+		try {
+			sistema.exibePesquisa("COM1");
+			fail("Deveria ser lancada uma excessao");
+		} catch (IllegalArgumentException e) {
+		}
+	}
+	
+	@Test
+	void testEncerraPesquisaJaEncerrada() {
+		try {
+			sistema.encerraPesquisa("HUM1", "Nao sei");
+			fail("Deveria ser lancada uma excessao");
+		} catch (IllegalArgumentException e) {
+		}
+	}
+	
+	@Test
+	void testEncerraPesquisaCodigoNulo() {
+		try {
+			sistema.encerraPesquisa(null, "Nao sei");
+			fail("Deveria ser lancada uma excessao");
+		} catch (IllegalArgumentException e) {
+		}
+	}
+	
+	@Test
+	void testEncerraPesquisaCodigoVazio() {
+		try {
+			sistema.encerraPesquisa("", "Nao sei");
+			fail("Deveria ser lancada uma excessao");
+		} catch (IllegalArgumentException e) {
+		}
+	}
+	
+	@Test
+	void testEncerraPesquisaMotivoNulo() {
+		try {
+			sistema.encerraPesquisa("COM1", null);
+			fail("Deveria ser lancada uma excessao");
+		} catch (IllegalArgumentException e) {
+		}
+	}
+	
+	@Test
+	void testEncerraPesquisaMotivoVazio() {
+		try {
+			sistema.encerraPesquisa("COM1", "");
+			fail("Deveria ser lancada uma excessao");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testEncerraPesquisaInexistente() {
+		try {
+			sistema.encerraPesquisa("ALT1", "Oi");
+			fail("Deveria ser lancada uma excessao");
+		} catch (NullPointerException e) {}
 	}
 
 	@Test
 	void testAtivaPesquisa() {
-		fail("Not yet implemented");
+		sistema.ativaPesquisa("HUM1");
+		sistema.exibePesquisa("HUM1");
+	}
+	
+	@Test
+	void testAtivaPesquisaJaAtiva() {
+		try {
+			sistema.ativaPesquisa("COM1");
+			fail("Uma excessao deveria ser lancada");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testAtivaPesquisaCodigoNulo() {
+		try {
+			sistema.ativaPesquisa(null);
+			fail("Uma excessao deveria ser lancada");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testAtivaPesquisaCodigoVazio() {
+		try {
+			sistema.ativaPesquisa("");
+			fail("Uma excessao deveria ser lancada");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testAtivaPesquisaInexistente() {
+		try {
+			sistema.ativaPesquisa("ALT1");
+			fail("Uma excessao deveria ser lancada");
+		} catch (NullPointerException e) {}
 	}
 
 	@Test
 	void testExibePesquisa() {
-		fail("Not yet implemented");
+		assertEquals("COM1 - Super computadores resolvendo problemas humanos. - computadores, IA", sistema.exibePesquisa("COM1"));
+	}
+	
+	@Test
+	void testExibePesquisaInexistente() {
+		try {
+			sistema.exibePesquisa("ALT1");
+			fail("Deveria ser lancada uma excessao");
+		} catch (NullPointerException e) {}
 	}
 
 	@Test
+	void testExibePesquisaEncerrada() {
+		try {
+			sistema.exibePesquisa("HUM1");
+			fail("Deveria ser lancada uma excessao");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testExibePesquisaCodigoNulo() {
+		try {
+			sistema.exibePesquisa(null);
+			fail("Deveria ser lancada uma excessao");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testExibePesquisaCodigoVazio() {
+		try {
+			sistema.exibePesquisa("");
+			fail("Deveria ser lancada uma excessao");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
 	void testEhAtiva() {
-		fail("Not yet implemented");
+		assertEquals("true", sistema.pesquisaEhAtiva("COM1"));
+	}
+	
+	@Test
+	void testEhAtivaFalse() {
+		assertEquals("false", sistema.pesquisaEhAtiva("HUM1"));
 	}
 
 }

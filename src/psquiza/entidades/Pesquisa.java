@@ -1,5 +1,7 @@
 package psquiza.entidades;
 
+import psquiza.Util;
+
 /**
  * 
  * Representação de uma pesquisa realizada por um pesquisador. Possui uma
@@ -37,11 +39,21 @@ public class Pesquisa {
 	 * Constrói uma pesquisa através da sua descrição, Campo de Interesse e código.
 	 * Inicializando o estado da pesquisa como ativo.
 	 * 
+	 * Caso a descricao da Pesquisa seja vazia ou nula, sera lancada um IllegalArgumentException:
+	 * "Campo descricao nao pode ser nulo ou vazio."
+	 * Caso o campo de interesse da Pesquisa seja vazio ou nulo, sera lancada um IllegalArgumentException:
+	 * "Campo interesse nao pode ser nulo ou vazio."
+	 * Caso o codigo da Pesquisa seja vazio ou nulo, sera lancada um IllegalArgumentException:
+	 * "Campo codigo nao pode ser nulo ou vazio."
+	 * 
 	 * @param descricao      texto livre sobre a pesquisa realizada
 	 * @param campoInteresse áreas para quais a pesquisa engloba
 	 * @param codigo         Código gerado automáticamente pelo sistema
 	 */
 	public Pesquisa(String descricao, String campoInteresse, String codigo) {
+		Util.validaAtributo(descricao, "Campo descricao nao pode ser nulo ou vazio.");
+		Util.validaAtributo(campoInteresse, "Campo interesse nao pode ser nulo ou vazio."); 
+		Util.validaAtributo(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 		this.descricao = descricao;
 		this.campoDeInteresse = campoInteresse;
 		this.codigo = codigo;
