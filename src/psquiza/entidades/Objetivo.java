@@ -43,6 +43,10 @@ public class Objetivo {
 	 * "Campo aderencia nao pode ser nulo ou vazio."
 	 * Caso a viabilidade do Objetivo seja invalida, sera lancada um IllegalArgumentException:
 	 * "Campo viabilidade nao pode ser nulo ou vazio."
+	 * Caso a viabilidade do Objetivo nao esteja no intervalo de 1 a 5, sera lancada um IllegalArgumentException:
+	 * "Valor invalido de aderencia"
+	 * Caso a aderencia do Objetivo nao esteja no intervalo de 1 a 5, sera lancada um IllegalArgumentException:
+	 * "Valor invalido de viabilidade."
 	 * Caso o codigo do Objetivo seja vazio ou nulo, sera lancada um IllegalArgumentException:
 	 * "Campo codigo nao pode ser nulo ou vazio."
 	 * 
@@ -57,6 +61,8 @@ public class Objetivo {
 		Util.validaAtributo(descricao, "Campo descricao nao pode ser nulo ou vazio.");
 		Util.validaAtributo(String.valueOf(aderencia), "Campo aderencia nao pode ser nulo ou vazio.");
 		Util.validaAtributo(String.valueOf(viabilidade), "Campo viabilidade nao pode ser nulo ou vazio.");
+		Util.validarLimite(aderencia, 1, 5, "Valor invalido de aderencia");
+		Util.validarLimite(viabilidade, 1, 5, "Valor invalido de viabilidade.");
 		Util.validaAtributo(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 		this.tipo = Tipo.atribuiTipo(tipo);
 		this.descricao = descricao;
