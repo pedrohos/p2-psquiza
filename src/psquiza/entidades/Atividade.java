@@ -66,8 +66,7 @@ public class Atividade {
 	 * Nivel de Risco vazio ou nulo: "Campo nivelRisco nao pode ser nulo ou vazio."
 	 * ID vazio ou nulo: "Campo codigo nao pode ser nulo ou vazio."
 	 * Descricao do Risco vazia ou nula: "Campo descricaoRisco nao pode ser nulo ou vazio."
-	 * 
-	 * Caso o Nivle de Risco nao seja BAIXO, MEDIO ou ALTO, sera lancado um
+	 * Caso o Nivel de Risco nao seja BAIXO, MEDIO ou ALTO, sera lancado um
 	 * IllegalArgumentException: "Valor invalido do nivel do risco."
 	 * 
 	 * @param descricao e a descricao da atividade.

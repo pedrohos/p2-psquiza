@@ -1,5 +1,7 @@
 package psquiza.entidades;
 
+import psquiza.Util;
+
 /**
  * Clase que representa um problema no sistema
  * 
@@ -24,11 +26,21 @@ public class Problema {
 	/**
 	 * Metodo para constroir um problema
 	 * 
+	 * Caso a descricao do Problema seja vazio ou nulo, sera lancada um IllegalArgumentException:
+	 * "Campo descricao nao pode ser nulo ou vazio."
+	 * Caso a vibilidade do Problema nao esteja no intervalo de 1 a 5, sera lancada um IllegalArgumentException:
+	 * "Campo viabilidade nao pode ser nulo ou vazio."
+	 * Caso o codigo do Problema seja vazio ou nulo, sera lancada um IllegalArgumentException:
+	 * "Campo codigo nao pode ser nulo ou vazio."
+	 * 
 	 * @param descricao   descricao do problema
 	 * @param viabilidade viabilidade do problema
 	 * @param codigo      codigo do problema
 	 */
 	public Problema(String descricao, int viabilidade, String codigo) {
+		Util.validaAtributo(descricao, "Campo descricao nao pode ser nulo ou vazio.");
+		Util.validarLimite(viabilidade, 1, 5, "Campo viabilidade nao pode ser nulo ou vazio.");
+		Util.validaAtributo(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 		this.descricao = descricao;
 		this.viabilidade = viabilidade;
 		this.codigo = codigo;
