@@ -90,7 +90,7 @@ public class ControladorPesquisa {
 				throw new IllegalArgumentException("Formato do campo de interesse invalido.");
 			} else {
 				for (String campo : campos) {
-					if (campo.trim().isEmpty() || campo.length() < 3) {
+					if (campo.trim().isEmpty() || campo.trim().length() < 3) {
 						throw new IllegalArgumentException("Formato do campo de interesse invalido.");
 					}
 				}
@@ -125,8 +125,11 @@ public class ControladorPesquisa {
 	 * @param novoConteudo         novo valor a ser adicionado
 	 */
 	public void alteraPesquisa(String codigo, String conteudoASerAlterado, String novoConteudo) {
+
+		Util.validaAtributo(conteudoASerAlterado, "Conteudo a ser alterado nao pode ser nulo ou vazio");
 		Util.validaAtributo(codigo, "Codigo nao pode ser nulo ou vazio.");
 		existePesquisa(pesquisas, codigo);
+
 		if (!pesquisas.get(codigo).ehAtiva()) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
 		}
