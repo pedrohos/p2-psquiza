@@ -2,73 +2,70 @@ package testes_use_case1;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import psquiza.entidades.Pesquisa;
 
 class PesquisaTest {
 
-	@Test
-	void testHashCode() {
-		fail("Not yet implemented");
+	private Pesquisa p1;
+	private Pesquisa p2;
+	private Pesquisa p3;
+	
+	@BeforeEach
+	void criaPesquisas() {
+		p1 = new Pesquisa("Descricao", "campo", "CAM1");
+		p2 = new Pesquisa("Descricao2", "campo2", "CAM1");
+		p3 = new Pesquisa("Descricao3", "campo3", "CAM2");
+		p3.encerraPesquisa();
 	}
-
+	
 	@Test
-	void testPesquisa() {
-		fail("Not yet implemented");
+	void testHashCodeIguais() {
+		assertEquals(p1.hashCode(), p2.hashCode());
 	}
-
+	
 	@Test
-	void testGetEstado() {
-		fail("Not yet implemented");
+	void testHashCodeDiferentes() {
+		assertNotEquals(p1.hashCode(), p3.hashCode());
 	}
-
-	@Test
-	void testGetDescricao() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testGetCampoDeInteresse() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testGetCodigo() {
-		fail("Not yet implemented");
-	}
-
+	
 	@Test
 	void testEhAtiva() {
-		fail("Not yet implemented");
+		assertEquals(true, p1.ehAtiva());
+	}
+	
+	@Test
+	void testNaoEhAtiva() {
+		assertEquals(false, p3.ehAtiva());
 	}
 
 	@Test
 	void testAtivaPesquisa() {
-		fail("Not yet implemented");
+		p3.ativaPesquisa();
+		assertEquals(true, p3.ehAtiva());
 	}
 
 	@Test
 	void testEncerraPesquisa() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testSetDescricao() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testSetCampoDeInteresse() {
-		fail("Not yet implemented");
+		p2.encerraPesquisa();
+		assertEquals(false, p2.ehAtiva());
 	}
 
 	@Test
 	void testToString() {
-		fail("Not yet implemented");
+		assertEquals("CAM1 - Descricao - campo", p1.toString());
 	}
 
 	@Test
 	void testEqualsObject() {
-		fail("Not yet implemented");
+		assertEquals(p1, p2);
+	}
+	
+	@Test
+	void testNotEqualsObject() {
+		assertNotEquals(p1, p3);
 	}
 
 }

@@ -158,9 +158,7 @@ public class Pesquisa {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((campoDeInteresse == null) ? 0 : campoDeInteresse.hashCode());
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		return result;
 	}
 
