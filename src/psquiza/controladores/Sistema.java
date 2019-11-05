@@ -110,7 +110,7 @@ public class Sistema {
 	 * @param codigo codigo da pesquisa
 	 * @return string true caso a pesquisa esteja ativa e false caso nao esteja.
 	 */
-	public String pesquisaEhAtiva(String codigo) {
+	public boolean pesquisaEhAtiva(String codigo) {
 		return controladorPesquisa.ehAtiva(codigo);
 	}
 
@@ -160,6 +160,25 @@ public class Sistema {
 
 	public boolean pesquisadorEhAtivo(String email) {
 		return controladorPesquisador.pesquisadorEhAtivo(email);
-
+	}
+	
+	public boolean associaProblema(String idPesquisa, String idProblema) {
+		return controladorPesquisa.associaProblema(idPesquisa, idProblema);
+	}
+	
+	public boolean desassociaProblema(String idPesquisa, String idProblema) {
+		return controladorPesquisa.desassociaProblema(idPesquisa, idProblema);
+	}
+	
+	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
+		if (controladorPesquisa.associaObjetivo(idPesquisa, idObjetivo) == false)
+			return false;
+		return controladorMetas.associaPesquisa(idPesquisa, idObjetivo);
+	}
+	
+	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
+		if (controladorPesquisa.desassociaObjetivo(idPesquisa, idObjetivo) == false)
+			return false;
+		return controladorMetas.desassociaPesquisa(idPesquisa, idObjetivo);
 	}
 }

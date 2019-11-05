@@ -31,6 +31,8 @@ public class Objetivo {
 	 * Atributo que representa o codigo de um objetivo
 	 */
 	private String codigo;
+	
+	private String idPesquisa;
 
 	/**
 	 * Metodo que constroi um objetivo a partir de um tipo, descricao, aderencia e viabilidade.
@@ -69,8 +71,33 @@ public class Objetivo {
 		this.aderencia = aderencia;
 		this.viabilidade = viabilidade;
 		this.codigo = codigo;
+		this.idPesquisa = "";
 	}
-
+	
+	public boolean associaPesquisa(String idPesquisa) {
+		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		if (this.idPesquisa.equals(idPesquisa))
+			return false;
+		if (!this.idPesquisa.isEmpty())
+			throw new IllegalArgumentException("Objetivo ja associado a uma pesquisa.");
+		
+		this.idPesquisa = idPesquisa;
+		return true;
+	}
+	
+	public boolean desassociaPesquisa(String idPesquisa) {
+		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		if (!this.idPesquisa.equals(idPesquisa))
+			return false;
+		
+		this.idPesquisa = "";
+		return true;
+	}
+	
+	public String getCodigo() {
+		return this.codigo;
+	}
+ 
 	/**
 	 * Metodo para gerar a representacao de um objetivo
 	 */

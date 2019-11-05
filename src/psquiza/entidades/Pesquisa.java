@@ -1,15 +1,16 @@
 package psquiza.entidades;
 
+import java.util.HashSet;
+
 import psquiza.Util;
 
 /**
- * 
- * Representação de uma pesquisa realizada por um pesquisador. Possui uma
- * descricao, até quatro campos de interesse, um código gerado automáticamente
- * pelo sistema e um estado que indica se a pesquisa está ativa (1) ou
+ * Representacao de uma pesquisa realizada por um pesquisador. Possui uma
+ * descricao, ate quatro campos de interesse, um codigo gerado automaticamente
+ * pelo sistema e um estado que indica se a pesquisa esta ativa (1) ou
  * desativada (-1)
  *
- * @author Regina Letícia Santos Felipe - 119110519
+ * @author Regina Leticia Santos Felipe - 119110519
  * 
  */
 public class Pesquisa {
@@ -20,13 +21,13 @@ public class Pesquisa {
 	private String descricao;
 
 	/**
-	 * Um marcador da área ou tema a ser colocado. Pode ter até 4 tópicos, separados
-	 * por vírgula e ter até 255 caracteres.
+	 * Um marcador da area ou tema a ser colocado. Pode ter ate 4 tipos, separados
+	 * por virgula e ter ate 255 caracteres.
 	 */
 	private String campoDeInteresse;
 	/**
-	 * Código gerado automaticamente pelas primeiras três letras do campo de
-	 * interesse mais um valor inteiro começando em 1.
+	 * Código gerado automaticamente pelas primeiras tres letras do campo de
+	 * interesse mais um valor inteiro comecando em 1.
 	 */
 	private String codigo;
 	/**
@@ -34,9 +35,13 @@ public class Pesquisa {
 	 * pesquisa ativada e (-1) para pesquisa desativada
 	 */
 	private boolean estado;
+	
+	private String problema;
+
+	private HashSet<String> objetivos;
 
 	/**
-	 * Constrói uma pesquisa através da sua descrição, Campo de Interesse e código.
+	 * Constroi uma pesquisa atraves da sua descricao, Campo de Interesse e codigo.
 	 * Inicializando o estado da pesquisa como ativo.
 	 * 
 	 * Caso a descricao da Pesquisa seja vazia ou nula, sera lancada um IllegalArgumentException:
@@ -47,8 +52,8 @@ public class Pesquisa {
 	 * "Campo codigo nao pode ser nulo ou vazio."
 	 * 
 	 * @param descricao      texto livre sobre a pesquisa realizada
-	 * @param campoInteresse áreas para quais a pesquisa engloba
-	 * @param codigo         Código gerado automáticamente pelo sistema
+	 * @param campoInteresse areas para quais a pesquisa engloba
+	 * @param codigo         codigo gerado automaticamente pelo sistema
 	 */
 	public Pesquisa(String descricao, String campoInteresse, String codigo) {
 		Util.validaAtributo(descricao, "Campo descricao nao pode ser nulo ou vazio.");
@@ -58,10 +63,12 @@ public class Pesquisa {
 		this.campoDeInteresse = campoInteresse;
 		this.codigo = codigo;
 		this.estado = true;
+		this.problema = "";
+		this.objetivos = new HashSet<>();
 	}
 
 	/**
-	 * Retorna o estado da pesquisa, se ativada ou não
+	 * Retorna o estado da pesquisa, se ativada ou nao
 	 * 
 	 * @return retorna string que representa se a pesquisa esta ativa ou nao.
 	 */
@@ -74,7 +81,7 @@ public class Pesquisa {
 	}
 
 	/**
-	 * Função que retorna a descricao da pesquisa
+	 * Funcao que retorna a descricao da pesquisa
 	 * 
 	 * @return descricao da pesquisa
 	 */
@@ -83,7 +90,7 @@ public class Pesquisa {
 	}
 
 	/**
-	 * Função que retorna o campo de Interesse de uma pesquisa
+	 * Funcao que retorna o campo de Interesse de uma pesquisa
 	 * 
 	 * @return campo de interesse da pesquisa
 	 */
@@ -92,16 +99,16 @@ public class Pesquisa {
 	}
 
 	/**
-	 * Função que retorna o código gerado de uma pesquisa
+	 * Funcao que retorna o codigo gerado de uma pesquisa
 	 * 
-	 * @return código de uma pesquisa
+	 * @return codigo de uma pesquisa
 	 */
 	public String getCodigo() {
 		return codigo;
 	}
 
 	/**
-	 * Retorna um boolean se pesquisa é ou não ativa
+	 * Retorna um boolean se pesquisa a ou nao ativa
 	 * 
 	 * @return true para pesquisa ativa e false para pesquisa desativada
 	 */
@@ -149,11 +156,60 @@ public class Pesquisa {
 		this.campoDeInteresse = campoDeInteresse;
 	}
 
+	public boolean associaProblema(String idProblema) {
+		Util.validaAtributo(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
+		if (this.problema.equals(idProblema)) return false;
+		
+		if (!this.problema.isEmpty())
+			throw new IllegalArgumentException("Pesquisa ja associada a um problema.");
+		
+		this.problema = idProblema;
+		return true;
+	}
+
+	public boolean desassociaProblema(String idProblema) {
+		Util.validaAtributo(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
+		
+		if (!this.problema.equals(idProblema))
+			return false;
+		this.problema = "";
+		return true;
+	}
+	
+	private boolean possuiObjetivo(String idObjetivo) {
+		for (String objetivo: objetivos) {
+			if (objetivo.equals(idObjetivo)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean associaObjetivo(String idObjetivo) {
+		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
+		
+		if (possuiObjetivo(idObjetivo))
+			return false;
+		
+		objetivos.add(idObjetivo);
+		return true;
+	}
+	
+	public boolean desassociaObjetivo(String idObjetivo) {
+		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
+		
+		if (!possuiObjetivo(idObjetivo))
+			return false;
+		
+		objetivos.remove(idObjetivo);
+		return true;
+	}
+
 	/**
-	 * Retorna a representação em string de uma pesquisa no formato "CODIGO -
-	 * DESCRICAO - CAMṔODEINTERESSE"
+	 * Retorna a representacao em string de uma pesquisa no formato "CODIGO -
+	 * DESCRICAO - CAMPODEINTERESSE"
 	 * 
-	 * @return representação em string de uma pesquisa
+	 * @return representacao em string de uma pesquisa
 	 */
 	@Override
 	public String toString() {
@@ -175,9 +231,9 @@ public class Pesquisa {
 	}
 
 	/**
-	 * Compara se uma pesquisa passada é igual a corrente pesquisa
+	 * Compara se uma pesquisa passada a igual a corrente pesquisa
 	 * 
-	 * @return true se objeto passado é igual a corrente pesquisa e false se o
+	 * @return true se objeto passado a igual a corrente pesquisa e false se o
 	 *         contrario
 	 */
 	@Override
