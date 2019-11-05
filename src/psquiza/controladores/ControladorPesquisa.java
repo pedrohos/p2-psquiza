@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import psquiza.Util;
+import psquiza.entidades.Atividade;
 import psquiza.entidades.Pesquisa;
 import psquiza.ordenacao.*;
 
@@ -283,5 +284,28 @@ public class ControladorPesquisa {
 			}
 		}
 		return resultado;
+	}
+
+	public boolean associaAtividade(String codigoPesquisa, Atividade atividade) {
+		Util.validaAtributo(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
+		if(!pesquisas.containsKey(codigoPesquisa)) {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+		if(!pesquisas.get(codigoPesquisa).ehAtiva()) {
+			throw new IllegalArgumentException("Pesquisa desativada.");
+		}
+		return pesquisas.get(codigoPesquisa).associaAtividade(atividade);
+		
+	}
+
+	public boolean desassociaAtividade(String codigoPesquisa, Atividade atividade) {
+		Util.validaAtributo(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
+		if(!pesquisas.containsKey(codigoPesquisa)) {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+		if(!pesquisas.get(codigoPesquisa).ehAtiva()) {
+			throw new IllegalArgumentException("Pesquisa desativada.");
+		}
+		return pesquisas.get(codigoPesquisa).desassociaAtividade(atividade);
 	}
 }

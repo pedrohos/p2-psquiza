@@ -1,7 +1,11 @@
 package psquiza.entidades;
 
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
 
 import psquiza.Util;
 import psquiza.enums.Risco;
@@ -31,6 +35,7 @@ public class Atividade {
 	 */
 	private String descricao;
 	
+	private Integer posicaoItem = 1;
 	/**
 	 * Armazena a descricao do risco da Atividade.
 	 */
@@ -46,7 +51,7 @@ public class Atividade {
 	/**
 	 * Representa a duracao da Atividade.
 	 */
-	private Period periodo;
+	private int periodo;
 	
 	/**
 	 * Representa o identificador unico da Atividade.
@@ -56,7 +61,7 @@ public class Atividade {
 	/**
 	 * Armazena um conjunto ordenado de itens que compoem a atividade.
 	 */
-	private LinkedHashSet<Item> itens;
+	private Map<Integer,Item> itens;
 
 	/**
 	 * Constroi um nova atividade, validando se os parametros passados
@@ -84,7 +89,7 @@ public class Atividade {
 		this.descricao = descricao;
 		this.descricaoRisco = descricaoRisco;
 		this.id = id;
-		this.itens = new LinkedHashSet<>();
+		this.itens = new HashMap<>();
 	}
 
 	/**
@@ -98,7 +103,8 @@ public class Atividade {
 	public void cadastraItem(String item) {
 		Util.validaAtributo(item, "Item nao pode ser nulo ou vazio.");
 
-		this.itens.add(new Item(item));
+		this.itens.put(this.posicaoItem,new Item(item));
+		this.posicaoItem += 1;
 	}
 
 	/**
@@ -108,9 +114,9 @@ public class Atividade {
 	 */
 	public int getItensPendentes() {
 		int resultado = 0;
-		for (Item item : itens) {
-			if (item.getEstado().equals("PENDENTE")) {
-				resultado++;
+		for(Integer item : itens.keySet()) {
+			if(itens.get(item).getEstado().equals("PENDENTE")) {
+				resultado ++;
 			}
 		}
 		return resultado;
@@ -123,9 +129,9 @@ public class Atividade {
 	 */
 	public int getItensRealizados() {
 		int resultado = 0;
-		for (Item item : itens) {
-			if (item.getEstado().equals("REALIZADO")) {
-				resultado++;
+		for(Integer item : itens.keySet()) {
+			if(itens.get(item).getEstado().equals("REALIZADO")) {
+				resultado ++;
 			}
 		}
 		return resultado;
@@ -177,5 +183,16 @@ public class Atividade {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public void executaAtividade(int item, int duracao) {
+		if(!itens.containsKey(item)){
+			throw new IllegalArgumentException("Item nao encontrado.");
+		}
+		if(itens.get(item).getEstado().equals("REALIZADO")) {
+			throw new IllegalArgumentException("Item ja executado.");
+		}
+		itens.get(item).setEstado("REALIZADO");
+		this.periodo += duracao;
 	}
 }

@@ -1,5 +1,7 @@
 package psquiza.controladores;
 
+import psquiza.entidades.Atividade;
+
 public class Sistema {
 
 	private ControladorAtividade controladorAtividade;
@@ -180,5 +182,20 @@ public class Sistema {
 		if (controladorPesquisa.desassociaObjetivo(idPesquisa, idObjetivo) == false)
 			return false;
 		return controladorMetas.desassociaPesquisa(idPesquisa, idObjetivo);
+	}
+
+	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade) {
+		Atividade atividade = controladorAtividade.getAtividade(codigoAtividade);
+		return controladorPesquisa.associaAtividade(codigoPesquisa, atividade);
+	}
+
+	public boolean desassociaAtividade(String codigoPesquisa, String codigoAtividade) {
+		Atividade atividade = controladorAtividade.getAtividade(codigoAtividade);
+		return controladorPesquisa.desassociaAtividade(codigoPesquisa, atividade);
+	}
+
+	public void executaAtividade(String codigoAtividade, int item, int duracao) {
+		controladorAtividade.executaAtividade(codigoAtividade, item, duracao);
+		
 	}
 }
