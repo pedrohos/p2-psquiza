@@ -204,6 +204,13 @@ public class Pesquisa {
 		objetivos.remove(idObjetivo);
 		return true;
 	}
+	
+	public boolean possuiProblema() {
+		if (!this.problema.equals("")) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Retorna a representacao em string de uma pesquisa no formato "CODIGO -
@@ -251,6 +258,10 @@ public class Pesquisa {
 		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
+	}
+
+	public int qtdObjetivos() {
+		return this.objetivos.size();
 	}
 
 }

@@ -181,4 +181,8 @@ public class Sistema {
 			return false;
 		return controladorMetas.desassociaPesquisa(idPesquisa, idObjetivo);
 	}
+
+	public String listaPesquisas(String ordem) {
+		return controladorPesquisa.listaPesquisas(ordem);
+	}
 }

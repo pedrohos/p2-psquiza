@@ -209,6 +209,13 @@ public class Psquiza {
 	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
 		return sistema.desassociaObjetivo(idPesquisa, idObjetivo);
 	}
+	
+	/**
+	 * {@link psquiza.controladores.Sistema#listaPesquisas(String)}
+	 */
+	public String listaPesquisas(String ordem) {
+		return sistema.listaPesquisas(ordem);
+	}
 
 	public static void main(String[] args) {
 		args = new String[] { "psquiza.Psquiza",

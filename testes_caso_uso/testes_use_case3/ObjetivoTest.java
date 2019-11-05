@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import psquiza.entidades.Objetivo;
-import psquiza.entidades.Problema;
 
 class ObjetivoTest {
 

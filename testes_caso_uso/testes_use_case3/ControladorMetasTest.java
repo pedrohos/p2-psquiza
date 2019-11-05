@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import psquiza.controladores.ControladorMetas;
-import psquiza.entidades.Objetivo;
 
 class ControladorMetasTest {
 
