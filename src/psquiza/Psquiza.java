@@ -52,7 +52,7 @@ public class Psquiza {
 	 * {@link psquiza.controladores.Sistema#pesquisaEhAtiva(String)}
 	 */
 
-	public String pesquisaEhAtiva(String codigo) {
+	public boolean pesquisaEhAtiva(String codigo) {
 		return sistema.pesquisaEhAtiva(codigo);
 	}
 
@@ -181,11 +181,40 @@ public class Psquiza {
 	public String exibeObjetivo(String codigo) {
 		return sistema.exibeObjetivo(codigo);
 	}
+	
+	/**
+	 * {@link psquiza.controladores.Sistema#associaProblema(String, String)}
+	 */
+	public boolean associaProblema(String idPesquisa, String idProblema) {
+		return sistema.associaProblema(idPesquisa, idProblema);
+	}
+	
+	/**
+	 * {@link psquiza.controladores.Sistema#desassociaProblema(String, String)}
+	 */
+	public boolean desassociaProblema(String idPesquisa, String idProblema) {
+		return sistema.desassociaProblema(idPesquisa, idProblema);
+	}
+	
+	/**
+	 * {@link psquiza.controladores.Sistema#associaObjetivo(String, String)}
+	 */
+	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
+		return sistema.associaObjetivo(idPesquisa, idObjetivo);
+	}
+	
+	/**
+	 * {@link psquiza.controladores.Sistema#desassociaObjetivo(String, String)}
+	 */
+	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
+		return sistema.desassociaObjetivo(idPesquisa, idObjetivo);
+	}
 
 	public static void main(String[] args) {
 		args = new String[] { "psquiza.Psquiza",
 							  "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",
-					          "testes_aceitacao/use_case_3.txt", "testes_aceitacao/use_case_4.txt" };
+					          "testes_aceitacao/use_case_3.txt", "testes_aceitacao/use_case_4.txt",
+					          "testes_aceitacao/use_case_5.txt"};
 
 		EasyAccept.main(args);
 	}

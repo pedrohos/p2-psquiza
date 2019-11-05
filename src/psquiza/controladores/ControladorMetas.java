@@ -30,8 +30,6 @@ public class ControladorMetas {
 	 * COntador para gerar o id de um objetivo
 	 */
 	private int contadorObjetivo = 1;
-
-	
 	
 	/**
 	 * Constroi um controlador de metas
@@ -130,5 +128,31 @@ public class ControladorMetas {
 		}
 		return objetivos.get(codigo).toString();
 	}
+	
+	private boolean existeObjetivo(String codigo) {
+		for (Objetivo o: objetivos.values()) {
+			if (o.getCodigo().equals(codigo)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean associaPesquisa(String idPesquisa, String idObjetivo) {
+		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
+		if(!existeObjetivo(idObjetivo))
+			throw new IllegalArgumentException("Objetivo nao encontrado.");
+		
+		return this.objetivos.get(idObjetivo).associaPesquisa(idPesquisa);
+	}
 
+	public boolean desassociaPesquisa(String idPesquisa, String idObjetivo) {
+		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
+		if(!existeObjetivo(idObjetivo))
+			throw new IllegalArgumentException("Objetivo nao encontrado.");
+		
+		return this.objetivos.get(idObjetivo).desassociaPesquisa(idPesquisa);
+	}
 }
