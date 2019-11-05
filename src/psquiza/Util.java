@@ -1,5 +1,7 @@
 package psquiza;
 
+import java.text.SimpleDateFormat;
+
 public final class Util {
 	public static void validaAtributo(String valor, String erro) {
 		if (valor == null || valor.equals(""))
@@ -22,6 +24,22 @@ public final class Util {
 		if (foto.length() < 7 || (!foto.substring(0, 7).equals("http://") && !foto.substring(0, 8).equals("https://"))) {
 			throw new IllegalArgumentException("Formato de foto invalido.");
 		}
+<<<<<<< HEAD
+	} 
+	
+	
+	public static void validaData(String data) {
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			sdf.setLenient(false);
+			sdf.parse(data);
+		}catch(Exception e ) {
+			throw new IllegalArgumentException("Atributo data com formato invalido.");
+		}
+	}
+
+} 
+=======
 	}
 	
 	public static void validaNumero(int numero, String erro) {
@@ -30,3 +48,4 @@ public final class Util {
 		}
 	}
 }
+>>>>>>> affe270b95049382a2d86c6d33ba2e2b028b27aa

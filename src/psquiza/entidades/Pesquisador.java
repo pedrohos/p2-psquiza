@@ -1,5 +1,7 @@
 package psquiza.entidades;
 
+import java.text.SimpleDateFormat;
+
 import psquiza.Util;
 import psquiza.enums.Funcao;
 
@@ -65,6 +67,30 @@ public class Pesquisador {
 		this.foto = foto;
 		this.funcao = Funcao.atribuiFuncao(funcao);
 		this.ativo = true;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getBiografia() {
+		return biografia;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public Funcao getFuncao() {
+		return funcao;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
 	}
 
 	/**
