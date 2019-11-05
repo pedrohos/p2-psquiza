@@ -3,6 +3,7 @@ package psquiza.controladores;
 import java.util.NoSuchElementException;
 
 import psquiza.Util;
+import psquiza.entidades.Atividade;
 
 public class Sistema {
 
@@ -239,4 +240,19 @@ public class Sistema {
     	
     	return busca(termo).split(" | ").length;
     }
+
+	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade) {
+		Atividade atividade = controladorAtividade.getAtividade(codigoAtividade);
+		return controladorPesquisa.associaAtividade(codigoPesquisa, atividade);
+	}
+
+	public boolean desassociaAtividade(String codigoPesquisa, String codigoAtividade) {
+		Atividade atividade = controladorAtividade.getAtividade(codigoAtividade);
+		return controladorPesquisa.desassociaAtividade(codigoPesquisa, atividade);
+	}
+
+	public void executaAtividade(String codigoAtividade, int item, int duracao) {
+		controladorAtividade.executaAtividade(codigoAtividade, item, duracao);
+		
+	}
 }

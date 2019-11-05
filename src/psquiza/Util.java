@@ -22,5 +22,11 @@ public final class Util {
 		if (foto.length() < 7 || (!foto.substring(0, 7).equals("http://") && !foto.substring(0, 8).equals("https://"))) {
 			throw new IllegalArgumentException("Formato de foto invalido.");
 		}
-	} 
-} 
+	}
+	
+	public static void validaNumero(int numero, String erro) {
+		if(numero < 0) {
+			throw new IllegalArgumentException(erro);
+		}
+	}
+}

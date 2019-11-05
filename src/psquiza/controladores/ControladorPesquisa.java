@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import psquiza.Util;
+import psquiza.entidades.Atividade;
 import psquiza.entidades.Pesquisa;
 import psquiza.ordenacao.*;
 
@@ -198,7 +199,7 @@ public class ControladorPesquisa {
 	public boolean ehAtiva(String codigo) {
 		Util.validaAtributo(codigo, "Codigo nao pode ser nulo ou vazio.");
 		validaPesquisa(codigo);
-		
+
 		if (pesquisas.get(codigo).ehAtiva())
 			return true;
 		return false;
@@ -213,14 +214,14 @@ public class ControladorPesquisa {
 
 		return this.pesquisas.get(idPesquisa).associaProblema(idProblema);
 	}
-	
+
 	public boolean desassociaProblema(String idPesquisa, String idProblema) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		Util.validaAtributo(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
 		validaPesquisa(idPesquisa);
 		if (!ehAtiva(idPesquisa))
 			throw new IllegalArgumentException("Pesquisa desativada.");
-		
+
 		return this.pesquisas.get(idPesquisa).desassociaProblema(idProblema);
 	}
 
@@ -230,61 +231,61 @@ public class ControladorPesquisa {
 		validaPesquisa(idPesquisa);
 		if (!ehAtiva(idPesquisa))
 			throw new IllegalArgumentException("Pesquisa desativada.");
-		
+
 		return this.pesquisas.get(idPesquisa).associaObjetivo(idObjetivo);
 	}
-	
+
 	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
 		validaPesquisa(idPesquisa);
 		if (!ehAtiva(idPesquisa))
 			throw new IllegalArgumentException("Pesquisa desativada.");
-		
+
 		return this.pesquisas.get(idPesquisa).desassociaObjetivo(idObjetivo);
 	}
 
 	private ArrayList<Pesquisa> ordenaPesquisas(String ordem) {
 		OrdenaPesquisa criterio;
 		switch (ordem) {
-			case "PROBLEMA":
-				criterio = new CriterioProblema();
-				break;
-			case "OBJETIVOS":
-				criterio = new CriterioObjetivo();
-				break;
-			case "PESQUISA":
-				criterio = new CriterioPesquisa();
-				break;		
-			default:
-				throw new IllegalArgumentException("");
+		case "PROBLEMA":
+			criterio = new CriterioProblema();
+			break;
+		case "OBJETIVOS":
+			criterio = new CriterioObjetivo();
+			break;
+		case "PESQUISA":
+			criterio = new CriterioPesquisa();
+			break;
+		default:
+			throw new IllegalArgumentException("");
 		}
-		
+
 		ArrayList<Pesquisa> pesquisasOrdenadas = new ArrayList<>();
 		pesquisasOrdenadas.addAll(this.pesquisas.values());
-		
+
 		Collections.sort(pesquisasOrdenadas, criterio);
 		return pesquisasOrdenadas;
 	}
-	
+
 	public String listaPesquisas(String ordem) {
 		ArrayList<Pesquisa> pesquisasOrdenadas = ordenaPesquisas(ordem);
-		
+
 		String resultado = "";
 		Iterator<Pesquisa> it = pesquisasOrdenadas.iterator();
 		while (it.hasNext()) {
 			Pesquisa pesquisa = it.next();
 			if (it.hasNext()) {
 				resultado += String.format("%s, %s, %s", pesquisa.getCodigo(), pesquisa.getDescricao(),
-				pesquisa.getCampoDeInteresse()) + " | ";
+						pesquisa.getCampoDeInteresse()) + " | ";
 			} else {
 				resultado += String.format("%s, %s, %s", pesquisa.getCodigo(), pesquisa.getDescricao(),
-				pesquisa.getCampoDeInteresse());
+						pesquisa.getCampoDeInteresse());
 			}
 		}
 		return resultado;
 	}
-	
+
 	public String buscaPesquisa(String termo) {
 		String listagem = "";
 		for (Pesquisa pesquisa : pesquisas.values()) {
@@ -304,5 +305,28 @@ public class ControladorPesquisa {
 			}
 		}
 		return listagem;
+	}
+
+	public boolean associaAtividade(String codigoPesquisa, Atividade atividade) {
+		Util.validaAtributo(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
+		if (!pesquisas.containsKey(codigoPesquisa)) {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+		if (!pesquisas.get(codigoPesquisa).ehAtiva()) {
+			throw new IllegalArgumentException("Pesquisa desativada.");
+		}
+		return pesquisas.get(codigoPesquisa).associaAtividade(atividade);
+
+	}
+
+	public boolean desassociaAtividade(String codigoPesquisa, Atividade atividade) {
+		Util.validaAtributo(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
+		if (!pesquisas.containsKey(codigoPesquisa)) {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+		if (!pesquisas.get(codigoPesquisa).ehAtiva()) {
+			throw new IllegalArgumentException("Pesquisa desativada.");
+		}
+		return pesquisas.get(codigoPesquisa).desassociaAtividade(atividade);
 	}
 }
