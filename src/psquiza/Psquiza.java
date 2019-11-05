@@ -209,12 +209,23 @@ public class Psquiza {
 	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
 		return sistema.desassociaObjetivo(idPesquisa, idObjetivo);
 	}
-
+	
+	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade) {
+		return sistema.associaAtividade(codigoPesquisa, codigoAtividade);
+	}
+	
+	public boolean desassociaAtividade(String codigoPesquisa, String codigoAtividade) {
+		return sistema.desassociaAtividade(codigoPesquisa, codigoAtividade);
+	}
+	
+	public void executaAtividade(String codigoAtividade, int item, int duracao) {
+		sistema.executaAtividade(codigoAtividade, item, duracao);
+	}
 	public static void main(String[] args) {
 		args = new String[] { "psquiza.Psquiza",
 							  "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",
 					          "testes_aceitacao/use_case_3.txt", "testes_aceitacao/use_case_4.txt",
-					          "testes_aceitacao/use_case_5.txt"};
+					          "testes_aceitacao/use_case_5.txt", "testes_aceitacao/use_case_7.txt"};
 
 		EasyAccept.main(args);
 	}

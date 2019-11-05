@@ -39,6 +39,8 @@ public class Pesquisa {
 	private String problema;
 
 	private HashSet<String> objetivos;
+	
+	private HashSet<Atividade> atividades;
 
 	/**
 	 * Constroi uma pesquisa atraves da sua descricao, Campo de Interesse e codigo.
@@ -65,6 +67,7 @@ public class Pesquisa {
 		this.estado = true;
 		this.problema = "";
 		this.objetivos = new HashSet<>();
+		this.atividades = new HashSet<>();
 	}
 
 	/**
@@ -251,6 +254,21 @@ public class Pesquisa {
 		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
+	}
+
+	public boolean associaAtividade(Atividade atividade) {
+		if(atividades.contains(atividade)) {
+			return false;
+		}
+		return atividades.add(atividade);
+	}
+
+	public boolean desassociaAtividade(Atividade atividade) {
+		if(!atividades.contains(atividade)) {
+			return false;
+		}
+		return atividades.remove(atividade);
+		
 	}
 
 }
