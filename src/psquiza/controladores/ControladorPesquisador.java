@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 import psquiza.Util;
 import psquiza.entidades.Pesquisador;
+import psquiza.enums.Funcao;
 
 /**
  * Classe controladora de pesquisadores.
@@ -35,6 +36,7 @@ public class ControladorPesquisador {
 	 * @param fotoURL   url da foto do pesquisador a ser cadastrado.
 	 */
 	public void cadastraPesquisador(String nome, String funcao, String biografia, String email, String fotoURL) {
+		
 		Util.validaAtributo(nome, "Campo nome nao pode ser nulo ou vazio.");
 		Util.validaAtributo(funcao, "Campo funcao nao pode ser nulo ou vazio.");
 		Util.validaAtributo(biografia, "Campo biografia nao pode ser nulo ou vazio.");
@@ -44,7 +46,7 @@ public class ControladorPesquisador {
 		Util.validaFoto(fotoURL);
 
 		pesquisadores.put(email, new Pesquisador(nome, biografia, email, fotoURL, funcao));
-	} 
+	}
 
 	/**
 	 * Metodo responsavel por alterar os atributos do pesquisador e que pode lancar
@@ -181,6 +183,6 @@ public class ControladorPesquisador {
 		}
 
 		return pesquisadores.get(email).ehAtivo();
-	} 
+	}
 
 }
