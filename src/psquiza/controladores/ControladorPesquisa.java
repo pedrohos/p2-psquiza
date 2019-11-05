@@ -284,4 +284,25 @@ public class ControladorPesquisa {
 		}
 		return resultado;
 	}
+	
+	public String buscaPesquisa(String termo) {
+		String listagem = "";
+		for (Pesquisa pesquisa : pesquisas.values()) {
+			if (pesquisa.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
+				if (listagem.isEmpty()) {
+					listagem += pesquisa.getCodigo() + " - " + pesquisa.getDescricao();
+				} else {
+					listagem += " | " + pesquisa.getCodigo() + " - " + pesquisa.getDescricao();
+				}
+			}
+			if (pesquisa.getCampoDeInteresse().toLowerCase().contains(termo.toLowerCase())) {
+				if (listagem.isEmpty()) {
+					listagem += pesquisa.getCodigo() + " - " + pesquisa.getCampoDeInteresse();
+				} else {
+					listagem += " | " + pesquisa.getCodigo() + " - " + pesquisa.getCampoDeInteresse();
+				}
+			}
+		}
+		return listagem;
+	}
 }

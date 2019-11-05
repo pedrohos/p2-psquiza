@@ -97,6 +97,15 @@ public class Objetivo {
 	public String getCodigo() {
 		return this.codigo;
 	}
+	
+	/**
+	 * Funcao que retorna a descricao da pesquisa.
+	 * 
+	 * @return descricao da pesquisa.
+	 */
+	public String getDescricao() {
+		return descricao;
+	}
  
 	/**
 	 * Metodo para gerar a representacao de um objetivo

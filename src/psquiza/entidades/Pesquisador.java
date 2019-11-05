@@ -58,14 +58,14 @@ public class Pesquisador {
 		Util.validaAtributo(foto, "Campo fotoURL nao pode ser nulo ou vazio.");
 		Util.validaEmail(email);
 		Util.validaFoto(foto);
-		
+
 		this.nome = nome;
 		this.biografia = biografia;
 		this.email = email;
 		this.foto = foto;
 		this.funcao = Funcao.atribuiFuncao(funcao);
 		this.ativo = true;
-	} 
+	}
 
 	/**
 	 * Metodo que retorna se o pesquisador e ativo ou nao.
@@ -96,6 +96,15 @@ public class Pesquisador {
 	}
 
 	/**
+	 * Metodo responsavel por retornar o atributo biografia.
+	 * 
+	 * @return valor da biografia.
+	 */
+	public String getBiografia() {
+		return biografia;
+	}
+
+	/**
 	 * Metodo responsavel por alterar o atributo biografia.
 	 * 
 	 * @param ativo novo valor para biografia.
@@ -103,6 +112,15 @@ public class Pesquisador {
 	public void setBiografia(String biografia) {
 		Util.validaAtributo(biografia, "Campo biografia nao pode ser nulo ou vazio.");
 		this.biografia = biografia;
+	}
+
+	/**
+	 * Metodo responsavel por retornar o atributo email.
+	 * 
+	 * @return valor do email.
+	 */
+	public String getEmail() {
+		return email;
 	}
 
 	/**

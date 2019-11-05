@@ -3,6 +3,7 @@ package psquiza.controladores;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 import psquiza.Util;
+import psquiza.entidades.Pesquisa;
 import psquiza.entidades.Pesquisador;
 
 /**
@@ -183,4 +184,17 @@ public class ControladorPesquisador {
 		return pesquisadores.get(email).ehAtivo();
 	} 
 
+	public String buscaPesquisador(String termo) {
+		String listagem = "";
+		for (Pesquisador pesquisador : pesquisadores.values()) {
+			if (pesquisador.getBiografia().toLowerCase().contains(termo.toLowerCase())) {
+				if (listagem.isEmpty()) {
+					listagem += pesquisador.getEmail() + " - " + pesquisador.getBiografia();
+				} else {
+					listagem += " | " + pesquisador.getEmail() + " - " + pesquisador.getBiografia();
+				}
+			}
+		}
+		return listagem;
+	}
 }

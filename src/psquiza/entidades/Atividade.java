@@ -131,15 +131,24 @@ public class Atividade {
 		return resultado;
 	}
 
-	private String getDescricao() {
+	/**
+	 * Metodo responsavel por retornar o atributo id.
+	 * 
+	 * @return valor do id.
+	 */
+	public String getId() {
+		return id;
+	}
+	
+	public String getDescricao() {
 		return this.descricao;
 	}
 
-	private String getNivelRisco() {
+	public String getNivelRisco() {
 		return this.nivelRisco.getRisco();
 	}
 
-	private String getDescricaoRisco() {
+	public String getDescricaoRisco() {
 		return this.descricaoRisco;
 	}
 

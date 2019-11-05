@@ -1,5 +1,9 @@
 package psquiza.controladores;
 
+import java.util.NoSuchElementException;
+
+import psquiza.Util;
+
 public class Sistema {
 
 	private ControladorAtividade controladorAtividade;
@@ -181,4 +185,58 @@ public class Sistema {
 			return false;
 		return controladorMetas.desassociaPesquisa(idPesquisa, idObjetivo);
 	}
+	
+    public String busca(String termo) {
+    	Util.validaAtributo(termo, "Campo termo nao pode ser nulo ou vazio.");
+    	
+    	String listagem = controladorPesquisa.buscaPesquisa(termo);
+    	
+    	if (listagem.isEmpty()) {
+    		listagem = controladorPesquisador.buscaPesquisador(termo);
+    	} else {
+    		listagem += " | " + controladorPesquisador.buscaPesquisador(termo);
+    	}
+    	
+    	if (listagem.isEmpty()) {
+    		listagem = controladorMetas.buscaProblema(termo);
+    	} else {
+    		listagem += " | " + controladorMetas.buscaProblema(termo);
+    	}
+    	
+    	if (listagem.isEmpty()) {
+    		listagem = controladorMetas.buscaObjetivo(termo);
+    	} else {
+    		listagem += " | " + controladorMetas.buscaObjetivo(termo);
+    	}
+    	
+    	if (listagem.isEmpty()) {
+    		listagem = controladorAtividade.buscaAtividade(termo);
+    	} else {
+    		listagem += " | " + controladorAtividade.buscaAtividade(termo);
+    	}
+    	
+    	return listagem;
+    }
+
+    public String busca(String termo, int numeroDoResultado) {
+    	Util.validaAtributo(termo, "Campo termo nao pode ser nulo ou vazio.");
+    	
+    	if (numeroDoResultado < 0) {
+    		throw new IllegalArgumentException("Numero do resultado nao pode ser negativo.");
+    	}
+    	
+    	String busca = busca(termo);
+    	
+    	if (busca.split(" | ").length - 1 < numeroDoResultado) {
+    		throw new NoSuchElementException("Entidade nao encontrada.");
+    	}
+
+    	return busca.split(" | ")[numeroDoResultado];
+    }
+    
+    public int contaResultadosBusca(String termo) {
+    	Util.validaAtributo(termo, "Campo termo nao pode ser nulo ou vazio.");
+    	
+    	return busca(termo).split(" | ").length;
+    }
 }

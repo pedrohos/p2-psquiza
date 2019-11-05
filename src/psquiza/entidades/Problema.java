@@ -26,12 +26,12 @@ public class Problema {
 	/**
 	 * Metodo para constroir um problema
 	 * 
-	 * Caso a descricao do Problema seja vazio ou nulo, sera lancada um IllegalArgumentException:
-	 * "Campo descricao nao pode ser nulo ou vazio."
-	 * Caso a vibilidade do Problema nao esteja no intervalo de 1 a 5, sera lancada um IllegalArgumentException:
-	 * "Campo viabilidade nao pode ser nulo ou vazio."
-	 * Caso o codigo do Problema seja vazio ou nulo, sera lancada um IllegalArgumentException:
-	 * "Campo codigo nao pode ser nulo ou vazio."
+	 * Caso a descricao do Problema seja vazio ou nulo, sera lancada um
+	 * IllegalArgumentException: "Campo descricao nao pode ser nulo ou vazio." Caso
+	 * a vibilidade do Problema nao esteja no intervalo de 1 a 5, sera lancada um
+	 * IllegalArgumentException: "Campo viabilidade nao pode ser nulo ou vazio."
+	 * Caso o codigo do Problema seja vazio ou nulo, sera lancada um
+	 * IllegalArgumentException: "Campo codigo nao pode ser nulo ou vazio."
 	 * 
 	 * @param descricao   descricao do problema
 	 * @param viabilidade viabilidade do problema
@@ -44,6 +44,24 @@ public class Problema {
 		this.descricao = descricao;
 		this.viabilidade = viabilidade;
 		this.codigo = codigo;
+	}
+
+	/**
+	 * Metodo responsavel por retornar o atributo codigo.
+	 * 
+	 * @return valor do codigo.
+	 */
+	public String getCodigo() {
+		return codigo;
+	}
+
+	/**
+	 * Metodo responsavel por retornar o atributo descricao.
+	 * 
+	 * @return valor da descricao.
+	 */
+	public String getDescricao() {
+		return descricao;
 	}
 
 	/**
