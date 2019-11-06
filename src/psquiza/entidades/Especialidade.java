@@ -1,6 +1,6 @@
 package psquiza.entidades;
 
-public interface Funcao {
+public interface Especialidade {
 
 	public String toString();
 	

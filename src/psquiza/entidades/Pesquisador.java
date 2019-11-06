@@ -43,6 +43,8 @@ public class Pesquisador {
 	 */
 	private boolean ativo;
 
+	private Especialidade especialidade;
+	
 	/**
 	 * Metodo responsavel por construir um pesquisador, o pesquisador inicia ativo.
 	 * 
@@ -67,6 +69,7 @@ public class Pesquisador {
 		this.foto = foto;
 		this.funcao = Funcao.atribuiFuncao(funcao);
 		this.ativo = true;
+		this.especialidade = null;
 	}
 
 	public String getNome() {
@@ -171,6 +174,10 @@ public class Pesquisador {
 	public void setFuncao(String funcao) {
 		Util.validaAtributo(funcao, "Campo funcao nao pode ser nulo ou vazio.");
 		this.funcao = Funcao.atribuiFuncao(funcao);
+	}
+	
+	public void setEspecialidade(Especialidade especialidade) {
+		especialidade = especialidade;
 	}
 
 	/**

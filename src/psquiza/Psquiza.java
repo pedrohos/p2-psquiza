@@ -236,6 +236,26 @@ public class Psquiza {
 	public void executaAtividade(String codigoAtividade, int item, int duracao) {
 		sistema.executaAtividade(codigoAtividade, item, duracao);
 	}
+	
+	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
+		return sistema.associaPesquisador(idPesquisa, emailPesquisador);
+	}
+	
+	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
+		return sistema.desassociaPesquisador(idPesquisa, emailPesquisador);
+	}
+	
+	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
+		sistema.cadastraEspecialidadeProfessor(email, formacao, unidade, data);
+	}
+	
+	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
+		sistema.cadastraEspecialidadeAluno(email, semestre, IEA);
+	}
+	
+	public String listaPesquisadores(String tipo) {
+		return sistema.listaPesquisadores(tipo);
+	}
 
 	public static void main(String[] args) {
 		args = new String[] { "psquiza.Psquiza", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",

@@ -259,4 +259,25 @@ public class Sistema {
 	public String listaPesquisas(String ordem) {
 		return controladorPesquisa.listaPesquisas(ordem);
 	}
+	
+	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
+		return false;
+	}
+	
+	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
+		return true;
+	}
+	
+	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
+		controladorPesquisador.cadastraEspecialidadeProfessor(email, formacao, unidade, data);
+	}
+	
+	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
+		controladorPesquisador.cadastraEspecialidadeAluno(email, semestre, IEA);
+	}
+	
+	public String listaPesquisadores(String tipo) {
+		return null;
+	}
+	
 }

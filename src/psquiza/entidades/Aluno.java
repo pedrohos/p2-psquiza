@@ -2,12 +2,12 @@ package psquiza.entidades;
 
 import psquiza.Util;
 
-public class PesquisadorAluno implements Funcao {
+public class Aluno implements Especialidade {
 
 	private int semestre;
-	private String iea;
+	private double iea;
 
-	public PesquisadorAluno(String iea, int semestre) {
+	public Aluno(double iea, int semestre) {
 		this.semestre = semestre;
 		this.iea = iea;
 	}
@@ -17,18 +17,20 @@ public class PesquisadorAluno implements Funcao {
 	}
 
 	public String getIea() {
-		return iea.replace(".", ",");
+		
+		return String.valueOf(iea).replace(".", ",");
 	}
 	
 	@Override
 	public void setAtributo(String atributo, String novo) {
 		
 		switch (atributo) {
-			case "semestre":
+			case "SEMESTRE":
 				semestre = Integer.parseInt(novo);
 				break;
-			case "iea":
-				iea = novo;
+			case "IEA":
+				iea = Double.parseDouble(novo);
+				break;
 
 		}
 	}
