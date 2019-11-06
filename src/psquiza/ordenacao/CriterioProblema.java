@@ -6,18 +6,15 @@ public class CriterioProblema implements OrdenaPesquisa {
 
 	@Override
 	public int compare(Pesquisa o1, Pesquisa o2) {
-		int codigo1 = Integer.parseInt(o1.getCodigo().substring(1));
-		int codigo2 = Integer.parseInt(o2.getCodigo().substring(1));
-		
-		if (codigo1 < codigo2) {
+		if (o1.possuiProblema() == true && o2.possuiProblema() == false) {
 			return -1;
 		}
 		
-		if (codigo1 > codigo2) {
+		if (o1.possuiProblema() == false && o2.possuiProblema() == true) {
 			return 1;
 		}
 		
-		return 0;
+		return o1.getCodigo().compareTo(o2.getCodigo()) * -1;
 	}
 
 }

@@ -245,42 +245,59 @@ public class ControladorPesquisa {
 		return this.pesquisas.get(idPesquisa).desassociaObjetivo(idObjetivo);
 	}
 
+	/**
+	 * Define o criterio de ordenacao a partir da string recebida,
+	 * ordena e retorna as pesquisas atuais com o criterio definido.
+	 *
+	 * Caso a ordenacao nao exista sera lancado um IllegalArgumentException: 
+	 * "Valor invalido da ordem"
+	 * 
+	 * @param ordem e o tipo de ordenacao.
+	 * @return e retornado a lista de pesquisas ordenadas.
+	 */
 	private ArrayList<Pesquisa> ordenaPesquisas(String ordem) {
 		OrdenaPesquisa criterio;
 		switch (ordem) {
-		case "PROBLEMA":
-			criterio = new CriterioProblema();
-			break;
-		case "OBJETIVOS":
-			criterio = new CriterioObjetivo();
-			break;
-		case "PESQUISA":
-			criterio = new CriterioPesquisa();
-			break;
-		default:
-			throw new IllegalArgumentException("");
+			case "PROBLEMA":
+				criterio = new CriterioProblema();
+				break;
+			case "OBJETIVOS":
+				criterio = new CriterioObjetivo();
+				break;
+			case "PESQUISA":
+				criterio = new CriterioPesquisa();
+				break;		
+			default:
+				throw new IllegalArgumentException("Valor invalido da ordem");
 		}
-
+		
 		ArrayList<Pesquisa> pesquisasOrdenadas = new ArrayList<>();
 		pesquisasOrdenadas.addAll(this.pesquisas.values());
-
+		
 		Collections.sort(pesquisasOrdenadas, criterio);
 		return pesquisasOrdenadas;
 	}
-
+	
+	/**
+	 * Ordena as pesquisas a partir de uma ordem e lista elas no seguinte formato:
+	 * "CODIGO1 - DESCRICAO1 - CAMPODEINTERESSE1 | "CODIGOX - DESCRICAOX - CAMPODEINTERESSEX"
+	 * 
+	 * @param ordem e o tipo de ordenacao.
+	 * @return e retornado a lista ordenada de pesquisas no formato acima.
+	 */
 	public String listaPesquisas(String ordem) {
 		ArrayList<Pesquisa> pesquisasOrdenadas = ordenaPesquisas(ordem);
-
+		
 		String resultado = "";
 		Iterator<Pesquisa> it = pesquisasOrdenadas.iterator();
 		while (it.hasNext()) {
 			Pesquisa pesquisa = it.next();
 			if (it.hasNext()) {
-				resultado += String.format("%s, %s, %s", pesquisa.getCodigo(), pesquisa.getDescricao(),
-						pesquisa.getCampoDeInteresse()) + " | ";
+				resultado += String.format("%s - %s - %s", pesquisa.getCodigo(), pesquisa.getDescricao(),
+				pesquisa.getCampoDeInteresse()) + " | ";
 			} else {
-				resultado += String.format("%s, %s, %s", pesquisa.getCodigo(), pesquisa.getDescricao(),
-						pesquisa.getCampoDeInteresse());
+				resultado += String.format("%s - %s - %s", pesquisa.getCodigo(), pesquisa.getDescricao(),
+				pesquisa.getCampoDeInteresse());
 			}
 		}
 		return resultado;

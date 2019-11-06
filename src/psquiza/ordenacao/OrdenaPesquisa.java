@@ -9,3 +9,4 @@ public interface OrdenaPesquisa extends Comparator<Pesquisa> {
 	@Override
 	public int compare(Pesquisa o1, Pesquisa o2);
 }
+
