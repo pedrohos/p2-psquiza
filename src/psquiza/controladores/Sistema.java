@@ -255,4 +255,8 @@ public class Sistema {
 		controladorAtividade.executaAtividade(codigoAtividade, item, duracao);
 		
 	}
+
+	public String listaPesquisas(String ordem) {
+		return controladorPesquisa.listaPesquisas(ordem);
+	}
 }

@@ -198,6 +198,13 @@ public class Pesquisa {
 		return true;
 	}
 	
+	public boolean possuiProblema() {
+		if (!this.problema.equals("")) {
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean desassociaObjetivo(String idObjetivo) {
 		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
 		
@@ -269,6 +276,10 @@ public class Pesquisa {
 		}
 		return atividades.remove(atividade);
 		
+	}
+	
+	public int qtdObjetivos() {
+		return this.objetivos.size();
 	}
 
 }

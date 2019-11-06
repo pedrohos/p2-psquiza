@@ -73,14 +73,6 @@ public class Pesquisador {
 		return nome;
 	}
 
-	public String getBiografia() {
-		return biografia;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
 	public String getFoto() {
 		return foto;
 	}
