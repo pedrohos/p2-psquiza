@@ -1,5 +1,7 @@
 package psquiza.controladores;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 import psquiza.Util;
@@ -7,7 +9,6 @@ import psquiza.entidades.Aluno;
 import psquiza.entidades.Pesquisa;
 import psquiza.entidades.Pesquisador;
 import psquiza.entidades.Professor;
-import psquiza.enums.Funcao;
 
 /**
  * Classe controladora de pesquisadores.
@@ -99,7 +100,7 @@ public class ControladorPesquisador {
 			pesquisadores.get(email).setFoto(novoValor);
 			break;
 		case "SEMESTRE":
-			Util.validaNumero(Integer.parseInt(novoValor)-1, "Atributo semestre com formato invalido.");
+			Util.validaNumero(Integer.parseInt(novoValor) - 1, "Atributo semestre com formato invalido.");
 			pesquisadores.get(email).setAtributoEspecialidade(atributo, novoValor);
 			break;
 		case "IEA":
@@ -205,6 +206,18 @@ public class ControladorPesquisador {
 
 		return pesquisadores.get(email).ehAtivo();
 	}
+	
+	public boolean associaPesquisador(Pesquisa pesquisa, String email) {
+		Util.validaAtributo(email, "Campo emailPesquisador nao pode ser nulo ou vazio.");
+		Util.validaEmail(email);
+		return pesquisadores.get(email).associaPesquisa(pesquisa);
+	}
+	
+	public boolean desassociaPesquisador(Pesquisa pesquisa, String email) {
+		Util.validaAtributo(email, "Campo emailPesquisador nao pode ser nulo ou vazio.");
+		Util.validaEmail(email);
+		return pesquisadores.get(email).desassociaPesquisa(pesquisa);
+	}
 
 	public String buscaPesquisador(String termo) {
 		String listagem = "";
@@ -221,51 +234,68 @@ public class ControladorPesquisador {
 	}
 
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
-		
+
 		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
 		Util.validaAtributo(formacao, "Campo formacao nao pode ser nulo ou vazio.");
 		Util.validaAtributo(unidade, "Campo unidade nao pode ser nulo ou vazio.");
 		Util.validaAtributo(data, "Campo data nao pode ser nulo ou vazio.");
 		Util.validaEmail(email);
 		Util.validaData(data);
-		
+
 		if (!pesquisadores.containsKey(email)) {
 			throw new NoSuchElementException("Pesquisadora nao encontrada.");
 		}
-		
+
 		if (!pesquisadores.get(email).getFuncaoPesquisador().equals("professor")) {
 			throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
 		}
-		
-		Professor especialidade = new Professor(formacao, unidade, data);	
+
+		Professor especialidade = new Professor(formacao, unidade, data);
 		pesquisadores.get(email).setEspecialidade(especialidade);
-		
+
 	}
-	
-	
 
 	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
-		
-		
+
 		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
 		Util.validaAtributo(String.valueOf(semestre), "Campo semestre nao pode ser nulo ou vazio.");
 		Util.validaAtributo(String.valueOf(IEA), "Campo iea nao pode ser nulo ou vazio.");
-		Util.validaNumero(semestre-1, "Atributo semestre com formato invalido.");
+		Util.validaNumero(semestre - 1, "Atributo semestre com formato invalido.");
 		Util.validaEmail(email);
 		Util.validaIEA(IEA);
-		
 
-		
 		if (!pesquisadores.containsKey(email)) {
 			throw new NoSuchElementException("Pesquisadora nao encontrada.");
 		}
-		
+
 		if (!pesquisadores.get(email).getFuncaoPesquisador().equals("estudante")) {
 			throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
 		}
-		
+
 		Aluno especialidade = new Aluno(IEA, semestre);
 		pesquisadores.get(email).setEspecialidade(especialidade);
-		
+
+	}
+
+	public String listaPesquisadores(String tipo) {
+
+		Util.validaAtributo(tipo, "Campo tipo nao pode ser nulo ou vazio.");
+		ArrayList<Pesquisador> valores = new ArrayList<Pesquisador>(pesquisadores.values());
+		Collections.sort(valores);
+		String saida = "";
+
+		if (tipo.equals("EXTERNO") || tipo.equals("ALUNA") || tipo.equals("PROFESSORA")) {
+
+			for (Pesquisador pesquisador : valores) {
+				if (pesquisador.getFuncaoPesquisador().equals(tipo.toLowerCase())) {
+					saida += pesquisador.toString() + " | ";
+				}
+			}
+		} else {
+			throw new IllegalArgumentException(String.format("Tipo %s inexistente.", tipo));
+		}
+
+		return saida.substring(0, saida.length() - 3);
+
 	}
 }
