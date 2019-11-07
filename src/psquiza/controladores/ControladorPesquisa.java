@@ -4,13 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-<<<<<<< HEAD
 import java.util.List;
 import java.util.stream.Collectors;
-=======
 import java.util.LinkedHashMap;
->>>>>>> fb2b31e9932b8c2103ed04139c4135e059496184
-
 import psquiza.Util;
 import psquiza.entidades.Atividade;
 import psquiza.entidades.Pesquisa;
