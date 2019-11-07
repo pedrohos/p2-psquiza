@@ -139,11 +139,6 @@ public class Atividade {
 		return resultado;
 	}
 
-	/**
-	 * Metodo responsavel por retornar o atributo id.
-	 * 
-	 * @return valor do id.
-	 */
 	public String getId() {
 		return id;
 	}

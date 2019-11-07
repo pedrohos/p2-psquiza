@@ -131,11 +131,9 @@ public class ControladorPesquisador {
 	public void desativaPesquisador(String email) {
 		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
 		Util.validaEmail(email);
-
 		if (!pesquisadores.containsKey(email)) {
 			throw new NoSuchElementException("Pesquisador nao encontrado");
 		}
-
 		if (!pesquisadores.get(email).ehAtivo()) {
 			throw new IllegalArgumentException("Pesquisador inativo.");
 		}
@@ -152,7 +150,6 @@ public class ControladorPesquisador {
 	public void ativaPesquisador(String email) {
 		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
 		Util.validaEmail(email);
-
 		if (!pesquisadores.containsKey(email)) {
 			throw new NoSuchElementException("Pesquisador nao encontrado");
 		}
@@ -221,7 +218,6 @@ public class ControladorPesquisador {
 	}
 
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
-		
 		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
 		Util.validaAtributo(formacao, "Campo formacao nao pode ser nulo ou vazio.");
 		Util.validaAtributo(unidade, "Campo unidade nao pode ser nulo ou vazio.");
@@ -232,21 +228,15 @@ public class ControladorPesquisador {
 		if (!pesquisadores.containsKey(email)) {
 			throw new NoSuchElementException("Pesquisadora nao encontrada.");
 		}
-		
 		if (!pesquisadores.get(email).getFuncaoPesquisador().equals("professor")) {
 			throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
 		}
 		
 		Professor especialidade = new Professor(formacao, unidade, data);	
 		pesquisadores.get(email).setEspecialidade(especialidade);
-		
 	}
 	
-	
-
 	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
-		
-		
 		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
 		Util.validaAtributo(String.valueOf(semestre), "Campo semestre nao pode ser nulo ou vazio.");
 		Util.validaAtributo(String.valueOf(IEA), "Campo iea nao pode ser nulo ou vazio.");
@@ -254,18 +244,14 @@ public class ControladorPesquisador {
 		Util.validaEmail(email);
 		Util.validaIEA(IEA);
 		
-
-		
 		if (!pesquisadores.containsKey(email)) {
 			throw new NoSuchElementException("Pesquisadora nao encontrada.");
 		}
-		
 		if (!pesquisadores.get(email).getFuncaoPesquisador().equals("estudante")) {
 			throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
 		}
 		
 		Aluno especialidade = new Aluno(IEA, semestre);
 		pesquisadores.get(email).setEspecialidade(especialidade);
-		
 	}
 }

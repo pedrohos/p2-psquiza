@@ -116,10 +116,10 @@ public class ControladorPesquisa {
 	public String cadastraPesquisa(String descricao, String campoDeInteresse) {
 		Util.validaAtributo(descricao, "Descricao nao pode ser nula ou vazia.");
 		validaCampoDeInteresse(campoDeInteresse);
+		
 		String codigo = geraCodigo(pesquisas, campoDeInteresse);
 		pesquisas.put(codigo, new Pesquisa(descricao, campoDeInteresse, codigo));
 		return codigo;
-
 	}
 
 	/**
@@ -131,7 +131,6 @@ public class ControladorPesquisa {
 	 * @param novoConteudo         novo valor a ser adicionado
 	 */
 	public void alteraPesquisa(String codigo, String conteudoASerAlterado, String novoConteudo) {
-
 		Util.validaAtributo(conteudoASerAlterado, "Conteudo a ser alterado nao pode ser nulo ou vazio");
 		Util.validaAtributo(codigo, "Codigo nao pode ser nulo ou vazio.");
 		validaPesquisa(codigo);
@@ -165,11 +164,10 @@ public class ControladorPesquisa {
 	}
 
 	/**
-	 * 
 	 * Ativa uma pesquisa desativada, retorna uma excessao caso a pesquisa
 	 * soliciatada ja esteja ativada.
 	 * 
-	 * @param codigo
+	 * @param codigo codigo da pesquisa
 	 */
 	public void ativaPesquisa(String codigo) {
 		Util.validaAtributo(codigo, "Codigo nao pode ser nulo ou vazio.");
@@ -188,6 +186,7 @@ public class ControladorPesquisa {
 	public String exibePesquisa(String codigo) {
 		Util.validaAtributo(codigo, "Codigo nao pode ser nulo ou vazio.");
 		validaPesquisa(codigo);
+		
 		return pesquisas.get(codigo).toString();
 	}
 
@@ -200,7 +199,6 @@ public class ControladorPesquisa {
 	public boolean ehAtiva(String codigo) {
 		Util.validaAtributo(codigo, "Codigo nao pode ser nulo ou vazio.");
 		validaPesquisa(codigo);
-
 		if (pesquisas.get(codigo).ehAtiva())
 			return true;
 		return false;
@@ -405,8 +403,8 @@ public class ControladorPesquisa {
 		if (!pesquisas.get(codigoPesquisa).ehAtiva()) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
 		}
+		
 		return pesquisas.get(codigoPesquisa).associaAtividade(atividade);
-
 	}
 
 	public boolean desassociaAtividade(String codigoPesquisa, Atividade atividade) {
@@ -417,6 +415,7 @@ public class ControladorPesquisa {
 		if (!pesquisas.get(codigoPesquisa).ehAtiva()) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
 		}
+		
 		return pesquisas.get(codigoPesquisa).desassociaAtividade(atividade);
 	}
 }
