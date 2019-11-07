@@ -145,6 +145,7 @@ public class ControladorAtividade {
 	 * @return e retornado um int indicando a quantidade de itens PENDENTE.
 	 */
 	public int contaItensPendentes(String id) {
+		Util.validaAtributo(id, "Campo codigo nao pode ser nulo ou vazio.");
 		if (!existeAtividade(id))
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		Util.validaAtributo(id, "Campo codigo nao pode ser nulo ou vazio.");
@@ -165,6 +166,7 @@ public class ControladorAtividade {
 	 * @return e retornado um int indicando a quantidade de itens REALIZADO.
 	 */
 	public int contaItensRealizados(String id) {
+		Util.validaAtributo(id, "Campo codigo nao pode ser nulo ou vazio.");
 		if (!existeAtividade(id))
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		Util.validaAtributo(id, "Campo codigo nao pode ser nulo ou vazio.");

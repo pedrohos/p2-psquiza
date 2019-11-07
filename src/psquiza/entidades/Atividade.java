@@ -3,6 +3,8 @@ package psquiza.entidades;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +63,7 @@ public class Atividade {
 	/**
 	 * Armazena um conjunto ordenado de itens que compoem a atividade.
 	 */
-	private Map<Integer,Item> itens;
+	private LinkedHashMap<Integer,Item> itens;
 
 	/**
 	 * Constroi um nova atividade, validando se os parametros passados
@@ -89,7 +91,7 @@ public class Atividade {
 		this.descricao = descricao;
 		this.descricaoRisco = descricaoRisco;
 		this.id = id;
-		this.itens = new HashMap<>();
+		this.itens = new LinkedHashMap<>();
 	}
 
 	/**
@@ -166,7 +168,14 @@ public class Atividade {
 	 */
 	@Override
 	public String toString() {
-		return String.format("%s (%s - %s)", getDescricao(), getNivelRisco(), getDescricaoRisco());
+		String resultado = String.format("%s (%s - %s)", getDescricao(), getNivelRisco(), getDescricaoRisco());
+		Iterator<Item> it = itens.values().iterator();
+		while(it.hasNext()) {
+			Item item = it.next();
+			resultado += String.format(" | %s - %s", item.getEstado(), item.getNome());
+		}
+		
+		return resultado;
 	}
 
 	@Override
