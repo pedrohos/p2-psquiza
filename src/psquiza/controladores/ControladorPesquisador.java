@@ -1,13 +1,20 @@
 package psquiza.controladores;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
+
 import psquiza.Util;
 import psquiza.entidades.Aluno;
+import psquiza.entidades.Atividade;
 import psquiza.entidades.Pesquisa;
 import psquiza.entidades.Pesquisador;
 import psquiza.entidades.Professor;
 import psquiza.enums.Funcao;
+import psquiza.ordenacao.OrdenaAtividade;
+import psquiza.ordenacao.OrdenaPesquisador;
 
 /**
  * Classe controladora de pesquisadores.
@@ -208,15 +215,20 @@ public class ControladorPesquisador {
 
 	public String buscaPesquisador(String termo) {
 		String listagem = "";
-		for (Pesquisador pesquisador : pesquisadores.values()) {
+		List<Pesquisador> aux = pesquisadores.values().stream().collect(Collectors.toList());
+		Collections.sort(aux, new OrdenaPesquisador());
+		for (Pesquisador pesquisador : aux) {
 			if (pesquisador.getBiografia().toLowerCase().contains(termo.toLowerCase())) {
 				if (listagem.isEmpty()) {
-					listagem += pesquisador.getEmail() + " - " + pesquisador.getBiografia();
+					listagem += pesquisador.getEmail() + ": " + pesquisador.getBiografia();
 				} else {
-					listagem += " | " + pesquisador.getEmail() + " - " + pesquisador.getBiografia();
+					listagem += " | " + pesquisador.getEmail() + ": " + pesquisador.getBiografia();
 				}
 			}
 		}
+		
+		if (listagem.isEmpty()) return "⠀";
+				
 		return listagem;
 	}
 

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import psquiza.Util;
 import psquiza.entidades.Atividade;
@@ -305,22 +307,27 @@ public class ControladorPesquisa {
 
 	public String buscaPesquisa(String termo) {
 		String listagem = "";
-		for (Pesquisa pesquisa : pesquisas.values()) {
+		List<Pesquisa> aux = pesquisas.values().stream().collect(Collectors.toList());
+		Collections.sort(aux, new CriterioPesquisa());
+		for (Pesquisa pesquisa : aux) {
 			if (pesquisa.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
 				if (listagem.isEmpty()) {
-					listagem += pesquisa.getCodigo() + " - " + pesquisa.getDescricao();
+					listagem += pesquisa.getCodigo() + ": " + pesquisa.getDescricao();
 				} else {
-					listagem += " | " + pesquisa.getCodigo() + " - " + pesquisa.getDescricao();
+					listagem += " | " + pesquisa.getCodigo() + ": " + pesquisa.getDescricao();
 				}
 			}
 			if (pesquisa.getCampoDeInteresse().toLowerCase().contains(termo.toLowerCase())) {
 				if (listagem.isEmpty()) {
-					listagem += pesquisa.getCodigo() + " - " + pesquisa.getCampoDeInteresse();
+					listagem += pesquisa.getCodigo() + ": " + pesquisa.getCampoDeInteresse();
 				} else {
-					listagem += " | " + pesquisa.getCodigo() + " - " + pesquisa.getCampoDeInteresse();
+					listagem += " | " + pesquisa.getCodigo() + ": " + pesquisa.getCampoDeInteresse();
 				}
 			}
 		}
+		
+		if (listagem.isEmpty()) return "⠀";
+		
 		return listagem;
 	}
 

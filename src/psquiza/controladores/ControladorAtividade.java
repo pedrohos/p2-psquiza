@@ -1,9 +1,13 @@
 package psquiza.controladores;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import psquiza.Util;
 import psquiza.entidades.Atividade;
+import psquiza.ordenacao.OrdenaAtividade;
 import psquiza.entidades.Atividade;
 
 /**
@@ -174,22 +178,27 @@ public class ControladorAtividade {
 
 	public String buscaAtividade(String termo) {
 		String listagem = "";
-		for (Atividade atividade : atividades.values()) {
+		List<Atividade> aux = atividades.values().stream().collect(Collectors.toList());
+		Collections.sort(aux, new OrdenaAtividade());
+		for (Atividade atividade : aux) {
 			if (atividade.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
 				if (listagem.isEmpty()) {
-					listagem += atividade.getId() + " - " + atividade.getDescricao();
+					listagem += atividade.getId() + ": " + atividade.getDescricao();
 				} else {
-					listagem += " | " + atividade.getId() + " - " + atividade.getDescricao();
+					listagem += " | " + atividade.getId() + ": " + atividade.getDescricao();
 				}
 			}
 			if (atividade.getDescricaoRisco().toLowerCase().contains(termo.toLowerCase())) {
 				if (listagem.isEmpty()) {
-					listagem += atividade.getId() + " - " + atividade.getDescricaoRisco();
+					listagem += atividade.getId() + ": " + atividade.getDescricaoRisco();
 				} else {
-					listagem += " | " + atividade.getId() + " - " + atividade.getDescricaoRisco();
+					listagem += " | " + atividade.getId() + ": " + atividade.getDescricaoRisco();
 				}
 			}
 		}
+		
+		if (listagem.isEmpty()) return "⠀";
+		
 		return listagem;
 	}
 	

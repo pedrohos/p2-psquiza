@@ -1,12 +1,19 @@
 package psquiza.controladores;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import psquiza.Util;
+import psquiza.entidades.Atividade;
 import psquiza.entidades.Objetivo;
 import psquiza.entidades.Pesquisador;
 import psquiza.entidades.Problema;
+import psquiza.ordenacao.OrdenaAtividade;
+import psquiza.ordenacao.OrdenaObjetivo;
+import psquiza.ordenacao.OrdenaProblema;
 
 /**
  * Classe controller responsavel pelos problemas e objetivos do sistema
@@ -159,29 +166,39 @@ public class ControladorMetas {
 	
 	public String buscaProblema(String termo) {
 		String listagem = "";
-		for (Problema problema : problemas.values()) {
+		List<Problema> aux = problemas.values().stream().collect(Collectors.toList());
+		Collections.sort(aux, new OrdenaProblema());
+		for (Problema problema : aux) {
 			if (problema.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
 				if (listagem.isEmpty()) {
-					listagem += problema.getCodigo() + " - " + problema.getDescricao();
+					listagem += problema.getCodigo() + ": " + problema.getDescricao();
 				} else {
-					listagem += " | " + problema.getCodigo() + " - " + problema.getDescricao();
+					listagem += " | " + problema.getCodigo() + ": " + problema.getDescricao();
 				}
 			}
 		}
+		
+		if (listagem.isEmpty()) return "⠀";
+		
 		return listagem;
 	}
 	
 	public String buscaObjetivo(String termo) {
 		String listagem = "";
-		for (Objetivo objetivo : objetivos.values()) {
+		List<Objetivo> aux = objetivos.values().stream().collect(Collectors.toList());
+		Collections.sort(aux, new OrdenaObjetivo());
+		for (Objetivo objetivo : aux) {
 			if (objetivo.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
 				if (listagem.isEmpty()) {
-					listagem += objetivo.getCodigo() + " - " + objetivo.getDescricao();
+					listagem += objetivo.getCodigo() + ": " + objetivo.getDescricao();
 				} else {
-					listagem += " | " + objetivo.getCodigo() + " - " + objetivo.getDescricao();
+					listagem += " | " + objetivo.getCodigo() + ": " + objetivo.getDescricao();
 				}
 			}
 		}
+		
+		if (listagem.isEmpty()) return "⠀";
+		
 		return listagem;
 	}
 }
