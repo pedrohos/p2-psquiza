@@ -1,9 +1,13 @@
 package psquiza.controladores;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import psquiza.Util;
 import psquiza.entidades.Atividade;
+import psquiza.ordenacao.OrdenaAtividade;
 import psquiza.entidades.Atividade;
 
 /**
@@ -145,6 +149,7 @@ public class ControladorAtividade {
 	 * @return e retornado um int indicando a quantidade de itens PENDENTE.
 	 */
 	public int contaItensPendentes(String id) {
+		Util.validaAtributo(id, "Campo codigo nao pode ser nulo ou vazio.");
 		if (!existeAtividade(id))
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		Util.validaAtributo(id, "Campo codigo nao pode ser nulo ou vazio.");
@@ -165,6 +170,7 @@ public class ControladorAtividade {
 	 * @return e retornado um int indicando a quantidade de itens REALIZADO.
 	 */
 	public int contaItensRealizados(String id) {
+		Util.validaAtributo(id, "Campo codigo nao pode ser nulo ou vazio.");
 		if (!existeAtividade(id))
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		Util.validaAtributo(id, "Campo codigo nao pode ser nulo ou vazio.");
@@ -174,30 +180,47 @@ public class ControladorAtividade {
 
 	public String buscaAtividade(String termo) {
 		String listagem = "";
-		for (Atividade atividade : atividades.values()) {
+		List<Atividade> aux = atividades.values().stream().collect(Collectors.toList());
+		Collections.sort(aux, new OrdenaAtividade());
+		for (Atividade atividade : aux) {
 			if (atividade.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
 				if (listagem.isEmpty()) {
-					listagem += atividade.getId() + " - " + atividade.getDescricao();
+					listagem += atividade.getId() + ": " + atividade.getDescricao();
 				} else {
-					listagem += " | " + atividade.getId() + " - " + atividade.getDescricao();
+					listagem += " | " + atividade.getId() + ": " + atividade.getDescricao();
 				}
 			}
 			if (atividade.getDescricaoRisco().toLowerCase().contains(termo.toLowerCase())) {
 				if (listagem.isEmpty()) {
-					listagem += atividade.getId() + " - " + atividade.getDescricaoRisco();
+					listagem += atividade.getId() + ": " + atividade.getDescricaoRisco();
 				} else {
-					listagem += " | " + atividade.getId() + " - " + atividade.getDescricaoRisco();
+					listagem += " | " + atividade.getId() + ": " + atividade.getDescricaoRisco();
 				}
 			}
 		}
+		
+		if (listagem.isEmpty()) return "⠀";
+		
 		return listagem;
 	}
 	
+	/**
+	 * Coleta uma atividade do mapa atividades a partir do codigo da atividade.
+	 * 
+	 * Caso o codigo da atividade seja vazio ou nulo sera lancado um IllegalArgumentException:
+	 * "Campo codigoAtividade nao pode ser nulo ou vazio."
+	 * Caso o codigo da atividade nao remeta a nenhuma atividade sera lancado um IllegalArgumentException:
+	 * "Atividade nao encontrada"
+	 * 
+	 * @param codigoAtividade
+	 * @return
+	 */
 	public Atividade getAtividade(String codigoAtividade) {
 		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		if(!atividades.containsKey(codigoAtividade)) {
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		}
+		
 		return atividades.get(codigoAtividade);
 	}
 
@@ -205,6 +228,7 @@ public class ControladorAtividade {
 		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		Util.validaNumero(item, "Item nao pode ser nulo ou negativo.");
 		Util.validaNumero(duracao, "Duracao nao pode ser nula ou negativa.");
+		
 		atividades.get(codigoAtividade).executaAtividade(item, duracao);
 	}
 }

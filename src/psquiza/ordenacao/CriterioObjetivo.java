@@ -16,5 +16,4 @@ public class CriterioObjetivo implements OrdenaPesquisa {
 		
 		return o1.getCodigo().compareTo(o2.getCodigo()) * -1;
 	}
-
 }

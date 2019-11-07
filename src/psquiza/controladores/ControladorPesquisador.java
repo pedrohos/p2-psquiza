@@ -3,12 +3,19 @@ package psquiza.controladores;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
+
 import psquiza.Util;
 import psquiza.entidades.Aluno;
+import psquiza.entidades.Atividade;
 import psquiza.entidades.Pesquisa;
 import psquiza.entidades.Pesquisador;
 import psquiza.entidades.Professor;
+import psquiza.enums.Funcao;
+import psquiza.ordenacao.OrdenaAtividade;
+import psquiza.ordenacao.OrdenaPesquisador;
 
 /**
  * Classe controladora de pesquisadores.
@@ -132,11 +139,9 @@ public class ControladorPesquisador {
 	public void desativaPesquisador(String email) {
 		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
 		Util.validaEmail(email);
-
 		if (!pesquisadores.containsKey(email)) {
 			throw new NoSuchElementException("Pesquisador nao encontrado");
 		}
-
 		if (!pesquisadores.get(email).ehAtivo()) {
 			throw new IllegalArgumentException("Pesquisador inativo.");
 		}
@@ -153,7 +158,6 @@ public class ControladorPesquisador {
 	public void ativaPesquisador(String email) {
 		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
 		Util.validaEmail(email);
-
 		if (!pesquisadores.containsKey(email)) {
 			throw new NoSuchElementException("Pesquisador nao encontrado");
 		}
@@ -221,20 +225,24 @@ public class ControladorPesquisador {
 
 	public String buscaPesquisador(String termo) {
 		String listagem = "";
-		for (Pesquisador pesquisador : pesquisadores.values()) {
+		List<Pesquisador> aux = pesquisadores.values().stream().collect(Collectors.toList());
+		Collections.sort(aux, new OrdenaPesquisador());
+		for (Pesquisador pesquisador : aux) {
 			if (pesquisador.getBiografia().toLowerCase().contains(termo.toLowerCase())) {
 				if (listagem.isEmpty()) {
-					listagem += pesquisador.getEmail() + " - " + pesquisador.getBiografia();
+					listagem += pesquisador.getEmail() + ": " + pesquisador.getBiografia();
 				} else {
-					listagem += " | " + pesquisador.getEmail() + " - " + pesquisador.getBiografia();
+					listagem += " | " + pesquisador.getEmail() + ": " + pesquisador.getBiografia();
 				}
 			}
 		}
+		
+		if (listagem.isEmpty()) return "⠀";
+				
 		return listagem;
 	}
 
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
-
 		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
 		Util.validaAtributo(formacao, "Campo formacao nao pode ser nulo ou vazio.");
 		Util.validaAtributo(unidade, "Campo unidade nao pode ser nulo ou vazio.");
@@ -245,7 +253,6 @@ public class ControladorPesquisador {
 		if (!pesquisadores.containsKey(email)) {
 			throw new NoSuchElementException("Pesquisadora nao encontrada.");
 		}
-
 		if (!pesquisadores.get(email).getFuncaoPesquisador().equals("professor")) {
 			throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
 		}
@@ -253,10 +260,7 @@ public class ControladorPesquisador {
 		Professor especialidade = new Professor(formacao, unidade, data);
 		pesquisadores.get(email).setEspecialidade(especialidade);
 
-	}
-
 	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
-
 		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
 		Util.validaAtributo(String.valueOf(semestre), "Campo semestre nao pode ser nulo ou vazio.");
 		Util.validaAtributo(String.valueOf(IEA), "Campo iea nao pode ser nulo ou vazio.");
@@ -267,14 +271,15 @@ public class ControladorPesquisador {
 		if (!pesquisadores.containsKey(email)) {
 			throw new NoSuchElementException("Pesquisadora nao encontrada.");
 		}
-
+		if (!pesquisadores.containsKey(email)) {
+			throw new NoSuchElementException("Pesquisadora nao encontrada.");
+		}
 		if (!pesquisadores.get(email).getFuncaoPesquisador().equals("estudante")) {
 			throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
 		}
 
 		Aluno especialidade = new Aluno(IEA, semestre);
 		pesquisadores.get(email).setEspecialidade(especialidade);
-
 	}
 
 	public String listaPesquisadores(String tipo) {
@@ -296,6 +301,5 @@ public class ControladorPesquisador {
 		}
 
 		return saida.substring(0, saida.length() - 3);
-
 	}
 }

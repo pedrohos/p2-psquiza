@@ -167,80 +167,64 @@ public class Sistema {
 	public boolean pesquisadorEhAtivo(String email) {
 		return controladorPesquisador.pesquisadorEhAtivo(email);
 	}
-	
+
 	public boolean associaProblema(String idPesquisa, String idProblema) {
 		return controladorPesquisa.associaProblema(idPesquisa, idProblema);
 	}
-	
+
 	public boolean desassociaProblema(String idPesquisa, String idProblema) {
 		return controladorPesquisa.desassociaProblema(idPesquisa, idProblema);
 	}
-	
+
 	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
 		if (controladorPesquisa.associaObjetivo(idPesquisa, idObjetivo) == false)
 			return false;
 		return controladorMetas.associaPesquisa(idPesquisa, idObjetivo);
 	}
-	
+
 	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
 		if (controladorPesquisa.desassociaObjetivo(idPesquisa, idObjetivo) == false)
 			return false;
 		return controladorMetas.desassociaPesquisa(idPesquisa, idObjetivo);
 	}
-	
-    public String busca(String termo) {
-    	Util.validaAtributo(termo, "Campo termo nao pode ser nulo ou vazio.");
-    	
-    	String listagem = controladorPesquisa.buscaPesquisa(termo);
-    	
-    	if (listagem.isEmpty()) {
-    		listagem = controladorPesquisador.buscaPesquisador(termo);
-    	} else {
-    		listagem += " | " + controladorPesquisador.buscaPesquisador(termo);
-    	}
-    	
-    	if (listagem.isEmpty()) {
-    		listagem = controladorMetas.buscaProblema(termo);
-    	} else {
-    		listagem += " | " + controladorMetas.buscaProblema(termo);
-    	}
-    	
-    	if (listagem.isEmpty()) {
-    		listagem = controladorMetas.buscaObjetivo(termo);
-    	} else {
-    		listagem += " | " + controladorMetas.buscaObjetivo(termo);
-    	}
-    	
-    	if (listagem.isEmpty()) {
-    		listagem = controladorAtividade.buscaAtividade(termo);
-    	} else {
-    		listagem += " | " + controladorAtividade.buscaAtividade(termo);
-    	}
-    	
-    	return listagem;
-    }
 
-    public String busca(String termo, int numeroDoResultado) {
-    	Util.validaAtributo(termo, "Campo termo nao pode ser nulo ou vazio.");
-    	
-    	if (numeroDoResultado < 0) {
-    		throw new IllegalArgumentException("Numero do resultado nao pode ser negativo.");
-    	}
-    	
-    	String busca = busca(termo);
-    	
-    	if (busca.split(" | ").length - 1 < numeroDoResultado) {
-    		throw new NoSuchElementException("Entidade nao encontrada.");
-    	}
+	public String busca(String termo) {
+		Util.validaAtributo(termo, "Campo termo nao pode ser nulo ou vazio.");
 
-    	return busca.split(" | ")[numeroDoResultado];
-    }
-    
-    public int contaResultadosBusca(String termo) {
-    	Util.validaAtributo(termo, "Campo termo nao pode ser nulo ou vazio.");
-    	
-    	return busca(termo).split(" | ").length;
-    }
+		String listagem = String.format("%s | %s | %s | %s | %s", controladorPesquisa.buscaPesquisa(termo),
+				controladorPesquisador.buscaPesquisador(termo), controladorMetas.buscaProblema(termo),
+				controladorMetas.buscaObjetivo(termo), controladorAtividade.buscaAtividade(termo));
+		listagem = listagem.replace("| ⠀ ", "");
+		listagem = listagem.replace("⠀ | ", "");
+		listagem = listagem.replace("⠀", "");
+
+		if (listagem.trim().isEmpty()) {
+			throw new NoSuchElementException("Nenhum resultado encontrado");
+		}
+
+		return listagem;
+	}
+
+	public String busca(String termo, int numeroDoResultado) {
+		Util.validaAtributo(termo, "Campo termo nao pode ser nulo ou vazio.");
+		if (numeroDoResultado < 0) {
+			throw new IllegalArgumentException("Numero do resultado nao pode ser negativo");
+		}
+
+		String[] busca = busca(termo).split(" \\| ");
+
+		if (busca.length - 1 < numeroDoResultado) {
+			throw new NoSuchElementException("Entidade nao encontrada.");
+		}
+
+		return busca[numeroDoResultado - 1];
+	}
+
+	public int contaResultadosBusca(String termo) {
+		Util.validaAtributo(termo, "Campo termo nao pode ser nulo ou vazio.");
+
+		return busca(termo).split(" \\| ").length;
+	}
 
 	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade) {
 		Atividade atividade = controladorAtividade.getAtividade(codigoAtividade);
@@ -254,33 +238,32 @@ public class Sistema {
 
 	public void executaAtividade(String codigoAtividade, int item, int duracao) {
 		controladorAtividade.executaAtividade(codigoAtividade, item, duracao);
-		
+
 	}
 
 	public String listaPesquisas(String ordem) {
 		return controladorPesquisa.listaPesquisas(ordem);
 	}
-	
+
 	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
 		Pesquisa pesquisa = controladorPesquisa.getPesquisa(idPesquisa);
 		return controladorPesquisador.associaPesquisador(pesquisa, emailPesquisador);
 	}
-	
+
 	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
 		Pesquisa pesquisa = controladorPesquisa.getPesquisa(idPesquisa);
 		return controladorPesquisador.desassociaPesquisador(pesquisa, emailPesquisador);
 	}
-	
+
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
 		controladorPesquisador.cadastraEspecialidadeProfessor(email, formacao, unidade, data);
 	}
-	
+
 	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
 		controladorPesquisador.cadastraEspecialidadeAluno(email, semestre, IEA);
 	}
-	
+
 	public String listaPesquisadores(String tipo) {
 		return controladorPesquisador.listaPesquisadores(tipo);
 	}
-	
 }
