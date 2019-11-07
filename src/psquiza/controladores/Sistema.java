@@ -1,5 +1,10 @@
 package psquiza.controladores;
 
+import java.util.NoSuchElementException;
+
+import psquiza.Util;
+import psquiza.entidades.Atividade;
+
 public class Sistema {
 
 	private ControladorAtividade controladorAtividade;
@@ -181,8 +186,97 @@ public class Sistema {
 			return false;
 		return controladorMetas.desassociaPesquisa(idPesquisa, idObjetivo);
 	}
+	
+    public String busca(String termo) {
+    	Util.validaAtributo(termo, "Campo termo nao pode ser nulo ou vazio.");
+    	
+    	String listagem = controladorPesquisa.buscaPesquisa(termo);
+    	
+    	if (listagem.isEmpty()) {
+    		listagem = controladorPesquisador.buscaPesquisador(termo);
+    	} else {
+    		listagem += " | " + controladorPesquisador.buscaPesquisador(termo);
+    	}
+    	
+    	if (listagem.isEmpty()) {
+    		listagem = controladorMetas.buscaProblema(termo);
+    	} else {
+    		listagem += " | " + controladorMetas.buscaProblema(termo);
+    	}
+    	
+    	if (listagem.isEmpty()) {
+    		listagem = controladorMetas.buscaObjetivo(termo);
+    	} else {
+    		listagem += " | " + controladorMetas.buscaObjetivo(termo);
+    	}
+    	
+    	if (listagem.isEmpty()) {
+    		listagem = controladorAtividade.buscaAtividade(termo);
+    	} else {
+    		listagem += " | " + controladorAtividade.buscaAtividade(termo);
+    	}
+    	
+    	return listagem;
+    }
+
+    public String busca(String termo, int numeroDoResultado) {
+    	Util.validaAtributo(termo, "Campo termo nao pode ser nulo ou vazio.");
+    	
+    	if (numeroDoResultado < 0) {
+    		throw new IllegalArgumentException("Numero do resultado nao pode ser negativo.");
+    	}
+    	
+    	String busca = busca(termo);
+    	
+    	if (busca.split(" | ").length - 1 < numeroDoResultado) {
+    		throw new NoSuchElementException("Entidade nao encontrada.");
+    	}
+
+    	return busca.split(" | ")[numeroDoResultado];
+    }
+    
+    public int contaResultadosBusca(String termo) {
+    	Util.validaAtributo(termo, "Campo termo nao pode ser nulo ou vazio.");
+    	
+    	return busca(termo).split(" | ").length;
+    }
+
+	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade) {
+		Atividade atividade = controladorAtividade.getAtividade(codigoAtividade);
+		return controladorPesquisa.associaAtividade(codigoPesquisa, atividade);
+	}
+
+	public boolean desassociaAtividade(String codigoPesquisa, String codigoAtividade) {
+		Atividade atividade = controladorAtividade.getAtividade(codigoAtividade);
+		return controladorPesquisa.desassociaAtividade(codigoPesquisa, atividade);
+	}
+
+	public void executaAtividade(String codigoAtividade, int item, int duracao) {
+		controladorAtividade.executaAtividade(codigoAtividade, item, duracao);
+		
+	}
 
 	public String listaPesquisas(String ordem) {
 		return controladorPesquisa.listaPesquisas(ordem);
+	}
+	
+	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
+		return false;
+	}
+	
+	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
+		return true;
+	}
+	
+	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
+		controladorPesquisador.cadastraEspecialidadeProfessor(email, formacao, unidade, data);
+	}
+	
+	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
+		controladorPesquisador.cadastraEspecialidadeAluno(email, semestre, IEA);
+	}
+	
+	public String listaPesquisadores(String tipo) {
+		return null;
 	}
 }

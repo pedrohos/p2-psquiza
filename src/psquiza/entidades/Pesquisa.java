@@ -39,6 +39,8 @@ public class Pesquisa {
 	private String problema;
 
 	private HashSet<String> objetivos;
+	
+	private HashSet<Atividade> atividades;
 
 	/**
 	 * Constroi uma pesquisa atraves da sua descricao, Campo de Interesse e codigo.
@@ -65,6 +67,7 @@ public class Pesquisa {
 		this.estado = true;
 		this.problema = "";
 		this.objetivos = new HashSet<>();
+		this.atividades = new HashSet<>();
 	}
 
 	/**
@@ -195,6 +198,13 @@ public class Pesquisa {
 		return true;
 	}
 	
+	public boolean possuiProblema() {
+		if (!this.problema.equals("")) {
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean desassociaObjetivo(String idObjetivo) {
 		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
 		
@@ -203,13 +213,6 @@ public class Pesquisa {
 		
 		objetivos.remove(idObjetivo);
 		return true;
-	}
-	
-	public boolean possuiProblema() {
-		if (!this.problema.equals("")) {
-			return true;
-		}
-		return false;
 	}
 
 	/**
@@ -260,6 +263,21 @@ public class Pesquisa {
 		return true;
 	}
 
+	public boolean associaAtividade(Atividade atividade) {
+		if(atividades.contains(atividade)) {
+			return false;
+		}
+		return atividades.add(atividade);
+	}
+
+	public boolean desassociaAtividade(Atividade atividade) {
+		if(!atividades.contains(atividade)) {
+			return false;
+		}
+		return atividades.remove(atividade);
+		
+	}
+	
 	public int qtdObjetivos() {
 		return this.objetivos.size();
 	}

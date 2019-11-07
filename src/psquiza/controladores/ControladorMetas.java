@@ -5,6 +5,7 @@ import java.util.Map;
 
 import psquiza.Util;
 import psquiza.entidades.Objetivo;
+import psquiza.entidades.Pesquisador;
 import psquiza.entidades.Problema;
 
 /**
@@ -154,5 +155,33 @@ public class ControladorMetas {
 			throw new IllegalArgumentException("Objetivo nao encontrado.");
 		
 		return this.objetivos.get(idObjetivo).desassociaPesquisa(idPesquisa);
+	}
+	
+	public String buscaProblema(String termo) {
+		String listagem = "";
+		for (Problema problema : problemas.values()) {
+			if (problema.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
+				if (listagem.isEmpty()) {
+					listagem += problema.getCodigo() + " - " + problema.getDescricao();
+				} else {
+					listagem += " | " + problema.getCodigo() + " - " + problema.getDescricao();
+				}
+			}
+		}
+		return listagem;
+	}
+	
+	public String buscaObjetivo(String termo) {
+		String listagem = "";
+		for (Objetivo objetivo : objetivos.values()) {
+			if (objetivo.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
+				if (listagem.isEmpty()) {
+					listagem += objetivo.getCodigo() + " - " + objetivo.getDescricao();
+				} else {
+					listagem += " | " + objetivo.getCodigo() + " - " + objetivo.getDescricao();
+				}
+			}
+		}
+		return listagem;
 	}
 }

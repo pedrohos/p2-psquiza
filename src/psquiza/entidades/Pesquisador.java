@@ -1,5 +1,7 @@
 package psquiza.entidades;
 
+import java.text.SimpleDateFormat;
+
 import psquiza.Util;
 import psquiza.enums.Funcao;
 
@@ -41,6 +43,8 @@ public class Pesquisador {
 	 */
 	private boolean ativo;
 
+	private Especialidade especialidade;
+	
 	/**
 	 * Metodo responsavel por construir um pesquisador, o pesquisador inicia ativo.
 	 * 
@@ -58,14 +62,35 @@ public class Pesquisador {
 		Util.validaAtributo(foto, "Campo fotoURL nao pode ser nulo ou vazio.");
 		Util.validaEmail(email);
 		Util.validaFoto(foto);
-		
+
 		this.nome = nome;
 		this.biografia = biografia;
 		this.email = email;
 		this.foto = foto;
 		this.funcao = Funcao.atribuiFuncao(funcao);
 		this.ativo = true;
-	} 
+		this.especialidade = null;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public Funcao getFuncao() {
+		return funcao;
+	}
+	
+	public String getFuncaoPesquisador() {
+		return funcao.getFuncao();
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
 
 	/**
 	 * Metodo que retorna se o pesquisador e ativo ou nao.
@@ -96,6 +121,15 @@ public class Pesquisador {
 	}
 
 	/**
+	 * Metodo responsavel por retornar o atributo biografia.
+	 * 
+	 * @return valor da biografia.
+	 */
+	public String getBiografia() {
+		return biografia;
+	}
+
+	/**
 	 * Metodo responsavel por alterar o atributo biografia.
 	 * 
 	 * @param ativo novo valor para biografia.
@@ -103,6 +137,15 @@ public class Pesquisador {
 	public void setBiografia(String biografia) {
 		Util.validaAtributo(biografia, "Campo biografia nao pode ser nulo ou vazio.");
 		this.biografia = biografia;
+	}
+
+	/**
+	 * Metodo responsavel por retornar o atributo email.
+	 * 
+	 * @return valor do email.
+	 */
+	public String getEmail() {
+		return email;
 	}
 
 	/**
@@ -135,6 +178,14 @@ public class Pesquisador {
 	public void setFuncao(String funcao) {
 		Util.validaAtributo(funcao, "Campo funcao nao pode ser nulo ou vazio.");
 		this.funcao = Funcao.atribuiFuncao(funcao);
+	}
+	
+	public void setEspecialidade(Especialidade especialidade) {
+		this.especialidade = especialidade;
+	}
+	
+	public void setAtributoEspecialidade(String atributo, String novo) {
+		especialidade.setAtributo(atributo, novo);
 	}
 
 	/**
@@ -181,6 +232,11 @@ public class Pesquisador {
 	 */
 	@Override
 	public String toString() {
-		return String.format("%s (%s) - %s - %s - %s", nome, funcao.getFuncao(), biografia, email, foto);
+		if(especialidade == null) {
+			return String.format("%s (%s) - %s - %s - %s", nome, funcao.getFuncao(), biografia, email, foto);	
+		}else {
+			return String.format("%s (%s) - %s - %s - %s - %s", nome, funcao.getFuncao(), biografia, email, foto, especialidade.toString());
+		}
+		
 	}
 }

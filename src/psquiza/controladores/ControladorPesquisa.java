@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import psquiza.Util;
+import psquiza.entidades.Atividade;
 import psquiza.entidades.Pesquisa;
 import psquiza.ordenacao.*;
 
@@ -199,7 +200,7 @@ public class ControladorPesquisa {
 	public boolean ehAtiva(String codigo) {
 		Util.validaAtributo(codigo, "Codigo nao pode ser nulo ou vazio.");
 		validaPesquisa(codigo);
-		
+
 		if (pesquisas.get(codigo).ehAtiva())
 			return true;
 		return false;
@@ -257,7 +258,7 @@ public class ControladorPesquisa {
 		validaPesquisa(idPesquisa);
 		if (!ehAtiva(idPesquisa))
 			throw new IllegalArgumentException("Pesquisa desativada.");
-		
+
 		return this.pesquisas.get(idPesquisa).desassociaProblema(idProblema);
 	}
 
@@ -285,7 +286,7 @@ public class ControladorPesquisa {
 		validaPesquisa(idPesquisa);
 		if (!ehAtiva(idPesquisa))
 			throw new IllegalArgumentException("Pesquisa desativada.");
-		
+
 		return this.pesquisas.get(idPesquisa).associaObjetivo(idObjetivo);
 	}
 	
@@ -313,7 +314,7 @@ public class ControladorPesquisa {
 		validaPesquisa(idPesquisa);
 		if (!ehAtiva(idPesquisa))
 			throw new IllegalArgumentException("Pesquisa desativada.");
-		
+
 		return this.pesquisas.get(idPesquisa).desassociaObjetivo(idObjetivo);
 	}
 
@@ -373,5 +374,49 @@ public class ControladorPesquisa {
 			}
 		}
 		return resultado;
+	}
+
+	public String buscaPesquisa(String termo) {
+		String listagem = "";
+		for (Pesquisa pesquisa : pesquisas.values()) {
+			if (pesquisa.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
+				if (listagem.isEmpty()) {
+					listagem += pesquisa.getCodigo() + " - " + pesquisa.getDescricao();
+				} else {
+					listagem += " | " + pesquisa.getCodigo() + " - " + pesquisa.getDescricao();
+				}
+			}
+			if (pesquisa.getCampoDeInteresse().toLowerCase().contains(termo.toLowerCase())) {
+				if (listagem.isEmpty()) {
+					listagem += pesquisa.getCodigo() + " - " + pesquisa.getCampoDeInteresse();
+				} else {
+					listagem += " | " + pesquisa.getCodigo() + " - " + pesquisa.getCampoDeInteresse();
+				}
+			}
+		}
+		return listagem;
+	}
+
+	public boolean associaAtividade(String codigoPesquisa, Atividade atividade) {
+		Util.validaAtributo(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
+		if (!pesquisas.containsKey(codigoPesquisa)) {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+		if (!pesquisas.get(codigoPesquisa).ehAtiva()) {
+			throw new IllegalArgumentException("Pesquisa desativada.");
+		}
+		return pesquisas.get(codigoPesquisa).associaAtividade(atividade);
+
+	}
+
+	public boolean desassociaAtividade(String codigoPesquisa, Atividade atividade) {
+		Util.validaAtributo(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
+		if (!pesquisas.containsKey(codigoPesquisa)) {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+		if (!pesquisas.get(codigoPesquisa).ehAtiva()) {
+			throw new IllegalArgumentException("Pesquisa desativada.");
+		}
+		return pesquisas.get(codigoPesquisa).desassociaAtividade(atividade);
 	}
 }

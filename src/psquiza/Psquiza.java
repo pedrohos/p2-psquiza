@@ -8,7 +8,7 @@ public class Psquiza {
 	private Sistema sistema;
 
 	public Psquiza() {
-		sistema = new Sistema(); 
+		sistema = new Sistema();
 	}
 
 	/**
@@ -31,7 +31,6 @@ public class Psquiza {
 	public void encerraPesquisa(String codigo, String motivo) {
 		sistema.encerraPesquisa(codigo, motivo);
 	}
-
 
 	/**
 	 * {@link psquiza.controladores.Sistema#ativaPesquisa(String)}
@@ -111,7 +110,7 @@ public class Psquiza {
 	public void apagaAtividade(String id) {
 		sistema.apagaAtividade(id);
 	}
-	
+
 	/**
 	 * {@link psquiza.controladores.Sistema#cadastraItem(String, String)}
 	 */
@@ -181,28 +180,28 @@ public class Psquiza {
 	public String exibeObjetivo(String codigo) {
 		return sistema.exibeObjetivo(codigo);
 	}
-	
+
 	/**
 	 * {@link psquiza.controladores.Sistema#associaProblema(String, String)}
 	 */
 	public boolean associaProblema(String idPesquisa, String idProblema) {
 		return sistema.associaProblema(idPesquisa, idProblema);
 	}
-	
+
 	/**
 	 * {@link psquiza.controladores.Sistema#desassociaProblema(String, String)}
 	 */
 	public boolean desassociaProblema(String idPesquisa, String idProblema) {
 		return sistema.desassociaProblema(idPesquisa, idProblema);
 	}
-	
+
 	/**
 	 * {@link psquiza.controladores.Sistema#associaObjetivo(String, String)}
 	 */
 	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
 		return sistema.associaObjetivo(idPesquisa, idObjetivo);
 	}
-	
+
 	/**
 	 * {@link psquiza.controladores.Sistema#desassociaObjetivo(String, String)}
 	 */
@@ -217,12 +216,55 @@ public class Psquiza {
 		return sistema.listaPesquisas(ordem);
 	}
 
-	public static void main(String[] args) {
-		args = new String[] { "psquiza.Psquiza",
-							  "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",
-					          "testes_aceitacao/use_case_3.txt", "testes_aceitacao/use_case_4.txt",
-					          "testes_aceitacao/use_case_5.txt"};
+	public String busca(String termo) {
+		return sistema.busca(termo);
+	}
 
+	public String busca(String termo, int numeroDoResultado) {
+		return sistema.busca(termo, numeroDoResultado);
+	}
+
+	public int contaResultadosBusca(String termo) {
+		return sistema.contaResultadosBusca(termo);
+	}
+
+	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade) {
+		return sistema.associaAtividade(codigoPesquisa, codigoAtividade);
+	}
+
+	public boolean desassociaAtividade(String codigoPesquisa, String codigoAtividade) {
+		return sistema.desassociaAtividade(codigoPesquisa, codigoAtividade);
+	}
+
+	public void executaAtividade(String codigoAtividade, int item, int duracao) {
+		sistema.executaAtividade(codigoAtividade, item, duracao);
+	}
+	
+	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
+		return sistema.associaPesquisador(idPesquisa, emailPesquisador);
+	}
+	
+	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
+		return sistema.desassociaPesquisador(idPesquisa, emailPesquisador);
+	}
+	
+	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
+		sistema.cadastraEspecialidadeProfessor(email, formacao, unidade, data);
+	}
+	
+	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
+		sistema.cadastraEspecialidadeAluno(email, semestre, IEA);
+	}
+	
+	public String listaPesquisadores(String tipo) {
+		return sistema.listaPesquisadores(tipo);
+	}
+
+	public static void main(String[] args) {
+		args = new String[] { "psquiza.Psquiza", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",
+				"testes_aceitacao/use_case_3.txt", "testes_aceitacao/use_case_4.txt", "testes_aceitacao/use_case_5.txt",
+				"testes_aceitacao/use_case_6.txt", "testes_aceitacao/use_case_7.txt",
+				"testes_aceitacao/use_case_8.txt" };
 		EasyAccept.main(args);
 	}
 }

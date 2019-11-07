@@ -66,4 +66,8 @@ public class Item {
 			return false;
 		return true;
 	}
+
+	public void setEstado(String string) {
+		this.estadoAtual = Estado.REALIZADO;	
+	}
 }
