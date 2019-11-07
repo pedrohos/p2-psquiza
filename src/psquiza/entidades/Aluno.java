@@ -18,7 +18,7 @@ public class Aluno implements Especialidade {
 
 	public String getIea() {
 		
-		return String.valueOf(iea).replace(".", ",");
+		return String.valueOf(iea);
 	}
 	
 	@Override

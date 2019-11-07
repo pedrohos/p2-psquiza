@@ -67,7 +67,7 @@ public class ControladorPesquisa {
 	 * @param pesquisas HasMAp que possui todas pesquisas cadastradas
 	 * @param codigo    codigo da pesquisa solicitada
 	 */
-	private void validaPesquisa(String codigo) {
+	private void existePesquisa(String codigo) {
 		if (!pesquisas.containsKey(codigo)) {
 			throw new NullPointerException("Pesquisa nao encontrada.");
 		}
@@ -134,7 +134,7 @@ public class ControladorPesquisa {
 	public void alteraPesquisa(String codigo, String conteudoASerAlterado, String novoConteudo) {
 		Util.validaAtributo(conteudoASerAlterado, "Conteudo a ser alterado nao pode ser nulo ou vazio");
 		Util.validaAtributo(codigo, "Codigo nao pode ser nulo ou vazio.");
-		validaPesquisa(codigo);
+		existePesquisa(codigo);
 
 		if (!pesquisas.get(codigo).ehAtiva()) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
@@ -160,7 +160,7 @@ public class ControladorPesquisa {
 	public void encerraPesquisa(String codigo, String motivo) {
 		Util.validaAtributo(codigo, "Codigo nao pode ser nulo ou vazio.");
 		Util.validaAtributo(motivo, "Motivo nao pode ser nulo ou vazio.");
-		validaPesquisa(codigo);
+		existePesquisa(codigo);
 		pesquisas.get(codigo).encerraPesquisa();
 	}
 
@@ -172,7 +172,7 @@ public class ControladorPesquisa {
 	 */
 	public void ativaPesquisa(String codigo) {
 		Util.validaAtributo(codigo, "Codigo nao pode ser nulo ou vazio.");
-		validaPesquisa(codigo);
+		existePesquisa(codigo);
 		pesquisas.get(codigo).ativaPesquisa();
 	}
 
@@ -186,9 +186,19 @@ public class ControladorPesquisa {
 	 */
 	public String exibePesquisa(String codigo) {
 		Util.validaAtributo(codigo, "Codigo nao pode ser nulo ou vazio.");
-		validaPesquisa(codigo);
-		
+		existePesquisa(codigo);
 		return pesquisas.get(codigo).toString();
+	}
+	
+	public Pesquisa getPesquisa(String codigo) {
+		Util.validaAtributo(codigo, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		existePesquisa(codigo);
+		if(pesquisas.get(codigo).ehAtiva()) {
+			return pesquisas.get(codigo);
+		}else {
+			throw new NullPointerException("Pesquisa desativada.");
+		}
+		
 	}
 
 	/**
@@ -199,7 +209,7 @@ public class ControladorPesquisa {
 	 */
 	public boolean ehAtiva(String codigo) {
 		Util.validaAtributo(codigo, "Codigo nao pode ser nulo ou vazio.");
-		validaPesquisa(codigo);
+		existePesquisa(codigo);
 		if (pesquisas.get(codigo).ehAtiva())
 			return true;
 		return false;
@@ -226,7 +236,7 @@ public class ControladorPesquisa {
 	public boolean associaProblema(String idPesquisa, String idProblema) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		Util.validaAtributo(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
-		validaPesquisa(idPesquisa);
+		existePesquisa(idPesquisa);
 		if (!ehAtiva(idPesquisa))
 			throw new IllegalArgumentException("Pesquisa desativada.");
 
@@ -254,7 +264,7 @@ public class ControladorPesquisa {
 	public boolean desassociaProblema(String idPesquisa, String idProblema) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		Util.validaAtributo(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
-		validaPesquisa(idPesquisa);
+		existePesquisa(idPesquisa);
 		if (!ehAtiva(idPesquisa))
 			throw new IllegalArgumentException("Pesquisa desativada.");
 
@@ -282,7 +292,7 @@ public class ControladorPesquisa {
 	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
-		validaPesquisa(idPesquisa);
+		existePesquisa(idPesquisa);
 		if (!ehAtiva(idPesquisa))
 			throw new IllegalArgumentException("Pesquisa desativada.");
 
@@ -310,7 +320,7 @@ public class ControladorPesquisa {
 	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
-		validaPesquisa(idPesquisa);
+		existePesquisa(idPesquisa);
 		if (!ehAtiva(idPesquisa))
 			throw new IllegalArgumentException("Pesquisa desativada.");
 

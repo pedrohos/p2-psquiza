@@ -4,6 +4,7 @@ import java.util.NoSuchElementException;
 
 import psquiza.Util;
 import psquiza.entidades.Atividade;
+import psquiza.entidades.Pesquisa;
 
 public class Sistema {
 
@@ -245,11 +246,13 @@ public class Sistema {
 	}
 
 	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
-		return false;
+		Pesquisa pesquisa = controladorPesquisa.getPesquisa(idPesquisa);
+		return controladorPesquisador.associaPesquisador(pesquisa, emailPesquisador);
 	}
 
 	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
-		return true;
+		Pesquisa pesquisa = controladorPesquisa.getPesquisa(idPesquisa);
+		return controladorPesquisador.desassociaPesquisador(pesquisa, emailPesquisador);
 	}
 
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
@@ -261,6 +264,6 @@ public class Sistema {
 	}
 
 	public String listaPesquisadores(String tipo) {
-		return null;
+		return controladorPesquisador.listaPesquisadores(tipo);
 	}
 }

@@ -1,6 +1,7 @@
 package psquiza.entidades;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import psquiza.Util;
 import psquiza.enums.Funcao;
@@ -10,7 +11,7 @@ import psquiza.enums.Funcao;
  * 
  * @author Eniedson Fabiano Pereira da Silva Junior
  */
-public class Pesquisador {
+public class Pesquisador implements Comparable<Pesquisador> {
 
 	/**
 	 * Atributo que representa o nome do pesquisador.
@@ -45,6 +46,8 @@ public class Pesquisador {
 
 	private Especialidade especialidade;
 	
+	private ArrayList<Pesquisa> pesquisasAssociadas;
+	
 	/**
 	 * Metodo responsavel por construir um pesquisador, o pesquisador inicia ativo.
 	 * 
@@ -70,6 +73,7 @@ public class Pesquisador {
 		this.funcao = Funcao.atribuiFuncao(funcao);
 		this.ativo = true;
 		this.especialidade = null;
+		this.pesquisasAssociadas = new ArrayList();
 	}
 
 	public String getNome() {
@@ -238,5 +242,40 @@ public class Pesquisador {
 			return String.format("%s (%s) - %s - %s - %s - %s", nome, funcao.getFuncao(), biografia, email, foto, especialidade.toString());
 		}
 		
+	}
+	
+	public boolean associaPesquisa(Pesquisa pesquisa) {
+		if(pesquisasAssociadas.contains(pesquisa)) {
+			return false;
+		}else {
+			pesquisasAssociadas.add(pesquisa);
+			return true;
+		}
+
+	}
+	
+	public boolean desassociaPesquisa(Pesquisa pesquisa) {
+		if(!pesquisasAssociadas.contains(pesquisa)) {
+			return false;
+		}else {
+			pesquisasAssociadas.remove(pesquisa);
+			return true;
+		}
+
+	}
+
+	public int compareTo(Pesquisador o) {
+		
+		if (this.nome == null) {
+			return 1;
+		}
+		if (o.nome == null) {
+			return 1;
+		}
+		if (this.nome.equals(o.nome)) {
+			return 0;
+		} else {
+			return this.nome.compareTo(o.nome)*-1;
+		}
 	}
 }
