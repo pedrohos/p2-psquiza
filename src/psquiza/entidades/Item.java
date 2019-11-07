@@ -38,6 +38,10 @@ public class Item {
 		this.estadoAtual = Estado.PENDENTE;
 	}
 	
+	public String getNome() {
+		return this.nome;
+	}
+	
 	public String getEstado() {
 		return this.estadoAtual.getEstado();
 	}

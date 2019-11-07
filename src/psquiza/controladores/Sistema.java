@@ -263,5 +263,8 @@ public class Sistema {
 	public String listaPesquisadores(String tipo) {
 		return null;
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> fb2b31e9932b8c2103ed04139c4135e059496184
 }

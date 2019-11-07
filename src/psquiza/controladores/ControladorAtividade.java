@@ -149,6 +149,7 @@ public class ControladorAtividade {
 	 * @return e retornado um int indicando a quantidade de itens PENDENTE.
 	 */
 	public int contaItensPendentes(String id) {
+		Util.validaAtributo(id, "Campo codigo nao pode ser nulo ou vazio.");
 		if (!existeAtividade(id))
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		Util.validaAtributo(id, "Campo codigo nao pode ser nulo ou vazio.");
@@ -169,6 +170,7 @@ public class ControladorAtividade {
 	 * @return e retornado um int indicando a quantidade de itens REALIZADO.
 	 */
 	public int contaItensRealizados(String id) {
+		Util.validaAtributo(id, "Campo codigo nao pode ser nulo ou vazio.");
 		if (!existeAtividade(id))
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		Util.validaAtributo(id, "Campo codigo nao pode ser nulo ou vazio.");
@@ -202,11 +204,23 @@ public class ControladorAtividade {
 		return listagem;
 	}
 	
+	/**
+	 * Coleta uma atividade do mapa atividades a partir do codigo da atividade.
+	 * 
+	 * Caso o codigo da atividade seja vazio ou nulo sera lancado um IllegalArgumentException:
+	 * "Campo codigoAtividade nao pode ser nulo ou vazio."
+	 * Caso o codigo da atividade nao remeta a nenhuma atividade sera lancado um IllegalArgumentException:
+	 * "Atividade nao encontrada"
+	 * 
+	 * @param codigoAtividade
+	 * @return
+	 */
 	public Atividade getAtividade(String codigoAtividade) {
 		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		if(!atividades.containsKey(codigoAtividade)) {
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		}
+		
 		return atividades.get(codigoAtividade);
 	}
 
@@ -214,6 +228,7 @@ public class ControladorAtividade {
 		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		Util.validaNumero(item, "Item nao pode ser nulo ou negativo.");
 		Util.validaNumero(duracao, "Duracao nao pode ser nula ou negativa.");
+		
 		atividades.get(codigoAtividade).executaAtividade(item, duracao);
 	}
 }
