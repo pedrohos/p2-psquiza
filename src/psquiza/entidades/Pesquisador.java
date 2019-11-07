@@ -83,6 +83,10 @@ public class Pesquisador {
 	public Funcao getFuncao() {
 		return funcao;
 	}
+	
+	public String getFuncaoPesquisador() {
+		return funcao.getFuncao();
+	}
 
 	public boolean isAtivo() {
 		return ativo;
@@ -177,7 +181,11 @@ public class Pesquisador {
 	}
 	
 	public void setEspecialidade(Especialidade especialidade) {
-		especialidade = especialidade;
+		this.especialidade = especialidade;
+	}
+	
+	public void setAtributoEspecialidade(String atributo, String novo) {
+		especialidade.setAtributo(atributo, novo);
 	}
 
 	/**
@@ -224,6 +232,11 @@ public class Pesquisador {
 	 */
 	@Override
 	public String toString() {
-		return String.format("%s (%s) - %s - %s - %s", nome, funcao.getFuncao(), biografia, email, foto);
+		if(especialidade == null) {
+			return String.format("%s (%s) - %s - %s - %s", nome, funcao.getFuncao(), biografia, email, foto);	
+		}else {
+			return String.format("%s (%s) - %s - %s - %s - %s", nome, funcao.getFuncao(), biografia, email, foto, especialidade.toString());
+		}
+		
 	}
 }

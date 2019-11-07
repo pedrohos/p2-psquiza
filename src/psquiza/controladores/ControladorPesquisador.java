@@ -98,6 +98,24 @@ public class ControladorPesquisador {
 			Util.validaFoto(novoValor);
 			pesquisadores.get(email).setFoto(novoValor);
 			break;
+		case "SEMESTRE":
+			Util.validaNumero(Integer.parseInt(novoValor)-1, "Atributo semestre com formato invalido.");
+			pesquisadores.get(email).setAtributoEspecialidade(atributo, novoValor);
+			break;
+		case "IEA":
+			Util.validaIEA(Double.parseDouble(novoValor));
+			pesquisadores.get(email).setAtributoEspecialidade(atributo, novoValor);
+			break;
+		case "DATA":
+			Util.validaData(novoValor);
+			pesquisadores.get(email).setAtributoEspecialidade(atributo, novoValor);
+			break;
+		case "FORMACAO":
+			pesquisadores.get(email).setAtributoEspecialidade(atributo, novoValor);
+			break;
+		case "UNIDADE":
+			pesquisadores.get(email).setAtributoEspecialidade(atributo, novoValor);
+			break;
 		default:
 			throw new IllegalArgumentException("Atributo invalido.");
 		}
@@ -204,7 +222,7 @@ public class ControladorPesquisador {
 
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
 		
-		Util.validaAtributo(email, "Campo email nao pode ser vazio ou nulo.");
+		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
 		Util.validaAtributo(formacao, "Campo formacao nao pode ser nulo ou vazio.");
 		Util.validaAtributo(unidade, "Campo unidade nao pode ser nulo ou vazio.");
 		Util.validaAtributo(data, "Campo data nao pode ser nulo ou vazio.");
@@ -212,10 +230,10 @@ public class ControladorPesquisador {
 		Util.validaData(data);
 		
 		if (!pesquisadores.containsKey(email)) {
-			throw new NoSuchElementException("Pesquisadora nao encontrada");
+			throw new NoSuchElementException("Pesquisadora nao encontrada.");
 		}
 		
-		if (pesquisadores.get(email).getFuncao().equals("professor")) {
+		if (!pesquisadores.get(email).getFuncaoPesquisador().equals("professor")) {
 			throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
 		}
 		
@@ -228,21 +246,21 @@ public class ControladorPesquisador {
 
 	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
 		
-		Util.validaAtributo(email, "Campo email nao pode ser vazio ou nulo.");
+		
+		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
 		Util.validaAtributo(String.valueOf(semestre), "Campo semestre nao pode ser nulo ou vazio.");
 		Util.validaAtributo(String.valueOf(IEA), "Campo iea nao pode ser nulo ou vazio.");
-		Util.validaNumero(semestre, "Atributo semestre com formato invalido.");
+		Util.validaNumero(semestre-1, "Atributo semestre com formato invalido.");
 		Util.validaEmail(email);
+		Util.validaIEA(IEA);
 		
-		if( IEA < 0.0 || IEA > 10.0) {
-			throw new IllegalArgumentException("Atributo IEA com formato invalido.");
-		}
+
 		
 		if (!pesquisadores.containsKey(email)) {
-			throw new NoSuchElementException("Pesquisadora nao encontrada");
+			throw new NoSuchElementException("Pesquisadora nao encontrada.");
 		}
 		
-		if (pesquisadores.get(email).getFuncao().equals("aluno")) {
+		if (!pesquisadores.get(email).getFuncaoPesquisador().equals("estudante")) {
 			throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
 		}
 		
