@@ -208,7 +208,7 @@ public class Psquiza {
 	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
 		return sistema.desassociaObjetivo(idPesquisa, idObjetivo);
 	}
-	
+
 	/**
 	 * {@link psquiza.controladores.Sistema#listaPesquisas(String)}
 	 */
@@ -228,17 +228,27 @@ public class Psquiza {
 		return sistema.contaResultadosBusca(termo);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#associaAtividade(String, String)}
+	 */
 	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade) {
 		return sistema.associaAtividade(codigoPesquisa, codigoAtividade);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#desassociaAtividade(String, String)}
+	 */
 	public boolean desassociaAtividade(String codigoPesquisa, String codigoAtividade) {
 		return sistema.desassociaAtividade(codigoPesquisa, codigoAtividade);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#executaAtividade(String, int, int)}
+	 */
 	public void executaAtividade(String codigoAtividade, int item, int duracao) {
 		sistema.executaAtividade(codigoAtividade, item, duracao);
 	}
+
 	/**
 	 * {@link psquiza.controladores.Sistema#associaPesquisador(String, String)}
 	 */
@@ -252,7 +262,6 @@ public class Psquiza {
 	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
 		return sistema.desassociaPesquisador(idPesquisa, emailPesquisador);
 	}
-	
 
 	/**
 	 * {@link psquiza.controladores.Sistema#cadastraEspecialidadeProfessor(String, String, String, String)}
@@ -260,7 +269,6 @@ public class Psquiza {
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
 		sistema.cadastraEspecialidadeProfessor(email, formacao, unidade, data);
 	}
-	
 
 	/**
 	 * {@link psquiza.controladores.Sistema#cadastraEspecialidadeAluno(String, Integer, double)}
@@ -268,7 +276,6 @@ public class Psquiza {
 	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
 		sistema.cadastraEspecialidadeAluno(email, semestre, IEA);
 	}
-	
 
 	/**
 	 * {@link psquiza.controladores.Sistema#listaPesquisadores(String)}
@@ -276,20 +283,31 @@ public class Psquiza {
 	public String listaPesquisadores(String tipo) {
 		return sistema.listaPesquisadores(tipo);
 	}
-	
-	
+
+	/**
+	 * {@link psquiza.controladores.Sistema#cadastraResultado(String, String)}
+	 */
 	public int cadastraResultado(String codigoAtividade, String resultado) {
 		return sistema.cadastraResultado(codigoAtividade, resultado);
 	}
-	
+
+	/**
+	 * {@link psquiza.controladores.Sistema#removeResultado(String, int)}
+	 */
 	public boolean removeResultado(String codigoAtividade, int numeroResultado) {
 		return sistema.removeResultado(codigoAtividade, numeroResultado);
 	}
-	
+
+	/**
+	 * {@link psquiza.controladores.Sistema#listaResultados(String)}
+	 */
 	public String listaResultados(String codigoAtividade) {
 		return sistema.listaResultados(codigoAtividade);
 	}
-	
+
+	/**
+	 * {@link psquiza.controladores.Sistema#getDuracao(String)}
+	 */
 	public int getDuracao(String codigoAtividade) {
 		return sistema.getDuracao(codigoAtividade);
 	}

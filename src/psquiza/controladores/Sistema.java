@@ -120,26 +120,62 @@ public class Sistema {
 		return controladorPesquisa.ehAtiva(codigo);
 	}
 
+	/**
+	 * Metodo para cadastrar um problema
+	 * 
+	 * @param descricao   descricao do problema
+	 * @param viabilidade viabilidade do problema
+	 */
 	public void cadastraProblema(String descricao, int viabilidade) {
 		controladorMetas.cadastraProblema(descricao, viabilidade);
 	}
 
+	/**
+	 * Metodo para cadastrar um objetivo
+	 * 
+	 * @param tipo        tipo do objetivo
+	 * @param descricao   descricao do objetivo
+	 * @param aderencia   aderencia do objetivo
+	 * @param viabilidade viabilidade do objetivo
+	 */
 	public void cadastraObjetivo(String tipo, String descricao, int aderencia, int viabilidade) {
 		controladorMetas.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
 	}
 
+	/**
+	 * Metodo para apagar um problema atraves do codigo
+	 * 
+	 * @param codigo codigo do problema
+	 */
 	public void apagarProblema(String codigo) {
 		controladorMetas.apagarProblema(codigo);
 	}
 
+	/**
+	 * Metodo para apagar objetivo
+	 * 
+	 * @param codigo codigo do objetivo
+	 */
 	public void apagarObjetivo(String codigo) {
 		controladorMetas.apagarObjetivo(codigo);
 	}
 
+	/**
+	 * Metodo para exibir um problema
+	 * 
+	 * @param codigo codigo do problema
+	 * @return retorna a exibicao do problema
+	 */
 	public String exibeProblema(String codigo) {
 		return controladorMetas.exibeProblema(codigo);
 	}
 
+	/**
+	 * Metodo para exibir um objetivo
+	 * 
+	 * @param codigo codigo do objetivo
+	 * @return retorna a exibicao do objetivo
+	 */
 	public String exibeObjetivo(String codigo) {
 		return controladorMetas.exibeObjetivo(codigo);
 	}
@@ -250,16 +286,37 @@ public class Sistema {
 		return busca(termo).split(" \\| ").length;
 	}
 
+	/**
+	 * Metodo para associar uma atividade a uma pesquisa
+	 * 
+	 * @param codigoPesquisa  codigo da pesquisa
+	 * @param codigoAtividade codigo da atividade
+	 * @return retorna true se a associacao deu certo ou false caso nao de certo
+	 */
 	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade) {
 		Atividade atividade = controladorAtividade.getAtividade(codigoAtividade);
 		return controladorPesquisa.associaAtividade(codigoPesquisa, atividade);
 	}
 
+	/**
+	 * Metodo para desassociar uma atividade de uma pesquisa
+	 * 
+	 * @param codigoPesquisa  codigo da pesquisa
+	 * @param codigoAtividade codigo da atividade
+	 * @return retorna true se a desassociacao deu certo ou false caso nao de certo
+	 */
 	public boolean desassociaAtividade(String codigoPesquisa, String codigoAtividade) {
 		Atividade atividade = controladorAtividade.getAtividade(codigoAtividade);
 		return controladorPesquisa.desassociaAtividade(codigoPesquisa, atividade);
 	}
 
+	/**
+	 * Metodo para executar uma atividade
+	 * 
+	 * @param codigoAtividade codigo da atividade
+	 * @param item            item que sera executado
+	 * @param duracao         duracao da execucao
+	 */
 	public void executaAtividade(String codigoAtividade, int item, int duracao) {
 		controladorAtividade.executaAtividade(codigoAtividade, item, duracao);
 
@@ -271,16 +328,16 @@ public class Sistema {
 
 	/**
 	 * 
-	 * Recebe uma pesquisa que serÃ¡ associada ao pesquisador passado. Lanca erros em
+	 * Recebe uma pesquisa que sera associada ao pesquisador passado. Lanca erros em
 	 * caso da pesquisa nÃ£o existir ou estar desativada e ainda se os parametros
-	 * recebios forme nulos, vazios ou com formato invÃ¡lido. Uma pesquisa Ã©
-	 * associada quando o pesquisador ainda nÃ£o tem aquela pesquisa em seu array e
-	 * nÃ£o Ã© associada caso a pesquisa jÃ¡ exista no array.
+	 * recebios forme nulos, vazios ou com formato invalido. Uma pesquisa e
+	 * associada quando o pesquisador ainda nao tem aquela pesquisa em seu array e
+	 * nao e associada caso a pesquisa ja exista no array.
 	 * 
 	 * @param idPesquisa       pesquisa que sera adicionada no pesquisador.
-	 * @param emailPesquisador email do pesquisador em que a pesquisa serÃ¡
+	 * @param emailPesquisador email do pesquisador em que a pesquisa sera
 	 *                         adicionada.
-	 * @return (true) caso a pesquisa seja associada e (false) caso nÃ£o possa
+	 * @return (true) caso a pesquisa seja associada e (false) caso nao possa
 	 *         ocorrer a associacao.
 	 */
 	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
@@ -291,8 +348,8 @@ public class Sistema {
 	/**
 	 * Recebe uma pesquisa que sera desassociada do pesquisador passado. Lanca erros
 	 * em caso da pesquisa nao existir ou estar desativada e ainda se os parametros
-	 * recebios forem nulos, vazios ou com formato invalido. Uma pesquisa Ã©
-	 * desassociada quando o pesquisador tem aquela pesquisa em seu array e nÃ£o Ã©
+	 * recebios forem nulos, vazios ou com formato invalido. Uma pesquisa e
+	 * desassociada quando o pesquisador tem aquela pesquisa em seu array e nao e
 	 * desassociada caso a pesquisa nao exista no array.
 	 * 
 	 * @param idPesquisa       pesquisa que sera adicionada no pesquisador.
@@ -310,7 +367,7 @@ public class Sistema {
 	 * Cadastra a especialidade de Professora em uma Pesquisadora, que como novas
 	 * caracteristicas tem uma formacao, uma unidade de alocacao e uma data. A
 	 * funcao lanca erros caso os parametros recebidos sejam nulos, vazios ou
-	 * invalidos e tambÃ©m caso a pesquisadora nao exista ou sua funcao nao seja
+	 * invalidos e tambem caso a pesquisadora nao exista ou sua funcao nao seja
 	 * professora.
 	 * 
 	 * @param email    referencia a pesquisadora a ser cadastrada as especialidades
@@ -326,7 +383,7 @@ public class Sistema {
 	 * Cadastra a especialidade de Aluna em uma Pesquisadora, que como novas
 	 * caracteristicas tem um semestr e um indice de eficiencia academica. A funcao
 	 * lanca erros caso os parametros recebidos sejam nulos, vazios ou invalidos e
-	 * tambÃ©m caso a pesquisadora nao exista ou sua funcao nao seja aluna.
+	 * tambem caso a pesquisadora nao exista ou sua funcao nao seja aluna.
 	 * 
 	 * @param email    email que identifica a pesquisadora aluna.
 	 * @param semestre semestre de ingresso da aluna.
@@ -337,7 +394,7 @@ public class Sistema {
 	}
 
 	/**
-	 * Lista pesquisadores de um mesmo tipo, o tipo Ã© recebido como parametro e pode
+	 * Lista pesquisadores de um mesmo tipo, o tipo e recebido como parametro e pode
 	 * ser "EXTERNO", "ALUNA" ou "PROFESSORA". Lanca erros casos o tipo passado seja
 	 * vazio, nulo o invalido (diferente dos tipos existentes). Retorna uma String
 	 * que contem a representacao em String dos pesquisadores.
@@ -349,18 +406,44 @@ public class Sistema {
 		return controladorPesquisador.listaPesquisadores(tipo);
 	}
 
+	/**
+	 * Metodo para cadastrar um resultado a uma atividade
+	 * 
+	 * @param codigoAtividade codigo da atividade
+	 * @param resultado       resultado que sera cadastrado
+	 * @return retorna um inteiro que indica o numero do resultado
+	 */
 	public int cadastraResultado(String codigoAtividade, String resultado) {
 		return controladorAtividade.cadastraResultado(codigoAtividade, resultado);
 	}
 
+	/**
+	 * Metodo para remover um resultado de uma atividade
+	 * 
+	 * @param codigoAtividade codigo da atividade
+	 * @param numeroResultado numero do resultado
+	 * @return retorna true se o resultado foi removido, false caso nao seja
+	 */
 	public boolean removeResultado(String codigoAtividade, int numeroResultado) {
 		return controladorAtividade.removeResultado(codigoAtividade, numeroResultado);
 	}
 
+	/**
+	 * Metodo para listar os resultados de uma atividade
+	 * 
+	 * @param codigoAtividade codigo da atividade
+	 * @return retorna a representacao dos resultados
+	 */
 	public String listaResultados(String codigoAtividade) {
 		return controladorAtividade.listaResultados(codigoAtividade);
 	}
 
+	/**
+	 * Metodo para pegar a duracao de uma atividade
+	 * 
+	 * @param codigoAtividade codigo da atividade
+	 * @return retorna a duracao da atividade
+	 */
 	public int getDuracao(String codigoAtividade) {
 		return controladorAtividade.getDuracao(codigoAtividade);
 	}

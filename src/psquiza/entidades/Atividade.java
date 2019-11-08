@@ -13,78 +13,72 @@ import psquiza.Util;
 import psquiza.enums.Risco;
 
 /**
- * Representacao de uma Atividade no sistema.
- * Cada Atividade apresenta uma descricao, um nivel
- * de risco, uma descricao do risco, uma duracao (periodo),
- * um id que o identifica unicamente em seu controlador e
- * uma lista de itens que compoem a Atividade.
+ * Representacao de uma Atividade no sistema. Cada Atividade apresenta uma
+ * descricao, um nivel de risco, uma descricao do risco, uma duracao (periodo),
+ * um id que o identifica unicamente em seu controlador e uma lista de itens que
+ * compoem a Atividade.
  * 
- * O nivel de risco deve ser um dos 3:
- * BAIXO
- * MEDIO
- * ALTO
+ * O nivel de risco deve ser um dos 3: BAIXO MEDIO ALTO
  * 
- * E possivel alem de criar uma Atividade, cadastrar um item,
- * retornar a quantidade de itens no status de PENDENTE e de
- * REALIZADO.
+ * E possivel alem de criar uma Atividade, cadastrar um item, retornar a
+ * quantidade de itens no status de PENDENTE e de REALIZADO.
  * 
  * @author Pedro Henrique
  */
 public class Atividade {
-	
+
 	/**
 	 * Armazena a descricao da Atividade.
 	 */
 	private String descricao;
-	
+
 	private Integer posicaoItem = 1;
 	/**
 	 * Armazena a descricao do risco da Atividade.
 	 */
 	private String descricaoRisco;
-	
+
 	/**
-	 * Armazena o nivel de risco da Atividade, podem estar em um
-	 * de 3 estados:
+	 * Armazena o nivel de risco da Atividade, podem estar em um de 3 estados:
 	 * BAIXO, MEDIO ou ALTO
 	 */
 	private Risco nivelRisco;
-	
+
 	/**
 	 * Representa a duracao da Atividade.
 	 */
 	private int periodo;
-	
+
 	/**
 	 * Representa o identificador unico da Atividade.
 	 */
 	private String id;
-	
+
 	/**
 	 * Armazena um conjunto ordenado de itens que compoem a atividade.
 	 */
-	private LinkedHashMap<Integer,Item> itens;
-	
+	private LinkedHashMap<Integer, Item> itens;
+
 	/**
 	 * Armazena um conjunto ordenados de resultados que compoem a atividade.
 	 */
 	private List<String> resultados;
 
 	/**
-	 * Constroi um nova atividade, validando se os parametros passados
-	 * sao vazios ou nulos, caso sejam sera lancado um IllegalArgumentException:
+	 * Constroi um nova atividade, validando se os parametros passados sao vazios ou
+	 * nulos, caso sejam sera lancado um IllegalArgumentException:
 	 * 
-	 * Descricao vazia ou nulo: "Campo Descricao nao pode ser nulo ou vazio."
-	 * Nivel de Risco vazio ou nulo: "Campo nivelRisco nao pode ser nulo ou vazio."
-	 * ID vazio ou nulo: "Campo codigo nao pode ser nulo ou vazio."
-	 * Descricao do Risco vazia ou nula: "Campo descricaoRisco nao pode ser nulo ou vazio."
-	 * Caso o Nivel de Risco nao seja BAIXO, MEDIO ou ALTO, sera lancado um
+	 * Descricao vazia ou nulo: "Campo Descricao nao pode ser nulo ou vazio." Nivel
+	 * de Risco vazio ou nulo: "Campo nivelRisco nao pode ser nulo ou vazio." ID
+	 * vazio ou nulo: "Campo codigo nao pode ser nulo ou vazio." Descricao do Risco
+	 * vazia ou nula: "Campo descricaoRisco nao pode ser nulo ou vazio." Caso o
+	 * Nivel de Risco nao seja BAIXO, MEDIO ou ALTO, sera lancado um
 	 * IllegalArgumentException: "Valor invalido do nivel do risco."
 	 * 
-	 * @param descricao e a descricao da atividade.
-	 * @param nivelRisco e o nivel de risco da ativdade.
+	 * @param descricao      e a descricao da atividade.
+	 * @param nivelRisco     e o nivel de risco da ativdade.
 	 * @param descricaoRisco e a descricao do risco da atividade.
-	 * @param id e o identificador unico da atividade.
+	 * @param id             e o identificador unico da atividade.
 	 */
 	public Atividade(String descricao, String nivelRisco, String descricaoRisco, String id) {
 		Util.validaAtributo(descricao, "Campo Descricao nao pode ser nulo ou vazio.");
@@ -111,7 +105,7 @@ public class Atividade {
 	public void cadastraItem(String item) {
 		Util.validaAtributo(item, "Item nao pode ser nulo ou vazio.");
 
-		this.itens.put(this.posicaoItem,new Item(item));
+		this.itens.put(this.posicaoItem, new Item(item));
 		this.posicaoItem += 1;
 	}
 
@@ -122,9 +116,9 @@ public class Atividade {
 	 */
 	public int getItensPendentes() {
 		int resultado = 0;
-		for(Integer item : itens.keySet()) {
-			if(itens.get(item).getEstado().equals("PENDENTE")) {
-				resultado ++;
+		for (Integer item : itens.keySet()) {
+			if (itens.get(item).getEstado().equals("PENDENTE")) {
+				resultado++;
 			}
 		}
 		return resultado;
@@ -137,22 +131,22 @@ public class Atividade {
 	 */
 	public int getItensRealizados() {
 		int resultado = 0;
-		for(Integer item : itens.keySet()) {
-			if(itens.get(item).getEstado().equals("REALIZADO")) {
-				resultado ++;
+		for (Integer item : itens.keySet()) {
+			if (itens.get(item).getEstado().equals("REALIZADO")) {
+				resultado++;
 			}
 		}
 		return resultado;
 	}
-	
+
 	public String getId() {
 		return id;
 	}
-	
+
 	public String getDescricao() {
 		return this.descricao;
 	}
-	
+
 	public String getNivelRisco() {
 		return this.nivelRisco.getRisco();
 	}
@@ -162,8 +156,8 @@ public class Atividade {
 	}
 
 	/**
-	 * Retorna a representacao toString de Atividade no formato:
-	 * DESCRICAO (NIVELRISCO - DESCRICAORISCO)
+	 * Retorna a representacao toString de Atividade no formato: DESCRICAO
+	 * (NIVELRISCO - DESCRICAORISCO)
 	 * 
 	 * @return e retornado a representacao toString de Atividade.
 	 */
@@ -171,11 +165,11 @@ public class Atividade {
 	public String toString() {
 		String resultado = String.format("%s (%s - %s)", getDescricao(), getNivelRisco(), getDescricaoRisco());
 		Iterator<Item> it = itens.values().iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			Item item = it.next();
 			resultado += String.format(" | %s - %s", item.getEstado(), item.getNome());
 		}
-		
+
 		return resultado;
 	}
 
@@ -204,41 +198,63 @@ public class Atividade {
 		return true;
 	}
 
+	/**
+	 * Metodo para executar uma atividade
+	 * 
+	 * @param item    item da atvidade
+	 * @param duracao duracao da atividade
+	 */
 	public void executaAtividade(int item, int duracao) {
-		if(!itens.containsKey(item)){
+		if (!itens.containsKey(item)) {
 			throw new IllegalArgumentException("Item nao encontrado.");
 		}
-		if(itens.get(item).getEstado().equals("REALIZADO")) {
+		if (itens.get(item).getEstado().equals("REALIZADO")) {
 			throw new IllegalArgumentException("Item ja executado.");
 		}
 		itens.get(item).setEstado("REALIZADO");
 		this.periodo += duracao;
 	}
 
+	/**
+	 * Metodo para cadastrar um resultado
+	 * 
+	 * @param resultado resultado que sera cadastrado
+	 * @return retorna a posicao do resultado
+	 */
 	public int cadastraResultado(String resultado) {
 		this.resultados.add(resultado);
 		return resultados.size();
 	}
 
+	/**
+	 * Metodo para remover um resultado
+	 * 
+	 * @param numeroResultado numer do resultado
+	 * @return retorna true caso seja removido, false caso nao seja
+	 */
 	public boolean removeResultado(int numeroResultado) {
-		if(numeroResultado > resultados.size()) {
+		if (numeroResultado > resultados.size()) {
 			throw new IllegalArgumentException("Resultado nao encontrado.");
 		}
-		if(resultados.get(numeroResultado-1) == null) {
+		if (resultados.get(numeroResultado - 1) == null) {
 			return false;
 		}
-		resultados.set(numeroResultado-1, null);
+		resultados.set(numeroResultado - 1, null);
 		return true;
 	}
 
+	/**
+	 * Metodo para listar os resultados
+	 * 
+	 * @return retorna uma string com a representacao dos resultados
+	 */
 	public String listaResultados() {
-		String saida ="";
+		String saida = "";
 		for (int i = 0; i < resultados.size(); i++) {
-			if(resultados.get(i) != null) {
-				if(i == resultados.size()-1) {
+			if (resultados.get(i) != null) {
+				if (i == resultados.size() - 1) {
 					saida += resultados.get(i);
-				}
-				else {
+				} else {
 					saida += resultados.get(i) + " | ";
 				}
 			}
@@ -246,6 +262,11 @@ public class Atividade {
 		return saida;
 	}
 
+	/**
+	 * Metodo para pegar a duracao de uma atividade
+	 * 
+	 * @return retorna a duracao da atividade
+	 */
 	public int getDuracao() {
 		return this.periodo;
 	}

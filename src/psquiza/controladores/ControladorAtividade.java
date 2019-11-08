@@ -2,7 +2,6 @@ package psquiza.controladores;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -233,6 +232,13 @@ public class ControladorAtividade {
 		return atividades.get(codigoAtividade);
 	}
 
+	/**
+	 * Metodo que executa uma atividade
+	 * 
+	 * @param codigoAtividade codigo da atividae
+	 * @param item            item da atividade
+	 * @param duracao         duracao da execucao da atividade
+	 */
 	public void executaAtividade(String codigoAtividade, int item, int duracao) {
 		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		Util.validaNumero(item, "Item nao pode ser nulo ou negativo.");
@@ -241,32 +247,58 @@ public class ControladorAtividade {
 		atividades.get(codigoAtividade).executaAtividade(item, duracao);
 	}
 
+	/**
+	 * Metodo que cadastra um resultado
+	 * 
+	 * @param codigoAtividade codigo da atividade
+	 * @param resultado       resultado que sera cadastrado
+	 * @return retorna um inteiro representando o numero do resultado
+	 */
 	public int cadastraResultado(String codigoAtividade, String resultado) {
 		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		Util.validaAtributo(resultado, "Resultado nao pode ser nulo ou vazio.");
 		return atividades.get(codigoAtividade).cadastraResultado(resultado);
 	}
 
+	/**
+	 * Metodo que remove um resultado de uma atividade
+	 * 
+	 * @param codigoAtividade codigo da atividade
+	 * @param numeroResultado numero do resultado
+	 * @return retorna true caso seja removido, false caso nao seja
+	 */
 	public boolean removeResultado(String codigoAtividade, int numeroResultado) {
 		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		Util.validaNumero(numeroResultado, "numeroResultado nao pode ser nulo ou negativo.");
-		if(!atividades.containsKey(codigoAtividade)) {
+		if (!atividades.containsKey(codigoAtividade)) {
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		}
 		return atividades.get(codigoAtividade).removeResultado(numeroResultado);
 	}
 
+	/**
+	 * Metodo que lista os resultados de uma atividade
+	 * 
+	 * @param codigoAtividade codigo da atividade
+	 * @return retorna a representacao dos resultados
+	 */
 	public String listaResultados(String codigoAtividade) {
 		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
-		if(!atividades.containsKey(codigoAtividade)) {
+		if (!atividades.containsKey(codigoAtividade)) {
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		}
 		return atividades.get(codigoAtividade).listaResultados();
 	}
 
+	/**
+	 * Metodo que pega a duracao de uma atividade
+	 * 
+	 * @param codigoAtividade codigo da atividade
+	 * @return retorna a duracao da atividade
+	 */
 	public int getDuracao(String codigoAtividade) {
 		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
-		if(!atividades.containsKey(codigoAtividade)) {
+		if (!atividades.containsKey(codigoAtividade)) {
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		}
 		return atividades.get(codigoAtividade).getDuracao();

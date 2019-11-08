@@ -417,6 +417,13 @@ public class ControladorPesquisa {
 		return listagem;
 	}
 
+	/**
+	 * Metodo que associa uma atividade a uma pesquisa
+	 * 
+	 * @param codigoPesquisa codigo da pesquisa
+	 * @param atividade      atividade que seja associada
+	 * @return retorna true caso a atividade seja associada, false caso nao seja
+	 */
 	public boolean associaAtividade(String codigoPesquisa, Atividade atividade) {
 		Util.validaAtributo(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
 		if (!pesquisas.containsKey(codigoPesquisa)) {
@@ -429,6 +436,13 @@ public class ControladorPesquisa {
 		return pesquisas.get(codigoPesquisa).associaAtividade(atividade);
 	}
 
+	/**
+	 * Metodo que desassocia uma atividade a uma pesquisa
+	 * 
+	 * @param codigoPesquisa codigo da pesquisa
+	 * @param atividade      codigo da atividade
+	 * @return retorna true caso a atividade seja removida, falso caso nao seja
+	 */
 	public boolean desassociaAtividade(String codigoPesquisa, Atividade atividade) {
 		Util.validaAtributo(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
 		if (!pesquisas.containsKey(codigoPesquisa)) {
