@@ -36,11 +36,6 @@ public class Professor implements Especialidade {
 	}
 
 	@Override
-	public String getFuncao() {
-		return "Professor";
-	}
-
-	@Override
 	public void setAtributo(String atributo, String novo) {
 		
 		switch (atributo) {

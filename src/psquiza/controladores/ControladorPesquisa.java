@@ -97,7 +97,7 @@ public class ControladorPesquisa {
 				throw new IllegalArgumentException("Formato do campo de interesse invalido.");
 			} else {
 				for (String campo : campos) {
-					if (campo.trim().isEmpty() || campo.trim().length() < 3) {
+					if (campo.trim().length() < 3) {
 						throw new IllegalArgumentException("Formato do campo de interesse invalido.");
 					}
 				}
