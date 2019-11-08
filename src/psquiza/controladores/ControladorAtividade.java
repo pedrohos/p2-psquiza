@@ -240,4 +240,35 @@ public class ControladorAtividade {
 
 		atividades.get(codigoAtividade).executaAtividade(item, duracao);
 	}
+
+	public int cadastraResultado(String codigoAtividade, String resultado) {
+		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+		Util.validaAtributo(resultado, "Resultado nao pode ser nulo ou vazio.");
+		return atividades.get(codigoAtividade).cadastraResultado(resultado);
+	}
+
+	public boolean removeResultado(String codigoAtividade, int numeroResultado) {
+		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+		Util.validaNumero(numeroResultado, "numeroResultado nao pode ser nulo ou negativo.");
+		if(!atividades.containsKey(codigoAtividade)) {
+			throw new IllegalArgumentException("Atividade nao encontrada");
+		}
+		return atividades.get(codigoAtividade).removeResultado(numeroResultado);
+	}
+
+	public String listaResultados(String codigoAtividade) {
+		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+		if(!atividades.containsKey(codigoAtividade)) {
+			throw new IllegalArgumentException("Atividade nao encontrada");
+		}
+		return atividades.get(codigoAtividade).listaResultados();
+	}
+
+	public int getDuracao(String codigoAtividade) {
+		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+		if(!atividades.containsKey(codigoAtividade)) {
+			throw new IllegalArgumentException("Atividade nao encontrada");
+		}
+		return atividades.get(codigoAtividade).getDuracao();
+	}
 }

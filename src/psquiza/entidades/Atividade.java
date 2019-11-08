@@ -64,6 +64,11 @@ public class Atividade {
 	 * Armazena um conjunto ordenado de itens que compoem a atividade.
 	 */
 	private LinkedHashMap<Integer,Item> itens;
+	
+	/**
+	 * Armazena um conjunto ordenados de resultados que compoem a atividade.
+	 */
+	private List<String> resultados;
 
 	/**
 	 * Constroi um nova atividade, validando se os parametros passados
@@ -92,6 +97,7 @@ public class Atividade {
 		this.descricaoRisco = descricaoRisco;
 		this.id = id;
 		this.itens = new LinkedHashMap<>();
+		this.resultados = new ArrayList<>();
 	}
 
 	/**
@@ -138,7 +144,7 @@ public class Atividade {
 		}
 		return resultado;
 	}
-
+	
 	public String getId() {
 		return id;
 	}
@@ -146,7 +152,7 @@ public class Atividade {
 	public String getDescricao() {
 		return this.descricao;
 	}
-
+	
 	public String getNivelRisco() {
 		return this.nivelRisco.getRisco();
 	}
@@ -207,5 +213,40 @@ public class Atividade {
 		}
 		itens.get(item).setEstado("REALIZADO");
 		this.periodo += duracao;
+	}
+
+	public int cadastraResultado(String resultado) {
+		this.resultados.add(resultado);
+		return resultados.size();
+	}
+
+	public boolean removeResultado(int numeroResultado) {
+		if(numeroResultado > resultados.size()) {
+			throw new IllegalArgumentException("Resultado nao encontrado.");
+		}
+		if(resultados.get(numeroResultado-1) == null) {
+			return false;
+		}
+		resultados.set(numeroResultado-1, null);
+		return true;
+	}
+
+	public String listaResultados() {
+		String saida ="";
+		for (int i = 0; i < resultados.size(); i++) {
+			if(resultados.get(i) != null) {
+				if(i == resultados.size()-1) {
+					saida += resultados.get(i);
+				}
+				else {
+					saida += resultados.get(i) + " | ";
+				}
+			}
+		}
+		return saida;
+	}
+
+	public int getDuracao() {
+		return this.periodo;
 	}
 }

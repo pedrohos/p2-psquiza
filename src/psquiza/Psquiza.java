@@ -276,6 +276,23 @@ public class Psquiza {
 	public String listaPesquisadores(String tipo) {
 		return sistema.listaPesquisadores(tipo);
 	}
+	
+	
+	public int cadastraResultado(String codigoAtividade, String resultado) {
+		return sistema.cadastraResultado(codigoAtividade, resultado);
+	}
+	
+	public boolean removeResultado(String codigoAtividade, int numeroResultado) {
+		return sistema.removeResultado(codigoAtividade, numeroResultado);
+	}
+	
+	public String listaResultados(String codigoAtividade) {
+		return sistema.listaResultados(codigoAtividade);
+	}
+	
+	public int getDuracao(String codigoAtividade) {
+		return sistema.getDuracao(codigoAtividade);
+	}
 
 	public static void main(String[] args) {
 		args = new String[] { "psquiza.Psquiza", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",

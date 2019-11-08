@@ -202,9 +202,9 @@ public class Sistema {
 		String listagem = String.format("%s | %s | %s | %s | %s", controladorPesquisa.buscaPesquisa(termo),
 				controladorPesquisador.buscaPesquisador(termo), controladorMetas.buscaProblema(termo),
 				controladorMetas.buscaObjetivo(termo), controladorAtividade.buscaAtividade(termo));
-		listagem = listagem.replace("| ⠀ ", "");
-		listagem = listagem.replace("⠀ | ", "");
-		listagem = listagem.replace("⠀", "");
+		listagem = listagem.replace("| â € ", "");
+		listagem = listagem.replace("â € | ", "");
+		listagem = listagem.replace("â €", "");
 
 		if (listagem.trim().isEmpty()) {
 			throw new NoSuchElementException("Nenhum resultado encontrado");
@@ -271,16 +271,16 @@ public class Sistema {
 
 	/**
 	 * 
-	 * Recebe uma pesquisa que será associada ao pesquisador passado. Lanca erros em
-	 * caso da pesquisa não existir ou estar desativada e ainda se os parametros
-	 * recebios forme nulos, vazios ou com formato inválido. Uma pesquisa é
-	 * associada quando o pesquisador ainda não tem aquela pesquisa em seu array e
-	 * não é associada caso a pesquisa já exista no array.
+	 * Recebe uma pesquisa que serÃ¡ associada ao pesquisador passado. Lanca erros em
+	 * caso da pesquisa nÃ£o existir ou estar desativada e ainda se os parametros
+	 * recebios forme nulos, vazios ou com formato invÃ¡lido. Uma pesquisa Ã©
+	 * associada quando o pesquisador ainda nÃ£o tem aquela pesquisa em seu array e
+	 * nÃ£o Ã© associada caso a pesquisa jÃ¡ exista no array.
 	 * 
 	 * @param idPesquisa       pesquisa que sera adicionada no pesquisador.
-	 * @param emailPesquisador email do pesquisador em que a pesquisa será
+	 * @param emailPesquisador email do pesquisador em que a pesquisa serÃ¡
 	 *                         adicionada.
-	 * @return (true) caso a pesquisa seja associada e (false) caso não possa
+	 * @return (true) caso a pesquisa seja associada e (false) caso nÃ£o possa
 	 *         ocorrer a associacao.
 	 */
 	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
@@ -289,16 +289,16 @@ public class Sistema {
 	}
 
 	/**
-	 * Recebe uma pesquisa que será desassociada do pesquisador passado. Lanca erros
-	 * em caso da pesquisa não existir ou estar desativada e ainda se os parametros
-	 * recebios forem nulos, vazios ou com formato inválido. Uma pesquisa é
-	 * desassociada quando o pesquisador tem aquela pesquisa em seu array e não é
-	 * desassociada caso a pesquisa não exista no array.
+	 * Recebe uma pesquisa que sera desassociada do pesquisador passado. Lanca erros
+	 * em caso da pesquisa nao existir ou estar desativada e ainda se os parametros
+	 * recebios forem nulos, vazios ou com formato invalido. Uma pesquisa Ã©
+	 * desassociada quando o pesquisador tem aquela pesquisa em seu array e nÃ£o Ã©
+	 * desassociada caso a pesquisa nao exista no array.
 	 * 
 	 * @param idPesquisa       pesquisa que sera adicionada no pesquisador.
-	 * @param emailPesquisador email do pesquisador em que a pesquisa será
+	 * @param emailPesquisador email do pesquisador em que a pesquisa serÃ¡
 	 *                         adicionada.
-	 * @return (true) caso a pesquisa seja desassociada e (false) caso não possa
+	 * @return (true) caso a pesquisa seja desassociada e (false) caso nÃ£o possa
 	 *         ocorrer a desassociacao.
 	 */
 	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
@@ -310,7 +310,7 @@ public class Sistema {
 	 * Cadastra a especialidade de Professora em uma Pesquisadora, que como novas
 	 * caracteristicas tem uma formacao, uma unidade de alocacao e uma data. A
 	 * funcao lanca erros caso os parametros recebidos sejam nulos, vazios ou
-	 * invalidos e também caso a pesquisadora nao exista ou sua funcao nao seja
+	 * invalidos e tambÃ©m caso a pesquisadora nao exista ou sua funcao nao seja
 	 * professora.
 	 * 
 	 * @param email    referencia a pesquisadora a ser cadastrada as especialidades
@@ -326,7 +326,7 @@ public class Sistema {
 	 * Cadastra a especialidade de Aluna em uma Pesquisadora, que como novas
 	 * caracteristicas tem um semestr e um indice de eficiencia academica. A funcao
 	 * lanca erros caso os parametros recebidos sejam nulos, vazios ou invalidos e
-	 * também caso a pesquisadora nao exista ou sua funcao nao seja aluna.
+	 * tambÃ©m caso a pesquisadora nao exista ou sua funcao nao seja aluna.
 	 * 
 	 * @param email    email que identifica a pesquisadora aluna.
 	 * @param semestre semestre de ingresso da aluna.
@@ -337,7 +337,7 @@ public class Sistema {
 	}
 
 	/**
-	 * Lista pesquisadores de um mesmo tipo, o tipo é recebido como parametro e pode
+	 * Lista pesquisadores de um mesmo tipo, o tipo Ã© recebido como parametro e pode
 	 * ser "EXTERNO", "ALUNA" ou "PROFESSORA". Lanca erros casos o tipo passado seja
 	 * vazio, nulo o invalido (diferente dos tipos existentes). Retorna uma String
 	 * que contem a representacao em String dos pesquisadores.
@@ -347,5 +347,21 @@ public class Sistema {
 	 */
 	public String listaPesquisadores(String tipo) {
 		return controladorPesquisador.listaPesquisadores(tipo);
+	}
+
+	public int cadastraResultado(String codigoAtividade, String resultado) {
+		return controladorAtividade.cadastraResultado(codigoAtividade, resultado);
+	}
+
+	public boolean removeResultado(String codigoAtividade, int numeroResultado) {
+		return controladorAtividade.removeResultado(codigoAtividade, numeroResultado);
+	}
+
+	public String listaResultados(String codigoAtividade) {
+		return controladorAtividade.listaResultados(codigoAtividade);
+	}
+
+	public int getDuracao(String codigoAtividade) {
+		return controladorAtividade.getDuracao(codigoAtividade);
 	}
 }
