@@ -117,7 +117,7 @@ public class ControladorPesquisa {
 	public String cadastraPesquisa(String descricao, String campoDeInteresse) {
 		Util.validaAtributo(descricao, "Descricao nao pode ser nula ou vazia.");
 		validaCampoDeInteresse(campoDeInteresse);
-		
+
 		String codigo = geraCodigo(pesquisas, campoDeInteresse);
 		pesquisas.put(codigo, new Pesquisa(descricao, campoDeInteresse, codigo));
 		return codigo;
@@ -189,16 +189,16 @@ public class ControladorPesquisa {
 		existePesquisa(codigo);
 		return pesquisas.get(codigo).toString();
 	}
-	
+
 	public Pesquisa getPesquisa(String codigo) {
 		Util.validaAtributo(codigo, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		existePesquisa(codigo);
-		if(pesquisas.get(codigo).ehAtiva()) {
+		if (pesquisas.get(codigo).ehAtiva()) {
 			return pesquisas.get(codigo);
-		}else {
+		} else {
 			throw new NullPointerException("Pesquisa desativada.");
 		}
-		
+
 	}
 
 	/**
@@ -219,19 +219,18 @@ public class ControladorPesquisa {
 	 * Associa um problema a uma pesquisa e retorna se a operacao foi efetuada com
 	 * sucesso ou nao.
 	 * 
-	 * Caso o id da pesquisa seja nulo ou vazio sera lancado um IllegalArgumentException:
-	 * "Campo idPesquisa nao pode ser nulo ou vazio."
-	 * Caso o id do problema seja nulo ou vazio sera lancado um IllegalArgumentException:
-	 * "Campo idProblema nao pode ser nulo ou vazio."
-	 * Caso o id da pesquisa nao remeta a nenhuma pesquisa sera lancado um IllegalArgumentException:
-	 * "Pesquisa nao encontrada."
-	 * Caso a pesquisa nao esteja ativa sera lancado um IllegalArgumentException:
-	 * "Pesquisa desativada."
+	 * Caso o id da pesquisa seja nulo ou vazio sera lancado um
+	 * IllegalArgumentException: "Campo idPesquisa nao pode ser nulo ou vazio." Caso
+	 * o id do problema seja nulo ou vazio sera lancado um IllegalArgumentException:
+	 * "Campo idProblema nao pode ser nulo ou vazio." Caso o id da pesquisa nao
+	 * remeta a nenhuma pesquisa sera lancado um IllegalArgumentException: "Pesquisa
+	 * nao encontrada." Caso a pesquisa nao esteja ativa sera lancado um
+	 * IllegalArgumentException: "Pesquisa desativada."
 	 * 
 	 * @param idPesquisa e o id que remete a pesquisa.
 	 * @param idProblema e o id que remete ao problema.
-	 * @return e retornado um boolean indicando se a operacao foi efetuada com sucesso
-	 * ou nao.
+	 * @return e retornado um boolean indicando se a operacao foi efetuada com
+	 *         sucesso ou nao.
 	 */
 	public boolean associaProblema(String idPesquisa, String idProblema) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
@@ -242,24 +241,23 @@ public class ControladorPesquisa {
 
 		return this.pesquisas.get(idPesquisa).associaProblema(idProblema);
 	}
-	
+
 	/**
-	 * Desassocia um problema a uma pesquisa e retorna se a operacao foi efetuada com
-	 * sucesso ou nao.
+	 * Desassocia um problema a uma pesquisa e retorna se a operacao foi efetuada
+	 * com sucesso ou nao.
 	 * 
-	 * Caso o id da pesquisa seja nulo ou vazio sera lancado um IllegalArgumentException:
-	 * "Campo idPesquisa nao pode ser nulo ou vazio."
-	 * Caso o id do problema seja nulo ou vazio sera lancado um IllegalArgumentException:
-	 * "Campo idProblema nao pode ser nulo ou vazio."
-	 * Caso o id da pesquisa nao remeta a nenhuma pesquisa sera lancado um IllegalArgumentException:
-	 * "Pesquisa nao encontrada."
-	 * Caso a pesquisa nao esteja ativa sera lancado um IllegalArgumentException:
-	 * "Pesquisa desativada."
+	 * Caso o id da pesquisa seja nulo ou vazio sera lancado um
+	 * IllegalArgumentException: "Campo idPesquisa nao pode ser nulo ou vazio." Caso
+	 * o id do problema seja nulo ou vazio sera lancado um IllegalArgumentException:
+	 * "Campo idProblema nao pode ser nulo ou vazio." Caso o id da pesquisa nao
+	 * remeta a nenhuma pesquisa sera lancado um IllegalArgumentException: "Pesquisa
+	 * nao encontrada." Caso a pesquisa nao esteja ativa sera lancado um
+	 * IllegalArgumentException: "Pesquisa desativada."
 	 * 
 	 * @param idPesquisa e o id que remete a pesquisa.
 	 * @param idProblema e o id que remete ao problema.
-	 * @return e retornado um boolean indicando se a operacao foi efetuada com sucesso
-	 * ou nao.
+	 * @return e retornado um boolean indicando se a operacao foi efetuada com
+	 *         sucesso ou nao.
 	 */
 	public boolean desassociaProblema(String idPesquisa, String idProblema) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
@@ -275,19 +273,18 @@ public class ControladorPesquisa {
 	 * Associa um objetivo a uma pesquisa e retorna se a operacao foi efetuada com
 	 * sucesso ou nao.
 	 * 
-	 * Caso o id da pesquisa seja nulo ou vazio sera lancado um IllegalArgumentException:
-	 * "Campo idPesquisa nao pode ser nulo ou vazio."
-	 * Caso o id do objetivo seja nulo ou vazio sera lancado um IllegalArgumentException:
-	 * "Campo idObjetivo nao pode ser nulo ou vazio."
-	 * Caso o id da pesquisa nao remeta a nenhuma pesquisa sera lancado um IllegalArgumentException:
-	 * "Pesquisa nao encontrada."
-	 * Caso a pesquisa nao esteja ativa sera lancado um IllegalArgumentException:
-	 * "Pesquisa desativada."
+	 * Caso o id da pesquisa seja nulo ou vazio sera lancado um
+	 * IllegalArgumentException: "Campo idPesquisa nao pode ser nulo ou vazio." Caso
+	 * o id do objetivo seja nulo ou vazio sera lancado um IllegalArgumentException:
+	 * "Campo idObjetivo nao pode ser nulo ou vazio." Caso o id da pesquisa nao
+	 * remeta a nenhuma pesquisa sera lancado um IllegalArgumentException: "Pesquisa
+	 * nao encontrada." Caso a pesquisa nao esteja ativa sera lancado um
+	 * IllegalArgumentException: "Pesquisa desativada."
 	 * 
 	 * @param idPesquisa e o id que remete a pesquisa.
 	 * @param idObjetivo e o id que remete ao problema.
-	 * @return e retornado um boolean indicando se a operacao foi efetuada com sucesso
-	 * ou nao.
+	 * @return e retornado um boolean indicando se a operacao foi efetuada com
+	 *         sucesso ou nao.
 	 */
 	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
@@ -298,24 +295,23 @@ public class ControladorPesquisa {
 
 		return this.pesquisas.get(idPesquisa).associaObjetivo(idObjetivo);
 	}
-	
+
 	/**
 	 * Associa um objetivo a uma pesquisa e retorna se a operacao foi efetuada com
 	 * sucesso ou nao.
 	 * 
-	 * Caso o id da pesquisa seja nulo ou vazio sera lancado um IllegalArgumentException:
-	 * "Campo idPesquisa nao pode ser nulo ou vazio."
-	 * Caso o id do objetivo seja nulo ou vazio sera lancado um IllegalArgumentException:
-	 * "Campo idObjetivo nao pode ser nulo ou vazio."
-	 * Caso o id da pesquisa nao remeta a nenhuma pesquisa sera lancado um IllegalArgumentException:
-	 * "Pesquisa nao encontrada."
-	 * Caso a pesquisa nao esteja ativa sera lancado um IllegalArgumentException:
-	 * "Pesquisa desativada."
+	 * Caso o id da pesquisa seja nulo ou vazio sera lancado um
+	 * IllegalArgumentException: "Campo idPesquisa nao pode ser nulo ou vazio." Caso
+	 * o id do objetivo seja nulo ou vazio sera lancado um IllegalArgumentException:
+	 * "Campo idObjetivo nao pode ser nulo ou vazio." Caso o id da pesquisa nao
+	 * remeta a nenhuma pesquisa sera lancado um IllegalArgumentException: "Pesquisa
+	 * nao encontrada." Caso a pesquisa nao esteja ativa sera lancado um
+	 * IllegalArgumentException: "Pesquisa desativada."
 	 * 
 	 * @param idPesquisa e o id que remete a pesquisa.
 	 * @param idObjetivo e o id que remete ao problema.
-	 * @return e retornado um boolean indicando se a operacao foi efetuada com sucesso
-	 * ou nao.
+	 * @return e retornado um boolean indicando se a operacao foi efetuada com
+	 *         sucesso ou nao.
 	 */
 	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
@@ -328,11 +324,11 @@ public class ControladorPesquisa {
 	}
 
 	/**
-	 * Define o criterio de ordenacao a partir da string recebida,
-	 * ordena e retorna as pesquisas atuais com o criterio definido.
+	 * Define o criterio de ordenacao a partir da string recebida, ordena e retorna
+	 * as pesquisas atuais com o criterio definido.
 	 *
-	 * Caso a ordenacao nao exista sera lancado um IllegalArgumentException: 
-	 * "Valor invalido da ordem"
+	 * Caso a ordenacao nao exista sera lancado um IllegalArgumentException: "Valor
+	 * invalido da ordem"
 	 * 
 	 * @param ordem e o tipo de ordenacao.
 	 * @return e retornado a lista de pesquisas ordenadas.
@@ -340,51 +336,60 @@ public class ControladorPesquisa {
 	private ArrayList<Pesquisa> ordenaPesquisas(String ordem) {
 		OrdenaPesquisa criterio;
 		switch (ordem) {
-			case "PROBLEMA":
-				criterio = new CriterioProblema();
-				break;
-			case "OBJETIVOS":
-				criterio = new CriterioObjetivo();
-				break;
-			case "PESQUISA":
-				criterio = new CriterioPesquisa();
-				break;		
-			default:
-				throw new IllegalArgumentException("Valor invalido da ordem");
+		case "PROBLEMA":
+			criterio = new CriterioProblema();
+			break;
+		case "OBJETIVOS":
+			criterio = new CriterioObjetivo();
+			break;
+		case "PESQUISA":
+			criterio = new CriterioPesquisa();
+			break;
+		default:
+			throw new IllegalArgumentException("Valor invalido da ordem");
 		}
-		
+
 		ArrayList<Pesquisa> pesquisasOrdenadas = new ArrayList<>();
 		pesquisasOrdenadas.addAll(this.pesquisas.values());
-		
+
 		Collections.sort(pesquisasOrdenadas, criterio);
 		return pesquisasOrdenadas;
 	}
-	
+
 	/**
 	 * Ordena as pesquisas a partir de uma ordem e lista elas no seguinte formato:
-	 * "CODIGO1 - DESCRICAO1 - CAMPODEINTERESSE1 | "CODIGOX - DESCRICAOX - CAMPODEINTERESSEX"
+	 * "CODIGO1 - DESCRICAO1 - CAMPODEINTERESSE1 | "CODIGOX - DESCRICAOX -
+	 * CAMPODEINTERESSEX"
 	 * 
 	 * @param ordem e o tipo de ordenacao.
 	 * @return e retornado a lista ordenada de pesquisas no formato acima.
 	 */
 	public String listaPesquisas(String ordem) {
 		ArrayList<Pesquisa> pesquisasOrdenadas = ordenaPesquisas(ordem);
-		
+
 		String resultado = "";
 		Iterator<Pesquisa> it = pesquisasOrdenadas.iterator();
 		while (it.hasNext()) {
 			Pesquisa pesquisa = it.next();
 			if (it.hasNext()) {
 				resultado += String.format("%s - %s - %s", pesquisa.getCodigo(), pesquisa.getDescricao(),
-				pesquisa.getCampoDeInteresse()) + " | ";
+						pesquisa.getCampoDeInteresse()) + " | ";
 			} else {
 				resultado += String.format("%s - %s - %s", pesquisa.getCodigo(), pesquisa.getDescricao(),
-				pesquisa.getCampoDeInteresse());
+						pesquisa.getCampoDeInteresse());
 			}
 		}
 		return resultado;
 	}
 
+	/**
+	 * Metodo que busca na colecao de pesquisas que possuam o termo informado na
+	 * descricao e nos campos de interesses.
+	 * 
+	 * @param termo termo a ser buscado.
+	 * 
+	 * @return lista de resultados.
+	 */
 	public String buscaPesquisa(String termo) {
 		String listagem = "";
 		List<Pesquisa> aux = pesquisas.values().stream().collect(Collectors.toList());
@@ -405,9 +410,10 @@ public class ControladorPesquisa {
 				}
 			}
 		}
-		
-		if (listagem.isEmpty()) return "⠀";
-		
+
+		if (listagem.isEmpty())
+			return "⠀";
+
 		return listagem;
 	}
 
@@ -419,7 +425,7 @@ public class ControladorPesquisa {
 		if (!pesquisas.get(codigoPesquisa).ehAtiva()) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
 		}
-		
+
 		return pesquisas.get(codigoPesquisa).associaAtividade(atividade);
 	}
 
@@ -431,7 +437,7 @@ public class ControladorPesquisa {
 		if (!pesquisas.get(codigoPesquisa).ehAtiva()) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
 		}
-		
+
 		return pesquisas.get(codigoPesquisa).desassociaAtividade(atividade);
 	}
 }

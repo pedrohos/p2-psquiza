@@ -188,6 +188,14 @@ public class Sistema {
 		return controladorMetas.desassociaPesquisa(idPesquisa, idObjetivo);
 	}
 
+	/**
+	 * Metodo responsavel por busca por todos os objetos do sistema que possuam o
+	 * termo informado.
+	 * 
+	 * @param termo termo a ser buscado.
+	 * 
+	 * @return lista de todos os objetos encontrados.
+	 */
 	public String busca(String termo) {
 		Util.validaAtributo(termo, "Campo termo nao pode ser nulo ou vazio.");
 
@@ -205,6 +213,15 @@ public class Sistema {
 		return listagem;
 	}
 
+	/**
+	 * Metodo que busca um objeto especifico, informado atravez do indice
+	 * (numeroDoResultado) na busca pelo termo informado.
+	 * 
+	 * @param termo             termo a ser buscado no sistema.
+	 * @param numeroDoResultado numero do resultado da busca a ser retornado.
+	 * 
+	 * @return objeto encontrado.
+	 */
 	public String busca(String termo, int numeroDoResultado) {
 		Util.validaAtributo(termo, "Campo termo nao pode ser nulo ou vazio.");
 		if (numeroDoResultado < 0) {
@@ -220,6 +237,13 @@ public class Sistema {
 		return busca[numeroDoResultado - 1];
 	}
 
+	/**
+	 * Metodo que retorna o numero de resultados da busca pelo termo informado.
+	 * 
+	 * @param termo termo a ser buscado no sistema.
+	 * 
+	 * @return numero de resultados encontrados.
+	 */
 	public int contaResultadosBusca(String termo) {
 		Util.validaAtributo(termo, "Campo termo nao pode ser nulo ou vazio.");
 

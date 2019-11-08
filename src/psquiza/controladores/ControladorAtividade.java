@@ -2,13 +2,13 @@ package psquiza.controladores;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import psquiza.Util;
 import psquiza.entidades.Atividade;
 import psquiza.ordenacao.OrdenaAtividade;
-import psquiza.entidades.Atividade;
 
 /**
  * Representacao do gerenciador de Atividades no sistema.
@@ -178,6 +178,14 @@ public class ControladorAtividade {
 		return this.atividades.get(id).getItensRealizados();
 	}
 
+	/**
+	 * Metodo que busca na colecao de atividades que possuam o termo informado na
+	 * descricao e na descricao de risco.
+	 * 
+	 * @param termo termo a ser buscado.
+	 * 
+	 * @return lista de resultados.
+	 */
 	public String buscaAtividade(String termo) {
 		String listagem = "";
 		List<Atividade> aux = atividades.values().stream().collect(Collectors.toList());
@@ -198,29 +206,30 @@ public class ControladorAtividade {
 				}
 			}
 		}
-		
-		if (listagem.isEmpty()) return "⠀";
-		
+
+		if (listagem.isEmpty())
+			return "⠀";
+
 		return listagem;
 	}
-	
+
 	/**
 	 * Coleta uma atividade do mapa atividades a partir do codigo da atividade.
 	 * 
-	 * Caso o codigo da atividade seja vazio ou nulo sera lancado um IllegalArgumentException:
-	 * "Campo codigoAtividade nao pode ser nulo ou vazio."
-	 * Caso o codigo da atividade nao remeta a nenhuma atividade sera lancado um IllegalArgumentException:
-	 * "Atividade nao encontrada"
+	 * Caso o codigo da atividade seja vazio ou nulo sera lancado um
+	 * IllegalArgumentException: "Campo codigoAtividade nao pode ser nulo ou vazio."
+	 * Caso o codigo da atividade nao remeta a nenhuma atividade sera lancado um
+	 * IllegalArgumentException: "Atividade nao encontrada"
 	 * 
 	 * @param codigoAtividade
 	 * @return
 	 */
 	public Atividade getAtividade(String codigoAtividade) {
 		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
-		if(!atividades.containsKey(codigoAtividade)) {
+		if (!atividades.containsKey(codigoAtividade)) {
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		}
-		
+
 		return atividades.get(codigoAtividade);
 	}
 
@@ -228,7 +237,7 @@ public class ControladorAtividade {
 		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		Util.validaNumero(item, "Item nao pode ser nulo ou negativo.");
 		Util.validaNumero(duracao, "Duracao nao pode ser nula ou negativa.");
-		
+
 		atividades.get(codigoAtividade).executaAtividade(item, duracao);
 	}
 }

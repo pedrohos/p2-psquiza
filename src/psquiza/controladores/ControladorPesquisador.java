@@ -248,10 +248,12 @@ public class ControladorPesquisador {
 	}
 
 	/**
+	 * Metodo que busca na colecao de pesquisadores que possuam o termo informado na
+	 * biografia.
 	 * 
+	 * @param termo termo a ser buscado.
 	 * 
-	 * @param termo
-	 * @return
+	 * @return lista de resultados.
 	 */
 	public String buscaPesquisador(String termo) {
 		String listagem = "";

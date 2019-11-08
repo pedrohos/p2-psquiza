@@ -22,27 +22,27 @@ import psquiza.ordenacao.OrdenaProblema;
  *
  */
 public class ControladorMetas {
-	
+
 	/**
 	 * Estrutura para guardar os objetos do tipo problema do sistema
 	 */
 	private Map<String, Problema> problemas;
-	
+
 	/**
 	 * Estrutura para guardar os objetos do tipo objetivo do sistema
 	 */
 	private Map<String, Objetivo> objetivos;
-	
+
 	/**
 	 * Contador para gerar o id de um problema
 	 */
 	private int contadorProblema = 1;
-	
+
 	/**
 	 * COntador para gerar o id de um objetivo
 	 */
 	private int contadorObjetivo = 1;
-	
+
 	/**
 	 * Constroi um controlador de metas
 	 */
@@ -60,7 +60,7 @@ public class ControladorMetas {
 	public void cadastraProblema(String descricao, int viabilidade) {
 		Util.validaAtributo(descricao, "Campo descricao nao pode ser nulo ou vazio.");
 		Util.validarLimite(viabilidade, 1, 5, "Valor invalido de viabilidade.");
-		
+
 		String codigo = "P" + this.contadorProblema;
 		this.problemas.put(codigo, new Problema(descricao, viabilidade, codigo));
 		this.contadorProblema += 1;
@@ -79,7 +79,7 @@ public class ControladorMetas {
 		Util.validaAtributo(descricao, "Campo descricao nao pode ser nulo ou vazio.");
 		Util.validarLimite(aderencia, 1, 5, "Valor invalido de aderencia");
 		Util.validarLimite(viabilidade, 1, 5, "Valor invalido de viabilidade.");
-		
+
 		if (tipo.equals("GERAL") || tipo.equals("ESPECIFICO")) {
 			String codigo = "O" + contadorObjetivo;
 			this.objetivos.put(codigo, new Objetivo(tipo, descricao, aderencia, viabilidade, codigo));
@@ -99,7 +99,7 @@ public class ControladorMetas {
 		if (!problemas.containsKey(codigo)) {
 			throw new IllegalArgumentException("Problema nao encontrado");
 		}
-		
+
 		problemas.remove(codigo);
 	}
 
@@ -113,7 +113,7 @@ public class ControladorMetas {
 		if (!objetivos.containsKey(codigo)) {
 			throw new IllegalArgumentException("Objetivo nao encontrado");
 		}
-		
+
 		objetivos.remove(codigo);
 	}
 
@@ -127,7 +127,7 @@ public class ControladorMetas {
 		if (!problemas.containsKey(codigo)) {
 			throw new IllegalArgumentException("Problema nao encontrado");
 		}
-		
+
 		return problemas.get(codigo).toString();
 	}
 
@@ -141,37 +141,45 @@ public class ControladorMetas {
 		if (!objetivos.containsKey(codigo)) {
 			throw new IllegalArgumentException("Objetivo nao encontrado");
 		}
-		
+
 		return objetivos.get(codigo).toString();
 	}
-	
+
 	private boolean existeObjetivo(String codigo) {
-		for (Objetivo o: objetivos.values()) {
+		for (Objetivo o : objetivos.values()) {
 			if (o.getCodigo().equals(codigo)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	public boolean associaPesquisa(String idPesquisa, String idObjetivo) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
-		if(!existeObjetivo(idObjetivo))
+		if (!existeObjetivo(idObjetivo))
 			throw new IllegalArgumentException("Objetivo nao encontrado.");
-		
+
 		return this.objetivos.get(idObjetivo).associaPesquisa(idPesquisa);
 	}
 
 	public boolean desassociaPesquisa(String idPesquisa, String idObjetivo) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
-		if(!existeObjetivo(idObjetivo))
+		if (!existeObjetivo(idObjetivo))
 			throw new IllegalArgumentException("Objetivo nao encontrado.");
-		
+
 		return this.objetivos.get(idObjetivo).desassociaPesquisa(idPesquisa);
 	}
-	
+
+	/**
+	 * Metodo que busca na colecao de problemas que possuam o termo informado na
+	 * descricao.
+	 * 
+	 * @param termo termo a ser buscado.
+	 * 
+	 * @return lista de resultados.
+	 */
 	public String buscaProblema(String termo) {
 		String listagem = "";
 		List<Problema> aux = problemas.values().stream().collect(Collectors.toList());
@@ -185,12 +193,21 @@ public class ControladorMetas {
 				}
 			}
 		}
-		
-		if (listagem.isEmpty()) return "⠀";
-		
+
+		if (listagem.isEmpty())
+			return "⠀";
+
 		return listagem;
 	}
-	
+
+	/**
+	 * Metodo que busca na colecao de objetivos que possuam o termo informado na
+	 * descricao.
+	 * 
+	 * @param termo termo a ser buscado.
+	 * 
+	 * @return lista de resultados.
+	 */
 	public String buscaObjetivo(String termo) {
 		String listagem = "";
 		List<Objetivo> aux = objetivos.values().stream().collect(Collectors.toList());
@@ -204,9 +221,10 @@ public class ControladorMetas {
 				}
 			}
 		}
-		
-		if (listagem.isEmpty()) return "⠀";
-		
+
+		if (listagem.isEmpty())
+			return "⠀";
+
 		return listagem;
 	}
 }
