@@ -245,24 +245,82 @@ public class Sistema {
 		return controladorPesquisa.listaPesquisas(ordem);
 	}
 
+	/**
+	 * 
+	 * Recebe uma pesquisa que será associada ao pesquisador passado. Lanca erros em
+	 * caso da pesquisa não existir ou estar desativada e ainda se os parametros
+	 * recebios forme nulos, vazios ou com formato inválido. Uma pesquisa é
+	 * associada quando o pesquisador ainda não tem aquela pesquisa em seu array e
+	 * não é associada caso a pesquisa já exista no array.
+	 * 
+	 * @param idPesquisa       pesquisa que sera adicionada no pesquisador.
+	 * @param emailPesquisador email do pesquisador em que a pesquisa será
+	 *                         adicionada.
+	 * @return (true) caso a pesquisa seja associada e (false) caso não possa
+	 *         ocorrer a associacao.
+	 */
 	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
 		Pesquisa pesquisa = controladorPesquisa.getPesquisa(idPesquisa);
 		return controladorPesquisador.associaPesquisador(pesquisa, emailPesquisador);
 	}
 
+	/**
+	 * Recebe uma pesquisa que será desassociada do pesquisador passado. Lanca erros
+	 * em caso da pesquisa não existir ou estar desativada e ainda se os parametros
+	 * recebios forem nulos, vazios ou com formato inválido. Uma pesquisa é
+	 * desassociada quando o pesquisador tem aquela pesquisa em seu array e não é
+	 * desassociada caso a pesquisa não exista no array.
+	 * 
+	 * @param idPesquisa       pesquisa que sera adicionada no pesquisador.
+	 * @param emailPesquisador email do pesquisador em que a pesquisa será
+	 *                         adicionada.
+	 * @return (true) caso a pesquisa seja desassociada e (false) caso não possa
+	 *         ocorrer a desassociacao.
+	 */
 	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
 		Pesquisa pesquisa = controladorPesquisa.getPesquisa(idPesquisa);
 		return controladorPesquisador.desassociaPesquisador(pesquisa, emailPesquisador);
 	}
 
+	/**
+	 * Cadastra a especialidade de Professora em uma Pesquisadora, que como novas
+	 * caracteristicas tem uma formacao, uma unidade de alocacao e uma data. A
+	 * funcao lanca erros caso os parametros recebidos sejam nulos, vazios ou
+	 * invalidos e também caso a pesquisadora nao exista ou sua funcao nao seja
+	 * professora.
+	 * 
+	 * @param email    referencia a pesquisadora a ser cadastrada as especialidades
+	 * @param formacao formacao da pesquisadora professora
+	 * @param unidade  unidade de alocacao da professora
+	 * @param data     data data de contratacao
+	 */
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
 		controladorPesquisador.cadastraEspecialidadeProfessor(email, formacao, unidade, data);
 	}
 
+	/**
+	 * Cadastra a especialidade de Aluna em uma Pesquisadora, que como novas
+	 * caracteristicas tem um semestr e um indice de eficiencia academica. A funcao
+	 * lanca erros caso os parametros recebidos sejam nulos, vazios ou invalidos e
+	 * também caso a pesquisadora nao exista ou sua funcao nao seja aluna.
+	 * 
+	 * @param email    email que identifica a pesquisadora aluna.
+	 * @param semestre semestre de ingresso da aluna.
+	 * @param IEA      indice de eficiencia academica.
+	 */
 	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
 		controladorPesquisador.cadastraEspecialidadeAluno(email, semestre, IEA);
 	}
 
+	/**
+	 * Lista pesquisadores de um mesmo tipo, o tipo é recebido como parametro e pode
+	 * ser "EXTERNO", "ALUNA" ou "PROFESSORA". Lanca erros casos o tipo passado seja
+	 * vazio, nulo o invalido (diferente dos tipos existentes). Retorna uma String
+	 * que contem a representacao em String dos pesquisadores.
+	 * 
+	 * @param tipo tipo no qual vao ser listados os pesquisadores.
+	 * @return String com representacao em string dos pesquisadores.
+	 */
 	public String listaPesquisadores(String tipo) {
 		return controladorPesquisador.listaPesquisadores(tipo);
 	}

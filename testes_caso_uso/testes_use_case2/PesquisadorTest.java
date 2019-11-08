@@ -58,7 +58,7 @@ class PesquisadorTest {
 	void testSetBiografia() {
 		regina.setBiografia("A estudante mais linda de cc");
 		assertEquals(
-				"Regina Felipe (estudante) - A estudante mais linda de cc - regina.felip3e@ccc.ufcg - https://fotoRegina.com",
+				"Regina Felipe (Estudante) - A estudante mais linda de cc - regina.felip3e@ccc.ufcg - https://fotoRegina.com",
 				regina.toString());
 	}
 
@@ -96,14 +96,14 @@ class PesquisadorTest {
 	@Test
 	void testToString() {
 		assertEquals(
-				"Eniedson Junior (estudante) - Estudante de Computação - eniedson.junior@ccc.ufcg - https://foto.junio.com",
+				"Eniedson Junior (Estudante) - Estudante de Computação - eniedson.junior@ccc.ufcg - https://foto.junio.com",
 				junio.toString());
 		assertEquals(
-				"Regina Felipe (estudante) - Estudante de computacao - regina.felip3e@ccc.ufcg - https://fotoRegina.com",
+				"Regina Felipe (Estudante) - Estudante de computacao - regina.felip3e@ccc.ufcg - https://fotoRegina.com",
 				regina.toString());
-		assertEquals("Lucian julio (estudante) - Outro estudante - lucian.julio@ccc.ufcg - http://fotoLucian.com",
+		assertEquals("Lucian julio (Estudante) - Outro estudante - lucian.julio@ccc.ufcg - http://fotoLucian.com",
 				lucian.toString());
-		assertEquals("Pedro Henrique (estudante) - Estudante também - pedro.henrique@ccc.ufcg - https://foto.pedro.com",
+		assertEquals("Pedro Henrique (Estudante) - Estudante também - pedro.henrique@ccc.ufcg - https://foto.pedro.com",
 				pedro.toString());
 	}
 
