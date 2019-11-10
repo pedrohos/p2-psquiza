@@ -240,10 +240,8 @@ public class ControladorAtividade {
 	 * @param duracao         duracao da execucao da atividade
 	 */
 	public void executaAtividade(String codigoAtividade, int item, int duracao) {
-		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		Util.validaNumero(item, "Item nao pode ser nulo ou negativo.");
 		Util.validaNumero(duracao, "Duracao nao pode ser nula ou negativa.");
-
 		atividades.get(codigoAtividade).executaAtividade(item, duracao);
 	}
 

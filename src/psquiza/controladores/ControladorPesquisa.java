@@ -454,4 +454,20 @@ public class ControladorPesquisa {
 
 		return pesquisas.get(codigoPesquisa).desassociaAtividade(atividade);
 	}
+
+	/**
+	 * Metodo para verifica se uma ativiade esta associada a uma pesquisa
+	 * 
+	 * @param codigoAtividade codigo da atividade
+	 * @return retorna true se estiver associada, false caso nao esteja
+	 */
+	public boolean verificaAssosiacaoAtividade(String codigoAtividade) {
+		for (String chave : pesquisas.keySet()) {
+			Pesquisa p = pesquisas.get(chave);
+			if (p.verificaAssosiacaoAtividade(codigoAtividade)) {
+				return true;
+			}
+		}
+		throw new IllegalArgumentException("Atividade sem associacoes com pesquisas.");
+	}
 }

@@ -35,23 +35,23 @@ public class Pesquisa {
 	 * pesquisa ativada e (-1) para pesquisa desativada
 	 */
 	private boolean estado;
-	
+
 	private String problema;
 
 	private HashSet<String> objetivos;
-	
+
 	private HashSet<Atividade> atividades;
 
 	/**
 	 * Constroi uma pesquisa atraves da sua descricao, Campo de Interesse e codigo.
 	 * Inicializando o estado da pesquisa como ativo.
 	 * 
-	 * Caso a descricao da Pesquisa seja vazia ou nula, sera lancada um IllegalArgumentException:
-	 * "Campo descricao nao pode ser nulo ou vazio."
-	 * Caso o campo de interesse da Pesquisa seja vazio ou nulo, sera lancada um IllegalArgumentException:
-	 * "Campo interesse nao pode ser nulo ou vazio."
-	 * Caso o codigo da Pesquisa seja vazio ou nulo, sera lancada um IllegalArgumentException:
-	 * "Campo codigo nao pode ser nulo ou vazio."
+	 * Caso a descricao da Pesquisa seja vazia ou nula, sera lancada um
+	 * IllegalArgumentException: "Campo descricao nao pode ser nulo ou vazio." Caso
+	 * o campo de interesse da Pesquisa seja vazio ou nulo, sera lancada um
+	 * IllegalArgumentException: "Campo interesse nao pode ser nulo ou vazio." Caso
+	 * o codigo da Pesquisa seja vazio ou nulo, sera lancada um
+	 * IllegalArgumentException: "Campo codigo nao pode ser nulo ou vazio."
 	 * 
 	 * @param descricao      texto livre sobre a pesquisa realizada
 	 * @param campoInteresse areas para quais a pesquisa engloba
@@ -59,7 +59,7 @@ public class Pesquisa {
 	 */
 	public Pesquisa(String descricao, String campoInteresse, String codigo) {
 		Util.validaAtributo(descricao, "Campo descricao nao pode ser nulo ou vazio.");
-		Util.validaAtributo(campoInteresse, "Campo interesse nao pode ser nulo ou vazio."); 
+		Util.validaAtributo(campoInteresse, "Campo interesse nao pode ser nulo ou vazio.");
 		Util.validaAtributo(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 		this.descricao = descricao;
 		this.campoDeInteresse = campoInteresse;
@@ -161,26 +161,27 @@ public class Pesquisa {
 
 	public boolean associaProblema(String idProblema) {
 		Util.validaAtributo(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
-		if (this.problema.equals(idProblema)) return false;
-		
+		if (this.problema.equals(idProblema))
+			return false;
+
 		if (!this.problema.isEmpty())
 			throw new IllegalArgumentException("Pesquisa ja associada a um problema.");
-		
+
 		this.problema = idProblema;
 		return true;
 	}
 
 	public boolean desassociaProblema(String idProblema) {
 		Util.validaAtributo(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
-		
+
 		if (!this.problema.equals(idProblema))
 			return false;
 		this.problema = "";
 		return true;
 	}
-	
+
 	private boolean possuiObjetivo(String idObjetivo) {
-		for (String objetivo: objetivos) {
+		for (String objetivo : objetivos) {
 			if (objetivo.equals(idObjetivo)) {
 				return true;
 			}
@@ -190,27 +191,27 @@ public class Pesquisa {
 
 	public boolean associaObjetivo(String idObjetivo) {
 		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
-		
+
 		if (possuiObjetivo(idObjetivo))
 			return false;
-		
+
 		objetivos.add(idObjetivo);
 		return true;
 	}
-	
+
 	public boolean possuiProblema() {
 		if (!this.problema.equals("")) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public boolean desassociaObjetivo(String idObjetivo) {
 		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
-		
+
 		if (!possuiObjetivo(idObjetivo))
 			return false;
-		
+
 		objetivos.remove(idObjetivo);
 		return true;
 	}
@@ -264,22 +265,37 @@ public class Pesquisa {
 	}
 
 	public boolean associaAtividade(Atividade atividade) {
-		if(atividades.contains(atividade)) {
+		if (atividades.contains(atividade)) {
 			return false;
 		}
 		return atividades.add(atividade);
 	}
 
 	public boolean desassociaAtividade(Atividade atividade) {
-		if(!atividades.contains(atividade)) {
+		if (!atividades.contains(atividade)) {
 			return false;
 		}
 		return atividades.remove(atividade);
-		
+
 	}
-	
+
 	public int qtdObjetivos() {
 		return this.objetivos.size();
 	}
 
+	/**
+	 * Metodo que verfica se uma atividade esta associada a pesquisa
+	 * 
+	 * @param codigoAtividade codigo da atividade
+	 * @return retorna true se estiver associada a essa pesquisa, false caso nao
+	 *         esteja
+	 */
+	public boolean verificaAssosiacaoAtividade(String codigoAtividade) {
+		for (Atividade atividade : atividades) {
+			if (atividade.getId().equals(codigoAtividade)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

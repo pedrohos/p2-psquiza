@@ -318,8 +318,9 @@ public class Sistema {
 	 * @param duracao         duracao da execucao
 	 */
 	public void executaAtividade(String codigoAtividade, int item, int duracao) {
+		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+		controladorPesquisa.verificaAssosiacaoAtividade(codigoAtividade);
 		controladorAtividade.executaAtividade(codigoAtividade, item, duracao);
-
 	}
 
 	public String listaPesquisas(String ordem) {
