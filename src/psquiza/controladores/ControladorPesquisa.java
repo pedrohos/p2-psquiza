@@ -259,14 +259,13 @@ public class ControladorPesquisa {
 	 * @return e retornado um boolean indicando se a operacao foi efetuada com
 	 *         sucesso ou nao.
 	 */
-	public boolean desassociaProblema(String idPesquisa, String idProblema) {
+	public boolean desassociaProblema(String idPesquisa) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
-		Util.validaAtributo(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
 		existePesquisa(idPesquisa);
 		if (!ehAtiva(idPesquisa))
 			throw new IllegalArgumentException("Pesquisa desativada.");
 
-		return this.pesquisas.get(idPesquisa).desassociaProblema(idProblema);
+		return this.pesquisas.get(idPesquisa).desassociaProblema();
 	}
 
 	/**

@@ -171,10 +171,8 @@ public class Pesquisa {
 		return true;
 	}
 
-	public boolean desassociaProblema(String idProblema) {
-		Util.validaAtributo(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
-
-		if (!this.problema.equals(idProblema))
+	public boolean desassociaProblema() {
+		if (this.problema.equals(""))
 			return false;
 		this.problema = "";
 		return true;

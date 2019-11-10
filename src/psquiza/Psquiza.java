@@ -191,8 +191,8 @@ public class Psquiza {
 	/**
 	 * {@link psquiza.controladores.Sistema#desassociaProblema(String, String)}
 	 */
-	public boolean desassociaProblema(String idPesquisa, String idProblema) {
-		return sistema.desassociaProblema(idPesquisa, idProblema);
+	public boolean desassociaProblema(String idPesquisa) {
+		return sistema.desassociaProblema(idPesquisa);
 	}
 
 	/**

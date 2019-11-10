@@ -208,8 +208,8 @@ public class Sistema {
 		return controladorPesquisa.associaProblema(idPesquisa, idProblema);
 	}
 
-	public boolean desassociaProblema(String idPesquisa, String idProblema) {
-		return controladorPesquisa.desassociaProblema(idPesquisa, idProblema);
+	public boolean desassociaProblema(String idPesquisa) {
+		return controladorPesquisa.desassociaProblema(idPesquisa);
 	}
 
 	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
