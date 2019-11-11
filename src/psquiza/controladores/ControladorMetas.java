@@ -194,9 +194,6 @@ public class ControladorMetas {
 			}
 		}
 
-		if (listagem.isEmpty())
-			return "⠀";
-
 		return listagem;
 	}
 
@@ -221,9 +218,6 @@ public class ControladorMetas {
 				}
 			}
 		}
-
-		if (listagem.isEmpty())
-			return "⠀";
 
 		return listagem;
 	}

@@ -206,9 +206,6 @@ public class ControladorAtividade {
 			}
 		}
 
-		if (listagem.isEmpty())
-			return "⠀";
-
 		return listagem;
 	}
 

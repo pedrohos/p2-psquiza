@@ -238,12 +238,17 @@ public class Sistema {
 		String listagem = String.format("%s | %s | %s | %s | %s", controladorPesquisa.buscaPesquisa(termo),
 				controladorPesquisador.buscaPesquisador(termo), controladorMetas.buscaProblema(termo),
 				controladorMetas.buscaObjetivo(termo), controladorAtividade.buscaAtividade(termo));
-		listagem = listagem.replace("| â € ", "");
-		listagem = listagem.replace("â € | ", "");
-		listagem = listagem.replace("â €", "");
-
-		if (listagem.trim().isEmpty()) {
-			throw new NoSuchElementException("Nenhum resultado encontrado");
+		listagem = listagem.replace(" |  ", "");
+		if (listagem.charAt(0) == '|')
+			listagem = listagem.substring(2);
+		if (listagem.length() >= 3 && listagem.substring(listagem.length() - 3).equals(" | ")) {
+			listagem = listagem.substring(0, listagem.length() - 3);
+		}
+		if (listagem.length() >= 2 && listagem.substring(listagem.length() - 2).equals("| ")) {
+			listagem = listagem.substring(0, listagem.length() - 2);
+		}
+		if (listagem.length() >= 1 && listagem.charAt(listagem.length() - 1) == '|') {
+			listagem = listagem.substring(0, listagem.length() - 1);
 		}
 
 		return listagem;
@@ -282,6 +287,10 @@ public class Sistema {
 	 */
 	public int contaResultadosBusca(String termo) {
 		Util.validaAtributo(termo, "Campo termo nao pode ser nulo ou vazio.");
+
+		if (busca(termo).length() == 0) {
+			throw new NoSuchElementException("Nenhum resultado encontrado");
+		}
 
 		return busca(termo).split(" \\| ").length;
 	}

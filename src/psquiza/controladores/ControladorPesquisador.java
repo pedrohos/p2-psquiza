@@ -269,9 +269,6 @@ public class ControladorPesquisador {
 			}
 		}
 
-		if (listagem.isEmpty())
-			return "⠀";
-
 		return listagem;
 	}
 

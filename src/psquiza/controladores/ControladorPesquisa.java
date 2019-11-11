@@ -410,9 +410,6 @@ public class ControladorPesquisa {
 			}
 		}
 
-		if (listagem.isEmpty())
-			return "⠀";
-
 		return listagem;
 	}
 
