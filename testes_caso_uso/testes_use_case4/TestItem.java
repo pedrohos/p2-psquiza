@@ -9,13 +9,13 @@ public class TestItem {
 
 	@Test
 	public void criaItem() {
-		Item item = new Item("Janela");
+		new Item("Janela");
 	}
 
 	@Test
 	public void criaItemVazio() {
 		try {
-			Item item = new Item("");
+			new Item("");
 			fail("");
 		} catch (Exception e) {
 		}

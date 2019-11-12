@@ -20,7 +20,7 @@ class ObjetivoTest {
 		
 		// Objetivo com tipo nulo
 		try {
-			Objetivo o =  new Objetivo(null, "Ajudar animais ameacados pelo vazamento de petroleo", 3, 4, "O12");
+			new Objetivo(null, "Ajudar animais ameacados pelo vazamento de petroleo", 3, 4, "O12");
 			fail("");
 		} catch (Exception e) {
 					

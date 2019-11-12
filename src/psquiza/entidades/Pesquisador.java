@@ -68,7 +68,6 @@ public class Pesquisador implements Comparable<Pesquisador> {
 		this.email = email;
 		this.foto = foto;
 		this.funcao = validaFuncao(funcao);
-		this.funcao = funcao;
 		this.ativo = true;
 		this.especialidade = null;
 		this.pesquisasAssociadas = new ArrayList<Pesquisa>();

@@ -109,7 +109,7 @@ expect "Prairie Johnson (externo) - Interessada no estudo de multiplas dimensoes
 expectError "Campo tipo nao pode ser nulo ou vazio." listaPesquisadores tipo=""
 expectError "Tipo BOM DIA FAMILIA inexistente." listaPesquisadores tipo="BOM DIA FAMILIA"
 
-
+	
 #Alterando pesquisadores
 
 alteraPesquisador email="matheusgr@computacao.ufcg.edu.br" atributo="FORMACAO" novoValor="Doutorado"

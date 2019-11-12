@@ -50,8 +50,10 @@ class PesquisadorTest {
 	@Test
 	void testSetNome() {
 		try {
-		pedro.setNome(null);
-		}catch(IllegalArgumentException e) {}
+			pedro.setNome(null);
+			fail("Excessao deve ser lancada");
+		} catch (IllegalArgumentException e) {
+		}
 	}
 
 	@Test
@@ -66,6 +68,7 @@ class PesquisadorTest {
 	void testSetEmail() {
 		try {
 			lucian.setEmail("");
+			fail("Excessao deve ser lancada");
 		} catch (IllegalArgumentException e) {
 		}
 	}
@@ -74,6 +77,7 @@ class PesquisadorTest {
 	void testSetFoto() {
 		try {
 			junio.setFoto("\n  :3");
+			fail("Excessao deve ser lancada");
 		} catch (IllegalArgumentException e) {
 
 		}
@@ -83,6 +87,7 @@ class PesquisadorTest {
 	void testSetFuncao() {
 		try {
 			regina.setFuncao("Faz os melhores testes");
+			fail("Excessao deve ser lancada");
 		} catch (IllegalArgumentException e) {
 		}
 	}

@@ -29,6 +29,7 @@ class ControladorPesquisadorTest {
 		try {
 			controle.cadastraPesquisador("", "estudante", "Estudante de computacao", "lucian.costa@ccc.ufcg",
 					"https://foto.lucian");
+			fail("Excessao deve ser lancada");
 		} catch (IllegalArgumentException e) {
 		}
 	}
@@ -37,6 +38,7 @@ class ControladorPesquisadorTest {
 	void testCadastraPesquisadorAtributoNulo() {
 		try {
 			controle.cadastraPesquisador("Lucian", "estudante", "Estudante de computacao", null, "https://foto.lucian");
+			fail("Excessao deve ser lancada");
 		} catch (IllegalArgumentException e) {
 		}
 	}
@@ -46,6 +48,7 @@ class ControladorPesquisadorTest {
 		try {
 			controle.cadastraPesquisador("Lucian", "estudante", "Estudante de computacao", "@.com",
 					"https://foto.lucian");
+			fail("Excessao deve ser lancada");
 		} catch (IllegalArgumentException e) {
 		}
 	}
@@ -55,6 +58,7 @@ class ControladorPesquisadorTest {
 		try {
 			controle.cadastraPesquisador("Lucian", "estudante", "Estudante de computacao", "lucian@julo.com",
 					"foto.lucian");
+			fail("Excessao deve ser lancada");
 		} catch (IllegalArgumentException e) {
 		}
 	}
@@ -64,7 +68,9 @@ class ControladorPesquisadorTest {
 		try {
 			controle.cadastraPesquisador("Lucian", "vagabundo", "Estudante de computacao", "lucian@julo.com",
 					"http://foto.lucian");
-		} catch (IllegalArgumentException e) {}
+			fail("Excessao deve ser lancada");
+		} catch (IllegalArgumentException e) {
+		}
 	}
 
 	@Test
@@ -92,24 +98,24 @@ class ControladorPesquisadorTest {
 		try {
 
 			controle.alteraPesquisador("lucian.costa@ccc.ufcg", "EMAIL", "");
-
+			fail("Excessao deve ser lancada");
 		} catch (IllegalArgumentException e) {
 		}
 
 	}
-	
+
 	@Test
 	void testAlteraPesquisadorInativo() {
 
 		controle.cadastraPesquisador("Lucian", "estudante", "Estudante de computacao", "lucian.costa@ccc.ufcg",
 				"https://foto.lucian");
-		
+
 		controle.desativaPesquisador("lucian.costa@ccc.ufcg");
 
 		try {
 
 			controle.alteraPesquisador("lucian.costa@ccc.ufcg", "EMAIL", "junin@eniedson");
-
+			fail("Excessao deve ser lancada");
 		} catch (IllegalArgumentException e) {
 		}
 
@@ -124,7 +130,7 @@ class ControladorPesquisadorTest {
 		try {
 
 			controle.alteraPesquisador("lucian.costa@ccc.ufcg", "EMAIL", null);
-
+			fail("Excessao deve ser lancada");
 		} catch (IllegalArgumentException e) {
 		}
 
@@ -139,7 +145,7 @@ class ControladorPesquisadorTest {
 		try {
 
 			controle.alteraPesquisador("lucian.costa@ccc.ufcg", "email", "lucian.costa@ccc.ufcg");
-
+			fail("Excessao deve ser lancada");
 		} catch (IllegalArgumentException e) {
 		}
 
@@ -154,9 +160,10 @@ class ControladorPesquisadorTest {
 		try {
 
 			controle.alteraPesquisador("lucian.costa@ccc.ufcg", "EMAIL", "emaillll.com");
+			fail("Excessao deve ser lancada");
+		} catch (IllegalArgumentException e) {
+		}
 
-		} catch (IllegalArgumentException e) {}
-		
 	}
 
 	@Test
@@ -164,7 +171,7 @@ class ControladorPesquisadorTest {
 		try {
 
 			controle.alteraPesquisador("lucian.costa@ccc.ufcg", "email", "emaillll@.com");
-
+			fail("Excessao deve ser lancada");
 		} catch (NoSuchElementException e) {
 		}
 
@@ -188,6 +195,7 @@ class ControladorPesquisadorTest {
 
 		try {
 			controle.desativaPesquisador("lucian.costa@ccc.ufcg");
+			fail("Excessao deve ser lancada");
 		} catch (IllegalArgumentException e) {
 
 		}
@@ -217,7 +225,7 @@ class ControladorPesquisadorTest {
 		try {
 
 			controle.ativaPesquisador("lucian.costa@ccc.ufcg");
-
+			fail("Excessao deve ser lancada");
 		} catch (IllegalArgumentException e) {
 
 		}
@@ -230,46 +238,47 @@ class ControladorPesquisadorTest {
 		try {
 
 			controle.ativaPesquisador("lucian.costa@ccc.ufcg");
-
+			fail("Excessao deve ser lancada");
 		} catch (NoSuchElementException e) {
 
-		} 
+		}
 
 	}
 
 	@Test
 	void testExibePesquisador() {
-		
+
 		controle.cadastraPesquisador("Lucian", "estudante", "Estudante de computacao", "lucian.costa@ccc.ufcg",
 				"https://foto.lucian");
-		
+
 		assertEquals("Lucian (estudante) - Estudante de computacao - lucian.costa@ccc.ufcg - https://foto.lucian",
 				controle.exibePesquisador("lucian.costa@ccc.ufcg"));
-		
+
 	}
-	
+
 	@Test
 	void testExibePesquisadorInexistente() {
 		try {
-		assertEquals("Lucian (estudante) - Estudante de computacao - lucian.costa@ccc.ufcg - https://foto.lucian",
-				controle.exibePesquisador("lucian.costa@ccc.ufcg"));
-		}catch(NoSuchElementException e) {}
-		
+			assertEquals("Lucian (estudante) - Estudante de computacao - lucian.costa@ccc.ufcg - https://foto.lucian",
+					controle.exibePesquisador("lucian.costa@ccc.ufcg"));
+			fail("Excessao deve ser lancada");
+		} catch (NoSuchElementException e) {
+		}
+
 	}
 
 	@Test
 	void testPesquisadorEhAtivo() {
-	
+
 		controle.cadastraPesquisador("Lucian", "estudante", "Estudante de computacao", "lucian.costa@ccc.ufcg",
 				"https://foto.lucian");
-		
+
 		assertTrue(controle.pesquisadorEhAtivo("lucian.costa@ccc.ufcg"));
-		
+
 		controle.desativaPesquisador("lucian.costa@ccc.ufcg");
-		
+
 		assertFalse(controle.pesquisadorEhAtivo("lucian.costa@ccc.ufcg"));
-		
-		
+
 	}
 
 }

@@ -10,13 +10,13 @@ public class TestAtividade {
 
 	@Test
 	public void criaAtividade() {
-		Atividade ati = new Atividade("aaa", "BAIXO", "fui", "A1");
+		new Atividade("aaa", "BAIXO", "fui", "A1");
 	}
 
 	@Test
 	public void criaAtividadeDescricaoVazia() {
 		try {
-			Atividade ati = new Atividade("", "BAIXO", "fui", "A1");
+			new Atividade("", "BAIXO", "fui", "A1");
 			fail("");
 		} catch (Exception e) {
 		}
@@ -25,7 +25,7 @@ public class TestAtividade {
 	@Test
 	public void criaAtividadeDescricaoRiscoVazio() {
 		try {
-			Atividade ati = new Atividade("aaa", "BAIXO", "", "A1");
+			new Atividade("aaa", "BAIXO", "", "A1");
 			fail("");
 		} catch (Exception e) {
 		}
@@ -33,23 +33,23 @@ public class TestAtividade {
 
 	@Test
 	public void criaAtividadeRiscoBaixo() {
-		Atividade ati = new Atividade("aaa", "BAIXO", "fui", "A1");
+		new Atividade("aaa", "BAIXO", "fui", "A1");
 	}
 
 	@Test
 	public void criaAtividadeRiscoMedio() {
-		Atividade ati = new Atividade("aaa", "MEDIO", "fui", "A1");
+		new Atividade("aaa", "MEDIO", "fui", "A1");
 	}
 
 	@Test
 	public void criaAtividadeRiscoAlto() {
-		Atividade ati = new Atividade("aaa", "ALTO", "fui", "A1");
+		new Atividade("aaa", "ALTO", "fui", "A1");
 	}
 
 	@Test
 	public void criaAtividadeRiscoDiferente() {
 		try {
-			Atividade ati = new Atividade("aaa", "alto demais", "fui", "A1");
+			new Atividade("aaa", "alto demais", "fui", "A1");
 			fail("");
 		} catch (Exception e) {
 		}
