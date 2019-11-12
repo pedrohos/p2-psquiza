@@ -367,12 +367,12 @@ class ControladorPesquisaTest {
 
 	@Test
 	void testEhAtiva() {
-		assertEquals("true", sistema.pesquisaEhAtiva("COM1"));
+		assertEquals(true, sistema.pesquisaEhAtiva("COM1"));
 	}
 
 	@Test
 	void testEhAtivaFalse() {
-		assertEquals("false", sistema.pesquisaEhAtiva("HUM1"));
+		assertEquals(false, sistema.pesquisaEhAtiva("HUM1"));
 	}
 
 }

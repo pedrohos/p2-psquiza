@@ -9,11 +9,9 @@ import java.util.stream.Collectors;
 
 import psquiza.Util;
 import psquiza.entidades.Aluno;
-import psquiza.entidades.Atividade;
 import psquiza.entidades.Pesquisa;
 import psquiza.entidades.Pesquisador;
 import psquiza.entidades.Professor;
-import psquiza.ordenacao.OrdenaAtividade;
 import psquiza.ordenacao.OrdenaPesquisador;
 
 /**

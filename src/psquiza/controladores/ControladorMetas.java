@@ -7,11 +7,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import psquiza.Util;
-import psquiza.entidades.Atividade;
 import psquiza.entidades.Objetivo;
-import psquiza.entidades.Pesquisador;
 import psquiza.entidades.Problema;
-import psquiza.ordenacao.OrdenaAtividade;
 import psquiza.ordenacao.OrdenaObjetivo;
 import psquiza.ordenacao.OrdenaProblema;
 

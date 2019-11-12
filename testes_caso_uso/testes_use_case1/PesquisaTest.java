@@ -22,6 +22,54 @@ class PesquisaTest {
 	}
 	
 	@Test
+	void testPesquisaDescricaoVazia() {
+		try {
+			new Pesquisa("", "campo", "CAM3");
+			fail("Uma excessao deveria ser lancada");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testPesquisaDescricaoNula() {
+		try {
+			new Pesquisa(null, "campo", "CAM3");
+			fail("Uma excessao deveria ser lancada");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testPesquisacamposVazios() {
+		try {
+			new Pesquisa("descricao", "", "CAM3");
+			fail("Uma excessao deveria ser lancada");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testPesquisacamposNulo() {
+		try {
+			new Pesquisa("descricao", null, "CAM3");
+			fail("Uma excessao deveria ser lancada");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testPesquisacodigoVazio() {
+		try {
+			new Pesquisa("descricao", "campo", "");
+			fail("Uma excessao deveria ser lancada");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testPesquisacodigoNull() {
+		try {
+			new Pesquisa("descricao", "campo", null);
+			fail("Uma excessao deveria ser lancada");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
 	void testHashCodeIguais() {
 		assertEquals(p1.hashCode(), p2.hashCode());
 	}
