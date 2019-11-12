@@ -67,10 +67,24 @@ public class Pesquisador implements Comparable<Pesquisador> {
 		this.biografia = biografia;
 		this.email = email;
 		this.foto = foto;
+		this.funcao = validaFuncao(funcao);
 		this.funcao = funcao;
 		this.ativo = true;
 		this.especialidade = null;
 		this.pesquisasAssociadas = new ArrayList<Pesquisa>();
+	}
+	
+	private String validaFuncao(String funcao) {
+		switch (funcao) {
+			case "ESTUDANTE":
+				return funcao;
+			case "PROFESSOR":
+				return funcao;
+			case "EXTERNO":
+				return funcao;
+			default:
+				throw new IllegalArgumentException("");
+		}
 	}
 
 	public String getNome() {
@@ -178,7 +192,7 @@ public class Pesquisador implements Comparable<Pesquisador> {
 	 */
 	public void setFuncao(String funcao) {
 		Util.validaAtributo(funcao, "Campo funcao nao pode ser nulo ou vazio.");
-		this.funcao = funcao;
+		this.funcao = validaFuncao(funcao);
 	}
 
 	/**
