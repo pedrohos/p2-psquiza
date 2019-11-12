@@ -74,7 +74,8 @@ public class Pesquisador implements Comparable<Pesquisador> {
 	}
 	
 	private String validaFuncao(String funcao) {
-		switch (funcao) {
+		String funcaoUpper = funcao.toUpperCase();
+		switch (funcaoUpper) {
 			case "ESTUDANTE":
 				return funcao;
 			case "PROFESSOR":
@@ -82,7 +83,7 @@ public class Pesquisador implements Comparable<Pesquisador> {
 			case "EXTERNO":
 				return funcao;
 			default:
-				throw new IllegalArgumentException("");
+				throw new IllegalArgumentException("Funcao invalido.");
 		}
 	}
 
@@ -93,10 +94,6 @@ public class Pesquisador implements Comparable<Pesquisador> {
 	public String getFoto() {
 		return foto;
 	}
-
-//	public Funcao getFuncao() {
-//		return funcao;
-//	}
 
 	public String getFuncaoPesquisador() {
 		return funcao;
