@@ -1,13 +1,20 @@
 package psquiza.controladores;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
+
 import psquiza.Util;
 import psquiza.entidades.Aluno;
+import psquiza.entidades.Atividade;
 import psquiza.entidades.Pesquisa;
 import psquiza.entidades.Pesquisador;
 import psquiza.entidades.Professor;
-import psquiza.enums.Funcao;
+import psquiza.ordenacao.OrdenaAtividade;
+import psquiza.ordenacao.OrdenaPesquisador;
 
 /**
  * Classe controladora de pesquisadores.
@@ -99,7 +106,7 @@ public class ControladorPesquisador {
 			pesquisadores.get(email).setFoto(novoValor);
 			break;
 		case "SEMESTRE":
-			Util.validaNumero(Integer.parseInt(novoValor)-1, "Atributo semestre com formato invalido.");
+			Util.validaNumero(Integer.parseInt(novoValor) - 1, "Atributo semestre com formato invalido.");
 			pesquisadores.get(email).setAtributoEspecialidade(atributo, novoValor);
 			break;
 		case "IEA":
@@ -203,20 +210,80 @@ public class ControladorPesquisador {
 		return pesquisadores.get(email).ehAtivo();
 	}
 
+	/**
+	 * 
+	 * Recebe uma pesquisa que será associada ao pesquisador passado. Lanca erros em
+	 * caso da pesquisa não existir ou estar desativada e ainda se os parametros
+	 * recebios forme nulos, vazios ou com formato inválido. Uma pesquisa é
+	 * associada quando o pesquisador ainda não tem aquela pesquisa em seu array e
+	 * não é associada caso a pesquisa já exista no array.
+	 * 
+	 * @param pesquisa pesquisa que sera adicionada no pesquisador.
+	 * @param email    email do pesquisador em que a pesquisa será adicionada.
+	 * @return (true) caso a pesquisa seja associada e (false) caso não possa
+	 *         ocorrer a associacao.
+	 */
+	public boolean associaPesquisador(Pesquisa pesquisa, String email) {
+		Util.validaAtributo(email, "Campo emailPesquisador nao pode ser nulo ou vazio.");
+		Util.validaEmail(email);
+		return pesquisadores.get(email).associaPesquisa(pesquisa);
+	}
+
+	/**
+	 * Recebe uma pesquisa que será desassociada do pesquisador passado. Lanca erros
+	 * em caso da pesquisa não existir ou estar desativada e ainda se os parametros
+	 * recebios forme nulos, vazios ou com formato inválido. Uma pesquisa é
+	 * desassociada quando o pesquisador tem aquela pesquisa em seu array e não é
+	 * desassociada caso a pesquisa não exista no array.
+	 * 
+	 * @param pesquisa pesquisa que sera adicionada no pesquisador.
+	 * @param email    email do pesquisador em que a pesquisa será adicionada.
+	 * @return (true) caso a pesquisa seja desassociada e (false) caso não possa
+	 *         ocorrer a desassociacao.
+	 */
+	public boolean desassociaPesquisador(Pesquisa pesquisa, String email) {
+		Util.validaAtributo(email, "Campo emailPesquisador nao pode ser nulo ou vazio.");
+		Util.validaEmail(email);
+		return pesquisadores.get(email).desassociaPesquisa(pesquisa);
+	}
+
+	/**
+	 * Metodo que busca na colecao de pesquisadores que possuam o termo informado na
+	 * biografia.
+	 * 
+	 * @param termo termo a ser buscado.
+	 * 
+	 * @return lista de resultados.
+	 */
 	public String buscaPesquisador(String termo) {
 		String listagem = "";
-		for (Pesquisador pesquisador : pesquisadores.values()) {
+		List<Pesquisador> aux = pesquisadores.values().stream().collect(Collectors.toList());
+		Collections.sort(aux, new OrdenaPesquisador());
+		for (Pesquisador pesquisador : aux) {
 			if (pesquisador.getBiografia().toLowerCase().contains(termo.toLowerCase())) {
 				if (listagem.isEmpty()) {
-					listagem += pesquisador.getEmail() + " - " + pesquisador.getBiografia();
+					listagem += pesquisador.getEmail() + ": " + pesquisador.getBiografia();
 				} else {
-					listagem += " | " + pesquisador.getEmail() + " - " + pesquisador.getBiografia();
+					listagem += " | " + pesquisador.getEmail() + ": " + pesquisador.getBiografia();
 				}
 			}
 		}
+
 		return listagem;
 	}
 
+	/**
+	 * Cadastra a especialidade de Professora em uma Pesquisadora, que como novas
+	 * caracteristicas tem uma formacao, uma unidade de alocacao e uma data. A
+	 * funcao lanca erros caso os parametros recebidos sejam nulos, vazios ou
+	 * invalidos e também caso a pesquisadora nao exista ou sua funcao nao seja
+	 * professora.
+	 * 
+	 * @param email    referencia a pesquisadora a ser cadastrada as especialidades
+	 * @param formacao formacao da pesquisadora professora
+	 * @param unidade  unidade de alocacao da professora
+	 * @param data     data data de contratacao
+	 */
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
 		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
 		Util.validaAtributo(formacao, "Campo formacao nao pode ser nulo ou vazio.");
@@ -224,34 +291,78 @@ public class ControladorPesquisador {
 		Util.validaAtributo(data, "Campo data nao pode ser nulo ou vazio.");
 		Util.validaEmail(email);
 		Util.validaData(data);
-		
+
 		if (!pesquisadores.containsKey(email)) {
 			throw new NoSuchElementException("Pesquisadora nao encontrada.");
 		}
 		if (!pesquisadores.get(email).getFuncaoPesquisador().equals("professor")) {
 			throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
 		}
-		
-		Professor especialidade = new Professor(formacao, unidade, data);	
+
+		Professor especialidade = new Professor(formacao, unidade, data);
 		pesquisadores.get(email).setEspecialidade(especialidade);
+
 	}
-	
+
+	/**
+	 * Cadastra a especialidade de Aluna em uma Pesquisadora, que como novas
+	 * caracteristicas tem um semestr e um indice de eficiencia academica. A funcao
+	 * lanca erros caso os parametros recebidos sejam nulos, vazios ou invalidos e
+	 * também caso a pesquisadora nao exista ou sua funcao nao seja aluna.
+	 * 
+	 * @param email    email que identifica a pesquisadora aluna.
+	 * @param semestre semestre de ingresso da aluna.
+	 * @param IEA      indice de eficiencia academica.
+	 */
 	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
 		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
 		Util.validaAtributo(String.valueOf(semestre), "Campo semestre nao pode ser nulo ou vazio.");
 		Util.validaAtributo(String.valueOf(IEA), "Campo iea nao pode ser nulo ou vazio.");
-		Util.validaNumero(semestre-1, "Atributo semestre com formato invalido.");
+		Util.validaNumero(semestre - 1, "Atributo semestre com formato invalido.");
 		Util.validaEmail(email);
 		Util.validaIEA(IEA);
-		
+
+		if (!pesquisadores.containsKey(email)) {
+			throw new NoSuchElementException("Pesquisadora nao encontrada.");
+		}
 		if (!pesquisadores.containsKey(email)) {
 			throw new NoSuchElementException("Pesquisadora nao encontrada.");
 		}
 		if (!pesquisadores.get(email).getFuncaoPesquisador().equals("estudante")) {
 			throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
 		}
-		
+
 		Aluno especialidade = new Aluno(IEA, semestre);
 		pesquisadores.get(email).setEspecialidade(especialidade);
+	}
+
+	/**
+	 * Lista pesquisadores de um mesmo tipo, o tipo é recebido como parametro e pode
+	 * ser "EXTERNO", "ALUNA" ou "PROFESSORA". Lanca erros casos o tipo passado seja
+	 * vazio, nulo o invalido (diferente dos tipos existentes). Retorna uma String
+	 * que contem a representacao em String dos pesquisadores.
+	 * 
+	 * @param tipo tipo no qual vao ser listados os pesquisadores.
+	 * @return String com representacao em string dos pesquisadores.
+	 */
+	public String listaPesquisadores(String tipo) {
+
+		Util.validaAtributo(tipo, "Campo tipo nao pode ser nulo ou vazio.");
+		ArrayList<Pesquisador> valores = new ArrayList<Pesquisador>(pesquisadores.values());
+		Collections.sort(valores);
+		String saida = "";
+
+		if (tipo.equals("EXTERNO") || tipo.equals("ALUNA") || tipo.equals("PROFESSORA")) {
+
+			for (Pesquisador pesquisador : valores) {
+				if (pesquisador.getFuncaoPesquisador().equals(tipo.toLowerCase())) {
+					saida += pesquisador.toString() + " | ";
+				}
+			}
+		} else {
+			throw new IllegalArgumentException(String.format("Tipo %s inexistente.", tipo));
+		}
+
+		return saida.substring(0, saida.length() - 3);
 	}
 }

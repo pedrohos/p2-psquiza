@@ -1,16 +1,14 @@
 package psquiza.entidades;
 
-import java.text.SimpleDateFormat;
-
+import java.util.ArrayList;
 import psquiza.Util;
-import psquiza.enums.Funcao;
 
 /**
  * Classe que representa o pesquisador no sistema.
  * 
  * @author Eniedson Fabiano Pereira da Silva Junior
  */
-public class Pesquisador {
+public class Pesquisador implements Comparable<Pesquisador> {
 
 	/**
 	 * Atributo que representa o nome do pesquisador.
@@ -36,7 +34,7 @@ public class Pesquisador {
 	 * Atributo que representa a função do pesquisador (estudante, professor ou
 	 * externo).
 	 */
-	private Funcao funcao;
+	private String funcao;
 
 	/**
 	 * Atributo que informa se o pesquisador esta ativo ou não.
@@ -44,7 +42,9 @@ public class Pesquisador {
 	private boolean ativo;
 
 	private Especialidade especialidade;
-	
+
+	private ArrayList<Pesquisa> pesquisasAssociadas;
+
 	/**
 	 * Metodo responsavel por construir um pesquisador, o pesquisador inicia ativo.
 	 * 
@@ -67,9 +67,10 @@ public class Pesquisador {
 		this.biografia = biografia;
 		this.email = email;
 		this.foto = foto;
-		this.funcao = Funcao.atribuiFuncao(funcao);
+		this.funcao = funcao;
 		this.ativo = true;
 		this.especialidade = null;
+		this.pesquisasAssociadas = new ArrayList<Pesquisa>();
 	}
 
 	public String getNome() {
@@ -80,12 +81,12 @@ public class Pesquisador {
 		return foto;
 	}
 
-	public Funcao getFuncao() {
-		return funcao;
-	}
-	
+//	public Funcao getFuncao() {
+//		return funcao;
+//	}
+
 	public String getFuncaoPesquisador() {
-		return funcao.getFuncao();
+		return funcao;
 	}
 
 	public boolean isAtivo() {
@@ -177,13 +178,24 @@ public class Pesquisador {
 	 */
 	public void setFuncao(String funcao) {
 		Util.validaAtributo(funcao, "Campo funcao nao pode ser nulo ou vazio.");
-		this.funcao = Funcao.atribuiFuncao(funcao);
+		this.funcao = funcao;
 	}
-	
+
+	/**
+	 * Metodo responsavel por alterar a especialidade do pesquisador.
+	 * 
+	 * @param especialidade especialidade do pesquisador.
+	 */
 	public void setEspecialidade(Especialidade especialidade) {
 		this.especialidade = especialidade;
 	}
-	
+
+	/**
+	 * Metodo que altera um atributo da especialidade do pesquisador
+	 * 
+	 * @param atributo Atributo a ser alterado.
+	 * @param novo     novo valor do atributo.
+	 */
 	public void setAtributoEspecialidade(String atributo, String novo) {
 		especialidade.setAtributo(atributo, novo);
 	}
@@ -232,11 +244,67 @@ public class Pesquisador {
 	 */
 	@Override
 	public String toString() {
-		if(especialidade == null) {
-			return String.format("%s (%s) - %s - %s - %s", nome, funcao.getFuncao(), biografia, email, foto);	
-		}else {
-			return String.format("%s (%s) - %s - %s - %s - %s", nome, funcao.getFuncao(), biografia, email, foto, especialidade.toString());
+		if (especialidade == null) {
+			return String.format("%s (%s) - %s - %s - %s", nome, funcao, biografia, email, foto);
+		} else {
+			return String.format("%s (%s) - %s - %s - %s - %s", nome, funcao, biografia, email, foto,
+					especialidade.toString());
 		}
-		
+
+	}
+
+	/**
+	 * Armazena a pesquisa passada no array de pesquisas caso nao exista.
+	 * 
+	 * @param pesquisa Pesquisa a ser armazenada.
+	 * @return booleano caso a pesquisa seja associada
+	 */
+	public boolean associaPesquisa(Pesquisa pesquisa) {
+		if (pesquisasAssociadas.contains(pesquisa)) {
+			return false;
+		} else {
+			pesquisasAssociadas.add(pesquisa);
+			return true;
+		}
+
+	}
+
+	/**
+	 * Remove a pesquisa passada do array de pesquisas caso nao exista.
+	 * 
+	 * @param pesquisa Pesquisa a ser removida.
+	 * @return booleano caso a pesquisa nao seja desassociada
+	 */
+	public boolean desassociaPesquisa(Pesquisa pesquisa) {
+		if (!pesquisasAssociadas.contains(pesquisa)) {
+			return false;
+		} else {
+			pesquisasAssociadas.remove(pesquisa);
+			return true;
+		}
+
+	}
+
+	/**
+	 * Metodo que compara dois pesquisadores e retorna um inteiro de acordo com sua
+	 * ordem de precedencia lexicografica do nome do pesquisador, de forma
+	 * invertida.
+	 * 
+	 * @param o o pesquisador a ser comparado com o pesquisador corrente.
+	 * @return int inteiro que indica ordem entre dois pesquisadores.
+	 */
+	public int compareTo(Pesquisador o) {
+
+		if (this.nome == null) {
+			return 1;
+		}
+		if (o.nome == null) {
+			return 1;
+		}
+		if (this.nome.equals(o.nome)) {
+			return 0;
+		} else {
+			return this.nome.compareTo(o.nome) * -1;
+		}
 	}
 }

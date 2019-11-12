@@ -23,7 +23,6 @@ public final class Util {
 			throw new IllegalArgumentException("Formato de foto invalido.");
 	} 
 	
-	
 	public static void validaData(String data) {
 		try {
 			String[] datas = data.split("/");
