@@ -30,5 +30,7 @@ class ControladorPesquisaTest {
 		assertEquals(c.buscaPesquisa("GERA"), "GER2: GERAL | GER1: GERAL");
 		assertEquals(c.buscaPesquisa("geRa"), "GER2: GERAL | GER1: GERAL");
 		assertEquals(c.buscaPesquisa("gera"), "GER2: GERAL | GER1: GERAL");
+		
+		assertEquals(c.buscaPesquisa("geraldo"), "");
 	}
 }
