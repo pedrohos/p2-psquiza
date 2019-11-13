@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
+
 import psquiza.Util;
 import psquiza.enums.Risco;
 
@@ -58,6 +60,8 @@ public class Atividade {
 	 * Armazena um conjunto ordenados de resultados que compoem a atividade.
 	 */
 	private List<String> resultados;
+
+	private Atividade proxima;
 
 	/**
 	 * Constroi um nova atividade, validando se os parametros passados sao vazios ou
@@ -148,6 +152,48 @@ public class Atividade {
 
 	public String getDescricaoRisco() {
 		return this.descricaoRisco;
+	}
+
+	public void definirProxima(Atividade proxima) {
+		if (this.proxima != null)
+			throw new IllegalArgumentException("Atividade ja possui uma subsequente.");
+
+		this.proxima = proxima;
+	}
+
+	public void tiraProxima() {
+		this.proxima = null;
+	}
+
+	public int contaProximos() {
+		if (this.proxima == null)
+			return 0;
+		return proxima.contaProximos() + 1;
+	}
+
+	public String pegaProximo(int index) {
+		if (index == 0)
+			return this.id;
+		if (proxima == null)
+			throw new NoSuchElementException("Atividade inexistente.");
+		return proxima.pegaProximo(index - 1);
+	}
+
+	public String pegaMaiorRiscoAtividades() {
+		if (proxima == null)
+			return this.id;
+		return proxima.pegaMaiorRiscoAtividades(this.nivelRisco, this.id);
+	}
+
+	private String pegaMaiorRiscoAtividades(Risco maior, String codigoMaior) {
+		if (!maior.ehMaior(nivelRisco)) {
+			maior = this.nivelRisco;
+			codigoMaior = this.id;
+		}
+		
+		if (proxima == null)
+			return codigoMaior;
+		return proxima.pegaMaiorRiscoAtividades(maior, codigoMaior);
 	}
 
 	/**

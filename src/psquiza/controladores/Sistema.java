@@ -457,4 +457,24 @@ public class Sistema {
 	public int getDuracao(String codigoAtividade) {
 		return controladorAtividade.getDuracao(codigoAtividade);
 	}
+	
+    public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
+    	controladorAtividade.defineProximaAtividade(idPrecedente, idSubsquente);
+    }
+    
+    public void tiraProximaAtividade(String idPrecedente) {
+    	controladorAtividade.tiraProximaAtividade(idPrecedente);
+    }
+    
+    public int contaProximos(String idPrecedente) {
+    	return controladorAtividade.contaProximos(idPrecedente);
+    }
+    
+    public String pegaProximo(String idAtividade, int enesimaAtividade) {
+    	return controladorAtividade.pegaProximo(idAtividade, enesimaAtividade);
+    }
+    
+    public String pegaMaiorRiscoAtividades(String idAtividade) {
+    	return controladorAtividade.pegaMaiorRiscoAtividades(idAtividade);
+    }
 }

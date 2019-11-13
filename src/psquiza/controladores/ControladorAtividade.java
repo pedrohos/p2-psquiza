@@ -3,6 +3,7 @@ package psquiza.controladores;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import psquiza.Util;
@@ -298,4 +299,47 @@ public class ControladorAtividade {
 		}
 		return atividades.get(codigoAtividade).getDuracao();
 	}
+	
+	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
+		Util.validaAtributo(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
+		Util.validaAtributo(idSubsquente, "Atividade nao pode ser nulo ou vazio.");
+		if (!atividades.containsKey(idPrecedente) || !atividades.containsKey(idSubsquente))
+			throw new NoSuchElementException("Atividade nao encontrada.");
+		
+		atividades.get(idPrecedente).definirProxima(atividades.get(idSubsquente));
+	}
+	
+    public void tiraProximaAtividade(String idPrecedente) {
+    	Util.validaAtributo(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
+    	if (!atividades.containsKey(idPrecedente))
+			throw new NoSuchElementException("Atividade nao encontrada.");
+    	
+    	atividades.get(idPrecedente).tiraProxima();
+    }
+    
+    public int contaProximos(String idPrecedente) {
+    	Util.validaAtributo(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
+    	if (!atividades.containsKey(idPrecedente))
+			throw new NoSuchElementException("Atividade nao encontrada.");
+    	
+    	return atividades.get(idPrecedente).contaProximos();
+    }
+    
+    public String pegaProximo(String idAtividade, int enesimaAtividade) {
+    	Util.validaAtributo(idAtividade, "Atividade nao pode ser nulo ou vazio.");
+    	if (!atividades.containsKey(idAtividade))
+			throw new NoSuchElementException("Atividade nao encontrada.");
+    	if (enesimaAtividade < 1)
+    		throw new IllegalArgumentException("EnesimaAtividade nao pode ser negativa");
+    	
+    	return atividades.get(idAtividade).pegaProximo(enesimaAtividade);
+    }
+    
+    public String pegaMaiorRiscoAtividades(String idAtividade) {
+    	Util.validaAtributo(idAtividade, "Atividade nao pode ser nulo ou vazio.");
+    	if (!atividades.containsKey(idAtividade))
+			throw new NoSuchElementException("Atividade nao encontrada.");
+    	
+    	return atividades.get(idAtividade).pegaMaiorRiscoAtividades();
+    }
 }

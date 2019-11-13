@@ -2,7 +2,6 @@ package teste_use_case6;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.Test;
 

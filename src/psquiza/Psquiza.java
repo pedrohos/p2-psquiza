@@ -311,6 +311,26 @@ public class Psquiza {
 	public int getDuracao(String codigoAtividade) {
 		return sistema.getDuracao(codigoAtividade);
 	}
+	
+	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
+    	sistema.defineProximaAtividade(idPrecedente, idSubsquente);
+    }
+    
+    public void tiraProximaAtividade(String idPrecedente) {
+    	sistema.tiraProximaAtividade(idPrecedente);
+    }
+    
+    public int contaProximos(String idPrecedente) {
+    	return sistema.contaProximos(idPrecedente);
+    }
+    
+    public String pegaProximo(String idAtividade, int enesimaAtividade) {
+    	return sistema.pegaProximo(idAtividade, enesimaAtividade);
+    }
+    
+    public String pegaMaiorRiscoAtividades(String idAtividade) {
+    	return sistema.pegaMaiorRiscoAtividades(idAtividade);
+    }
 
 	public static void main(String[] args) {
 		args = new String[] { "psquiza.Psquiza", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",

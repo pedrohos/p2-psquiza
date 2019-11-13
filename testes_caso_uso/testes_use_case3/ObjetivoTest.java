@@ -12,7 +12,7 @@ class ObjetivoTest {
 	void testConstroiObjetivoTipoInvalido() {
 		// Objetivo com tipo vazio
 		try {
-			Objetivo o =  new Objetivo("", "Ajudar animais ameacados pelo vazamento de petroleo", 3, 4, "O12");
+			new Objetivo("", "Ajudar animais ameacados pelo vazamento de petroleo", 3, 4, "O12");
 			fail("");
 		} catch (Exception e) {
 			
@@ -28,7 +28,7 @@ class ObjetivoTest {
 		
 		// Objetivo com tipo invalido
 		try {
-			Objetivo o =  new Objetivo("Meio Ambiente", "Ajudar animais ameacados pelo vazamento de petroleo", 3, 4, "O12");
+			new Objetivo("Meio Ambiente", "Ajudar animais ameacados pelo vazamento de petroleo", 3, 4, "O12");
 			fail("");
 		} catch (Exception e) {
 					
@@ -39,7 +39,7 @@ class ObjetivoTest {
 	void testConstroiObjetivoDescricaoInvalido() {
 		// Objetivo com descicao vazia
 		try {
-			Objetivo o =  new Objetivo("ESPECIFICO", "", 3, 4, "O12");
+			new Objetivo("ESPECIFICO", "", 3, 4, "O12");
 			fail("");
 		} catch (Exception e) {
 			
@@ -47,7 +47,7 @@ class ObjetivoTest {
 		
 		// Objetivo com descricao nula
 		try {
-			Objetivo o =  new Objetivo("ESPECIFICO", null, 3, 4, "O12");
+			new Objetivo("ESPECIFICO", null, 3, 4, "O12");
 			fail("");
 		} catch (Exception e) {
 					
@@ -58,7 +58,7 @@ class ObjetivoTest {
 	void testConstroiObjetivoAderenciaInvalida() {
 		// Objetivo com aderencia abaixo do limite
 		try {
-			Objetivo o =  new Objetivo("ESPECIFICO", "Ajudar animais ameacados pelo vazamento de petroleo", 0, 4, "O12");
+			new Objetivo("ESPECIFICO", "Ajudar animais ameacados pelo vazamento de petroleo", 0, 4, "O12");
 			fail("");
 		} catch (Exception e) {
 			
@@ -66,7 +66,7 @@ class ObjetivoTest {
 		
 		// Objetivo com aderencia acima do limite
 		try {
-			Objetivo o =  new Objetivo("ESPECIFICO", "Ajudar animais ameacados pelo vazamento de petroleo", 6, 4, "O12");
+			new Objetivo("ESPECIFICO", "Ajudar animais ameacados pelo vazamento de petroleo", 6, 4, "O12");
 			fail("");
 		} catch (Exception e) {
 					
@@ -77,7 +77,7 @@ class ObjetivoTest {
 	void testConstroiObjetivoViabilidadeInvalido() {
 		// Objetivo com viabilidade abaixo do limite
 		try {
-			Objetivo o =  new Objetivo("ESPECIFICO", "Ajudar animais ameacados pelo vazamento de petroleo", 3, 0, "O12");
+			new Objetivo("ESPECIFICO", "Ajudar animais ameacados pelo vazamento de petroleo", 3, 0, "O12");
 			fail("");
 		} catch (Exception e) {
 			
@@ -85,7 +85,7 @@ class ObjetivoTest {
 		
 		// Objetivo com viabilidade acima do limite
 		try {
-			Objetivo o =  new Objetivo("ESPECIFICO", "Ajudar animais ameacados pelo vazamento de petroleo", 3, 6, "O12");
+			new Objetivo("ESPECIFICO", "Ajudar animais ameacados pelo vazamento de petroleo", 3, 6, "O12");
 			fail("");
 		} catch (Exception e) {
 					
@@ -96,7 +96,7 @@ class ObjetivoTest {
 	void testConstroiObjetivoCodigoInvalido() {
 		// Objetivo com codigo vazio
 		try {
-			Objetivo o =  new Objetivo("ESPECIFICO", "Ajudar animais ameacados pelo vazamento de petroleo", 3, 4, "");
+			new Objetivo("ESPECIFICO", "Ajudar animais ameacados pelo vazamento de petroleo", 3, 4, "");
 			fail("");
 		} catch (Exception e) {
 			
@@ -104,7 +104,7 @@ class ObjetivoTest {
 		
 		// Objetivo com codigo nulo
 		try {
-			Objetivo o =  new Objetivo("ESPECIFICO", "Ajudar animais ameacados pelo vazamento de petroleo", 3, 4, null);
+			new Objetivo("ESPECIFICO", "Ajudar animais ameacados pelo vazamento de petroleo", 3, 4, null);
 			fail("");
 		} catch (Exception e) {
 					
