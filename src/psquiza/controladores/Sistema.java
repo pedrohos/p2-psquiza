@@ -4,7 +4,6 @@ import java.util.NoSuchElementException;
 
 import psquiza.Util;
 import psquiza.entidades.Atividade;
-import psquiza.entidades.Pesquisa;
 import psquiza.entidades.Pesquisador;
 
 public class Sistema {

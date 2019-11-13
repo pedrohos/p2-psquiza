@@ -15,13 +15,15 @@ class SistemaTest {
 	void inicializaSistema() {
 		sistema = new Sistema();
 		sistema.cadastraAtividade("Atividade", "BAIXO", "e baixo");
+		sistema.cadastraAtividade("Atividade2", "BAIXO", "e baixo");
 		sistema.cadastraPesquisa("Pesquisa", "pesquisar");
 		sistema.associaAtividade("PES1", "A1");
+		sistema.cadastraPesquisa("Pesquisa", "fazer");
+		sistema.encerraPesquisa("FAZ1", "Algum");
 	}
 	
 	@Test
 	void testAssociaAtividade() {
-		sistema.cadastraAtividade("Atividade", "ALTO", "alto");
 		assertTrue(sistema.associaAtividade("PES1", "A2"));
 	}
 	
@@ -31,16 +33,45 @@ class SistemaTest {
 	}
 	
 	@Test
-	void testAssociaAtividadeCodigoNulo() {
+	void testAssociaAtividadePesquisaInexistente() {
 		try {
-			sistema.associaAtividade("PES2", null);
+			sistema.associaAtividade("PES5", "A1");
+			fail("Excessao deve ser lancada");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testAssociaAtividadePesquisaInativa() {
+		try {
+			sistema.associaAtividade("FAZ1", "A1");
 			fail("Excessao deve ser lancada");
 		} catch (IllegalArgumentException e) {}
 	}
 
 	@Test
 	void testDesassociaAtividade() {
-		fail("Not yet implemented");
+		assertTrue(sistema.desassociaAtividade("PES1", "A1"));
+	}
+	
+	@Test
+	void testDesassociaAtividadeNaoAssociada() {
+		assertFalse(sistema.desassociaAtividade("PES1", "A2"));
+	}
+	
+	@Test
+	void testDesassociaAtividadeCodigoPesquisaInexistente() {
+		try {
+			sistema.desassociaAtividade("PES5", "A1");
+			fail("Excessao deve ser lancada");
+		} catch (IllegalArgumentException e) {}
+	}
+	
+	@Test
+	void testDesassociaAtividadeCodigoPesquisaInativa() {
+		try {
+			sistema.desassociaAtividade("FAZ1", "A1");
+			fail("Excessao deve ser lancada");
+		} catch (IllegalArgumentException e) {}
 	}
 
 	@Test
