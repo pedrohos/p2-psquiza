@@ -43,7 +43,6 @@ public class Pesquisador implements Comparable<Pesquisador> {
 
 	private Especialidade especialidade;
 
-	private ArrayList<Pesquisa> pesquisasAssociadas;
 
 	/**
 	 * Metodo responsavel por construir um pesquisador, o pesquisador inicia ativo.
@@ -70,7 +69,6 @@ public class Pesquisador implements Comparable<Pesquisador> {
 		this.funcao = validaFuncao(funcao);
 		this.ativo = true;
 		this.especialidade = null;
-		this.pesquisasAssociadas = new ArrayList<Pesquisa>();
 	}
 	
 	private String validaFuncao(String funcao) {
@@ -259,38 +257,6 @@ public class Pesquisador implements Comparable<Pesquisador> {
 		} else {
 			return String.format("%s (%s) - %s - %s - %s - %s", nome, funcao, biografia, email, foto,
 					especialidade.toString());
-		}
-
-	}
-
-	/**
-	 * Armazena a pesquisa passada no array de pesquisas caso nao exista.
-	 * 
-	 * @param pesquisa Pesquisa a ser armazenada.
-	 * @return booleano caso a pesquisa seja associada
-	 */
-	public boolean associaPesquisa(Pesquisa pesquisa) {
-		if (pesquisasAssociadas.contains(pesquisa)) {
-			return false;
-		} else {
-			pesquisasAssociadas.add(pesquisa);
-			return true;
-		}
-
-	}
-
-	/**
-	 * Remove a pesquisa passada do array de pesquisas caso nao exista.
-	 * 
-	 * @param pesquisa Pesquisa a ser removida.
-	 * @return booleano caso a pesquisa nao seja desassociada
-	 */
-	public boolean desassociaPesquisa(Pesquisa pesquisa) {
-		if (!pesquisasAssociadas.contains(pesquisa)) {
-			return false;
-		} else {
-			pesquisasAssociadas.remove(pesquisa);
-			return true;
 		}
 
 	}

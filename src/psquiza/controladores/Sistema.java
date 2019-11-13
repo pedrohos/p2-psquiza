@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import psquiza.Util;
 import psquiza.entidades.Atividade;
 import psquiza.entidades.Pesquisa;
+import psquiza.entidades.Pesquisador;
 
 public class Sistema {
 
@@ -351,8 +352,8 @@ public class Sistema {
 	 *         ocorrer a associacao.
 	 */
 	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
-		Pesquisa pesquisa = controladorPesquisa.getPesquisa(idPesquisa);
-		return controladorPesquisador.associaPesquisador(pesquisa, emailPesquisador);
+		Pesquisador pesquisador = controladorPesquisador.getPesquisador(emailPesquisador);
+		return controladorPesquisa.associaPesquisador(pesquisador, idPesquisa);
 	}
 
 	/**
@@ -369,8 +370,8 @@ public class Sistema {
 	 *         ocorrer a desassociacao.
 	 */
 	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
-		Pesquisa pesquisa = controladorPesquisa.getPesquisa(idPesquisa);
-		return controladorPesquisador.desassociaPesquisador(pesquisa, emailPesquisador);
+		Pesquisador pesquisador = controladorPesquisador.getPesquisador(emailPesquisador);
+		return controladorPesquisa.desassociaPesquisador(pesquisador, idPesquisa);
 	}
 
 	/**
