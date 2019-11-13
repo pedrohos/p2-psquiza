@@ -209,40 +209,21 @@ public class ControladorPesquisador {
 	}
 
 	/**
+	 * Retorna um pesquisador de acordo com seu email
 	 * 
-	 * Recebe uma pesquisa que será associada ao pesquisador passado. Lanca erros em
-	 * caso da pesquisa não existir ou estar desativada e ainda se os parametros
-	 * recebios forme nulos, vazios ou com formato inválido. Uma pesquisa é
-	 * associada quando o pesquisador ainda não tem aquela pesquisa em seu array e
-	 * não é associada caso a pesquisa já exista no array.
+	 * @param email
 	 * 
-	 * @param pesquisa pesquisa que sera adicionada no pesquisador.
-	 * @param email    email do pesquisador em que a pesquisa será adicionada.
-	 * @return (true) caso a pesquisa seja associada e (false) caso não possa
-	 *         ocorrer a associacao.
+	 * @return pesquisador solicitado
 	 */
-	public boolean associaPesquisador(Pesquisa pesquisa, String email) {
+	public Pesquisador getPesquisador(String email) {
 		Util.validaAtributo(email, "Campo emailPesquisador nao pode ser nulo ou vazio.");
 		Util.validaEmail(email);
-		return pesquisadores.get(email).associaPesquisa(pesquisa);
-	}
+		if (pesquisadores.containsKey(email)) {
+			return pesquisadores.get(email);
+		} else {
+			throw new NullPointerException("Pesquisador nao existe");
+		}
 
-	/**
-	 * Recebe uma pesquisa que será desassociada do pesquisador passado. Lanca erros
-	 * em caso da pesquisa não existir ou estar desativada e ainda se os parametros
-	 * recebios forme nulos, vazios ou com formato inválido. Uma pesquisa é
-	 * desassociada quando o pesquisador tem aquela pesquisa em seu array e não é
-	 * desassociada caso a pesquisa não exista no array.
-	 * 
-	 * @param pesquisa pesquisa que sera adicionada no pesquisador.
-	 * @param email    email do pesquisador em que a pesquisa será adicionada.
-	 * @return (true) caso a pesquisa seja desassociada e (false) caso não possa
-	 *         ocorrer a desassociacao.
-	 */
-	public boolean desassociaPesquisador(Pesquisa pesquisa, String email) {
-		Util.validaAtributo(email, "Campo emailPesquisador nao pode ser nulo ou vazio.");
-		Util.validaEmail(email);
-		return pesquisadores.get(email).desassociaPesquisa(pesquisa);
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package psquiza.entidades;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import psquiza.Util;
@@ -41,6 +42,10 @@ public class Pesquisa {
 	private HashSet<String> objetivos;
 
 	private HashSet<Atividade> atividades;
+	/**
+	 * Array que armazena pesquisadores de uma pesquisa
+	 */
+	private ArrayList<Pesquisador> pesquisadores;
 
 	/**
 	 * Constroi uma pesquisa atraves da sua descricao, Campo de Interesse e codigo.
@@ -68,6 +73,7 @@ public class Pesquisa {
 		this.problema = "";
 		this.objetivos = new HashSet<>();
 		this.atividades = new HashSet<>();
+		this.pesquisadores = new ArrayList<>();
 	}
 
 	/**
@@ -280,6 +286,45 @@ public class Pesquisa {
 	public int qtdObjetivos() {
 		return this.objetivos.size();
 	}
+	
+	/**
+	 * Armazena pesquisador passada no array de pesquisadores caso nao exista.
+	 * 
+	 * @param pesquisador Pesquisa a ser armazenada.
+	 * @return booleano caso a pesquisa seja associada
+	 */
+	public boolean associaPesquisador(Pesquisador pesquisador) {
+		if(!ehAtiva()) {
+			throw new IllegalArgumentException("Pesquisa desativada.");
+		}
+		if (pesquisadores.contains(pesquisador)) {
+			return false;
+		} else {
+			pesquisadores.add(pesquisador);
+			return true;
+		}
+
+	}
+	
+	/**
+	 * Remove pesquisador passado do array de pesquisadores caso nao exista.
+	 * 
+	 * @param pesquisador Pesquisa a ser removida.
+	 * @return booleano caso a pesquisa nao seja desassociada
+	 */
+	public boolean desassociaPesquisador(Pesquisador pesquisador) {
+		if(!ehAtiva()) {
+			throw new IllegalArgumentException("Pesquisa desativada.");
+		}
+		if (!pesquisadores.contains(pesquisador)) {
+			return false;
+		} else {
+			pesquisadores.remove(pesquisador);
+			return true;
+		}
+
+	}
+
 
 	/**
 	 * Metodo que verfica se uma atividade esta associada a pesquisa

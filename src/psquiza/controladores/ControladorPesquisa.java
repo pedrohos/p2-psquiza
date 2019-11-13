@@ -10,6 +10,7 @@ import java.util.LinkedHashMap;
 import psquiza.Util;
 import psquiza.entidades.Atividade;
 import psquiza.entidades.Pesquisa;
+import psquiza.entidades.Pesquisador;
 import psquiza.ordenacao.*;
 
 /**
@@ -188,17 +189,6 @@ public class ControladorPesquisa {
 		Util.validaAtributo(codigo, "Codigo nao pode ser nulo ou vazio.");
 		existePesquisa(codigo);
 		return pesquisas.get(codigo).toString();
-	}
-
-	public Pesquisa getPesquisa(String codigo) {
-		Util.validaAtributo(codigo, "Campo idPesquisa nao pode ser nulo ou vazio.");
-		existePesquisa(codigo);
-		if (pesquisas.get(codigo).ehAtiva()) {
-			return pesquisas.get(codigo);
-		} else {
-			throw new NullPointerException("Pesquisa desativada.");
-		}
-
 	}
 
 	/**
@@ -465,5 +455,52 @@ public class ControladorPesquisa {
 			}
 		}
 		throw new IllegalArgumentException("Atividade sem associacoes com pesquisas.");
+	}
+
+	/**
+	 * 
+	 * Recebe um pesquisador que será associado a pesquisa passada. Lanca erros em
+	 * caso da pesquisa não existir ou estar desativada e ainda se os parametros
+	 * recebios forme nulos, vazios ou com formato inválido. Uma pesquisa é
+	 * associada a um pesquisador quando a pesquisa ainda não tem aquele pesquisador
+	 * em seu array e não é associada caso a pesquisa já exista no array.
+	 * 
+	 * @param pesquisador pesquisador que sera adicionado na pesquisa.
+	 * @param codigo      codigo da pesquisa que recebera o pesquisador
+	 * @return (true) caso a pesquisa seja associada e (false) caso não possa
+	 *         ocorrer a associacao.
+	 */
+	public boolean associaPesquisador(Pesquisador pesquisador, String codigo) {
+		Util.validaAtributo(codigo, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		if (pesquisas.containsKey(codigo)) {
+			return pesquisas.get(codigo).associaPesquisador(pesquisador);
+		} else {
+			throw new NullPointerException("Pesquisa nao encontrada.");
+		}
+
+	}
+
+	/**
+	 * 
+	 * Recebe um pesquisador que será desassociado a pesquisa passada. Lanca erros
+	 * em caso da pesquisa não existir ou estar desativada e ainda se os parametros
+	 * recebios forme nulos, vazios ou com formato inválido. Uma pesquisa é
+	 * desassociada a um pesquisador quando a pesquisa ainda não tem aquele
+	 * pesquisador em seu array e não é desassociada caso a pesquisa já exista no
+	 * array.
+	 * 
+	 * @param pesquisador pesquisador que sera removido na pesquisa.
+	 * @param codigo      codigo da pesquisa que recebera o pesquisador
+	 * @return (true) caso a pesquisa seja associada e (false) caso não possa
+	 *         ocorrer a associacao.
+	 */
+	public boolean desassociaPesquisador(Pesquisador pesquisador, String codigo) {
+		Util.validaAtributo(codigo, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		if (pesquisas.containsKey(codigo)) {
+			return pesquisas.get(codigo).desassociaPesquisador(pesquisador);
+		} else {
+			throw new NullPointerException("Pesquisa nao encontrada.");
+		}
+
 	}
 }
