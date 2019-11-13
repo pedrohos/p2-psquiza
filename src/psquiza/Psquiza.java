@@ -311,32 +311,34 @@ public class Psquiza {
 	public int getDuracao(String codigoAtividade) {
 		return sistema.getDuracao(codigoAtividade);
 	}
-	
+
 	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
-    	sistema.defineProximaAtividade(idPrecedente, idSubsquente);
-    }
-    
-    public void tiraProximaAtividade(String idPrecedente) {
-    	sistema.tiraProximaAtividade(idPrecedente);
-    }
-    
-    public int contaProximos(String idPrecedente) {
-    	return sistema.contaProximos(idPrecedente);
-    }
-    
-    public String pegaProximo(String idAtividade, int enesimaAtividade) {
-    	return sistema.pegaProximo(idAtividade, enesimaAtividade);
-    }
-    
-    public String pegaMaiorRiscoAtividades(String idAtividade) {
-    	return sistema.pegaMaiorRiscoAtividades(idAtividade);
-    }
+		sistema.defineProximaAtividade(idPrecedente, idSubsquente);
+	}
+
+	public void tiraProximaAtividade(String idPrecedente) {
+		sistema.tiraProximaAtividade(idPrecedente);
+	}
+
+	public int contaProximos(String idPrecedente) {
+		return sistema.contaProximos(idPrecedente);
+	}
+
+	public String pegaProximo(String idAtividade, int enesimaAtividade) {
+		return sistema.pegaProximo(idAtividade, enesimaAtividade);
+	}
+
+	public String pegaMaiorRiscoAtividades(String idAtividade) {
+		return sistema.pegaMaiorRiscoAtividades(idAtividade);
+	}
 
 	public static void main(String[] args) {
 		args = new String[] { "psquiza.Psquiza", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",
 				"testes_aceitacao/use_case_3.txt", "testes_aceitacao/use_case_4.txt", "testes_aceitacao/use_case_5.txt",
-				"testes_aceitacao/use_case_6.txt", "testes_aceitacao/use_case_7.txt",
-				"testes_aceitacao/use_case_8.txt" };
+				"testes_aceitacao/use_case_6.txt", "testes_aceitacao/use_case_7.txt", "testes_aceitacao/use_case_8.txt",
+				"testes_aceitacao/use_case_9.txt", "testes_aceitacao/use_case_10.txt",
+				"testes_aceitacao/use_case_11.txt", "testes_aceitacao/use_case_12CARREGAR.txt",
+				"testes_aceitacao/use_case_12SALVAR.txt" };
 		EasyAccept.main(args);
 	}
 }

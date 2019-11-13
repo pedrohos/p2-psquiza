@@ -157,7 +157,8 @@ public class Atividade {
 	public void definirProxima(Atividade proxima) {
 		if (this.proxima != null)
 			throw new IllegalArgumentException("Atividade ja possui uma subsequente.");
-
+		verificaLoop(proxima);
+		
 		this.proxima = proxima;
 	}
 
@@ -194,6 +195,13 @@ public class Atividade {
 		if (proxima == null)
 			return codigoMaior;
 		return proxima.pegaMaiorRiscoAtividades(maior, codigoMaior);
+	}
+	
+	private void verificaLoop(Atividade a) {
+		if (this.equals(a))
+			throw new IllegalArgumentException("Criacao de loops negada.");
+		if (a.proxima != null)
+			verificaLoop(a.proxima);
 	}
 
 	/**

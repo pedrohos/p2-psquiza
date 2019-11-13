@@ -1,0 +1,19 @@
+#Gravando resumo das pesquisas COM1, COM2 e COM3
+#Gravando resumo dos resultados COM1, COM2 e COM3
+
+
+expectError "Pesquisa nao pode ser nula ou vazia." gravarResumo codigoPesquisa=""
+expectError "Pesquisa nao encontrada." gravarResumo codigoPesquisa="ENE1"
+gravarResumo codigoPesquisa="COM1"
+gravarResumo codigoPesquisa="COM2"
+gravarResumo codigoPesquisa="COM3"
+
+
+expectError "Pesquisa nao pode ser nula ou vazia." gravarResultados codigoPesquisa=""
+expectError "Pesquisa nao encontrada." gravarResultados codigoPesquisa="ENE1"
+gravarResultados codigoPesquisa="COM1"
+gravarResultados codigoPesquisa="COM2"
+gravarResultados codigoPesquisa="COM3"
+
+
+
