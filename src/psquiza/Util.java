@@ -44,7 +44,7 @@ public final class Util {
 	}
 	
 	public static void validaNumero(int numero, String erro) {
-		if(numero < 0)
+		if(numero <= 0)
 			throw new IllegalArgumentException(erro);
 	}
 }

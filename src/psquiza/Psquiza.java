@@ -332,12 +332,22 @@ public class Psquiza {
 		return sistema.pegaMaiorRiscoAtividades(idAtividade);
 	}
 	
+
 	public void configuraEstrategia(String estrategia) {
 		sistema.configuraEstrategia(estrategia);
 	}
 	
 	public String proximaAtividade(String codigoPesquisa) {
 		return sistema.proximaAtividade(codigoPesquisa);
+	}
+	public void gravarResumo(String codigoPesquisa) {
+		sistema.gravarResumo(codigoPesquisa);
+		
+	}
+	
+	public void gravarResultados(String codigoPesquisa) {
+		sistema.gravarResultados(codigoPesquisa);
+
 	}
 
 	public static void main(String[] args) {
