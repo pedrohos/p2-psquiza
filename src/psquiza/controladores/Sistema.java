@@ -477,4 +477,14 @@ public class Sistema {
     public String pegaMaiorRiscoAtividades(String idAtividade) {
     	return controladorAtividade.pegaMaiorRiscoAtividades(idAtividade);
     }
+    
+
+	public void gravarResumo(String codigoPesquisa) {
+		controladorPesquisa.gravarResumo(codigoPesquisa);
+		
+	}
+	
+	public void gravarResultados(String codigoPesquisa) {
+		controladorPesquisa.gravarResultados(codigoPesquisa);
+	}
 }

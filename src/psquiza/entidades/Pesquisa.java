@@ -286,7 +286,7 @@ public class Pesquisa {
 	public int qtdObjetivos() {
 		return this.objetivos.size();
 	}
-	
+
 	/**
 	 * Armazena pesquisador passada no array de pesquisadores caso nao exista.
 	 * 
@@ -294,7 +294,7 @@ public class Pesquisa {
 	 * @return booleano caso a pesquisa seja associada
 	 */
 	public boolean associaPesquisador(Pesquisador pesquisador) {
-		if(!ehAtiva()) {
+		if (!ehAtiva()) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
 		}
 		if (pesquisadores.contains(pesquisador)) {
@@ -305,7 +305,7 @@ public class Pesquisa {
 		}
 
 	}
-	
+
 	/**
 	 * Remove pesquisador passado do array de pesquisadores caso nao exista.
 	 * 
@@ -313,7 +313,7 @@ public class Pesquisa {
 	 * @return booleano caso a pesquisa nao seja desassociada
 	 */
 	public boolean desassociaPesquisador(Pesquisador pesquisador) {
-		if(!ehAtiva()) {
+		if (!ehAtiva()) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
 		}
 		if (!pesquisadores.contains(pesquisador)) {
@@ -324,7 +324,6 @@ public class Pesquisa {
 		}
 
 	}
-
 
 	/**
 	 * Metodo que verfica se uma atividade esta associada a pesquisa
@@ -340,5 +339,32 @@ public class Pesquisa {
 			}
 		}
 		return false;
+	}
+
+	public String getResumo() {
+		String resumo  = "";
+		//resumo+= "Pesquisa: "+toString() + "\n    Pesquisadores:\n    -";
+		
+		String obj = "";
+		for (String o: objetivos) {
+			obj+=String.format("- %s\n", o);
+		}
+		
+		String psq = "";
+		for(Pesquisador p: pesquisadores) {
+			psq = String.format("- %s\n",p.toString());
+		}
+		
+		//verificar erros aqui
+		String atv = "";
+		for(Atividade a: atividades) {
+			atv+=String.format("- %s\n",a.toString());
+		}
+		
+		resumo = String.format("-Pesquisa: %s\n    -Pesquisadores:\n        %s    -Problema: %s\n    -Objetivos: \n        %s    -Atividades:\n        %s", toString(),psq,problema,obj,atv);
+		
+		
+		
+		return resumo;
 	}
 }
