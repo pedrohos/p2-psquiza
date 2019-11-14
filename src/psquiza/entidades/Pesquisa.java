@@ -2,6 +2,9 @@ package psquiza.entidades;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
 
 import psquiza.Util;
 
@@ -41,7 +44,7 @@ public class Pesquisa {
 
 	private HashSet<String> objetivos;
 
-	private HashSet<Atividade> atividades;
+	private List<Atividade> atividades;
 	/**
 	 * Array que armazena pesquisadores de uma pesquisa
 	 */
@@ -72,7 +75,7 @@ public class Pesquisa {
 		this.estado = true;
 		this.problema = "";
 		this.objetivos = new HashSet<>();
-		this.atividades = new HashSet<>();
+		this.atividades = new ArrayList<>();
 		this.pesquisadores = new ArrayList<>();
 	}
 
@@ -341,4 +344,51 @@ public class Pesquisa {
 		}
 		return false;
 	}
+
+	public String proximaAtividade(String estrategia) {
+		if(!pesquisaPossuiPendencias()) {
+			throw new IllegalArgumentException("Pesquisa sem atividades com pendencias.");
+		}
+		switch(estrategia) {
+		case "MAIS_ANTIGA":
+			for (Atividade atividade: atividades) {
+				if(atividadePossuiItensPendentes(atividade)) {
+					return atividade.getId();
+				}
+			}
+		case "MENOS_PENDENCIAS":
+			Atividade atividade = null;
+			for (Atividade a: atividades) {
+				if(a.getItensPendentes() > 0) {
+					atividade = a;
+					break;
+				}
+			}
+			for (int i = 1; i < atividades.size(); i++) {
+				if(atividades.get(i).getItensPendentes() < atividade.getItensPendentes()) {
+					atividade = atividades.get(i);
+				}
+			}
+			return atividade.getId();
+		}
+		return null;
+	}
+	
+	private boolean pesquisaPossuiPendencias() {
+		for(Atividade atividade : atividades) {
+			if(atividade.getItensPendentes() > 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean atividadePossuiItensPendentes(Atividade atividade) {
+		if(atividade.getItensPendentes() == 0) {
+			return false;
+		}
+		return true;
+	}
+	
+	
 }

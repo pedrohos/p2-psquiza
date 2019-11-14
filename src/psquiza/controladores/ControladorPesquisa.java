@@ -30,12 +30,14 @@ public class ControladorPesquisa {
 	 * pelo sistema identifica unicamente uma pesquisa.
 	 */
 	private LinkedHashMap<String, Pesquisa> pesquisas;
-
+	
+	private String estrategia;
 	/**
 	 * Cria um controle de pesquisa e inicializa a coleção de pesquisas.
 	 */
 	public ControladorPesquisa() {
 		pesquisas = new LinkedHashMap<String, Pesquisa>();
+		this.estrategia = "MAIS_ANTIGA";
 	}
 
 	/**
@@ -502,5 +504,26 @@ public class ControladorPesquisa {
 			throw new NullPointerException("Pesquisa nao encontrada.");
 		}
 
+	}
+
+	public void configuraEstrategia(String estrategia) {
+		Util.validaAtributo(estrategia, "Estrategia nao pode ser nula ou vazia.");
+		if(estrategia.equals("MAIS_ANTIGA") || estrategia.equals("MENOS_PENDENCIAS") || estrategia.equals("MAIOR_RISCO") || estrategia.equals("MAIOR_DURACAO")){
+			this.estrategia = estrategia;
+		}else {
+			throw new IllegalArgumentException("Valor invalido da estrategia");
+		}
+		
+	}
+
+	public String proximaAtividade(String codigoPesquisa) {
+		Util.validaAtributo(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
+		if(!pesquisas.containsKey(codigoPesquisa)) {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+		if(!pesquisas.get(codigoPesquisa).ehAtiva()) {
+			throw new IllegalArgumentException("Pesquisa desativada.");
+		}
+		return pesquisas.get(codigoPesquisa).proximaAtividade(this.estrategia);
 	}
 }

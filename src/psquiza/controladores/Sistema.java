@@ -477,4 +477,12 @@ public class Sistema {
     public String pegaMaiorRiscoAtividades(String idAtividade) {
     	return controladorAtividade.pegaMaiorRiscoAtividades(idAtividade);
     }
+
+	public void configuraEstrategia(String estrategia) {
+		controladorPesquisa.configuraEstrategia(estrategia);
+		
+	}
+	public String proximaAtividade(String codigoPesquisa) {
+		return controladorPesquisa.proximaAtividade(codigoPesquisa);
+	}
 }
