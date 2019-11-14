@@ -1,5 +1,9 @@
 package psquiza.controladores;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -503,4 +507,32 @@ public class ControladorPesquisa {
 		}
 
 	}
+
+	public static void escritor(String path, Pesquisa p) throws IOException {
+		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path));
+
+		buffWrite.append("novo arquivo");
+		buffWrite.close();
+	}
+
+	public void gravarResumo(String codigoPesquisa) {
+		Util.validaAtributo(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
+		existePesquisa(codigoPesquisa);
+		
+		String caminho = String.format("%s/%s.txt",System.getProperty("user.dir"),codigoPesquisa);
+		
+		try {
+			new File(caminho);
+			escritor(caminho, pesquisas.get(codigoPesquisa));
+		}catch(Exception e) {
+		}
+		
+
+	}
+
+	public void gravarResultados(String codigoPesquisa) {
+		Util.validaAtributo(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
+		existePesquisa(codigoPesquisa);
+	}
+
 }
