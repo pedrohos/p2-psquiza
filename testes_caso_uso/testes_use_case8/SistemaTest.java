@@ -18,7 +18,7 @@ class SistemaTest {
 		s.cadastraObjetivo("GERAL", "Reconhecer tipo de pe atraves do processamento da imagem fotografada do pe", 3, 5);
 		s.cadastraAtividade("Retirar fotos de pes a fim de reconhecimento", "BAIXO", "Retirar fotos dos pes de voluntarios");
 		
-		assertEquals(s.busca("reconhe"),"SAU1: Reconhecimento de pes| P1: Reconhecer curvaturas atraves de algoritmos | "
+		assertEquals(s.busca("reconhe"),"SAU1: Reconhecimento de pes | P1: Reconhecer curvaturas atraves de algoritmos | "
 									  + "O1: Reconhecer tipo de pe atraves do processamento da imagem fotografada do pe | "
 									  + "A1: Retirar fotos de pes a fim de reconhecimento");
 	}

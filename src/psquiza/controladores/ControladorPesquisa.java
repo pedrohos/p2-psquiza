@@ -1,6 +1,10 @@
 package psquiza.controladores;
 
 import java.io.Serializable;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -33,12 +37,14 @@ public class ControladorPesquisa implements Serializable {
 	 * pelo sistema identifica unicamente uma pesquisa.
 	 */
 	private LinkedHashMap<String, Pesquisa> pesquisas;
-
+	
+	private String estrategia;
 	/**
 	 * Cria um controle de pesquisa e inicializa a coleção de pesquisas.
 	 */
 	public ControladorPesquisa() {
 		pesquisas = new LinkedHashMap<String, Pesquisa>();
+		this.estrategia = "MAIS_ANTIGA";
 	}
 
 	/**
@@ -506,4 +512,53 @@ public class ControladorPesquisa implements Serializable {
 		}
 
 	}
+
+	public void configuraEstrategia(String estrategia) {
+		Util.validaAtributo(estrategia, "Estrategia nao pode ser nula ou vazia.");
+		if(estrategia.equals("MAIS_ANTIGA") || estrategia.equals("MENOS_PENDENCIAS") || estrategia.equals("MAIOR_RISCO") || estrategia.equals("MAIOR_DURACAO")){
+			this.estrategia = estrategia;
+		}else {
+			throw new IllegalArgumentException("Valor invalido da estrategia");
+		}
+		
+	}
+
+	public String proximaAtividade(String codigoPesquisa) {
+		Util.validaAtributo(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
+		if(!pesquisas.containsKey(codigoPesquisa)) {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+		if(!pesquisas.get(codigoPesquisa).ehAtiva()) {
+			throw new IllegalArgumentException("Pesquisa desativada.");
+		}
+		return pesquisas.get(codigoPesquisa).proximaAtividade(this.estrategia);
+	}
+	
+	public static void escritor(String path, Pesquisa p) throws IOException {
+		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path));
+
+		buffWrite.append("novo arquivo");
+		buffWrite.close();
+	}
+
+	public void gravarResumo(String codigoPesquisa) {
+		Util.validaAtributo(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
+		existePesquisa(codigoPesquisa);
+		
+		String caminho = String.format("%s/%s.txt",System.getProperty("user.dir"),codigoPesquisa);
+		
+		try {
+			new File(caminho);
+			escritor(caminho, pesquisas.get(codigoPesquisa));
+		}catch(Exception e) {
+		}
+		
+
+	}
+
+	public void gravarResultados(String codigoPesquisa) {
+		Util.validaAtributo(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
+		existePesquisa(codigoPesquisa);
+	}
+
 }

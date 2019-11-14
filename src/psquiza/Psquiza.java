@@ -340,6 +340,23 @@ public class Psquiza {
 		sistema.carrega();
 	}
 
+	public void configuraEstrategia(String estrategia) {
+		sistema.configuraEstrategia(estrategia);
+	}
+	
+	public String proximaAtividade(String codigoPesquisa) {
+		return sistema.proximaAtividade(codigoPesquisa);
+	}
+	public void gravarResumo(String codigoPesquisa) {
+		sistema.gravarResumo(codigoPesquisa);
+		
+	}
+	
+	public void gravarResultados(String codigoPesquisa) {
+		sistema.gravarResultados(codigoPesquisa);
+
+	}
+
 	public static void main(String[] args) {
 		args = new String[] { "psquiza.Psquiza", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",
 				"testes_aceitacao/use_case_3.txt", "testes_aceitacao/use_case_4.txt", "testes_aceitacao/use_case_5.txt",

@@ -242,7 +242,7 @@ public class Sistema {
 		String listagem = String.format("%s | %s | %s | %s | %s", controladorPesquisa.buscaPesquisa(termo),
 				controladorPesquisador.buscaPesquisador(termo), controladorMetas.buscaProblema(termo),
 				controladorMetas.buscaObjetivo(termo), controladorAtividade.buscaAtividade(termo));
-		listagem = listagem.replace(" |  ", "");
+		listagem = listagem.replace("|  ", "");
 		if (listagem.charAt(0) == '|')
 			listagem = listagem.substring(2);
 		if (listagem.length() >= 3 && listagem.substring(listagem.length() - 3).equals(" | ")) {
@@ -498,4 +498,22 @@ public class Sistema {
     	this.controladorPesquisa = gerenciadorControladores.carregaPesquisa();
     	this.controladorPesquisador = gerenciadorControladores.carregaPesquisador();
     }
+
+	public void configuraEstrategia(String estrategia) {
+		controladorPesquisa.configuraEstrategia(estrategia);
+		
+	}
+	public String proximaAtividade(String codigoPesquisa) {
+		return controladorPesquisa.proximaAtividade(codigoPesquisa);
+	}
+    
+
+	public void gravarResumo(String codigoPesquisa) {
+		controladorPesquisa.gravarResumo(codigoPesquisa);
+		
+	}
+	
+	public void gravarResultados(String codigoPesquisa) {
+		controladorPesquisa.gravarResultados(codigoPesquisa);
+	}
 }
