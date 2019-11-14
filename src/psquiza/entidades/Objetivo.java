@@ -1,5 +1,7 @@
 package psquiza.entidades;
 
+import java.io.Serializable;
+
 import psquiza.Util;
 import psquiza.enums.Tipo;
 
@@ -9,8 +11,10 @@ import psquiza.enums.Tipo;
  * @author Lucian Julio
  *
  */
-public class Objetivo {
+public class Objetivo implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Atributo que indica a viabilidade do um objetivo
 	 */

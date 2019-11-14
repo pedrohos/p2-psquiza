@@ -1,5 +1,6 @@
 package psquiza.entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -22,8 +23,10 @@ import psquiza.enums.Risco;
  * 
  * @author Pedro Henrique
  */
-public class Atividade {
+public class Atividade implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Armazena a descricao da Atividade.
 	 */

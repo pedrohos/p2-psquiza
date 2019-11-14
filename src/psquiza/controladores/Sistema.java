@@ -1,5 +1,6 @@
 package psquiza.controladores;
 
+import java.io.IOException;
 import java.util.NoSuchElementException;
 
 import psquiza.Util;
@@ -15,7 +16,9 @@ public class Sistema {
 	private ControladorPesquisa controladorPesquisa;
 	private ControladorMetas controladorMetas;
 	private ControladorPesquisador controladorPesquisador;
-
+	private GerenciadorControladores gerenciadorControladores;
+	private final String estadoSistema = "estado.dat";  
+   
 	/**
 	 * Constroi um sistema inicializando os controladores de Pesquisa, Atividade,
 	 * Metas e Pesquisador.
@@ -25,6 +28,7 @@ public class Sistema {
 		this.controladorPesquisa = new ControladorPesquisa();
 		this.controladorMetas = new ControladorMetas();
 		this.controladorPesquisador = new ControladorPesquisador();
+		this.gerenciadorControladores = new GerenciadorControladores();
 	}
 
 	public void cadastraAtividade(String descricao, String nivelRisco, String descricaoRisco) {
@@ -476,5 +480,22 @@ public class Sistema {
     
     public String pegaMaiorRiscoAtividades(String idAtividade) {
     	return controladorAtividade.pegaMaiorRiscoAtividades(idAtividade);
+    }
+    
+    public void salva() {
+    	try {
+			gerenciadorControladores.salva(estadoSistema, controladorAtividade, controladorMetas, controladorPesquisa, controladorPesquisador);
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+    }
+    
+    public void carrega() {
+    	gerenciadorControladores.carrega(estadoSistema));
+    	this.controladorAtividade = gerenciadorControladores.carregaAtividade();
+    	this.controladorMetas = gerenciadorControladores.carregaMetas();
+    	this.controladorPesquisa = gerenciadorControladores.carregaPesquisa();
+    	this.controladorPesquisador = gerenciadorControladores.carregaPesquisador();
     }
 }

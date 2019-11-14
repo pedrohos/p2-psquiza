@@ -1,5 +1,6 @@
 package psquiza.controladores;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,8 +20,10 @@ import psquiza.ordenacao.OrdenaPesquisador;
  * 
  * @author Eniedson Fabiano Pereira da Silva Junior.
  */
-public class ControladorPesquisador {
+public class ControladorPesquisador implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * HashMap responsavel por armazenar os pesquisadores cadastrados.
 	 */

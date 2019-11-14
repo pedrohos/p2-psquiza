@@ -1,5 +1,6 @@
 package psquiza.controladores;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -20,8 +21,10 @@ import psquiza.ordenacao.OrdenaAtividade;
  * 
  * @author Pedro Henrique
  */
-public class ControladorAtividade {
-
+public class ControladorAtividade implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Armazena um mapa que mapeia um id a uma Atividade.
 	 */

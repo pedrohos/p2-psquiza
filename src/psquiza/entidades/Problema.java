@@ -1,5 +1,7 @@
 package psquiza.entidades;
 
+import java.io.Serializable;
+
 import psquiza.Util;
 
 /**
@@ -8,8 +10,10 @@ import psquiza.Util;
  * @author Lucian Julio
  *
  */
-public class Problema {
+public class Problema implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Atributo que representa a descricao do problema
 	 */

@@ -1,5 +1,6 @@
 package psquiza.controladores;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -18,8 +19,10 @@ import psquiza.ordenacao.OrdenaProblema;
  * @author Lucian Julio
  *
  */
-public class ControladorMetas {
+public class ControladorMetas implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Estrutura para guardar os objetos do tipo problema do sistema
 	 */

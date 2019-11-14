@@ -1,5 +1,6 @@
 package psquiza.entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -14,8 +15,10 @@ import psquiza.Util;
  * @author Regina Leticia Santos Felipe - 119110519
  * 
  */
-public class Pesquisa {
+public class Pesquisa implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Descricao da pesquisa que será realizada através de um resumo.
 	 */

@@ -1,5 +1,6 @@
 package psquiza.entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import psquiza.Util;
 
@@ -8,8 +9,10 @@ import psquiza.Util;
  * 
  * @author Eniedson Fabiano Pereira da Silva Junior
  */
-public class Pesquisador implements Comparable<Pesquisador> {
+public class Pesquisador implements Comparable<Pesquisador>, Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Atributo que representa o nome do pesquisador.
 	 */

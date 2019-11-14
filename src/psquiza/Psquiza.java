@@ -331,6 +331,14 @@ public class Psquiza {
 	public String pegaMaiorRiscoAtividades(String idAtividade) {
 		return sistema.pegaMaiorRiscoAtividades(idAtividade);
 	}
+	
+	public void salva() {
+		sistema.salva();
+	}
+	
+	public void carrega() {
+		sistema.carrega();
+	}
 
 	public static void main(String[] args) {
 		args = new String[] { "psquiza.Psquiza", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",

@@ -1,5 +1,6 @@
 package psquiza.controladores;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -23,8 +24,10 @@ import psquiza.ordenacao.*;
  * @author Regina Leticia Santos Felipe
  *
  */
-public class ControladorPesquisa {
+public class ControladorPesquisa implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Colecao de pesquisas, no formato: Chave - Pesquisa, onde um codigo gerado
 	 * pelo sistema identifica unicamente uma pesquisa.
