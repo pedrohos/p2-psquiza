@@ -1,4 +1,4 @@
-﻿#Criando atividades 6-14
+#Criando atividades 6-14
 
 cadastraAtividade Descricao="Plantio de um grao de feijao em um algodao." nivelRisco="ALTO" descricaoRisco="Por se tratar de uma vida, o risco e extremamente elevado."
 cadastraAtividade Descricao="Analise do comportamento dos alunos de computacao com os alunos de arq/urb." nivelRisco="ALTO" descricaoRisco="Por se tratar de uma analise a partir de denuncias de um comportamento hostil, o risco e extremamente elevado."
@@ -64,12 +64,12 @@ expectError "Atividade inexistente." pegaProximo idAtividade="A5" enesimaAtivida
 expect "A10" pegaProximo idAtividade="A7" enesimaAtividade=3
 expect "A1" pegaProximo idAtividade="A2" enesimaAtividade=1
 expectError "Atividade nao pode ser nulo ou vazio." pegaProximo idAtividade="" enesimaAtividade=3
-expectError "Atividade nao pode ser nulo ou vazio." pegaProximo idAtividade="A2" enesimaAtividade=0
+expectError "EnesimaAtividade nao pode ser negativa ou zero." pegaProximo idAtividade="A2" enesimaAtividade=0
 
 
 #Pegando a atividade de maior risco
 expect "A10" pegaMaiorRiscoAtividades idAtividade="A13" 
-expect "Nao existe proxima atividade." pegaMaiorRiscoAtividades idAtividade="A1" 
+expectError "Nao existe proxima atividade." pegaMaiorRiscoAtividades idAtividade="A1" 
 expect "A10" pegaMaiorRiscoAtividades idAtividade="A7" 
 expect "A10" pegaMaiorRiscoAtividades idAtividade="A12" 
 expectError "Atividade nao pode ser nulo ou vazio." pegaMaiorRiscoAtividades idAtividade=""

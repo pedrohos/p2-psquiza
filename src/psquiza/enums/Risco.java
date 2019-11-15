@@ -60,4 +60,8 @@ public enum Risco {
 	public boolean ehMaior(Risco r) {
 		return (int) this.risco[1] > (int) r.risco[1];
 	}
+
+	public int getRiscoInt() {
+		return (int) this.risco[1];
+	}
 }

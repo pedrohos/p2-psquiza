@@ -322,4 +322,8 @@ public class Atividade implements Serializable {
 	public int getDuracao() {
 		return this.periodo;
 	}
+
+	public int getNivelRiscoInt() {
+		return this.nivelRisco.getRiscoInt();
+	}
 }

@@ -348,32 +348,67 @@ public class Pesquisa implements Serializable {
 	}
 
 	public String proximaAtividade(String estrategia) {
-		if(!pesquisaPossuiPendencias()) {
+		if (!pesquisaPossuiPendencias()) {
 			throw new IllegalArgumentException("Pesquisa sem atividades com pendencias.");
 		}
-		switch(estrategia) {
+		switch (estrategia) {
 		case "MAIS_ANTIGA":
-			for (Atividade atividade: atividades) {
-				if(atividadePossuiItensPendentes(atividade)) {
+			for (Atividade atividade : atividades) {
+				if (atividadePossuiItensPendentes(atividade)) {
 					return atividade.getId();
 				}
 			}
 		case "MENOS_PENDENCIAS":
 			Atividade atividade = null;
-			for (Atividade a: atividades) {
-				if(a.getItensPendentes() > 0) {
+			for (Atividade a : atividades) {
+				if (a.getItensPendentes() > 0) {
 					atividade = a;
 					break;
 				}
 			}
 			for (int i = 1; i < atividades.size(); i++) {
-				if(atividades.get(i).getItensPendentes() < atividade.getItensPendentes()) {
+				if (atividades.get(i).getItensPendentes() < atividade.getItensPendentes()
+						&& atividades.get(i).getItensPendentes() != 0) {
 					atividade = atividades.get(i);
 				}
 			}
 			return atividade.getId();
+		case "MAIOR_RISCO":
+			Atividade atividade1 = null;
+			for (Atividade a : atividades) {
+				if (a.getItensPendentes() > 0) {
+					atividade1 = a;
+					break;
+				}
+			}
+			for (int i = 1; i < atividades.size(); i++) {
+				if (atividadePossuiItensPendentes(atividades.get(i))) {
+					if (atividades.get(i).getNivelRiscoInt() > atividade1.getNivelRiscoInt()) {
+						atividade1 = atividades.get(i);
+					}
+				}
+			}
+			return atividade1.getId();
+
+		case "MAIOR_DURACAO":
+			Atividade atividade2 = null;
+			for (Atividade a : atividades) {
+				if (a.getItensPendentes() > 0) {
+					atividade2 = a;
+					break;
+				}
+			}
+			for (int i = 1; i < atividades.size(); i++) {
+				if (atividadePossuiItensPendentes(atividades.get(i))) {
+					if (atividades.get(i).getDuracao() > atividade2.getDuracao()) {
+						atividade2 = atividades.get(i);
+					}
+				}
+			}
+			return atividade2.getId();
+		default:
+			throw new IllegalArgumentException("Estrategia nao definida");
 		}
-		return null;
 	}
 	
 	private boolean pesquisaPossuiPendencias() {
