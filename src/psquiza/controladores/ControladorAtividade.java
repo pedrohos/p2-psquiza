@@ -243,6 +243,9 @@ public class ControladorAtividade implements Serializable {
 	public void executaAtividade(String codigoAtividade, int item, int duracao) {
 		Util.validaNumero(item, "Item nao pode ser nulo ou negativo.");
 		Util.validaNumero(duracao, "Duracao nao pode ser nula ou negativa.");
+		if(!atividades.containsKey(codigoAtividade)) {
+			throw new IllegalArgumentException("Atividade nao existe!");
+		}
 		atividades.get(codigoAtividade).executaAtividade(item, duracao);
 	}
 
