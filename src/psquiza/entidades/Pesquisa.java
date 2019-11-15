@@ -21,7 +21,7 @@ import psquiza.Util;
 public class Pesquisa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Descricao da pesquisa que será realizada através de um resumo.
 	 */
@@ -347,25 +347,32 @@ public class Pesquisa implements Serializable {
 		return false;
 	}
 
+	/**
+	 * Metodo para pegar a proxima atividade
+	 * 
+	 * @param estrategia estrategia que vai ser usada para definir a proxima
+	 *                   atividade
+	 * @return retorna o codigo da proxima atividade
+	 */
 	public String proximaAtividade(String estrategia) {
 		if (!pesquisaPossuiPendencias()) {
 			throw new IllegalArgumentException("Pesquisa sem atividades com pendencias.");
 		}
+		Atividade atividade = null;
+		for (Atividade a : atividades) {
+			if (a.getItensPendentes() > 0) {
+				atividade = a;
+				break;
+			}
+		}
 		switch (estrategia) {
 		case "MAIS_ANTIGA":
-			for (Atividade atividade : atividades) {
+			for (Atividade tarefa : atividades) {
 				if (atividadePossuiItensPendentes(atividade)) {
 					return atividade.getId();
 				}
 			}
 		case "MENOS_PENDENCIAS":
-			Atividade atividade = null;
-			for (Atividade a : atividades) {
-				if (a.getItensPendentes() > 0) {
-					atividade = a;
-					break;
-				}
-			}
 			for (int i = 1; i < atividades.size(); i++) {
 				if (atividades.get(i).getItensPendentes() < atividade.getItensPendentes()
 						&& atividades.get(i).getItensPendentes() != 0) {
@@ -374,85 +381,82 @@ public class Pesquisa implements Serializable {
 			}
 			return atividade.getId();
 		case "MAIOR_RISCO":
-			Atividade atividade1 = null;
-			for (Atividade a : atividades) {
-				if (a.getItensPendentes() > 0) {
-					atividade1 = a;
-					break;
-				}
-			}
 			for (int i = 1; i < atividades.size(); i++) {
 				if (atividadePossuiItensPendentes(atividades.get(i))) {
-					if (atividades.get(i).getNivelRiscoInt() > atividade1.getNivelRiscoInt()) {
-						atividade1 = atividades.get(i);
+					if (atividades.get(i).getNivelRiscoInt() > atividade.getNivelRiscoInt()) {
+						atividade = atividades.get(i);
 					}
 				}
 			}
-			return atividade1.getId();
+			return atividade.getId();
 
 		case "MAIOR_DURACAO":
-			Atividade atividade2 = null;
-			for (Atividade a : atividades) {
-				if (a.getItensPendentes() > 0) {
-					atividade2 = a;
-					break;
-				}
-			}
 			for (int i = 1; i < atividades.size(); i++) {
 				if (atividadePossuiItensPendentes(atividades.get(i))) {
-					if (atividades.get(i).getDuracao() > atividade2.getDuracao()) {
-						atividade2 = atividades.get(i);
+					if (atividades.get(i).getDuracao() > atividade.getDuracao()) {
+						atividade = atividades.get(i);
 					}
 				}
 			}
-			return atividade2.getId();
+			return atividade.getId();
 		default:
 			throw new IllegalArgumentException("Estrategia nao definida");
 		}
 	}
-	
+
+	/**
+	 * Metodo para checar se uma pesquisa possoui pelo menos uma atividade com algum
+	 * item pendente
+	 * 
+	 * @return retorna true se possuir, false caso nao possua
+	 */
 	private boolean pesquisaPossuiPendencias() {
-		for(Atividade atividade : atividades) {
-			if(atividade.getItensPendentes() > 0) {
+		for (Atividade atividade : atividades) {
+			if (atividade.getItensPendentes() > 0) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
+	/**
+	 * Metodo para cehcar se uma atividade possui um item pendente
+	 * 
+	 * @param atividade atividade que vai ser checada
+	 * @return retorna true se a atividade possuir um item pendente, false caso nao
+	 *         possua
+	 */
 	private boolean atividadePossuiItensPendentes(Atividade atividade) {
-		if(atividade.getItensPendentes() == 0) {
+		if (atividade.getItensPendentes() == 0) {
 			return false;
 		}
 		return true;
 	}
-	
-	
 
 	public String getResumo() {
-		String resumo  = "";
-		//resumo+= "Pesquisa: "+toString() + "\n    Pesquisadores:\n    -";
-		
+		String resumo = "";
+		// resumo+= "Pesquisa: "+toString() + "\n Pesquisadores:\n -";
+
 		String obj = "";
-		for (String o: objetivos) {
-			obj+=String.format("- %s\n", o);
+		for (String o : objetivos) {
+			obj += String.format("- %s\n", o);
 		}
-		
+
 		String psq = "";
-		for(Pesquisador p: pesquisadores) {
-			psq = String.format("- %s\n",p.toString());
+		for (Pesquisador p : pesquisadores) {
+			psq = String.format("- %s\n", p.toString());
 		}
-		
-		//verificar erros aqui
+
+		// verificar erros aqui
 		String atv = "";
-		for(Atividade a: atividades) {
-			atv+=String.format("- %s\n",a.toString());
+		for (Atividade a : atividades) {
+			atv += String.format("- %s\n", a.toString());
 		}
-		
-		resumo = String.format("-Pesquisa: %s\n    -Pesquisadores:\n        %s    -Problema: %s\n    -Objetivos: \n        %s    -Atividades:\n        %s", toString(),psq,problema,obj,atv);
-		
-		
-		
+
+		resumo = String.format(
+				"-Pesquisa: %s\n    -Pesquisadores:\n        %s    -Problema: %s\n    -Objetivos: \n        %s    -Atividades:\n        %s",
+				toString(), psq, problema, obj, atv);
+
 		return resumo;
 	}
 }

@@ -512,7 +512,10 @@ public class ControladorPesquisa implements Serializable {
 		}
 
 	}
-
+	
+	/**
+	 * {@link psquiza.controladores.Sistema#configuraEstrategia(String)}
+	 */
 	public void configuraEstrategia(String estrategia) {
 		Util.validaAtributo(estrategia, "Estrategia nao pode ser nula ou vazia.");
 		if(estrategia.equals("MAIS_ANTIGA") || estrategia.equals("MENOS_PENDENCIAS") || estrategia.equals("MAIOR_RISCO") || estrategia.equals("MAIOR_DURACAO")){
@@ -522,7 +525,9 @@ public class ControladorPesquisa implements Serializable {
 		}
 		
 	}
-
+	/**
+	 * {@link psquiza.controladores.Sistema#proximaAtividade(String)}
+	 */
 	public String proximaAtividade(String codigoPesquisa) {
 		Util.validaAtributo(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
 		if(!pesquisas.containsKey(codigoPesquisa)) {

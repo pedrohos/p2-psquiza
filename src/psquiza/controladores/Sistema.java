@@ -498,16 +498,24 @@ public class Sistema {
     	this.controladorPesquisa = gerenciadorControladores.carregaPesquisa();
     	this.controladorPesquisador = gerenciadorControladores.carregaPesquisador();
     }
-
+    
+    /**
+     * Metodo para configurar a estrategia para proxima atividade
+     * @param estrategia estrategia que sera definida
+     */
 	public void configuraEstrategia(String estrategia) {
 		controladorPesquisa.configuraEstrategia(estrategia);
 		
 	}
+	/**
+	 * Metodo para pegar a proxima atividade
+	 * @param codigoPesquisa codigo da pesquisa
+	 * @return retorna retorna o codigo da proxima atividade a ser executada
+	 */
 	public String proximaAtividade(String codigoPesquisa) {
 		return controladorPesquisa.proximaAtividade(codigoPesquisa);
 	}
     
-
 	public void gravarResumo(String codigoPesquisa) {
 		controladorPesquisa.gravarResumo(codigoPesquisa);
 		

@@ -331,27 +331,33 @@ public class Psquiza {
 	public String pegaMaiorRiscoAtividades(String idAtividade) {
 		return sistema.pegaMaiorRiscoAtividades(idAtividade);
 	}
-	
+
 	public void salva() {
 		sistema.salva();
 	}
-	
+
 	public void carrega() {
 		sistema.carrega();
 	}
-
+	/**
+	 * {@link psquiza.controladores.Sistema#configuraEstrategia(String)}
+	 */
 	public void configuraEstrategia(String estrategia) {
 		sistema.configuraEstrategia(estrategia);
 	}
 	
+	/**
+	 * {@link psquiza.controladores.Sistema#proximaAtividade(String)}
+	 */
 	public String proximaAtividade(String codigoPesquisa) {
 		return sistema.proximaAtividade(codigoPesquisa);
 	}
+
 	public void gravarResumo(String codigoPesquisa) {
 		sistema.gravarResumo(codigoPesquisa);
-		
+
 	}
-	
+
 	public void gravarResultados(String codigoPesquisa) {
 		sistema.gravarResultados(codigoPesquisa);
 

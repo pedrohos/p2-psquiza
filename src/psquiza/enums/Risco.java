@@ -8,12 +8,11 @@ package psquiza.enums;
  * @author Pedro Henrique
  */
 public enum Risco {
-	
+
 	/**
-	 * Tipos possiveis de Risco:
-	 * BAIXO, MEDIO e ALTO
+	 * Tipos possiveis de Risco: BAIXO, MEDIO e ALTO
 	 */
-	BAIXO(new Object[] {"BAIXO", 0}), MEDIO(new Object[] {"MEDIO", 1}), ALTO(new Object[] {"ALTO", 2});
+	BAIXO(new Object[] { "BAIXO", 0 }), MEDIO(new Object[] { "MEDIO", 1 }), ALTO(new Object[] { "ALTO", 2 });
 
 	/**
 	 * Armazena o risco atual.
@@ -37,7 +36,7 @@ public enum Risco {
 	public String getRisco() {
 		return (String) this.risco[0];
 	}
-	
+
 	/**
 	 * Retorna o risco referente ao nome do nivel do risco.
 	 * 
@@ -56,11 +55,16 @@ public enum Risco {
 			throw new IllegalArgumentException("Valor invalido do nivel do risco.");
 		}
 	}
-	
+
 	public boolean ehMaior(Risco r) {
 		return (int) this.risco[1] > (int) r.risco[1];
 	}
 
+	/**
+	 * Metodo que pega o nivel de risco em formato inteiro
+	 * 
+	 * @return retorna o nivel do risco
+	 */
 	public int getRiscoInt() {
 		return (int) this.risco[1];
 	}

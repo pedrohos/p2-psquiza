@@ -26,7 +26,7 @@ import psquiza.enums.Risco;
 public class Atividade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Armazena a descricao da Atividade.
 	 */
@@ -161,7 +161,7 @@ public class Atividade implements Serializable {
 		if (this.proxima != null)
 			throw new IllegalArgumentException("Atividade ja possui uma subsequente.");
 		verificaLoop(proxima);
-		
+
 		this.proxima = proxima;
 	}
 
@@ -194,12 +194,12 @@ public class Atividade implements Serializable {
 			maior = this.nivelRisco;
 			codigoMaior = this.id;
 		}
-		
+
 		if (proxima == null)
 			return codigoMaior;
 		return proxima.pegaMaiorRiscoAtividades(maior, codigoMaior);
 	}
-	
+
 	private void verificaLoop(Atividade a) {
 		if (this.equals(a))
 			throw new IllegalArgumentException("Criacao de loops negada.");
@@ -323,6 +323,11 @@ public class Atividade implements Serializable {
 		return this.periodo;
 	}
 
+	/**
+	 * Metodo para pegar o nivel de risco de uma ativiade no formato inteiro
+	 * 
+	 * @return retorna um inteiro que representa o nivel de risco
+	 */
 	public int getNivelRiscoInt() {
 		return this.nivelRisco.getRiscoInt();
 	}
