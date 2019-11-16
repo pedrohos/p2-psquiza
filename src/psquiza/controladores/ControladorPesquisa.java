@@ -550,12 +550,13 @@ public class ControladorPesquisa implements Serializable {
 		Util.validaAtributo(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
 		existePesquisa(codigoPesquisa);
 		
-		String caminho = String.format("%s/%s.txt",System.getProperty("user.dir"),codigoPesquisa);
+		String caminho = String.format("%s/easyaccept/%s.txt",System.getProperty("user.dir"),codigoPesquisa);
 		
 		try {
 			new File(caminho);
 			escritor(caminho, pesquisas.get(codigoPesquisa));
 		}catch(Exception e) {
+			System.out.println(e);
 		}
 		
 
@@ -564,6 +565,16 @@ public class ControladorPesquisa implements Serializable {
 	public void gravarResultados(String codigoPesquisa) {
 		Util.validaAtributo(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
 		existePesquisa(codigoPesquisa);
+		
+		String caminho = String.format("%s/easyaccept/%s-Resultados.txt",System.getProperty("user.dir"),codigoPesquisa);
+		
+		try {
+			new File(caminho);
+			escritor(caminho, pesquisas.get(codigoPesquisa));
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		
 	}
 
 }
