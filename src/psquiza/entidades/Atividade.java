@@ -127,6 +127,33 @@ public class Atividade implements Serializable {
 	}
 
 	/**
+	 * Retorna uma representacao em string que mostra o estado do item e o seu
+	 * estado, que pode ser pendente ou resolvido.
+	 * 
+	 * @return o estado dos itens de uma pesquisa.
+	 */
+	public String getItens() {
+		String saida = "";
+		int ind = 1;
+		for (Item item : itens.values()) {
+			saida +=String.format("        - %s - ITEM%d\n", item.getEstado(),ind);
+			ind++;
+		}
+		return saida;
+	}
+	
+	public String getResuladoItens() {
+		String saida = "";
+		for (int item : itens.keySet()) {
+			saida +=String.format("        - ITEM%d - %d\n", item,periodo/itens.size());
+		}
+//		for (Item item: itens.valus()) {
+//			saida+= String.format("        -%s\n", item.)
+//		}
+		return saida;
+	}
+
+	/**
 	 * Retorna a quantidade de itens com o status de REALIZADO.
 	 * 
 	 * @return e retornado a quantidade de itens REALIZADO.

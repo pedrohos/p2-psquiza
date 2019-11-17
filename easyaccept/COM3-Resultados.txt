@@ -1,1 +1,24 @@
-novo arquivo
+-Pesquisa: COM3 - Dificuldade de pensar em bons exemplos para os testes do projeto da disciplina LP2 - computacao, bloqueio criativo, insonia
+    -Resultados:
+        -Monitoramento de chats dos alunos de computacao do primeiro periodo.
+        - ITEM1 - 5
+        - ITEM2 - 5
+        - ITEM3 - 5
+        - ITEM4 - 5
+        -Monitoramento por ninjas de computacao na guerra ninja.
+        -Analise do comportamento dos alunos de computacao com os alunos de arq/urb.
+        - ITEM1 - 0
+        - ITEM2 - 0
+        - ITEM3 - 0
+        -Testando se a terra e plana
+        -Analise de quantas maos levantadas sao necessarias para Goku fazer uma Genki Dama que consiga derrotar Saitama
+        -Busca e analise de uma razao para a Netflix cancelar BoJack Horseman
+        - ITEM1 - 0
+        -Mudancas nas relacoes do instagram, apos a ocultacao do numero de curtidas das postagens.
+        -Ponderacao do por que Imagine dragons e tao bom.
+        - ITEM1 - 12
+        - ITEM2 - 12
+        - ITEM3 - 12
+        - ITEM4 - 12
+        - ITEM5 - 12
+ 

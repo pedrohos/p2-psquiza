@@ -1,1 +1,8 @@
-novo arquivo
+-Pesquisa: COM2 - Autoavaliacao na Disciplina de Programacao Orientada a Objeto. - computacao, poo
+    -Resultados:
+        -Monitoramento de chats dos alunos de computacao do primeiro periodo.
+        - ITEM1 - 5
+        - ITEM2 - 5
+        - ITEM3 - 5
+        - ITEM4 - 5
+ 

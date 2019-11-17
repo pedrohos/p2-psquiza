@@ -539,10 +539,9 @@ public class ControladorPesquisa implements Serializable {
 		return pesquisas.get(codigoPesquisa).proximaAtividade(this.estrategia);
 	}
 	
-	public static void escritor(String path, Pesquisa p) throws IOException {
+	public static void escritor(String path, String texto) throws IOException {
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path));
-
-		buffWrite.append("novo arquivo");
+		buffWrite.append(texto);
 		buffWrite.close();
 	}
 
@@ -554,7 +553,7 @@ public class ControladorPesquisa implements Serializable {
 		
 		try {
 			new File(caminho);
-			escritor(caminho, pesquisas.get(codigoPesquisa));
+			escritor(caminho, pesquisas.get(codigoPesquisa).getResumo());
 		}catch(Exception e) {
 			System.out.println(e);
 		}
@@ -570,7 +569,7 @@ public class ControladorPesquisa implements Serializable {
 		
 		try {
 			new File(caminho);
-			escritor(caminho, pesquisas.get(codigoPesquisa));
+			escritor(caminho, pesquisas.get(codigoPesquisa).getResultado());
 		}catch(Exception e) {
 			System.out.println(e);
 		}

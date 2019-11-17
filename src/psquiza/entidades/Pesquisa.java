@@ -434,12 +434,12 @@ public class Pesquisa implements Serializable {
 	}
 
 	public String getResumo() {
+
 		String resumo = "";
-		// resumo+= "Pesquisa: "+toString() + "\n Pesquisadores:\n -";
 
 		String obj = "";
 		for (String o : objetivos) {
-			obj += String.format("- %s\n", o);
+			obj += String.format("- %s\n", o.toString());
 		}
 
 		String psq = "";
@@ -447,10 +447,10 @@ public class Pesquisa implements Serializable {
 			psq = String.format("- %s\n", p.toString());
 		}
 
-		// verificar erros aqui
 		String atv = "";
 		for (Atividade a : atividades) {
-			atv += String.format("- %s\n", a.toString());
+			atv += String.format("- %s (%s - %s)\n%s", a.getDescricao(), a.getNivelRisco(), a.getDescricaoRisco(),
+					a.getItens());
 		}
 
 		resumo = String.format(
@@ -458,5 +458,20 @@ public class Pesquisa implements Serializable {
 				toString(), psq, problema, obj, atv);
 
 		return resumo;
+	}
+
+	public String getResultado() {
+
+		String resultado = "";
+		
+		String atvd = "";
+		
+		for(Atividade a: atividades) {
+			atvd+= String.format("        -%s\n%s",a.getDescricao(),a.getResuladoItens());
+		}
+
+		resultado = String.format("-Pesquisa: %s\n    -Resultados:\n%s ", toString(),atvd);
+
+		return resultado;
 	}
 }
