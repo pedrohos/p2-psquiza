@@ -492,7 +492,14 @@ public class Sistema {
     }
     
     public void carrega() {
-    	gerenciadorControladores.carrega(estadoSistema));
+    	try {
+    		gerenciadorControladores.carrega(estadoSistema);
+    	} catch (ClassNotFoundException cnfe){
+    		cnfe.printStackTrace();
+    	} catch (IOException ioe) {
+    		ioe.printStackTrace();
+    	}
+    	
     	this.controladorAtividade = gerenciadorControladores.carregaAtividade();
     	this.controladorMetas = gerenciadorControladores.carregaMetas();
     	this.controladorPesquisa = gerenciadorControladores.carregaPesquisa();

@@ -35,7 +35,7 @@ public class GerenciadorControladores {
 		ObjectInputStream in = null;
 		try {
 			in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(estadoSistema)));
-			this.controladorAtividade = in.readObject();
+			this.controladorAtividade = (ControladorAtividade) in.readObject();
 			in.readObject();
 			in.readObject();
 			in.readObject();
