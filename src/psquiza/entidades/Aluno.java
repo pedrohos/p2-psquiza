@@ -71,6 +71,8 @@ public class Aluno implements Especialidade {
 			Util.validaIEA(Double.parseDouble(novo));
 			iea = Double.parseDouble(novo);
 			break;
+		default:
+			throw new IllegalArgumentException();
 
 		}
 	}

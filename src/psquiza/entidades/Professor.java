@@ -32,7 +32,7 @@ public class Professor implements Especialidade {
 
 	@Override
 	public String toString() {
-		return String.format("%s - %s - %s", getFormacao(), getUnidade(), getData());
+		return String.format("%s - %s - %s", formacao, unidade, data);
 	}
 
 	@Override
@@ -49,6 +49,8 @@ public class Professor implements Especialidade {
 		case "UNIDADE":
 			unidade = novo;
 			break;
+		default:
+			throw new IllegalArgumentException();
 
 		}
 

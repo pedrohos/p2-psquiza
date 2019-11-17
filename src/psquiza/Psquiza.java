@@ -339,13 +339,14 @@ public class Psquiza {
 	public void carrega() {
 		sistema.carrega();
 	}
+
 	/**
 	 * {@link psquiza.controladores.Sistema#configuraEstrategia(String)}
 	 */
 	public void configuraEstrategia(String estrategia) {
 		sistema.configuraEstrategia(estrategia);
 	}
-	
+
 	/**
 	 * {@link psquiza.controladores.Sistema#proximaAtividade(String)}
 	 */
@@ -364,12 +365,12 @@ public class Psquiza {
 	}
 
 	public static void main(String[] args) {
-		args = new String[] { "psquiza.Psquiza", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",
-				"testes_aceitacao/use_case_3.txt", "testes_aceitacao/use_case_4.txt", "testes_aceitacao/use_case_5.txt",
-				"testes_aceitacao/use_case_6.txt", "testes_aceitacao/use_case_7.txt", "testes_aceitacao/use_case_8.txt",
-				"testes_aceitacao/use_case_9.txt", "testes_aceitacao/use_case_10.txt",
-				"testes_aceitacao/use_case_11.txt", "testes_aceitacao/use_case_12SALVAR.txt",
-				"testes_aceitacao/use_case_12CARREGAR.txt" };
+		args = new String[] { "psquiza.Psquiza", "easyaccept/use_case_1.txt", "easyaccept/use_case_2.txt",
+				"easyaccept/use_case_3.txt", "easyaccept/use_case_4.txt", "easyaccept/use_case_5.txt",
+				"easyaccept/use_case_6.txt", "easyaccept/use_case_7.txt", "easyaccept/use_case_8.txt",
+				"easyaccept/use_case_9.txt", "easyaccept/use_case_10.txt",
+				"easyaccept/use_case_11.txt", "easyaccept/use_case_12SALVAR.txt",
+				"easyaccept/use_case_12CARREGAR.txt" };
 		EasyAccept.main(args);
 	}
 }

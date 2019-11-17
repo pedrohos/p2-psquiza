@@ -444,17 +444,17 @@ public class Pesquisa implements Serializable {
 
 		String psq = "";
 		for (Pesquisador p : pesquisadores) {
-			psq = String.format("- %s\n", p.toString());
+			psq += String.format("        - %s\n", p.toString());
 		}
 
 		String atv = "";
 		for (Atividade a : atividades) {
-			atv += String.format("- %s (%s - %s)\n%s", a.getDescricao(), a.getNivelRisco(), a.getDescricaoRisco(),
+			atv += String.format("        - %s (%s - %s)\n%s", a.getDescricao(), a.getNivelRisco(), a.getDescricaoRisco(),
 					a.getItens());
 		}
 
 		resumo = String.format(
-				"-Pesquisa: %s\n    -Pesquisadores:\n        %s    -Problema: %s\n    -Objetivos: \n        %s    -Atividades:\n        %s",
+				"- Pesquisa: %s\n    - Pesquisadores:\n%s    - Problema:\n        - %s\n    - Objetivos: \n        - %s    - Atividades:\n%s",
 				toString(), psq, problema, obj, atv);
 
 		return resumo;

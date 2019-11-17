@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -27,13 +28,13 @@ public class ControladorPesquisador implements Serializable {
 	/**
 	 * HashMap responsavel por armazenar os pesquisadores cadastrados.
 	 */
-	private HashMap<String, Pesquisador> pesquisadores;
+	private LinkedHashMap<String, Pesquisador> pesquisadores;
 
 	/**
 	 * Metodo responsavel por construir o controlador.
 	 */
 	public ControladorPesquisador() {
-		pesquisadores = new HashMap<String, Pesquisador>();
+		pesquisadores = new LinkedHashMap<String, Pesquisador>();
 	}
 
 	/**

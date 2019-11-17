@@ -31,14 +31,15 @@ import psquiza.ordenacao.*;
 public class ControladorPesquisa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Colecao de pesquisas, no formato: Chave - Pesquisa, onde um codigo gerado
 	 * pelo sistema identifica unicamente uma pesquisa.
 	 */
 	private LinkedHashMap<String, Pesquisa> pesquisas;
-	
+
 	private String estrategia;
+
 	/**
 	 * Cria um controle de pesquisa e inicializa a coleção de pesquisas.
 	 */
@@ -512,33 +513,35 @@ public class ControladorPesquisa implements Serializable {
 		}
 
 	}
-	
+
 	/**
 	 * {@link psquiza.controladores.Sistema#configuraEstrategia(String)}
 	 */
 	public void configuraEstrategia(String estrategia) {
 		Util.validaAtributo(estrategia, "Estrategia nao pode ser nula ou vazia.");
-		if(estrategia.equals("MAIS_ANTIGA") || estrategia.equals("MENOS_PENDENCIAS") || estrategia.equals("MAIOR_RISCO") || estrategia.equals("MAIOR_DURACAO")){
+		if (estrategia.equals("MAIS_ANTIGA") || estrategia.equals("MENOS_PENDENCIAS")
+				|| estrategia.equals("MAIOR_RISCO") || estrategia.equals("MAIOR_DURACAO")) {
 			this.estrategia = estrategia;
-		}else {
+		} else {
 			throw new IllegalArgumentException("Valor invalido da estrategia");
 		}
-		
+
 	}
+
 	/**
 	 * {@link psquiza.controladores.Sistema#proximaAtividade(String)}
 	 */
 	public String proximaAtividade(String codigoPesquisa) {
 		Util.validaAtributo(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
-		if(!pesquisas.containsKey(codigoPesquisa)) {
+		if (!pesquisas.containsKey(codigoPesquisa)) {
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		}
-		if(!pesquisas.get(codigoPesquisa).ehAtiva()) {
+		if (!pesquisas.get(codigoPesquisa).ehAtiva()) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
 		}
 		return pesquisas.get(codigoPesquisa).proximaAtividade(this.estrategia);
 	}
-	
+
 	public static void escritor(String path, String texto) throws IOException {
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path));
 		buffWrite.append(texto);
@@ -548,32 +551,29 @@ public class ControladorPesquisa implements Serializable {
 	public void gravarResumo(String codigoPesquisa) {
 		Util.validaAtributo(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
 		existePesquisa(codigoPesquisa);
-		
-		String caminho = String.format("%s/easyaccept/%s.txt",System.getProperty("user.dir"),codigoPesquisa);
-		
+
+		String caminho = String.format("%s/%s.txt", System.getProperty("user.dir"), codigoPesquisa);
+
 		try {
 			new File(caminho);
 			escritor(caminho, pesquisas.get(codigoPesquisa).getResumo());
-		}catch(Exception e) {
-			System.out.println(e);
+		} catch (Exception e) {
 		}
-		
 
 	}
 
 	public void gravarResultados(String codigoPesquisa) {
 		Util.validaAtributo(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
 		existePesquisa(codigoPesquisa);
-		
-		String caminho = String.format("%s/easyaccept/%s-Resultados.txt",System.getProperty("user.dir"),codigoPesquisa);
-		
+
+		String caminho = String.format("%s/%s-Resultados.txt", System.getProperty("user.dir"), codigoPesquisa);
+
 		try {
 			new File(caminho);
 			escritor(caminho, pesquisas.get(codigoPesquisa).getResultado());
-		}catch(Exception e) {
-			System.out.println(e);
+		} catch (Exception e) {
 		}
-		
+
 	}
 
 }

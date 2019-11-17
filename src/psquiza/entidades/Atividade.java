@@ -136,7 +136,7 @@ public class Atividade implements Serializable {
 		String saida = "";
 		int ind = 1;
 		for (Item item : itens.values()) {
-			saida +=String.format("        - %s - ITEM%d\n", item.getEstado(),ind);
+			saida +=String.format("            - %s - ITEM%d\n", item.getEstado(),ind);
 			ind++;
 		}
 		return saida;
