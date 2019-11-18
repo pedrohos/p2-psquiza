@@ -221,4 +221,22 @@ public class ControladorMetas implements Serializable {
 
 		return listagem;
 	}
+
+	public Problema getProblema(String idProblema) {
+		Util.validaAtributo(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
+		if(!problemas.containsKey(idProblema)) {
+			throw new IllegalArgumentException("Problema nao existe!");
+		}
+		return problemas.get(idProblema);
+	}
+
+	public Objetivo getObjetivo(String idObjetivo) {
+		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
+		if(!objetivos.containsKey(idObjetivo)) {
+			throw new IllegalArgumentException("");
+		}
+		return objetivos.get(idObjetivo);
+		
+		
+	}
 }

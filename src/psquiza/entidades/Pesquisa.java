@@ -43,9 +43,9 @@ public class Pesquisa implements Serializable {
 	 */
 	private boolean estado;
 
-	private String problema;
+	private Problema problema;
 
-	private HashSet<String> objetivos;
+	private HashSet<Objetivo> objetivos;
 
 	private List<Atividade> atividades;
 	/**
@@ -76,7 +76,6 @@ public class Pesquisa implements Serializable {
 		this.campoDeInteresse = campoInteresse;
 		this.codigo = codigo;
 		this.estado = true;
-		this.problema = "";
 		this.objetivos = new HashSet<>();
 		this.atividades = new ArrayList<>();
 		this.pesquisadores = new ArrayList<>();
@@ -171,58 +170,53 @@ public class Pesquisa implements Serializable {
 		this.campoDeInteresse = campoDeInteresse;
 	}
 
-	public boolean associaProblema(String idProblema) {
-		Util.validaAtributo(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
-		if (this.problema.equals(idProblema))
+	public boolean associaProblema(Problema problema) {
+		if(this.problema != null && this.problema.equals(problema) ) {
 			return false;
-
-		if (!this.problema.isEmpty())
+		}
+		if(this.problema != null) {
 			throw new IllegalArgumentException("Pesquisa ja associada a um problema.");
-
-		this.problema = idProblema;
+		}
+		this.problema = problema;
 		return true;
 	}
 
 	public boolean desassociaProblema() {
-		if (this.problema.equals(""))
+		if (this.problema == null) {
 			return false;
-		this.problema = "";
+		}
+		this.problema = null;
 		return true;
 	}
 
-	private boolean possuiObjetivo(String idObjetivo) {
-		for (String objetivo : objetivos) {
-			if (objetivo.equals(idObjetivo)) {
+	private boolean possuiObjetivo(Objetivo objetivo) {
+		for (Objetivo obj : objetivos) {
+			if (obj.getCodigo().equals(objetivo.getCodigo())) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public boolean associaObjetivo(String idObjetivo) {
-		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
-
-		if (possuiObjetivo(idObjetivo))
+	public boolean associaObjetivo(Objetivo objetivo) {
+		if (possuiObjetivo(objetivo)) {
 			return false;
-
-		objetivos.add(idObjetivo);
+		}
+		objetivos.add(objetivo);
 		return true;
 	}
 
 	public boolean possuiProblema() {
-		if (!this.problema.equals("")) {
+		if (!(this.problema == null)) {
 			return true;
 		}
 		return false;
 	}
 
-	public boolean desassociaObjetivo(String idObjetivo) {
-		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
-
-		if (!possuiObjetivo(idObjetivo))
+	public boolean desassociaObjetivo(Objetivo objetivo) {
+		if (!possuiObjetivo(objetivo))
 			return false;
-
-		objetivos.remove(idObjetivo);
+		objetivos.remove(objetivo);
 		return true;
 	}
 
@@ -438,7 +432,7 @@ public class Pesquisa implements Serializable {
 		String resumo = "";
 
 		String obj = "";
-		for (String o : objetivos) {
+		for (Objetivo o : objetivos) {
 			obj += String.format("- %s\n", o.toString());
 		}
 

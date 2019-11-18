@@ -14,8 +14,10 @@ import java.util.stream.Collectors;
 import java.util.LinkedHashMap;
 import psquiza.Util;
 import psquiza.entidades.Atividade;
+import psquiza.entidades.Objetivo;
 import psquiza.entidades.Pesquisa;
 import psquiza.entidades.Pesquisador;
+import psquiza.entidades.Problema;
 import psquiza.ordenacao.*;
 
 /**
@@ -232,14 +234,13 @@ public class ControladorPesquisa implements Serializable {
 	 * @return e retornado um boolean indicando se a operacao foi efetuada com
 	 *         sucesso ou nao.
 	 */
-	public boolean associaProblema(String idPesquisa, String idProblema) {
+	public boolean associaProblema(String idPesquisa, Problema problema) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
-		Util.validaAtributo(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
 		existePesquisa(idPesquisa);
-		if (!ehAtiva(idPesquisa))
+		if (!ehAtiva(idPesquisa)) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
-
-		return this.pesquisas.get(idPesquisa).associaProblema(idProblema);
+		}
+		return this.pesquisas.get(idPesquisa).associaProblema(problema);
 	}
 
 	/**
@@ -285,14 +286,13 @@ public class ControladorPesquisa implements Serializable {
 	 * @return e retornado um boolean indicando se a operacao foi efetuada com
 	 *         sucesso ou nao.
 	 */
-	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
+	public boolean associaObjetivo(String idPesquisa, Objetivo objetivo) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
-		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
 		existePesquisa(idPesquisa);
 		if (!ehAtiva(idPesquisa))
 			throw new IllegalArgumentException("Pesquisa desativada.");
 
-		return this.pesquisas.get(idPesquisa).associaObjetivo(idObjetivo);
+		return this.pesquisas.get(idPesquisa).associaObjetivo(objetivo);
 	}
 
 	/**
@@ -312,14 +312,13 @@ public class ControladorPesquisa implements Serializable {
 	 * @return e retornado um boolean indicando se a operacao foi efetuada com
 	 *         sucesso ou nao.
 	 */
-	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
+	public boolean desassociaObjetivo(String idPesquisa, Objetivo objetivo) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
-		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
 		existePesquisa(idPesquisa);
 		if (!ehAtiva(idPesquisa))
 			throw new IllegalArgumentException("Pesquisa desativada.");
 
-		return this.pesquisas.get(idPesquisa).desassociaObjetivo(idObjetivo);
+		return this.pesquisas.get(idPesquisa).desassociaObjetivo(objetivo);
 	}
 
 	/**

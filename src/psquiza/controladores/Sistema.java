@@ -5,7 +5,9 @@ import java.util.NoSuchElementException;
 
 import psquiza.Util;
 import psquiza.entidades.Atividade;
+import psquiza.entidades.Objetivo;
 import psquiza.entidades.Pesquisador;
+import psquiza.entidades.Problema;
 
 public class Sistema {
 
@@ -17,8 +19,8 @@ public class Sistema {
 	private ControladorMetas controladorMetas;
 	private ControladorPesquisador controladorPesquisador;
 	private GerenciadorControladores gerenciadorControladores;
-	private final String estadoSistema = "estado.dat";  
-   
+	private final String estadoSistema = "estado.dat";
+
 	/**
 	 * Constroi um sistema inicializando os controladores de Pesquisa, Atividade,
 	 * Metas e Pesquisador.
@@ -209,7 +211,8 @@ public class Sistema {
 	}
 
 	public boolean associaProblema(String idPesquisa, String idProblema) {
-		return controladorPesquisa.associaProblema(idPesquisa, idProblema);
+		Problema problema = controladorMetas.getProblema(idProblema);
+		return controladorPesquisa.associaProblema(idPesquisa, problema);
 	}
 
 	public boolean desassociaProblema(String idPesquisa) {
@@ -217,13 +220,15 @@ public class Sistema {
 	}
 
 	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
-		if (controladorPesquisa.associaObjetivo(idPesquisa, idObjetivo) == false)
+		Objetivo objetivo  = controladorMetas.getObjetivo(idObjetivo);
+		if (controladorPesquisa.associaObjetivo(idPesquisa, objetivo) == false)
 			return false;
 		return controladorMetas.associaPesquisa(idPesquisa, idObjetivo);
 	}
 
 	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
-		if (controladorPesquisa.desassociaObjetivo(idPesquisa, idObjetivo) == false)
+		Objetivo objetivo  = controladorMetas.getObjetivo(idObjetivo);
+		if (controladorPesquisa.desassociaObjetivo(idPesquisa, objetivo) == false)
 			return false;
 		return controladorMetas.desassociaPesquisa(idPesquisa, idObjetivo);
 	}
@@ -461,73 +466,77 @@ public class Sistema {
 	public int getDuracao(String codigoAtividade) {
 		return controladorAtividade.getDuracao(codigoAtividade);
 	}
-	
-    public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
-    	controladorAtividade.defineProximaAtividade(idPrecedente, idSubsquente);
-    }
-    
-    public void tiraProximaAtividade(String idPrecedente) {
-    	controladorAtividade.tiraProximaAtividade(idPrecedente);
-    }
-    
-    public int contaProximos(String idPrecedente) {
-    	return controladorAtividade.contaProximos(idPrecedente);
-    }
-    
-    public String pegaProximo(String idAtividade, int enesimaAtividade) {
-    	return controladorAtividade.pegaProximo(idAtividade, enesimaAtividade);
-    }
-    
-    public String pegaMaiorRiscoAtividades(String idAtividade) {
-    	return controladorAtividade.pegaMaiorRiscoAtividades(idAtividade);
-    }
-    
-    public void salva() {
-    	try {
-			gerenciadorControladores.salva(estadoSistema, controladorAtividade, controladorMetas, controladorPesquisa, controladorPesquisador);
+
+	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
+		controladorAtividade.defineProximaAtividade(idPrecedente, idSubsquente);
+	}
+
+	public void tiraProximaAtividade(String idPrecedente) {
+		controladorAtividade.tiraProximaAtividade(idPrecedente);
+	}
+
+	public int contaProximos(String idPrecedente) {
+		return controladorAtividade.contaProximos(idPrecedente);
+	}
+
+	public String pegaProximo(String idAtividade, int enesimaAtividade) {
+		return controladorAtividade.pegaProximo(idAtividade, enesimaAtividade);
+	}
+
+	public String pegaMaiorRiscoAtividades(String idAtividade) {
+		return controladorAtividade.pegaMaiorRiscoAtividades(idAtividade);
+	}
+
+	public void salva() {
+		try {
+			gerenciadorControladores.salva(estadoSistema, controladorAtividade, controladorMetas, controladorPesquisa,
+					controladorPesquisador);
 		} catch (IOException e) {
-			
+
 			e.printStackTrace();
 		}
-    }
-    
-    public void carrega() {
-    	try {
-    		gerenciadorControladores.carrega(estadoSistema);
-    	} catch (ClassNotFoundException cnfe){
-    		cnfe.printStackTrace();
-    	} catch (IOException ioe) {
-    		ioe.printStackTrace();
-    	}
-    	
-    	this.controladorAtividade = gerenciadorControladores.carregaAtividade();
-    	this.controladorMetas = gerenciadorControladores.carregaMetas();
-    	this.controladorPesquisa = gerenciadorControladores.carregaPesquisa();
-    	this.controladorPesquisador = gerenciadorControladores.carregaPesquisador();
-    }
-    
-    /**
-     * Metodo para configurar a estrategia para proxima atividade
-     * @param estrategia estrategia que sera definida
-     */
+	}
+
+	public void carrega() {
+		try {
+			gerenciadorControladores.carrega(estadoSistema);
+		} catch (ClassNotFoundException cnfe) {
+			cnfe.printStackTrace();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+
+		this.controladorAtividade = gerenciadorControladores.carregaAtividade();
+		this.controladorMetas = gerenciadorControladores.carregaMetas();
+		this.controladorPesquisa = gerenciadorControladores.carregaPesquisa();
+		this.controladorPesquisador = gerenciadorControladores.carregaPesquisador();
+	}
+
+	/**
+	 * Metodo para configurar a estrategia para proxima atividade
+	 * 
+	 * @param estrategia estrategia que sera definida
+	 */
 	public void configuraEstrategia(String estrategia) {
 		controladorPesquisa.configuraEstrategia(estrategia);
-		
+
 	}
+
 	/**
 	 * Metodo para pegar a proxima atividade
+	 * 
 	 * @param codigoPesquisa codigo da pesquisa
 	 * @return retorna retorna o codigo da proxima atividade a ser executada
 	 */
 	public String proximaAtividade(String codigoPesquisa) {
 		return controladorPesquisa.proximaAtividade(codigoPesquisa);
 	}
-    
+
 	public void gravarResumo(String codigoPesquisa) {
 		controladorPesquisa.gravarResumo(codigoPesquisa);
-		
+
 	}
-	
+
 	public void gravarResultados(String codigoPesquisa) {
 		controladorPesquisa.gravarResultados(codigoPesquisa);
 	}
