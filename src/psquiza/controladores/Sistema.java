@@ -15,32 +15,32 @@ public class Sistema {
 	 * Armazena o controlador que gerencia as atividades.
 	 */
 	private ControladorAtividade controladorAtividade;
-	
+
 	/**
 	 * Armazena o controlador que gerencia as pesquisas.
 	 */
 	private ControladorPesquisa controladorPesquisa;
-	
+
 	/**
 	 * Armazena o controlador que gerencia os objetivos e problemas (metas).
 	 */
 	private ControladorMetas controladorMetas;
-	
+
 	/**
 	 * Armazena o controlador que gerencia as pesquisadores.
 	 */
 	private ControladorPesquisador controladorPesquisador;
-	
+
 	/**
 	 * Armazena o controlador de salvamento e carregamento dos outros controladores.
 	 */
 	private GerenciadorControladores gerenciadorControladores;
-	
+
 	/**
 	 * Local onde sera salvo e carregado os controladores.
 	 */
-	private final String estadoSistema = "estado.dat";  
-   
+	private final String estadoSistema = "estado.dat";
+
 	/**
 	 * Constroi um sistema inicializando os controladores de Pesquisa, Atividade,
 	 * Metas e Pesquisador e controladores.
@@ -73,8 +73,8 @@ public class Sistema {
 	 * Retorna a quantidade itens pendentes em determinada atividade.
 	 * 
 	 * @param id e o id referente a atividade.
-	 * @return e retornado a quantidade de itens com o estado PENDENTE de
-	 * dada atividade.
+	 * @return e retornado a quantidade de itens com o estado PENDENTE de dada
+	 *         atividade.
 	 */
 	public int contaItensPendentes(String id) {
 		return controladorAtividade.contaItensPendentes(id);
@@ -84,8 +84,8 @@ public class Sistema {
 	 * Retorna a quantidade itens realizados em determinada atividade.
 	 * 
 	 * @param id e o id referente a atividade.
-	 * @return e retornado a quantidade de itens com o estado REALIZADO de
-	 * dada atividade.
+	 * @return e retornado a quantidade de itens com o estado REALIZADO de dada
+	 *         atividade.
 	 */
 	public int contaItensRealizados(String id) {
 		return controladorAtividade.contaItensRealizados(id);
@@ -240,8 +240,8 @@ public class Sistema {
 	 * Retorna um boolean indicando se o pesquisador e ativo ou nao.
 	 * 
 	 * @param email e o email referente ao pesquisador.
-	 * @return e retornado um boolean indicando true caso o pesquisador
-	 * seja ativo, caso contrario, e retornado false.
+	 * @return e retornado um boolean indicando true caso o pesquisador seja ativo,
+	 *         caso contrario, e retornado false.
 	 */
 	public boolean pesquisadorEhAtivo(String email) {
 		return controladorPesquisador.pesquisadorEhAtivo(email);
@@ -257,14 +257,14 @@ public class Sistema {
 	}
 
 	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
-		Objetivo objetivo  = controladorMetas.getObjetivo(idObjetivo);
+		Objetivo objetivo = controladorMetas.getObjetivo(idObjetivo);
 		if (controladorPesquisa.associaObjetivo(idPesquisa, objetivo) == false)
 			return false;
 		return controladorMetas.associaPesquisa(idPesquisa, idObjetivo);
 	}
 
 	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
-		Objetivo objetivo  = controladorMetas.getObjetivo(idObjetivo);
+		Objetivo objetivo = controladorMetas.getObjetivo(idObjetivo);
 		if (controladorPesquisa.desassociaObjetivo(idPesquisa, objetivo) == false)
 			return false;
 		return controladorMetas.desassociaPesquisa(idPesquisa, idObjetivo);
@@ -282,25 +282,14 @@ public class Sistema {
 		String listagem = String.format("%s | %s | %s | %s | %s", controladorPesquisa.buscaPesquisa(termo),
 				controladorPesquisador.buscaPesquisador(termo), controladorMetas.buscaProblema(termo),
 				controladorMetas.buscaObjetivo(termo), controladorAtividade.buscaAtividade(termo));
-		listagem = listagem.replace("|  ", "");
-		if (listagem.charAt(0) == '|')
-			listagem = listagem.substring(2);
-		if (listagem.length() >= 3 && listagem.substring(listagem.length() - 3).equals(" | ")) {
-			listagem = listagem.substring(0, listagem.length() - 3);
-		}
-		if (listagem.length() >= 2 && listagem.substring(listagem.length() - 2).equals("| ")) {
-			listagem = listagem.substring(0, listagem.length() - 2);
-		}
-		if (listagem.length() >= 1 && listagem.charAt(listagem.length() - 1) == '|') {
-			listagem = listagem.substring(0, listagem.length() - 1);
-		}
+		listagem  = Util.removeVazios(listagem);
 
 		return listagem;
 	}
 
 	/**
-	 * Busca um objeto especifico, informado atravez do indice
-	 * (numeroDoResultado) na busca pelo termo informado.
+	 * Busca um objeto especifico, informado atravez do indice (numeroDoResultado)
+	 * na busca pelo termo informado.
 	 * 
 	 * @param termo             e o termo a ser buscado no sistema.
 	 * @param numeroDoResultado e o numero do resultado da busca a ser retornado.
@@ -340,10 +329,10 @@ public class Sistema {
 	/**
 	 * Associar uma atividade a uma pesquisa.
 	 * 
-	 * @param codigoPesquisa e o codigo referente a pesquisa
+	 * @param codigoPesquisa  e o codigo referente a pesquisa
 	 * @param codigoAtividade e o codigo referente a atividade
-	 * @return retorna true se a associacao foi efetuada com sucesso, caso contrario,
-	 * false.
+	 * @return retorna true se a associacao foi efetuada com sucesso, caso
+	 *         contrario, false.
 	 */
 	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade) {
 		Atividade atividade = controladorAtividade.getAtividade(codigoAtividade);
@@ -353,7 +342,7 @@ public class Sistema {
 	/**
 	 * Desassociar uma atividade de uma pesquisa.
 	 * 
-	 * @param codigoPesquisa e o codigo referente a pesquisa.
+	 * @param codigoPesquisa  e o codigo referente a pesquisa.
 	 * @param codigoAtividade e o codigo referente a atividade.
 	 * @return retorna true se a desassociacao deu certo ou false caso nao de certo
 	 */
@@ -365,8 +354,8 @@ public class Sistema {
 	/**
 	 * Metodo para executar uma atividade
 	 * 
-	 * Caso o codigoAtividade seja vazio ou nulo, sera lancado um IllegalArgumentException:
-	 * "Campo codigoAtividade nao pode ser nulo ou vazio."
+	 * Caso o codigoAtividade seja vazio ou nulo, sera lancado um
+	 * IllegalArgumentException: "Campo codigoAtividade nao pode ser nulo ou vazio."
 	 * 
 	 * @param codigoAtividade e o codigo referente a atividade
 	 * @param item            e o item que sera executado
@@ -503,72 +492,72 @@ public class Sistema {
 	public int getDuracao(String codigoAtividade) {
 		return controladorAtividade.getDuracao(codigoAtividade);
 	}
-	
-    public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
-    	controladorAtividade.defineProximaAtividade(idPrecedente, idSubsquente);
-    }
-    
-    public void tiraProximaAtividade(String idPrecedente) {
-    	controladorAtividade.tiraProximaAtividade(idPrecedente);
-    }
-    
-    public int contaProximos(String idPrecedente) {
-    	return controladorAtividade.contaProximos(idPrecedente);
-    }
-    
-    public String pegaProximo(String idAtividade, int enesimaAtividade) {
-    	return controladorAtividade.pegaProximo(idAtividade, enesimaAtividade);
-    }
-    
-    public String pegaMaiorRiscoAtividades(String idAtividade) {
-    	return controladorAtividade.pegaMaiorRiscoAtividades(idAtividade);
-    }
-    
-    /**
-     * Salva o estado atual dos controladores de:
-     *     Atividade, Metas, Pesquisa e Pesquisadores
-     * No arquivo localizado em:
-     *     estadoSistema
-     * 
-     * Caso ocorra algum erro no salvamento do arquivo, sera printado o
-     * stackTrace do erro.
-     */
-    public void salvar() {
-    	try {
-			gerenciadorControladores.salva(estadoSistema, controladorAtividade, controladorMetas, controladorPesquisa, controladorPesquisador);
+
+	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
+		controladorAtividade.defineProximaAtividade(idPrecedente, idSubsquente);
+	}
+
+	public void tiraProximaAtividade(String idPrecedente) {
+		controladorAtividade.tiraProximaAtividade(idPrecedente);
+	}
+
+	public int contaProximos(String idPrecedente) {
+		return controladorAtividade.contaProximos(idPrecedente);
+	}
+
+	public String pegaProximo(String idAtividade, int enesimaAtividade) {
+		return controladorAtividade.pegaProximo(idAtividade, enesimaAtividade);
+	}
+
+	public String pegaMaiorRiscoAtividades(String idAtividade) {
+		return controladorAtividade.pegaMaiorRiscoAtividades(idAtividade);
+	}
+
+	/**
+	 * Salva o estado atual dos controladores de: Atividade, Metas, Pesquisa e
+	 * Pesquisadores No arquivo localizado em: estadoSistema
+	 * 
+	 * Caso ocorra algum erro no salvamento do arquivo, sera printado o stackTrace
+	 * do erro.
+	 */
+	public void salvar() {
+		try {
+			gerenciadorControladores.salva(estadoSistema, controladorAtividade, controladorMetas, controladorPesquisa,
+					controladorPesquisador);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    }
-    
-    /**
-     * Carrega os controladores salvos no arquivo localizado em estadoSistema.
-     * 
-     * Os controladores do sistema sao substituidos por novos controladores com
-     * os atributos carregados do arquivo carregado anteriormente.
-     * 
-     * Caso ocorra um IOException ou um ClassNotFoundException, sera printado o
-     * stackTrace da excecao.
-     */
-    public void carregar() {
-    	try {
-    		gerenciadorControladores.carrega(estadoSistema);
-    	} catch (ClassNotFoundException cnfe){
-    		cnfe.printStackTrace();
-    	} catch (IOException ioe) {
-    		ioe.printStackTrace();
-    	}
-    	
-    	this.controladorAtividade = gerenciadorControladores.carregaAtividade();
-    	this.controladorMetas = gerenciadorControladores.carregaMetas();
-    	this.controladorPesquisa = gerenciadorControladores.carregaPesquisa();
-    	this.controladorPesquisador = gerenciadorControladores.carregaPesquisador();
-    }
-    
-    /**
-     * Metodo para configurar a estrategia para proxima atividade
-     * @param estrategia estrategia que sera definida
-     */
+	}
+
+	/**
+	 * Carrega os controladores salvos no arquivo localizado em estadoSistema.
+	 * 
+	 * Os controladores do sistema sao substituidos por novos controladores com os
+	 * atributos carregados do arquivo carregado anteriormente.
+	 * 
+	 * Caso ocorra um IOException ou um ClassNotFoundException, sera printado o
+	 * stackTrace da excecao.
+	 */
+	public void carregar() {
+		try {
+			gerenciadorControladores.carrega(estadoSistema);
+		} catch (ClassNotFoundException cnfe) {
+			cnfe.printStackTrace();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+
+		this.controladorAtividade = gerenciadorControladores.carregaAtividade();
+		this.controladorMetas = gerenciadorControladores.carregaMetas();
+		this.controladorPesquisa = gerenciadorControladores.carregaPesquisa();
+		this.controladorPesquisador = gerenciadorControladores.carregaPesquisador();
+	}
+
+	/**
+	 * Metodo para configurar a estrategia para proxima atividade
+	 * 
+	 * @param estrategia estrategia que sera definida
+	 */
 	public void configuraEstrategia(String estrategia) {
 		controladorPesquisa.configuraEstrategia(estrategia);
 

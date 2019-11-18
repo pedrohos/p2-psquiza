@@ -47,4 +47,18 @@ public final class Util {
 		if(numero <= 0)
 			throw new IllegalArgumentException(erro);
 	}
+	
+	public static String removeVazios(String v) {
+		v = v.replace("|  ", "");
+		if (v.charAt(0) == '|')
+			v = v.substring(2);
+		if (v.length() >= 3 && v.substring(v.length() - 3).equals(" | "))
+			v = v.substring(0, v.length() - 3);
+		if (v.length() >= 2 && v.substring(v.length() - 2).equals("| "))
+			v = v.substring(0, v.length() - 2);
+		if (v.length() >= 1 && v.charAt(v.length() - 1) == '|')
+			v = v.substring(0, v.length() - 1);
+		
+		return v;
+	}
 }
