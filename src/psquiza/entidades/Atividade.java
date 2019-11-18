@@ -31,7 +31,9 @@ public class Atividade implements Serializable {
 	 * Armazena a descricao da Atividade.
 	 */
 	private String descricao;
-
+	/**
+	 * Armazena um inteiro que representa a posicao de cada item.
+	 */
 	private Integer posicaoItem = 1;
 	/**
 	 * Armazena a descricao do risco da Atividade.
@@ -63,7 +65,10 @@ public class Atividade implements Serializable {
 	 * Armazena um conjunto ordenados de resultados que compoem a atividade.
 	 */
 	private List<String> resultados;
-
+	
+	/**
+	 * Guarda a proxima atividade
+	 */
 	private Atividade proxima;
 
 	/**
@@ -106,7 +111,6 @@ public class Atividade implements Serializable {
 	 */
 	public void cadastraItem(String item) {
 		Util.validaAtributo(item, "Item nao pode ser nulo ou vazio.");
-
 		this.itens.put(this.posicaoItem, new Item(item));
 		this.posicaoItem += 1;
 	}
@@ -141,7 +145,7 @@ public class Atividade implements Serializable {
 		}
 		return saida;
 	}
-	
+
 	public String getResuladoItens() {
 		String saida = "";
 		for (int item : itens.keySet()) {

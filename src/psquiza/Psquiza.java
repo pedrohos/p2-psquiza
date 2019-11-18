@@ -219,7 +219,7 @@ public class Psquiza {
 	public String busca(String termo) {
 		return sistema.busca(termo);
 	}
-
+	
 	public String busca(String termo, int numeroDoResultado) {
 		return sistema.busca(termo, numeroDoResultado);
 	}
