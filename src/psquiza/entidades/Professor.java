@@ -1,8 +1,12 @@
 package psquiza.entidades;
 
+import java.io.Serializable;
+
 import psquiza.Util;
 
-public class Professor implements Especialidade {
+public class Professor implements Especialidade, Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	private String formacao;
 	private String data;

@@ -63,6 +63,16 @@ public class ControladorAtividade implements Serializable {
 		this.codigoId = 1;
 		this.idAtual = "A" + codigoId;
 	}
+	
+	/**
+	 * Constroi o controlador recuperando as informacoes do controlador ja salvo,
+	 * contendo um mapa de atividades, o id gerador atual da atividade e o id final. 
+	 */
+	public ControladorAtividade(HashMap<String, Atividade> atividades, int codigoId) {
+		this.atividades = atividades;
+		this.codigoId = codigoId;
+		this.idAtual = "A" + codigoId;
+	}
 
 	/**
 	 * Cadastra uma atividade no mapa de atividades. Cada atividade deve ser
@@ -347,5 +357,13 @@ public class ControladorAtividade implements Serializable {
 			throw new NoSuchElementException("Atividade nao encontrada.");
     	
     	return atividades.get(idAtividade).pegaMaiorRiscoAtividades();
+    }
+    
+    public HashMap<String, Atividade> getMapaAtividades() {
+    	return this.atividades;
+    }
+    
+    public int getCodigoId() {
+    	return this.codigoId;
     }
 }

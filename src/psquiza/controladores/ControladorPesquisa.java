@@ -44,8 +44,13 @@ public class ControladorPesquisa implements Serializable {
 	 * Cria um controle de pesquisa e inicializa a coleção de pesquisas.
 	 */
 	public ControladorPesquisa() {
-		pesquisas = new LinkedHashMap<String, Pesquisa>();
+		this.pesquisas = new LinkedHashMap<String, Pesquisa>();
 		this.estrategia = "MAIS_ANTIGA";
+	}
+	
+	public ControladorPesquisa(LinkedHashMap<String, Pesquisa> pesquisas, String estrategia) {
+		this.pesquisas = pesquisas;
+		this.estrategia = estrategia;
 	}
 
 	/**
@@ -572,8 +577,16 @@ public class ControladorPesquisa implements Serializable {
 			new File(caminho);
 			escritor(caminho, pesquisas.get(codigoPesquisa).getResultado());
 		} catch (Exception e) {
+			
 		}
 
 	}
-
+	
+	public LinkedHashMap<String, Pesquisa> getMapaPesquisas() {
+		return this.pesquisas;
+	}
+	
+	public String getEstrategia() {
+		return this.estrategia;
+	}
 }

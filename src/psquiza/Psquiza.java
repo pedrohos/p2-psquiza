@@ -312,32 +312,53 @@ public class Psquiza {
 		return sistema.getDuracao(codigoAtividade);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#defineProximaAtividade(String, String)}
+	 */
 	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
 		sistema.defineProximaAtividade(idPrecedente, idSubsquente);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#tiraProximaAtividade(String)}
+	 */
 	public void tiraProximaAtividade(String idPrecedente) {
 		sistema.tiraProximaAtividade(idPrecedente);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#contaProximos(String)}
+	 */
 	public int contaProximos(String idPrecedente) {
 		return sistema.contaProximos(idPrecedente);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#pegaProximo(String, int)}
+	 */
 	public String pegaProximo(String idAtividade, int enesimaAtividade) {
 		return sistema.pegaProximo(idAtividade, enesimaAtividade);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#pegaMaiorRiscoAtividades(String)}
+	 */
 	public String pegaMaiorRiscoAtividades(String idAtividade) {
 		return sistema.pegaMaiorRiscoAtividades(idAtividade);
 	}
 
-	public void salva() {
-		sistema.salva();
+	/**
+	 * {@link psquiza.controladores.Sistema#salvar()}
+	 */
+	public void salvar() {
+		sistema.salvar();
 	}
 
-	public void carrega() {
-		sistema.carrega();
+	/**
+	 * {@link psquiza.controladores.Sistema#carregar()}
+	 */
+	public void carregar() {
+		sistema.carregar();
 	}
 
 	/**
@@ -354,14 +375,18 @@ public class Psquiza {
 		return sistema.proximaAtividade(codigoPesquisa);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#gravarResumo(String)}
+	 */
 	public void gravarResumo(String codigoPesquisa) {
 		sistema.gravarResumo(codigoPesquisa);
-
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#gravarResultados(String)}
+	 */
 	public void gravarResultados(String codigoPesquisa) {
 		sistema.gravarResultados(codigoPesquisa);
-
 	}
 
 	public static void main(String[] args) {

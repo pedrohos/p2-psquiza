@@ -50,6 +50,13 @@ public class ControladorMetas implements Serializable {
 		this.problemas = new HashMap<String, Problema>();
 		this.objetivos = new HashMap<String, Objetivo>();
 	}
+	
+	public ControladorMetas(Map<String, Problema> problemas, Map<String, Objetivo> objetivos, int contadorProblema, int contadorObjetivo) {
+		this.problemas = (HashMap<String, Problema>) problemas;
+		this.objetivos = (HashMap<String, Objetivo>) objetivos;
+		this.contadorProblema = contadorProblema;
+		this.contadorObjetivo =  contadorObjetivo;
+	}
 
 	/**
 	 * Metodo para cadastrar um novo problema
@@ -220,5 +227,21 @@ public class ControladorMetas implements Serializable {
 		}
 
 		return listagem;
+	}
+	
+	public HashMap<String, Problema> getMapaProblemas() {
+		return (HashMap<String, Problema>) this.problemas;
+	}
+	
+	public HashMap<String, Objetivo> getMapaObjetivos() {
+		return (HashMap<String, Objetivo>) this.objetivos;
+	}
+	
+	public int getContadorProblema() {
+		return this.contadorProblema;
+	}
+	
+	public int getContadorObjetivo() {
+		return this.contadorObjetivo;
 	}
 }

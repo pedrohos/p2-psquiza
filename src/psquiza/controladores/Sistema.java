@@ -9,19 +9,39 @@ import psquiza.entidades.Pesquisador;
 
 public class Sistema {
 
-	private ControladorAtividade controladorAtividade;
 	/**
-	 * Controle que gerencia funcionalidades de uma Pesquisa.
+	 * Armazena o controlador que gerencia as atividades.
+	 */
+	private ControladorAtividade controladorAtividade;
+	
+	/**
+	 * Armazena o controlador que gerencia as pesquisas.
 	 */
 	private ControladorPesquisa controladorPesquisa;
+	
+	/**
+	 * Armazena o controlador que gerencia os objetivos e problemas (metas).
+	 */
 	private ControladorMetas controladorMetas;
+	
+	/**
+	 * Armazena o controlador que gerencia as pesquisadores.
+	 */
 	private ControladorPesquisador controladorPesquisador;
+	
+	/**
+	 * Armazena o controlador de salvamento e carregamento dos outros controladores.
+	 */
 	private GerenciadorControladores gerenciadorControladores;
+	
+	/**
+	 * Local onde sera salvo e carregado os controladores.
+	 */
 	private final String estadoSistema = "estado.dat";  
    
 	/**
 	 * Constroi um sistema inicializando os controladores de Pesquisa, Atividade,
-	 * Metas e Pesquisador.
+	 * Metas e Pesquisador e controladores.
 	 */
 	public Sistema() {
 		this.controladorAtividade = new ControladorAtividade();
@@ -47,16 +67,29 @@ public class Sistema {
 		return controladorAtividade.exibeAtividade(id);
 	}
 
+	/**
+	 * Retorna a quantidade itens pendentes em determinada atividade.
+	 * 
+	 * @param id e o id referente a atividade.
+	 * @return e retornado a quantidade de itens com o estado PENDENTE de
+	 * dada atividade.
+	 */
 	public int contaItensPendentes(String id) {
 		return controladorAtividade.contaItensPendentes(id);
 	}
 
+	/**
+	 * Retorna a quantidade itens realizados em determinada atividade.
+	 * 
+	 * @param id e o id referente a atividade.
+	 * @return e retornado a quantidade de itens com o estado REALIZADO de
+	 * dada atividade.
+	 */
 	public int contaItensRealizados(String id) {
 		return controladorAtividade.contaItensRealizados(id);
 	}
 
 	/**
-	 * 
 	 * Funcao que cadastra uma nova pesquisa no sistema atraves de uma descricao e
 	 * campo de interesse passados.
 	 * 
@@ -69,7 +102,6 @@ public class Sistema {
 	}
 
 	/**
-	 * 
 	 * Altera um atributo da pesquisa, ou a descricao ou o Campo de Interesse
 	 * 
 	 * @param codigo               codigo da pesquisa a ser alterada
@@ -92,7 +124,6 @@ public class Sistema {
 	}
 
 	/**
-	 * 
 	 * Ativa uma pesquisa desativada, retorna uma excessao caso a pesquisa
 	 * soliciatada ja esteja ativada.
 	 * 
@@ -103,7 +134,6 @@ public class Sistema {
 	}
 
 	/**
-	 * 
 	 * Retorna a representacao em string de uma pesquisa no formato: "Codigo -
 	 * Descricao - Campo de Interesse."
 	 * 
@@ -204,6 +234,13 @@ public class Sistema {
 		return controladorPesquisador.exibePesquisador(email);
 	}
 
+	/**
+	 * Retorna um boolean indicando se o pesquisador e ativo ou nao.
+	 * 
+	 * @param email e o email referente ao pesquisador.
+	 * @return e retornado um boolean indicando true caso o pesquisador
+	 * seja ativo, caso contrario, e retornado false.
+	 */
 	public boolean pesquisadorEhAtivo(String email) {
 		return controladorPesquisador.pesquisadorEhAtivo(email);
 	}
@@ -229,12 +266,10 @@ public class Sistema {
 	}
 
 	/**
-	 * Metodo responsavel por busca por todos os objetos do sistema que possuam o
-	 * termo informado.
+	 * Busca por todos os objetos do sistema que possuam o termo informado.
 	 * 
-	 * @param termo termo a ser buscado.
-	 * 
-	 * @return lista de todos os objetos encontrados.
+	 * @param termo e termo a ser buscado.
+	 * @return e retornada a lista de todos os objetos encontrados.
 	 */
 	public String busca(String termo) {
 		Util.validaAtributo(termo, "Campo termo nao pode ser nulo ou vazio.");
@@ -259,13 +294,12 @@ public class Sistema {
 	}
 
 	/**
-	 * Metodo que busca um objeto especifico, informado atravez do indice
+	 * Busca um objeto especifico, informado atravez do indice
 	 * (numeroDoResultado) na busca pelo termo informado.
 	 * 
-	 * @param termo             termo a ser buscado no sistema.
-	 * @param numeroDoResultado numero do resultado da busca a ser retornado.
-	 * 
-	 * @return objeto encontrado.
+	 * @param termo             e o termo a ser buscado no sistema.
+	 * @param numeroDoResultado e o numero do resultado da busca a ser retornado.
+	 * @return e retornado o objeto encontrado.
 	 */
 	public String busca(String termo, int numeroDoResultado) {
 		Util.validaAtributo(termo, "Campo termo nao pode ser nulo ou vazio.");
@@ -283,10 +317,9 @@ public class Sistema {
 	}
 
 	/**
-	 * Metodo que retorna o numero de resultados da busca pelo termo informado.
+	 * Retorna o numero de resultados da busca pelo termo informado.
 	 * 
 	 * @param termo termo a ser buscado no sistema.
-	 * 
 	 * @return numero de resultados encontrados.
 	 */
 	public int contaResultadosBusca(String termo) {
@@ -300,11 +333,12 @@ public class Sistema {
 	}
 
 	/**
-	 * Metodo para associar uma atividade a uma pesquisa
+	 * Associar uma atividade a uma pesquisa.
 	 * 
-	 * @param codigoPesquisa  codigo da pesquisa
-	 * @param codigoAtividade codigo da atividade
-	 * @return retorna true se a associacao deu certo ou false caso nao de certo
+	 * @param codigoPesquisa e o codigo referente a pesquisa
+	 * @param codigoAtividade e o codigo referente a atividade
+	 * @return retorna true se a associacao foi efetuada com sucesso, caso contrario,
+	 * false.
 	 */
 	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade) {
 		Atividade atividade = controladorAtividade.getAtividade(codigoAtividade);
@@ -312,10 +346,10 @@ public class Sistema {
 	}
 
 	/**
-	 * Metodo para desassociar uma atividade de uma pesquisa
+	 * Desassociar uma atividade de uma pesquisa.
 	 * 
-	 * @param codigoPesquisa  codigo da pesquisa
-	 * @param codigoAtividade codigo da atividade
+	 * @param codigoPesquisa e o codigo referente a pesquisa.
+	 * @param codigoAtividade e o codigo referente a atividade.
 	 * @return retorna true se a desassociacao deu certo ou false caso nao de certo
 	 */
 	public boolean desassociaAtividade(String codigoPesquisa, String codigoAtividade) {
@@ -326,9 +360,12 @@ public class Sistema {
 	/**
 	 * Metodo para executar uma atividade
 	 * 
-	 * @param codigoAtividade codigo da atividade
-	 * @param item            item que sera executado
-	 * @param duracao         duracao da execucao
+	 * Caso o codigoAtividade seja vazio ou nulo, sera lancado um IllegalArgumentException:
+	 * "Campo codigoAtividade nao pode ser nulo ou vazio."
+	 * 
+	 * @param codigoAtividade e o codigo referente a atividade
+	 * @param item            e o item que sera executado
+	 * @param duracao         e a duracao da execucao
 	 */
 	public void executaAtividade(String codigoAtividade, int item, int duracao) {
 		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
@@ -482,7 +519,16 @@ public class Sistema {
     	return controladorAtividade.pegaMaiorRiscoAtividades(idAtividade);
     }
     
-    public void salva() {
+    /**
+     * Salva o estado atual dos controladores de:
+     *     Atividade, Metas, Pesquisa e Pesquisadores
+     * No arquivo localizado em:
+     *     estadoSistema
+     * 
+     * Caso ocorra algum erro no salvamento do arquivo, sera printado o
+     * stackTrace do erro.
+     */
+    public void salvar() {
     	try {
 			gerenciadorControladores.salva(estadoSistema, controladorAtividade, controladorMetas, controladorPesquisa, controladorPesquisador);
 		} catch (IOException e) {
@@ -491,7 +537,16 @@ public class Sistema {
 		}
     }
     
-    public void carrega() {
+    /**
+     * Carrega os controladores salvos no arquivo localizado em estadoSistema.
+     * 
+     * Os controladores do sistema sao substituidos por novos controladores com
+     * os atributos carregados do arquivo carregado anteriormente.
+     * 
+     * Caso ocorra um IOException ou um ClassNotFoundException, sera printado o
+     * stackTrace da excecao.
+     */
+    public void carregar() {
     	try {
     		gerenciadorControladores.carrega(estadoSistema);
     	} catch (ClassNotFoundException cnfe){

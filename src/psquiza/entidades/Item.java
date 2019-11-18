@@ -1,5 +1,7 @@
 package psquiza.entidades;
 
+import java.io.Serializable;
+
 import psquiza.Util;
 import psquiza.enums.Estado;
 
@@ -10,7 +12,9 @@ import psquiza.enums.Estado;
  * 
  * @author Pedro Henrique
  */
-public class Item {
+public class Item implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Armazena o nome do item. 

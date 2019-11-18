@@ -34,7 +34,11 @@ public class ControladorPesquisador implements Serializable {
 	 * Metodo responsavel por construir o controlador.
 	 */
 	public ControladorPesquisador() {
-		pesquisadores = new LinkedHashMap<String, Pesquisador>();
+		this.pesquisadores = new LinkedHashMap<String, Pesquisador>();
+	}
+	
+	public ControladorPesquisador(LinkedHashMap<String, Pesquisador> pesquisadores) {
+		this.pesquisadores = pesquisadores;
 	}
 
 	/**
@@ -347,5 +351,9 @@ public class ControladorPesquisador implements Serializable {
 		}
 
 		return saida.substring(0, saida.length() - 3);
+	}
+	
+	public LinkedHashMap<String, Pesquisador> getMapaPesquisadores() {
+		return this.pesquisadores;
 	}
 }
