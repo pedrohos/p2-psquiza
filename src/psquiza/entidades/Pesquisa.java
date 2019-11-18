@@ -431,6 +431,10 @@ public class Pesquisa implements Serializable {
 		return true;
 	}
 
+	/**
+	 * Gera e retorna um resumo da pesquisa que contém seu nome, pesquisadores, objetivos, problemas e atividades;
+	 * @return resumo de uma pesquisa
+	 */
 	public String getResumo() {
 
 		String resumo = "";
@@ -460,25 +464,33 @@ public class Pesquisa implements Serializable {
 		return resumo;
 	}
 
+
 	public String getResultado() {
 
 		String resultado = "";
+
 		String resultados = "";
 		String atvd = "";
 
 		for (Atividade a : atividades) {
 			if (a.getItensRealizados()>0) {
-				atvd += String.format("        - %s\n%s", a.getDescricao(), a.getResuladoItens());
+				atvd += String.format("        - %s\n%s", a.getDescricao(), a.getResultados());
 			}
 			resultados += a.getResultados();
 		}
-		
 
+		for(Atividade a: atividades) {
+			atvd+= String.format("        -%s\n%s",a.getDescricao(),a.getResultados());
+
+		}
+		
 		if (!resultados.equals("")) {
 			resultados = resultados.substring(0, resultados.length() - 1);
 		}
 
+		//resultado = String.format("-Pesquisa: %s\n    -Resultados:\n%s ", toString(),atvd);
 		resultado = String.format("\"- Pesquisa: %s\n    - Resultados:\n%s%s\"", toString(), atvd, resultados);
+	
 
 		return resultado;
 	}
