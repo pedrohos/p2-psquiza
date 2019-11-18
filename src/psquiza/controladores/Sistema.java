@@ -5,7 +5,9 @@ import java.util.NoSuchElementException;
 
 import psquiza.Util;
 import psquiza.entidades.Atividade;
+import psquiza.entidades.Objetivo;
 import psquiza.entidades.Pesquisador;
+import psquiza.entidades.Problema;
 
 public class Sistema {
 
@@ -246,7 +248,8 @@ public class Sistema {
 	}
 
 	public boolean associaProblema(String idPesquisa, String idProblema) {
-		return controladorPesquisa.associaProblema(idPesquisa, idProblema);
+		Problema problema = controladorMetas.getProblema(idProblema);
+		return controladorPesquisa.associaProblema(idPesquisa, problema);
 	}
 
 	public boolean desassociaProblema(String idPesquisa) {
@@ -254,13 +257,15 @@ public class Sistema {
 	}
 
 	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
-		if (controladorPesquisa.associaObjetivo(idPesquisa, idObjetivo) == false)
+		Objetivo objetivo  = controladorMetas.getObjetivo(idObjetivo);
+		if (controladorPesquisa.associaObjetivo(idPesquisa, objetivo) == false)
 			return false;
 		return controladorMetas.associaPesquisa(idPesquisa, idObjetivo);
 	}
 
 	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
-		if (controladorPesquisa.desassociaObjetivo(idPesquisa, idObjetivo) == false)
+		Objetivo objetivo  = controladorMetas.getObjetivo(idObjetivo);
+		if (controladorPesquisa.desassociaObjetivo(idPesquisa, objetivo) == false)
 			return false;
 		return controladorMetas.desassociaPesquisa(idPesquisa, idObjetivo);
 	}
@@ -532,7 +537,6 @@ public class Sistema {
     	try {
 			gerenciadorControladores.salva(estadoSistema, controladorAtividade, controladorMetas, controladorPesquisa, controladorPesquisador);
 		} catch (IOException e) {
-			
 			e.printStackTrace();
 		}
     }
@@ -567,22 +571,24 @@ public class Sistema {
      */
 	public void configuraEstrategia(String estrategia) {
 		controladorPesquisa.configuraEstrategia(estrategia);
-		
+
 	}
+
 	/**
 	 * Metodo para pegar a proxima atividade
+	 * 
 	 * @param codigoPesquisa codigo da pesquisa
 	 * @return retorna retorna o codigo da proxima atividade a ser executada
 	 */
 	public String proximaAtividade(String codigoPesquisa) {
 		return controladorPesquisa.proximaAtividade(codigoPesquisa);
 	}
-    
+
 	public void gravarResumo(String codigoPesquisa) {
 		controladorPesquisa.gravarResumo(codigoPesquisa);
-		
+
 	}
-	
+
 	public void gravarResultados(String codigoPesquisa) {
 		controladorPesquisa.gravarResultados(codigoPesquisa);
 	}
