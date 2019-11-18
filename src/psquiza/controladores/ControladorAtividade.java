@@ -22,9 +22,9 @@ import psquiza.ordenacao.OrdenaAtividade;
  * @author Pedro Henrique
  */
 public class ControladorAtividade implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Armazena um mapa que mapeia um id a uma Atividade.
 	 */
@@ -63,10 +63,10 @@ public class ControladorAtividade implements Serializable {
 		this.codigoId = 1;
 		this.idAtual = "A" + codigoId;
 	}
-	
+
 	/**
 	 * Constroi o controlador recuperando as informacoes do controlador ja salvo,
-	 * contendo um mapa de atividades, o id gerador atual da atividade e o id final. 
+	 * contendo um mapa de atividades, o id gerador atual da atividade e o id final.
 	 */
 	public ControladorAtividade(HashMap<String, Atividade> atividades, int codigoId) {
 		this.atividades = atividades;
@@ -253,7 +253,7 @@ public class ControladorAtividade implements Serializable {
 	public void executaAtividade(String codigoAtividade, int item, int duracao) {
 		Util.validaNumero(item, "Item nao pode ser nulo ou negativo.");
 		Util.validaNumero(duracao, "Duracao nao pode ser nula ou negativa.");
-		if(!atividades.containsKey(codigoAtividade)) {
+		if (!atividades.containsKey(codigoAtividade)) {
 			throw new IllegalArgumentException("Atividade nao existe!");
 		}
 		atividades.get(codigoAtividade).executaAtividade(item, duracao);
@@ -315,55 +315,96 @@ public class ControladorAtividade implements Serializable {
 		}
 		return atividades.get(codigoAtividade).getDuracao();
 	}
-	
+
+	/**
+	 * Metodo que define a proxima atividade de uma outra e que pode lancar
+	 * excessoes caso algum parametro seja invalido ou uma das atividades nao
+	 * exista.
+	 * 
+	 * @param idPrecedente id da atividade que seja definida uma proxima.
+	 * @param idSubsquente id da atividade que sera definida como proxima.
+	 */
 	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
 		Util.validaAtributo(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
 		Util.validaAtributo(idSubsquente, "Atividade nao pode ser nulo ou vazio.");
 		if (!atividades.containsKey(idPrecedente) || !atividades.containsKey(idSubsquente))
 			throw new NoSuchElementException("Atividade nao encontrada.");
-		
+
 		atividades.get(idPrecedente).definirProxima(atividades.get(idSubsquente));
 	}
-	
-    public void tiraProximaAtividade(String idPrecedente) {
-    	Util.validaAtributo(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
-    	if (!atividades.containsKey(idPrecedente))
+
+	/**
+	 * Metodo que tira a proxima atividade de uma outra e que pode lancar excessoes
+	 * caso o id da atividade seja invalido ou nao exista a atividade.
+	 * 
+	 * @param idPrecedente id da atividade que a proxima sera tirada.
+	 */
+	public void tiraProximaAtividade(String idPrecedente) {
+		Util.validaAtributo(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
+		if (!atividades.containsKey(idPrecedente))
 			throw new NoSuchElementException("Atividade nao encontrada.");
-    	
-    	atividades.get(idPrecedente).tiraProxima();
-    }
-    
-    public int contaProximos(String idPrecedente) {
-    	Util.validaAtributo(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
-    	if (!atividades.containsKey(idPrecedente))
+
+		atividades.get(idPrecedente).tiraProxima();
+	}
+
+	/**
+	 * Metodo que conta a quantidade de proximas atividades de uma atividade e que
+	 * pode lancar excessoes caso o id da atividade seja invalido ou a atividade em
+	 * questao nao exista.
+	 * 
+	 * @param idPrecedente id da atividade que seram contadas as proximas.
+	 * 
+	 * @return quantidade de proximas atividades.
+	 */
+	public int contaProximos(String idPrecedente) {
+		Util.validaAtributo(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
+		if (!atividades.containsKey(idPrecedente))
 			throw new NoSuchElementException("Atividade nao encontrada.");
-    	
-    	return atividades.get(idPrecedente).contaProximos();
-    }
-    
-    public String pegaProximo(String idAtividade, int enesimaAtividade) {
-    	Util.validaAtributo(idAtividade, "Atividade nao pode ser nulo ou vazio.");
-    	if (!atividades.containsKey(idAtividade))
+
+		return atividades.get(idPrecedente).contaProximos();
+	}
+
+	/**
+	 * Metodo que pega a enesima atividade subsequente a outra e que pode lancar
+	 * excessoes caso algum parametro seja invalido ou a atividade nao exista.
+	 * 
+	 * @param idAtividade      id da atividade que sera buscada uma proxima.
+	 * @param enesimaAtividade indice da atividade buscada.
+	 * 
+	 * @return id da atividade encontrada.
+	 */
+	public String pegaProximo(String idAtividade, int enesimaAtividade) {
+		Util.validaAtributo(idAtividade, "Atividade nao pode ser nulo ou vazio.");
+		if (!atividades.containsKey(idAtividade))
 			throw new NoSuchElementException("Atividade nao encontrada.");
-    	if (enesimaAtividade < 1)
-    		throw new IllegalArgumentException("EnesimaAtividade nao pode ser negativa");
-    	
-    	return atividades.get(idAtividade).pegaProximo(enesimaAtividade);
-    }
-    
-    public String pegaMaiorRiscoAtividades(String idAtividade) {
-    	Util.validaAtributo(idAtividade, "Atividade nao pode ser nulo ou vazio.");
-    	if (!atividades.containsKey(idAtividade))
+		if (enesimaAtividade < 1)
+			throw new IllegalArgumentException("EnesimaAtividade nao pode ser negativa ou zero.");
+
+		return atividades.get(idAtividade).pegaProximo(enesimaAtividade);
+	}
+
+	/**
+	 * Metodo que pega a atividade subsequente a outra que possui o maior risco
+	 * entre elas e que pode lancar excessoes caso o id da atividade seja invalido
+	 * ou nao exista uma atividade com o mesmo.
+	 * 
+	 * @param idAtividade id da atividade que sera buscado.
+	 * 
+	 * @return atividade subsequente com maior risco.
+	 */
+	public String pegaMaiorRiscoAtividades(String idAtividade) {
+		Util.validaAtributo(idAtividade, "Atividade nao pode ser nulo ou vazio.");
+		if (!atividades.containsKey(idAtividade))
 			throw new NoSuchElementException("Atividade nao encontrada.");
-    	
-    	return atividades.get(idAtividade).pegaMaiorRiscoAtividades();
-    }
-    
-    public HashMap<String, Atividade> getMapaAtividades() {
-    	return this.atividades;
-    }
-    
-    public int getCodigoId() {
-    	return this.codigoId;
-    }
+
+		return atividades.get(idAtividade).pegaMaiorRiscoAtividades();
+	}
+
+	public HashMap<String, Atividade> getMapaAtividades() {
+		return this.atividades;
+	}
+
+	public int getCodigoId() {
+		return this.codigoId;
+	}
 }

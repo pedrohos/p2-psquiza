@@ -65,7 +65,7 @@ public class Atividade implements Serializable {
 	 * Armazena um conjunto ordenados de resultados que compoem a atividade.
 	 */
 	private List<String> resultados;
-	
+
 	/**
 	 * Guarda a proxima atividade
 	 */
@@ -140,7 +140,7 @@ public class Atividade implements Serializable {
 		String saida = "";
 		int ind = 1;
 		for (Item item : itens.values()) {
-			saida +=String.format("            - %s - ITEM%d\n", item.getEstado(),ind);
+			saida += String.format("            - %s - ITEM%d\n", item.getEstado(), ind);
 			ind++;
 		}
 		return saida;
@@ -149,7 +149,7 @@ public class Atividade implements Serializable {
 	public String getResuladoItens() {
 		String saida = "";
 		for (int item : itens.keySet()) {
-			saida +=String.format("        - ITEM%d - %d\n", item,periodo/itens.size());
+			saida += String.format("        - ITEM%d - %d\n", item, periodo / itens.size());
 		}
 //		for (Item item: itens.valus()) {
 //			saida+= String.format("        -%s\n", item.)
@@ -188,6 +188,13 @@ public class Atividade implements Serializable {
 		return this.descricaoRisco;
 	}
 
+	/**
+	 * Metodo que define a atividade a ser executada apos essa e que pode lancar
+	 * excessoes caso a proxima atividade ja esteja setada ou um loop seja
+	 * encontrado.
+	 * 
+	 * @param proxima atividade a ser definida.
+	 */
 	public void definirProxima(Atividade proxima) {
 		if (this.proxima != null)
 			throw new IllegalArgumentException("Atividade ja possui uma subsequente.");
@@ -196,16 +203,34 @@ public class Atividade implements Serializable {
 		this.proxima = proxima;
 	}
 
+	/**
+	 * Metodo que exclui a proxima atividade da atividade em questao, tornando assim
+	 * possivel a definicao de uma nova proxima atividade.
+	 */
 	public void tiraProxima() {
 		this.proxima = null;
 	}
 
+	/**
+	 * Metodo responsavel por contar a quantidade de proximas atividades apos a
+	 * ativividade em questao.
+	 * 
+	 * @return numero de atividades subsequentes a mesma.
+	 */
 	public int contaProximos() {
 		if (this.proxima == null)
 			return 0;
 		return proxima.contaProximos() + 1;
 	}
 
+	/**
+	 * Metodo responsavel por pegar a enesima atividade subsequente a esta e que
+	 * pode lancar uma excessao caso o indice passado nao exista.
+	 * 
+	 * @param index index que defini qual atividade deve ser pega.
+	 * 
+	 * @return id da atividade, caso seja encontrada.
+	 */
 	public String pegaProximo(int index) {
 		if (index == 0)
 			return this.id;
@@ -214,12 +239,29 @@ public class Atividade implements Serializable {
 		return proxima.pegaProximo(index - 1);
 	}
 
+	/**
+	 * Metodo que prepara para a busca da atividade subsequente a esta que possua o
+	 * maior risco e que pode lancar excessao caso nao exista nenhuma atividade
+	 * subsequente.
+	 * 
+	 * @return codigo da atividade subsequente a esta com o maior risco.
+	 */
 	public String pegaMaiorRiscoAtividades() {
 		if (proxima == null)
-			return this.id;
-		return proxima.pegaMaiorRiscoAtividades(this.nivelRisco, this.id);
+			throw new NoSuchElementException("Nao existe proxima atividade.");
+		return proxima.pegaMaiorRiscoAtividades(Risco.BAIXO, null);
 	}
 
+	/**
+	 * Metodo que realiza a busca pelo maior risco entra as atividades subsequentes
+	 * a esta.
+	 * 
+	 * @param maior       maior risco ate o momento.
+	 * @param codigoMaior codigo da atividade que possui o maior risco ate o
+	 *                    momento.
+	 * 
+	 * @return codigo da atividade com o maior risco.
+	 */
 	private String pegaMaiorRiscoAtividades(Risco maior, String codigoMaior) {
 		if (!maior.ehMaior(nivelRisco)) {
 			maior = this.nivelRisco;
@@ -231,6 +273,12 @@ public class Atividade implements Serializable {
 		return proxima.pegaMaiorRiscoAtividades(maior, codigoMaior);
 	}
 
+	/**
+	 * Metodo que verifica a existencia de um loop e lanca uma excessao caso seja
+	 * encontrado.
+	 * 
+	 * @param a atividade a ser verificada.
+	 */
 	private void verificaLoop(Atividade a) {
 		if (this.equals(a))
 			throw new IllegalArgumentException("Criacao de loops negada.");
