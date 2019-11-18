@@ -11,7 +11,7 @@ import psquiza.enums.Tipo;
  * @author Lucian Julio
  *
  */
-public class Objetivo implements Serializable {
+public class Objetivo implements Serializable, Comparable<Objetivo> {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -117,5 +117,20 @@ public class Objetivo implements Serializable {
 	@Override
 	public String toString() {
 		return this.codigo + " - " + this.tipo + " - " + this.descricao + " - " + (this.aderencia + this.viabilidade);
+	}
+
+	@Override
+	public int compareTo(Objetivo o) {
+		if (this.codigo == null) {
+			return -1;
+		}
+		if (o.codigo == null) {
+			return -1;
+		}
+		if (this.codigo.equals(o.codigo)) {
+			return 0;
+		} else {
+			return this.codigo.compareTo(o.codigo);
+		}
 	}
 }

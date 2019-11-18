@@ -338,19 +338,31 @@ public class ControladorPesquisador implements Serializable {
 		ArrayList<Pesquisador> valores = new ArrayList<Pesquisador>(pesquisadores.values());
 		Collections.sort(valores);
 		String saida = "";
-
-		if (tipo.equals("EXTERNO") || tipo.equals("ALUNA") || tipo.equals("PROFESSORA")) {
-
-			for (Pesquisador pesquisador : valores) {
-				if (pesquisador.getFuncaoPesquisador().equals(tipo.toLowerCase())) {
-					saida += pesquisador.toString() + " | ";
-				}
-			}
-		} else {
+		switch(tipo) {
+		case "ALUNA":
+			tipo = "estudante";
+			break;
+		case "EXTERNO":
+			tipo = "externo";
+			break;
+		case "PROFESSORA":
+			tipo = "professor";
+			break;
+		default:
 			throw new IllegalArgumentException(String.format("Tipo %s inexistente.", tipo));
+		} 
+		
+		for (Pesquisador pesquisador : valores) {
+			if (pesquisador.getFuncaoPesquisador().equals(tipo)) {
+				saida += pesquisador.toString() + " | ";
+			}
 		}
-
-		return saida.substring(0, saida.length() - 3);
+		
+		if (saida.equals("")) {
+			return saida;
+		}else {
+			return saida.substring(0, saida.length() - 3);
+		}
 	}
 	
 	public LinkedHashMap<String, Pesquisador> getMapaPesquisadores() {

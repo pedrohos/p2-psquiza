@@ -2,10 +2,14 @@ package psquiza.entidades;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+
+import com.sun.xml.internal.ws.util.StringUtils;
 
 import psquiza.Util;
 
@@ -171,10 +175,10 @@ public class Pesquisa implements Serializable {
 	}
 
 	public boolean associaProblema(Problema problema) {
-		if(this.problema != null && this.problema.equals(problema) ) {
+		if (this.problema != null && this.problema.equals(problema)) {
 			return false;
 		}
-		if(this.problema != null) {
+		if (this.problema != null) {
 			throw new IllegalArgumentException("Pesquisa ja associada a um problema.");
 		}
 		this.problema = problema;
@@ -432,8 +436,10 @@ public class Pesquisa implements Serializable {
 		String resumo = "";
 
 		String obj = "";
-		for (Objetivo o : objetivos) {
-			obj += String.format("- %s\n", o.toString());
+		ArrayList<Objetivo> objt = new ArrayList<>(objetivos);
+		Collections.sort(objt);
+		for (Objetivo o : objt) {
+			obj += String.format("        - %s\n", o.toString());
 		}
 
 		String psq = "";
@@ -443,13 +449,13 @@ public class Pesquisa implements Serializable {
 
 		String atv = "";
 		for (Atividade a : atividades) {
-			atv += String.format("        - %s (%s - %s)\n%s", a.getDescricao(), a.getNivelRisco(), a.getDescricaoRisco(),
-					a.getItens());
+			atv += String.format("        - %s (%s - %s)\n%s", a.getDescricao(), a.getNivelRisco(),
+					a.getDescricaoRisco(), a.getItens());
 		}
 
 		resumo = String.format(
-				"- Pesquisa: %s\n    - Pesquisadores:\n%s    - Problema:\n        - %s\n    - Objetivos: \n        - %s    - Atividades:\n%s",
-				toString(), psq, problema, obj, atv);
+				"\"- Pesquisa: %s\n    - Pesquisadores:\n%s    - Problema:\n        - %s\n    - Objetivos: \n%s    - Atividades:\n%s\"",
+				toString(), psq, problema, obj, atv.substring(0, atv.length() - 1));
 
 		return resumo;
 	}
@@ -457,14 +463,22 @@ public class Pesquisa implements Serializable {
 	public String getResultado() {
 
 		String resultado = "";
-		
+		String resultados = "";
 		String atvd = "";
+
+		for (Atividade a : atividades) {
+			if (a.getItensRealizados()>0) {
+				atvd += String.format("        - %s\n%s", a.getDescricao(), a.getResuladoItens());
+			}
+			resultados += a.getResultados();
+		}
 		
-		for(Atividade a: atividades) {
-			atvd+= String.format("        -%s\n%s",a.getDescricao(),a.getResuladoItens());
+
+		if (!resultados.equals("")) {
+			resultados = resultados.substring(0, resultados.length() - 1);
 		}
 
-		resultado = String.format("-Pesquisa: %s\n    -Resultados:\n%s ", toString(),atvd);
+		resultado = String.format("\"- Pesquisa: %s\n    - Resultados:\n%s%s\"", toString(), atvd, resultados);
 
 		return resultado;
 	}

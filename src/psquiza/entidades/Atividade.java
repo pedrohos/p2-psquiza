@@ -149,11 +149,23 @@ public class Atividade implements Serializable {
 	public String getResuladoItens() {
 		String saida = "";
 		for (int item : itens.keySet()) {
-			saida +=String.format("        - ITEM%d - %d\n", item,periodo/itens.size());
+			if(getItensRealizados() == 0) {
+				saida +=String.format("        - ITEM%d - %d\n", item,periodo);	
+			}else {
+				saida +=String.format("        - ITEM%d - %d\n", item,periodo/getItensRealizados());
+			}
+			
 		}
-//		for (Item item: itens.valus()) {
-//			saida+= String.format("        -%s\n", item.)
-//		}
+		return saida;
+	}
+	
+	public String getResultados() {
+		String saida = "";
+		for (String r: resultados) {
+			if (!(r==null)) {
+				saida+="        - "+r+"\n";	
+			}
+		}
 		return saida;
 	}
 
