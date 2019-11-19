@@ -260,4 +260,41 @@ public class ControladorMetas implements Serializable {
 		}
 		return objetivos.get(idObjetivo);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + contadorObjetivo;
+		result = prime * result + contadorProblema;
+		result = prime * result + ((objetivos == null) ? 0 : objetivos.hashCode());
+		result = prime * result + ((problemas == null) ? 0 : problemas.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ControladorMetas other = (ControladorMetas) obj;
+		if (contadorObjetivo != other.contadorObjetivo)
+			return false;
+		if (contadorProblema != other.contadorProblema)
+			return false;
+		if (objetivos == null) {
+			if (other.objetivos != null)
+				return false;
+		} else if (!objetivos.equals(other.objetivos))
+			return false;
+		if (problemas == null) {
+			if (other.problemas != null)
+				return false;
+		} else if (!problemas.equals(other.problemas))
+			return false;
+		return true;
+	}
 }

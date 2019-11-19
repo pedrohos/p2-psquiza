@@ -581,4 +581,47 @@ public class Sistema {
 	public void gravarResultados(String codigoPesquisa) {
 		controladorPesquisa.gravarResultados(codigoPesquisa);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((controladorAtividade == null) ? 0 : controladorAtividade.hashCode());
+		result = prime * result + ((controladorMetas == null) ? 0 : controladorMetas.hashCode());
+		result = prime * result + ((controladorPesquisa == null) ? 0 : controladorPesquisa.hashCode());
+		result = prime * result + ((controladorPesquisador == null) ? 0 : controladorPesquisador.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sistema other = (Sistema) obj;
+		if (controladorAtividade == null) {
+			if (other.controladorAtividade != null)
+				return false;
+		} else if (!controladorAtividade.equals(other.controladorAtividade))
+			return false;
+		if (controladorMetas == null) {
+			if (other.controladorMetas != null)
+				return false;
+		} else if (!controladorMetas.equals(other.controladorMetas))
+			return false;
+		if (controladorPesquisa == null) {
+			if (other.controladorPesquisa != null)
+				return false;
+		} else if (!controladorPesquisa.equals(other.controladorPesquisa))
+			return false;
+		if (controladorPesquisador == null) {
+			if (other.controladorPesquisador != null)
+				return false;
+		} else if (!controladorPesquisador.equals(other.controladorPesquisador))
+			return false;
+		return true;
+	}
 }

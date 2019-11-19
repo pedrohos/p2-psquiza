@@ -133,4 +133,55 @@ public class Objetivo implements Serializable, Comparable<Objetivo> {
 			return this.codigo.compareTo(o.codigo);
 		}
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + aderencia;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((idPesquisa == null) ? 0 : idPesquisa.hashCode());
+		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		result = prime * result + viabilidade;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Objetivo other = (Objetivo) obj;
+		if (aderencia != other.aderencia)
+			return false;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
+		if (idPesquisa == null) {
+			if (other.idPesquisa != null)
+				return false;
+		} else if (!idPesquisa.equals(other.idPesquisa))
+			return false;
+		if (tipo != other.tipo)
+			return false;
+		if (viabilidade != other.viabilidade)
+			return false;
+		return true;
+	}
+	
+	public String getIdPesquisa() {
+		return idPesquisa;
+	}
+
 }

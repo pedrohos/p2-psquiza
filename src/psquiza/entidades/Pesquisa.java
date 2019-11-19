@@ -8,9 +8,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
-
-import com.sun.xml.internal.ws.util.StringUtils;
-
 import psquiza.Util;
 
 /**
@@ -202,7 +199,15 @@ public class Pesquisa implements Serializable {
 		return false;
 	}
 
-	public boolean associaObjetivo(Objetivo objetivo) {
+
+	public boolean associaObjetivo(Objetivo objetivo,String idPesquisa) {
+		if(objetivo.getIdPesquisa().equals(idPesquisa)) {
+			return false;
+		}
+		if(!objetivo.getIdPesquisa().equals("")) {
+			throw new IllegalArgumentException("Objetivo ja associado a uma pesquisa.");
+		}
+
 		if (possuiObjetivo(objetivo)) {
 			return false;
 		}
@@ -432,7 +437,9 @@ public class Pesquisa implements Serializable {
 	}
 
 	/**
-	 * Gera e retorna um resumo da pesquisa que contém seu nome, pesquisadores, objetivos, problemas e atividades;
+	 * Gera e retorna um resumo da pesquisa que contém seu nome, pesquisadores,
+	 * objetivos, problemas e atividades;
+	 * 
 	 * @return resumo de uma pesquisa
 	 */
 	public String getResumo() {
@@ -464,33 +471,21 @@ public class Pesquisa implements Serializable {
 		return resumo;
 	}
 
-
 	public String getResultado() {
 
 		String resultado = "";
 
-		String resultados = "";
-		String atvd = "";
-
+		String atv = "";
 		for (Atividade a : atividades) {
-			if (a.getItensRealizados()>0) {
-				atvd += String.format("        - %s\n%s", a.getDescricao(), a.getResultados());
-			}
-			resultados += a.getResultados();
-		}
-
-		for(Atividade a: atividades) {
-			atvd+= String.format("        -%s\n%s",a.getDescricao(),a.getResultados());
-
+			atv += String.format("        - %s\n%s", a.getDescricao(), a.getResultados());
 		}
 		
-		if (!resultados.equals("")) {
-			resultados = resultados.substring(0, resultados.length() - 1);
+		if (!atv.equals("")) {
+			atv = atv.substring(0,atv.length()-1);
 		}
 
-		//resultado = String.format("-Pesquisa: %s\n    -Resultados:\n%s ", toString(),atvd);
-		resultado = String.format("\"- Pesquisa: %s\n    - Resultados:\n%s%s\"", toString(), atvd, resultados);
-	
+		resultado = String.format("\"- Pesquisa: %s\n        - Resultados:\n%s\"", toString(), atv);
+		
 
 		return resultado;
 	}
