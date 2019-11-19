@@ -14,79 +14,116 @@ class ControladorPesquisaTest {
 
 	private Sistema sistema;
 	String pesquisa1;
+	String pesquisa2;
 	String objetivo1;
 	String objetivo2;
 	String atividade1;
+	String problema1;
+	String problema2;
 
 	@BeforeEach
 	void criaControle() {
 		sistema = new Sistema();
 
 		pesquisa1 = sistema.cadastraPesquisa("Pesquisa sobre vasamento de petroleo", "petroleo, animais, vasamento");
-		sistema.cadastraAtividade(
-				"Monitoramento de chats dos alunos de computacao do primeiro periodo que falam sobre vazamento de petroleo.",
-				"BAIXO", "Por se tratar de apenas um monitoramento, o risco nao e elevado.");
-		sistema.cadastraItem("A1", "Olhar o zapzap deles");
-		sistema.cadastraItem("A1", "Perguntar sobre o oleo");
-		sistema.cadastraItem("A1", "Descobrir o responsavel");
+		pesquisa2 = sistema.cadastraPesquisa("Pesquisa sobre produtos quimicos nos mares", "Produtos quimicos, mar, problemas");
 		sistema.cadastraObjetivo("ESPECIFICO", "Ajudar animais ameacados pelo vazamento de petroleo", 3, 4);
 		sistema.cadastraObjetivo("GERAL", "Descobrir se o culpado pelo óleo ta na ufcg", 2, 3);
+		sistema.cadastraProblema("Tirar o oleo do mar e salvar os peixinhos", 1);
+		sistema.cadastraProblema("Ajudar a tirar o oleo do mar", 4);
 		atividade1 = "A1";
 		objetivo1 = "O1";
 		objetivo2 = "O2";
+		problema1 = "P1";
+		problema2 = "P2";
 
 	}
 
+	@Test
+	void associaProblemaIdPesquisaVazia() {
+		try {
+			sistema.associaAtividade("", problema1);
+			fail("Deve lancar uma excessao");
+		} catch (IllegalArgumentException e) {
+
+		}
+	}
+
+	@Test
+	void associaProblemaIdPesquisaNulo() {
+		try {
+			sistema.associaProblema(null, problema1);
+			fail("Deve lancar uma excessao");
+		} catch (IllegalArgumentException e) {
+
+		}
+	}
+
+	@Test
+	void associaProblemaIdProblemaVazio() {
+		try {
+			sistema.associaAtividade(pesquisa1, "");
+			fail("Deve lancar uma excessao");
+		} catch (IllegalArgumentException e) {
+
+		}
+	}
+
+	@Test
+	void associaProblemaIdProblemaNulo() {
+		try {
+			sistema.associaAtividade(pesquisa1, null);
+			fail("Deve lancar uma excessao");
+		} catch (IllegalArgumentException e) {
+
+		}
+	}
+
+	@Test
+	void associaProblemaInexistente() {
+		try {
+			sistema.associaAtividade(pesquisa1, "P3");
+			fail("Deve lancar uma excessao");
+		} catch (IllegalArgumentException e) {
+
+		}
+	}
+
+	@Test
+	void associaProblemaPesquisaInexistente() {
+		try {
+			sistema.associaAtividade("COM5", problema1);
+			fail("Deve lancar uma excessao");
+		} catch (IllegalArgumentException e) {
+
+		}
+	}
+
+	@Test
+	void associaProblemaJaAssociado() {
+		assertTrue(sistema.associaProblema(pesquisa1, problema1));
+		assertFalse(sistema.associaProblema(pesquisa1, problema1));
+	}
 	
 	@Test
-	void associaAtividadeIdPesquisaVazia() {
-		try {
-		sistema.associaAtividade("", "A1");
-		fail("Deve lancar uma excessao");
+	void associaProblemaJaAssociadoAUmaPesquisa() {
+		assertTrue(sistema.associaProblema(pesquisa1, problema1));
+		try{
+			sistema.associaProblema(pesquisa2, problema1);
+			fail("deve ser lancada uma excessao");
 		}catch(IllegalArgumentException e) {
 			
 		}
 	}
-	
+
 	@Test
-	void associaAtividadeIdPesquisaNulo() {
+	void associaObjetivo() {
 		try {
-		sistema.associaAtividade(null, "A1");
-		fail("Deve lancar uma excessao");
-		}catch(IllegalArgumentException e) {
-			
+			sistema.associaAtividade(pesquisa1, null);
+			fail("Deve lancar uma excessao");
+		} catch (IllegalArgumentException e) {
+
 		}
 	}
-	
-	@Test
-	void associaAtividadeIdAtividadeVazio() {
-		try {
-		sistema.associaAtividade(pesquisa1, "");
-		fail("Deve lancar uma excessao");
-		}catch(IllegalArgumentException e) {
-			
-		}
-	}
-	
-	@Test
-	void associaProblemaIdAtividadeNulo() {
-		try {
-		sistema.associaAtividade(pesquisa1, null);
-		fail("Deve lancar uma excessao");
-		}catch(IllegalArgumentException e) {
-			
-		}
-	}
-	
-	@Test
-	void associaObjetivo () {
-		try {
-		sistema.associaAtividade(pesquisa1, null);
-		fail("Deve lancar uma excessao");
-		}catch(IllegalArgumentException e) {
-			
-		}
-	}
-	
 
 }

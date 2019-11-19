@@ -163,7 +163,6 @@ public class Atividade implements Serializable {
 		int ind = 1;
 		for (Item i : itens.values()) {
 			if (i.getEstado().equals("REALIZADO")) {
-				//System.out.println(i);
 				saida += String.format("            - ITEM%d - %d\n", ind, valor);
 				ind++;
 			}
@@ -171,7 +170,6 @@ public class Atividade implements Serializable {
 
 		for (String r : resultados) {
 			if (r != null) {
-				//System.out.println(r);
 				saida += "            - " + r + "\n";
 			}
 		}
@@ -180,7 +178,7 @@ public class Atividade implements Serializable {
 	}
 
 	/**
-	 * Retorna a quantidade de itens com o status de REALIZADO.
+	 * Retorna a quantidade de itens com o status REALIZADO.
 	 * 
 	 * @return e retornado a quantidade de itens REALIZADO.
 	 */
@@ -194,18 +192,38 @@ public class Atividade implements Serializable {
 		return resultado;
 	}
 
+	/**
+	 * Metodo que retorna o id de uma atividade
+	 * 
+	 * @return String que representa o id de uma atividade
+	 */
 	public String getId() {
 		return id;
 	}
 
+	/**
+	 * Método que retorna a descricao de uma atividade
+	 * 
+	 * @return uma string que representa descricao de uma atividade
+	 */
 	public String getDescricao() {
 		return this.descricao;
 	}
 
+	/**
+	 * Retorna o nivel de risco de uma atividade que pode ser BAIXO, MEDIO ou ALTO.
+	 * 
+	 * @return String que representa o nivel do risco de uma atividade
+	 */
 	public String getNivelRisco() {
 		return this.nivelRisco.getRisco();
 	}
 
+	/**
+	 * Metodo que retorna a descricao do risco de uma atividade
+	 * 
+	 * @return String da descricao do risco de uma atividade
+	 */
 	public String getDescricaoRisco() {
 		return this.descricaoRisco;
 	}

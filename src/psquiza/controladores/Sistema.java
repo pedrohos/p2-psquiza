@@ -282,7 +282,7 @@ public class Sistema {
 		String listagem = String.format("%s | %s | %s | %s | %s", controladorPesquisa.buscaPesquisa(termo),
 				controladorPesquisador.buscaPesquisador(termo), controladorMetas.buscaProblema(termo),
 				controladorMetas.buscaObjetivo(termo), controladorAtividade.buscaAtividade(termo));
-		listagem  = Util.removeVazios(listagem);
+		listagem = Util.removeVazios(listagem);
 
 		return listagem;
 	}
@@ -573,11 +573,27 @@ public class Sistema {
 		return controladorPesquisa.proximaAtividade(codigoPesquisa);
 	}
 
+	/**
+	 * Recebe o id da pesquisa e grava o resumo da mesma em um arquivo de texto na
+	 * origem do projeto. Lança excessões caso os parametros passados sejam nulos,
+	 * vazios ou inválidos (caso a pesquisa não exista). Cria um arquivo com o nome
+	 * "_CodigoDaPesquisa.txt"
+	 * 
+	 * @param codigoPesquisa id da pesquisa a ser gravada
+	 */
 	public void gravarResumo(String codigoPesquisa) {
 		controladorPesquisa.gravarResumo(codigoPesquisa);
 
 	}
 
+	/**
+	 * Recebe o id da pesquisa e grava os resultados da mesma em um arquivo de texto
+	 * na origem do projeto. Lança excessões caso os parametros passados sejam
+	 * nulos, vazios ou inválidos (caso a pesquisa não exista). Cria um arquivo com
+	 * o nome "CodigoDaPesquisa-Resultados.txt".
+	 * 
+	 * @param codigoPesquisa id da pesquisa a ser gravada
+	 */
 	public void gravarResultados(String codigoPesquisa) {
 		controladorPesquisa.gravarResultados(codigoPesquisa);
 	}

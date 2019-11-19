@@ -49,7 +49,7 @@ public class ControladorPesquisa implements Serializable {
 		this.pesquisas = new LinkedHashMap<String, Pesquisa>();
 		this.estrategia = "MAIS_ANTIGA";
 	}
-	
+
 	public ControladorPesquisa(LinkedHashMap<String, Pesquisa> pesquisas, String estrategia) {
 		this.pesquisas = pesquisas;
 		this.estrategia = estrategia;
@@ -297,7 +297,7 @@ public class ControladorPesquisa implements Serializable {
 		if (!ehAtiva(idPesquisa))
 			throw new IllegalArgumentException("Pesquisa desativada.");
 
-		return this.pesquisas.get(idPesquisa).associaObjetivo(objetivo,idPesquisa);
+		return this.pesquisas.get(idPesquisa).associaObjetivo(objetivo, idPesquisa);
 	}
 
 	/**
@@ -546,26 +546,48 @@ public class ControladorPesquisa implements Serializable {
 		return pesquisas.get(codigoPesquisa).proximaAtividade(this.estrategia);
 	}
 
-	public static void escritor(String path, String texto) throws IOException {
+	/**
+	 * Metodo interno da classe que recebe um caminho, cria um arquivo de texto e
+	 * grava o texto recebido no parametro nesse arquivo.
+	 * 
+	 * @param path  caminho que o arquivo vai ser criado com o nome do arquivo
+	 * @param texto texto que vai ser gravado dentro do arquivo criado
+	 * @throws IOException
+	 */
+	private static void escritor(String path, String texto) throws IOException {
+		new File(path);
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path));
 		buffWrite.append(texto);
 		buffWrite.close();
 	}
 
+	/**
+	 * Recebe o id da pesquisa e grava o resumo da mesma em um arquivo de texto na
+	 * origem do projeto. Lança excessões caso os parametros passados sejam nulos,
+	 * vazios ou inválidos (caso a pesquisa não exista). Cria um arquivo com o nome
+	 * "_CodigoDaPesquisa.txt"
+	 * 
+	 * @param codigoPesquisa id da pesquisa a ser gravada
+	 */
 	public void gravarResumo(String codigoPesquisa) {
 		Util.validaAtributo(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
 		existePesquisa(codigoPesquisa);
-
-		String caminho = String.format("%s/%s.txt", System.getProperty("user.dir"), codigoPesquisa);
-
+		String caminho = String.format("%s/_%s.txt", System.getProperty("user.dir"), codigoPesquisa);
 		try {
-			new File(caminho);
 			escritor(caminho, pesquisas.get(codigoPesquisa).getResumo());
 		} catch (Exception e) {
 		}
 
 	}
 
+	/**
+	 * Recebe o id da pesquisa e grava os resultados da mesma em um arquivo de texto
+	 * na origem do projeto. Lança excessões caso os parametros passados sejam
+	 * nulos, vazios ou inválidos (caso a pesquisa não exista). Cria um arquivo com
+	 * o nome "CodigoDaPesquisa-Resultados.txt".
+	 * 
+	 * @param codigoPesquisa id da pesquisa a ser gravada
+	 */
 	public void gravarResultados(String codigoPesquisa) {
 		Util.validaAtributo(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
 		existePesquisa(codigoPesquisa);
@@ -573,18 +595,16 @@ public class ControladorPesquisa implements Serializable {
 		String caminho = String.format("%s/%s-Resultados.txt", System.getProperty("user.dir"), codigoPesquisa);
 
 		try {
-			new File(caminho);
 			escritor(caminho, pesquisas.get(codigoPesquisa).getResultado());
 		} catch (Exception e) {
-			
 		}
 
 	}
-	
+
 	public LinkedHashMap<String, Pesquisa> getMapaPesquisas() {
 		return this.pesquisas;
 	}
-	
+
 	public String getEstrategia() {
 		return this.estrategia;
 	}
