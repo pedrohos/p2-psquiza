@@ -16,7 +16,6 @@ import psquiza.Util;
  * pelo sistema e um estado que indica se a pesquisa esta ativa (1) ou
  * desativada (-1)
  *
- * @author Regina Leticia Santos Felipe - 119110519
  * 
  */
 public class Pesquisa implements Serializable {
@@ -199,12 +198,11 @@ public class Pesquisa implements Serializable {
 		return false;
 	}
 
-
-	public boolean associaObjetivo(Objetivo objetivo,String idPesquisa) {
-		if(objetivo.getIdPesquisa().equals(idPesquisa)) {
+	public boolean associaObjetivo(Objetivo objetivo, String idPesquisa) {
+		if (objetivo.getIdPesquisa().equals(idPesquisa)) {
 			return false;
 		}
-		if(!objetivo.getIdPesquisa().equals("")) {
+		if (!objetivo.getIdPesquisa().equals("")) {
 			throw new IllegalArgumentException("Objetivo ja associado a uma pesquisa.");
 		}
 
@@ -465,12 +463,18 @@ public class Pesquisa implements Serializable {
 		}
 
 		resumo = String.format(
-				"\"- Pesquisa: %s\n    - Pesquisadores:\n%s    - Problema:\n        - %s\n    - Objetivos: \n%s    - Atividades:\n%s\"",
+				"- Pesquisa: %s\n    - Pesquisadores:\n%s    - Problema:\n        - %s\n    - Objetivos: \n%s    - Atividades:\n%s",
 				toString(), psq, problema, obj, atv.substring(0, atv.length() - 1));
 
 		return resumo;
 	}
 
+	/**
+	 * Retorna uma string que representa o resultado da pesquisa, quais atividades
+	 * foram realizadas e os comentarios sobre.
+	 * 
+	 * @return string sobre o resultado da pesquisa
+	 */
 	public String getResultado() {
 
 		String resultado = "";
@@ -479,13 +483,12 @@ public class Pesquisa implements Serializable {
 		for (Atividade a : atividades) {
 			atv += String.format("        - %s\n%s", a.getDescricao(), a.getResultados());
 		}
-		
+
 		if (!atv.equals("")) {
-			atv = atv.substring(0,atv.length()-1);
+			atv = atv.substring(0, atv.length() - 1);
 		}
 
-		resultado = String.format("\"- Pesquisa: %s\n        - Resultados:\n%s\"", toString(), atv);
-		
+		resultado = String.format("- Pesquisa: %s\n        - Resultados:\n%s", toString(), atv);
 
 		return resultado;
 	}

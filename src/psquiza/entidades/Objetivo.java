@@ -14,7 +14,7 @@ import psquiza.enums.Tipo;
 public class Objetivo implements Serializable, Comparable<Objetivo> {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Atributo que indica a viabilidade do um objetivo
 	 */
@@ -35,26 +35,27 @@ public class Objetivo implements Serializable, Comparable<Objetivo> {
 	 * Atributo que representa o codigo de um objetivo
 	 */
 	private String codigo;
-	
+
 	private String idPesquisa;
 
 	/**
-	 * Metodo que constroi um objetivo a partir de um tipo, descricao, aderencia e viabilidade.
+	 * Metodo que constroi um objetivo a partir de um tipo, descricao, aderencia e
+	 * viabilidade.
 	 * 
-	 * Caso o tipo do Objetivo seja vazio ou nulo, sera lancada um IllegalArgumentException:
-	 * "Campo tipo nao pode ser nulo ou vazio."
-	 * Caso a descricao do Objetivo seja vazia ou nula, sera lancada um IllegalArgumentException:
-	 * "Campo descricao nao pode ser nulo ou vazio."
-	 * Caso a aderencia do Objetivo seja invalida, sera lancada um IllegalArgumentException:
-	 * "Campo aderencia nao pode ser nulo ou vazio."
-	 * Caso a viabilidade do Objetivo seja invalida, sera lancada um IllegalArgumentException:
-	 * "Campo viabilidade nao pode ser nulo ou vazio."
-	 * Caso a viabilidade do Objetivo nao esteja no intervalo de 1 a 5, sera lancada um IllegalArgumentException:
-	 * "Valor invalido de aderencia"
-	 * Caso a aderencia do Objetivo nao esteja no intervalo de 1 a 5, sera lancada um IllegalArgumentException:
-	 * "Valor invalido de viabilidade."
-	 * Caso o codigo do Objetivo seja vazio ou nulo, sera lancada um IllegalArgumentException:
-	 * "Campo codigo nao pode ser nulo ou vazio."
+	 * Caso o tipo do Objetivo seja vazio ou nulo, sera lancada um
+	 * IllegalArgumentException: "Campo tipo nao pode ser nulo ou vazio." Caso a
+	 * descricao do Objetivo seja vazia ou nula, sera lancada um
+	 * IllegalArgumentException: "Campo descricao nao pode ser nulo ou vazio." Caso
+	 * a aderencia do Objetivo seja invalida, sera lancada um
+	 * IllegalArgumentException: "Campo aderencia nao pode ser nulo ou vazio." Caso
+	 * a viabilidade do Objetivo seja invalida, sera lancada um
+	 * IllegalArgumentException: "Campo viabilidade nao pode ser nulo ou vazio."
+	 * Caso a viabilidade do Objetivo nao esteja no intervalo de 1 a 5, sera lancada
+	 * um IllegalArgumentException: "Valor invalido de aderencia" Caso a aderencia
+	 * do Objetivo nao esteja no intervalo de 1 a 5, sera lancada um
+	 * IllegalArgumentException: "Valor invalido de viabilidade." Caso o codigo do
+	 * Objetivo seja vazio ou nulo, sera lancada um IllegalArgumentException: "Campo
+	 * codigo nao pode ser nulo ou vazio."
 	 * 
 	 * @param tipo        tipo do objetivo
 	 * @param descricao   descricao do objetivo
@@ -77,31 +78,31 @@ public class Objetivo implements Serializable, Comparable<Objetivo> {
 		this.codigo = codigo;
 		this.idPesquisa = "";
 	}
-	
+
 	public boolean associaPesquisa(String idPesquisa) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		if (this.idPesquisa.equals(idPesquisa))
 			return false;
 		if (!this.idPesquisa.isEmpty())
 			throw new IllegalArgumentException("Objetivo ja associado a uma pesquisa.");
-		
+
 		this.idPesquisa = idPesquisa;
 		return true;
 	}
-	
+
 	public boolean desassociaPesquisa(String idPesquisa) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		if (!this.idPesquisa.equals(idPesquisa))
 			return false;
-		
+
 		this.idPesquisa = "";
 		return true;
 	}
-	
+
 	public String getCodigo() {
 		return this.codigo;
 	}
-	
+
 	/**
 	 * Funcao que retorna a descricao da pesquisa.
 	 * 
@@ -110,7 +111,7 @@ public class Objetivo implements Serializable, Comparable<Objetivo> {
 	public String getDescricao() {
 		return descricao;
 	}
- 
+
 	/**
 	 * Metodo para gerar a representacao de um objetivo
 	 */
@@ -119,6 +120,12 @@ public class Objetivo implements Serializable, Comparable<Objetivo> {
 		return this.codigo + " - " + this.tipo + " - " + this.descricao + " - " + (this.aderencia + this.viabilidade);
 	}
 
+	/**
+	 * Método que compara dois objetivos e retorna um inteiro que representa a ordem
+	 * de precedencia entre eles
+	 * 
+	 * @return inteiro que representa a ordem de precedencia entre dois inteiros.
+	 */
 	@Override
 	public int compareTo(Objetivo o) {
 		if (this.codigo == null) {
@@ -134,6 +141,13 @@ public class Objetivo implements Serializable, Comparable<Objetivo> {
 		}
 	}
 
+<<<<<<< HEAD
+	/**
+	 * Método que retorna o id de uma pesquisa
+	 * 
+	 * @return codigo da pesquisa
+	 */
+=======
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -180,6 +194,7 @@ public class Objetivo implements Serializable, Comparable<Objetivo> {
 		return true;
 	}
 	
+>>>>>>> 01a4a23a19565980b8f1802ac8bcae3e0cfaadd1
 	public String getIdPesquisa() {
 		return idPesquisa;
 	}
