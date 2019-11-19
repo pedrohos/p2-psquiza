@@ -133,4 +133,8 @@ public class Objetivo implements Serializable, Comparable<Objetivo> {
 			return this.codigo.compareTo(o.codigo);
 		}
 	}
+
+	public String getIdPesquisa() {
+		return idPesquisa;
+	}
 }
