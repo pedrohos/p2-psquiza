@@ -269,6 +269,9 @@ public class ControladorAtividade implements Serializable {
 	public int cadastraResultado(String codigoAtividade, String resultado) {
 		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		Util.validaAtributo(resultado, "Resultado nao pode ser nulo ou vazio.");
+		if(!atividades.containsKey(codigoAtividade)) {
+			throw new IllegalArgumentException("Atividade nao existe!");
+		}
 		return atividades.get(codigoAtividade).cadastraResultado(resultado);
 	}
 
