@@ -26,11 +26,27 @@ class SistemaTest {
 	@Test
 	void testBuscaDoisParametros() {
 		Sistema s = new Sistema();
+		
+		s.cadastraPesquisa("Reconhecimento de pes", "saude");
+		s.cadastraPesquisador("Charleu Luie", "PROFESSOR", "Professor renomado no ambito medicinal", "charleu@xac.lulel.com", "https://charleu.com");
+		s.cadastraProblema("Reconhecer curvaturas atraves de algoritmos", 4);
+		s.cadastraObjetivo("GERAL", "Reconhecer tipo de pe atraves do processamento da imagem fotografada do pe", 3, 5);
+		s.cadastraAtividade("Retirar fotos de pes a fim de reconhecimento", "BAIXO", "Retirar fotos dos pes de voluntarios");
+		
+		assertEquals(s.busca("re", 4), "O1: Reconhecer tipo de pe atraves do processamento da imagem fotografada do pe");
 	}
 	
 	@Test
 	void testContaResultadoPesquisa() {
 		Sistema s = new Sistema();
+		
+		s.cadastraPesquisa("Reconhecimento de pes", "saude");
+		s.cadastraPesquisador("Charleu Luie", "PROFESSOR", "Professor renomado no ambito medicinal", "charleu@xac.lulel.com", "https://charleu.com");
+		s.cadastraProblema("Reconhecer curvaturas atraves de algoritmos", 4);
+		s.cadastraObjetivo("GERAL", "Reconhecer tipo de pe atraves do processamento da imagem fotografada do pe", 3, 5);
+		s.cadastraAtividade("Retirar fotos de pes a fim de reconhecimento", "BAIXO", "Retirar fotos dos pes de voluntarios");
+		
+		assertEquals(s.contaResultadosBusca("re"), 6);
 	}
 
 }
