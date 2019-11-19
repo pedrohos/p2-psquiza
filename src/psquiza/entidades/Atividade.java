@@ -147,28 +147,37 @@ public class Atividade implements Serializable {
 	}
 
 	/**
-	 * Retorna uma string que mostra os itens realizados e as comentarios sobre as realizações
+	 * Retorna uma string que mostra os itens realizados e as comentarios sobre as
+	 * realizações
+	 * 
 	 * @return retorna uma string com resultados.
 	 */
 	public String getResultados() {
-			String saida = "";
-			float valor = periodo/getItensRealizados();
-			int ind = 1;
-		
-			for(Item i: itens.values()) {
-				if(i.getEstado().equals("REALIZADO")) {
-					saida+=String.format("        - ITEM%d %d", ind,valor);
-					ind++;
-				}
+		String saida = "";
+		int valor = 0;
+		if (getItensRealizados() != 0) {
+			valor = periodo / getItensRealizados();
+		} else {
+			valor = periodo;
+		}
+		int ind = 1;
+		for (Item i : itens.values()) {
+			if (i.getEstado().equals("REALIZADO")) {
+				//System.out.println(i);
+				saida += String.format("            - ITEM%d - %d\n", ind, valor);
+				ind++;
 			}
-			
-			for (String r: resultados) {
-					saida+="        - "+r+"\n";	
-				}
+		}
 
-			return saida;
+		for (String r : resultados) {
+			if (r != null) {
+				//System.out.println(r);
+				saida += "            - " + r + "\n";
+			}
+		}
+
+		return saida;
 	}
-
 
 	/**
 	 * Retorna a quantidade de itens com o status de REALIZADO.

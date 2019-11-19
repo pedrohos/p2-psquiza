@@ -297,7 +297,7 @@ public class ControladorPesquisa implements Serializable {
 		if (!ehAtiva(idPesquisa))
 			throw new IllegalArgumentException("Pesquisa desativada.");
 
-		return this.pesquisas.get(idPesquisa).associaObjetivo(objetivo);
+		return this.pesquisas.get(idPesquisa).associaObjetivo(objetivo,idPesquisa);
 	}
 
 	/**
