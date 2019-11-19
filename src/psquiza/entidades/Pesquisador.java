@@ -1,7 +1,6 @@
 package psquiza.entidades;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import psquiza.Util;
 
 /**
