@@ -368,4 +368,29 @@ public class ControladorPesquisador implements Serializable {
 	public LinkedHashMap<String, Pesquisador> getMapaPesquisadores() {
 		return this.pesquisadores;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((pesquisadores == null) ? 0 : pesquisadores.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ControladorPesquisador other = (ControladorPesquisador) obj;
+		if (pesquisadores == null) {
+			if (other.pesquisadores != null)
+				return false;
+		} else if (!pesquisadores.equals(other.pesquisadores))
+			return false;
+		return true;
+	}
 }

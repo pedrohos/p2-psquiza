@@ -407,4 +407,32 @@ public class ControladorAtividade implements Serializable {
 	public int getCodigoId() {
 		return this.codigoId;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((atividades == null) ? 0 : atividades.hashCode());
+		result = prime * result + codigoId;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ControladorAtividade other = (ControladorAtividade) obj;
+		if (atividades == null) {
+			if (other.atividades != null)
+				return false;
+		} else if (!atividades.equals(other.atividades))
+			return false;
+		if (codigoId != other.codigoId)
+			return false;
+		return true;
+	}
 }

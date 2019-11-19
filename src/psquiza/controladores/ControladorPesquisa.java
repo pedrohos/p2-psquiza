@@ -598,7 +598,6 @@ public class ControladorPesquisa implements Serializable {
 			escritor(caminho, pesquisas.get(codigoPesquisa).getResultado());
 		} catch (Exception e) {
 		}
-
 	}
 
 	public LinkedHashMap<String, Pesquisa> getMapaPesquisas() {
@@ -607,5 +606,36 @@ public class ControladorPesquisa implements Serializable {
 
 	public String getEstrategia() {
 		return this.estrategia;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((estrategia == null) ? 0 : estrategia.hashCode());
+		result = prime * result + ((pesquisas == null) ? 0 : pesquisas.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ControladorPesquisa other = (ControladorPesquisa) obj;
+		if (estrategia == null) {
+			if (other.estrategia != null)
+				return false;
+		} else if (!estrategia.equals(other.estrategia))
+			return false;
+		if (pesquisas == null) {
+			if (other.pesquisas != null)
+				return false;
+		} else if (!pesquisas.equals(other.pesquisas))
+			return false;
+		return true;
 	}
 }
