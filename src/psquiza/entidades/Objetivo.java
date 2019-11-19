@@ -141,13 +141,7 @@ public class Objetivo implements Serializable, Comparable<Objetivo> {
 		}
 	}
 
-<<<<<<< HEAD
-	/**
-	 * Método que retorna o id de uma pesquisa
-	 * 
-	 * @return codigo da pesquisa
-	 */
-=======
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -194,7 +188,7 @@ public class Objetivo implements Serializable, Comparable<Objetivo> {
 		return true;
 	}
 	
->>>>>>> 01a4a23a19565980b8f1802ac8bcae3e0cfaadd1
+
 	public String getIdPesquisa() {
 		return idPesquisa;
 	}
