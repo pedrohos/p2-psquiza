@@ -199,7 +199,14 @@ public class Pesquisa implements Serializable {
 		return false;
 	}
 
-	public boolean associaObjetivo(Objetivo objetivo) {
+
+	public boolean associaObjetivo(Objetivo objetivo,String idPesquisa) {
+		if(objetivo.getIdPesquisa().equals(idPesquisa)) {
+			return false;
+		}
+		if(!objetivo.getIdPesquisa().equals("")) {
+			throw new IllegalArgumentException("Objetivo ja associado a uma pesquisa.");
+		}
 
 		if (possuiObjetivo(objetivo)) {
 			return false;

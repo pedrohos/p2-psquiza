@@ -137,6 +137,5 @@ public class Objetivo implements Serializable, Comparable<Objetivo> {
 	public String getIdPesquisa() {
 		return idPesquisa;
 	}
-	
-	
+
 }
