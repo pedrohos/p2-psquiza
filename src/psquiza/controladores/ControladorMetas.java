@@ -51,6 +51,14 @@ public class ControladorMetas implements Serializable {
 		this.objetivos = new HashMap<String, Objetivo>();
 	}
 	
+	/**
+	 * Constroi um controlador a partir de atributos carregados.
+	 * 
+	 * @param problemas e o mapa de problemas a ser atribuido.
+	 * @param objetivos e o mapa de problemas a ser atribuido.
+	 * @param contadorProblema e o contador de problema a ser atribuido.
+	 * @param contadorObjetivo e o contador de objetivo a ser atribuido.
+	 */
 	public ControladorMetas(Map<String, Problema> problemas, Map<String, Objetivo> objetivos, int contadorProblema, int contadorObjetivo) {
 		this.problemas = (HashMap<String, Problema>) problemas;
 		this.objetivos = (HashMap<String, Objetivo>) objetivos;
@@ -59,10 +67,19 @@ public class ControladorMetas implements Serializable {
 	}
 
 	/**
-	 * Metodo para cadastrar um novo problema
+	 * Cadastrar um problema no mapa de problemas.
+	 * Cada problema possui uma descricao e uma viabildiade que deve
+	 * estar entre 1 e 5. E atribui o codigo ao problema formado por:
+	 * "PX" com X sendo o contador problema que e incrementado apos
+	 * cada cadastro de problema.
 	 * 
-	 * @param descricao   descricao do problema
-	 * @param viabilidade viabilidade do problema
+	 * Caso a descricao seja nula ou vazia ser lancado um IllegalArgumentException:
+	 * "Campo descricao nao pode ser nulo ou vazio."
+	 * Caso a viabilidade nao esteja entre 1 e 5 ser lancado um IllegalArgumentException:
+	 * "Valor invalido de viabilidade."
+	 * 
+	 * @param descricao   e a descricao do problema
+	 * @param viabilidade e a viabilidade do problema
 	 */
 	public void cadastraProblema(String descricao, int viabilidade) {
 		Util.validaAtributo(descricao, "Campo descricao nao pode ser nulo ou vazio.");
@@ -74,12 +91,24 @@ public class ControladorMetas implements Serializable {
 	}
 
 	/**
-	 * Metodo para cadastrar um objetivo
+	 * Cadastra um objetivo no mapa objetivos.
+	 * Cada objetivo possui um tipo, descricao, aderencia, viabilidade
+	 * e id. O tipo deve ser GERAL ou ESPECIFICO, e a aderencia e a
+	 * viabilidade devem ser de 1 a 5.
 	 * 
-	 * @param tipo        tipo do objetivo
-	 * @param descricao   descricao do objetivo
-	 * @param aderencia   aderencia do objetivo
-	 * @param viabilidade viabilidade do objetivo
+	 *  Caso o tipo seja nulo ou vazio sera lancado um IllegalArgumentException:
+	 *  "Campo tipo nao pode ser nulo ou vazio."
+	 *  Caso a descricao seja nula ou vazia sera lancado um IllegalArgumentException:
+	 *  "Campo descricao nao pode ser nulo ou vazio."
+	 *  Caso a aderencia nao esteja entre 1 e 5 sera lancado um IllegalArgumentException:
+	 *  "Valor invalido de aderencia"
+	 *  Caso a viabilidade nao esteja entre 1 e 5 sera lancado um IllegalArgumentException:
+	 * "Valor invalido de viabilidade."
+	 * 
+	 * @param tipo        e tipo do objetivo, podendo ser GERAL ou ESPECIFICO.
+	 * @param descricao   e a descricao do objetivo.
+	 * @param aderencia   e a aderencia do objetivo, estando entre 1 e 5.
+	 * @param viabilidade e a viabilidade do objetivo, estando entre 1 e 5.
 	 */
 	public void cadastraObjetivo(String tipo, String descricao, int aderencia, int viabilidade) {
 		Util.validaAtributo(tipo, "Campo tipo nao pode ser nulo ou vazio.");
@@ -125,10 +154,14 @@ public class ControladorMetas implements Serializable {
 	}
 
 	/**
-	 * Metodo para exibir a representacao em texto de um problema
+	 * Exibe a representacao em texto de um problema no seguinte formato:
+	 * CODIGO - DESCRICAO - VIABILIDADE
 	 * 
-	 * @param codigo codigo do problema
-	 * @return retorna a representacao em texto do problema
+	 * Caso o problema nao seja encontrado sera lancado um
+	 * IllegalArgumentException: "Problema nao encontrado".
+	 * 
+	 * @param codigo e o codigo referente ao problema.
+	 * @return retorna a representacao em texto do problema.
 	 */
 	public String exibeProblema(String codigo) {
 		if (!problemas.containsKey(codigo)) {
@@ -139,10 +172,14 @@ public class ControladorMetas implements Serializable {
 	}
 
 	/**
-	 * metodo para exibir a representacao em texto de um objetivo
+	 * Exibe a representacao em texto de um objetivo no seguinte formato:
+	 * CODIGO - TIPO - DESCRICAO - (ADERENCIA VIABILIDADE)
 	 * 
-	 * @param codigo codigo do objetivo
-	 * @return retorna a representacao em texto de um objetivo
+	 * Caso o problema nao seja encontrado sera lancado um
+	 * IllegalArgumentException: "Problema nao encontrado".
+	 * 
+	 * @param codigo e o codigo referente ao objetivo.
+	 * @return retorna a representacao em texto do objetivo.
 	 */
 	public String exibeObjetivo(String codigo) {
 		if (!objetivos.containsKey(codigo)) {
@@ -152,6 +189,13 @@ public class ControladorMetas implements Serializable {
 		return objetivos.get(codigo).toString();
 	}
 
+	/**
+	 * Verifica se um objetivo existe dado seu codigo, retornado true
+	 * caso exista, caso contrario false.
+	 * 
+	 * @param codigo e o codigo que sera verificado se remete a algum objetivo
+	 * @return e retornado true caso exista, caso contrario, false.
+	 */
 	private boolean existeObjetivo(String codigo) {
 		for (Objetivo o : objetivos.values()) {
 			if (o.getCodigo().equals(codigo)) {
