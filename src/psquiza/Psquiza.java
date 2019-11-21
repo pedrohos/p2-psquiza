@@ -216,14 +216,23 @@ public class Psquiza {
 		return sistema.listaPesquisas(ordem);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#busca(String)}
+	 */
 	public String busca(String termo) {
 		return sistema.busca(termo);
 	}
 	
+	/**
+	 * {@link psquiza.controladores.Sistema#busca(String, int)}
+	 */
 	public String busca(String termo, int numeroDoResultado) {
 		return sistema.busca(termo, numeroDoResultado);
 	}
 
+	/**
+	 * {@link psquiza.controladores.Sistema#contaResultadosBusca(String)}
+	 */
 	public int contaResultadosBusca(String termo) {
 		return sistema.contaResultadosBusca(termo);
 	}

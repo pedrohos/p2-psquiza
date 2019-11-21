@@ -4,6 +4,13 @@ import java.util.Comparator;
 
 import psquiza.entidades.Pesquisador;
 
+/**
+ * Ordenador de pesquisador.
+ * A ordem e feita em ordem lexicograficamente inversa do email do
+ * pesquisador.
+ * 
+ * @author Pedro Henrique
+ */
 public class OrdenaPesquisador implements Comparator<Pesquisador>{
 
 	@Override

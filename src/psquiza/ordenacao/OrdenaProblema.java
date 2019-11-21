@@ -4,6 +4,13 @@ import java.util.Comparator;
 
 import psquiza.entidades.Problema;
 
+/**
+ * Ordenador de problema.
+ * A ordem e feita em ordem lexicograficamente inversa do codigo do
+ * problema.
+ * 
+ * @author Pedro Henrique
+ */
 public class OrdenaProblema implements Comparator<Problema>{
 
 	@Override

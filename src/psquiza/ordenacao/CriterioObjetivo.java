@@ -2,6 +2,14 @@ package psquiza.ordenacao;
 
 import psquiza.entidades.Pesquisa;
 
+/**
+ * Caracteriza um criterio de ordenacao de pesquisa pelos objetivos.
+ * A prioridade para ordenacao e:
+ * 1. Quem possuir a maior quantidades de objetivo.
+ * 2. Ordem lexicografica inversa do codigo da pesquisa.
+ * 
+ * @author Pedro Henrique
+ */
 public class CriterioObjetivo implements OrdenaPesquisa {
 
 	@Override

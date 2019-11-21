@@ -40,6 +40,9 @@ public enum Risco {
 	/**
 	 * Retorna o risco referente ao nome do nivel do risco.
 	 * 
+	 * Caso o nivel de risco seja invalido sera lancado um
+	 * IllegalArgumentException "Valor invalido do nivel do risco.".
+	 * 
 	 * @param nivelRisco e o nivel de risco.
 	 * @return e retornado o risco.
 	 */
@@ -56,14 +59,22 @@ public enum Risco {
 		}
 	}
 
+	/**
+	 * Retorna um boolean indicando se um risco atual e maior que
+	 * o passado por parametro.
+	 * 
+	 * @param r e o risco recebido a ser comparado com o atual.
+	 * @return e retornado True, caso o risco r seja BAIXO, caso
+	 * contrario seja retornado True.
+	 */
 	public boolean ehMaior(Risco r) {
 		return (int) this.risco[1] > (int) r.risco[1];
 	}
 
 	/**
-	 * Metodo que pega o nivel de risco em formato inteiro
+	 * Retorna nivel de risco em formato inteiro.
 	 * 
-	 * @return retorna o nivel do risco
+	 * @return retorna o nivel do risco.
 	 */
 	public int getRiscoInt() {
 		return (int) this.risco[1];

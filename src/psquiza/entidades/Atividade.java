@@ -62,7 +62,7 @@ public class Atividade implements Serializable {
 	private LinkedHashMap<Integer, Item> itens;
 
 	/**
-	 * Armazena um conjunto ordenados de resultados que compoem a atividade.
+	 * Armazena um conjunto ordenado de resultados que compoem a atividade.
 	 */
 	private List<String> resultados;
 

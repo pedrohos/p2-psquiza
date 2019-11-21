@@ -4,6 +4,13 @@ import java.util.Comparator;
 
 import psquiza.entidades.Objetivo;
 
+/**
+ * Ordenador de objetivo.
+ * A ordem e feita em ordem lexicograficamente inversa do codigo do
+ * objetivo.
+ * 
+ * @author Pedro Henrique
+ */
 public class OrdenaObjetivo implements Comparator<Objetivo>{
 
 	@Override

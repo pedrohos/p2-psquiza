@@ -2,6 +2,13 @@ package psquiza.ordenacao;
 
 import psquiza.entidades.Pesquisa;
 
+/**
+ * Caracteriza um criterio de ordenacao de pesquisa.
+ * A prioridade para ordenacao e a ordem lexicografica inversa do
+ * codigo da pesquisa.
+ * 
+ * @author Pedro Henrique
+ */
 public class CriterioPesquisa implements OrdenaPesquisa {
 
 	@Override

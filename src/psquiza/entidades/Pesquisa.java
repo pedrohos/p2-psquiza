@@ -13,7 +13,7 @@ import psquiza.Util;
  * pelo sistema e um estado que indica se a pesquisa esta ativa (1) ou
  * desativada (-1)
  *
- * 
+ * @author Regina Felipe
  */
 public class Pesquisa implements Serializable {
 

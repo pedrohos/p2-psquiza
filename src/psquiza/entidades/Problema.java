@@ -8,7 +8,6 @@ import psquiza.Util;
  * Clase que representa um problema no sistema
  * 
  * @author Lucian Julio
- *
  */
 public class Problema implements Serializable {
 
