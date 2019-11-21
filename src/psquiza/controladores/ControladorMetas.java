@@ -52,7 +52,7 @@ public class ControladorMetas implements Serializable {
 	}
 	
 	/**
-	 * Constroi um controlador a partir de atributos carregados.
+	 * Constroi um controlador a partir dos atributos carregados.
 	 * 
 	 * @param problemas e o mapa de problemas a ser atribuido.
 	 * @param objetivos e o mapa de problemas a ser atribuido.
@@ -126,9 +126,15 @@ public class ControladorMetas implements Serializable {
 	}
 
 	/**
-	 * Metodo para apagar um problema
+	 * Apaga um problema do mapa de problemas atraves do codigo que
+	 * identifica o problema.
 	 * 
-	 * @param codigo identificador do problema
+	 * Caso o problema seja vazio ou nulo sera lancado um IllegalArgumentException:
+	 * "Campo codigo nao pode ser nulo ou vazio.".
+	 * Caso o problema nao seja encontrado sera lancado um IllegalArgumentException:
+	 * "Problema nao encontrado".
+	 * 
+	 * @param codigo e o identificador unico do problema.
 	 */
 	public void apagarProblema(String codigo) {
 		Util.validaAtributo(codigo, "Campo codigo nao pode ser nulo ou vazio.");
@@ -140,9 +146,15 @@ public class ControladorMetas implements Serializable {
 	}
 
 	/**
-	 * Metodo para apagar um objetivo
+	 * Apaga um objetivo do mapa de objetivoss atraves do codigo que
+	 * identifica o objetivo.
 	 * 
-	 * @param codigo codigo do objetivo
+	 * Caso o objetivo seja vazio ou nulo sera lancado um IllegalArgumentException:
+	 * "Campo codigo nao pode ser nulo ou vazio."
+	 * Caso o objetivo nao seja encontrado sera lancado um IllegalArgumentException:
+	 * "Objetivo nao encontrado"
+	 * 
+	 * @param codigo e o identificador unico do objetivo.
 	 */
 	public void apagarObjetivo(String codigo) {
 		Util.validaAtributo(codigo, "Campo codigo nao pode ser nulo ou vazio.");
@@ -193,7 +205,8 @@ public class ControladorMetas implements Serializable {
 	 * Verifica se um objetivo existe dado seu codigo, retornado true
 	 * caso exista, caso contrario false.
 	 * 
-	 * @param codigo e o codigo que sera verificado se remete a algum objetivo
+	 * @param codigo e o codigo que sera verificado se remete a algum
+	 * objetivo.
 	 * @return e retornado true caso exista, caso contrario, false.
 	 */
 	private boolean existeObjetivo(String codigo) {
@@ -205,6 +218,23 @@ public class ControladorMetas implements Serializable {
 		return false;
 	}
 
+	/**
+	 * Associa uma pesquisa a um objetivo. Salvando o codigo da
+	 * pesquisa no objetivo. Retorna true caso a associacao tenha
+	 * sido executada com sucesso, caso contrario, false.
+	 * 
+	 * Caso o idPesquisa seja nulo ou vazio sera lancado um
+	 * IllegalArgumentException: "Campo idPesquisa nao pode ser nulo ou vazio."
+	 * Caso o idObjetivo seja nulo ou vazio sera lancado um
+	 * IllegalArgumentException: "Campo idObjetivo nao pode ser nulo ou vazio."
+	 * Caso o idObjetivo nao seja encontrado sera lancado um
+	 * IllegalArgumentException: "Objetivo nao encontrado."
+	 * 
+	 * @param idPesquisa e o identificador da pesquisa.
+	 * @param idObjetivo e o identificador do objetivo.
+	 * @return e retornado um boolean indicando se a associacao foi
+	 * efetuada com sucesso ou nao.
+	 */
 	public boolean associaPesquisa(String idPesquisa, String idObjetivo) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
@@ -214,6 +244,23 @@ public class ControladorMetas implements Serializable {
 		return this.objetivos.get(idObjetivo).associaPesquisa(idPesquisa);
 	}
 
+	/**
+	 * Desassocia uma pesquisa a um objetivo. Removendo o codigo da
+	 * pesquisa do objetivo. Retorna true caso a desassociacao tenha
+	 * sido executada com sucesso, caso contrario, false.
+	 * 
+	 * Caso o idPesquisa seja nulo ou vazio sera lancado um
+	 * IllegalArgumentException: "Campo idPesquisa nao pode ser nulo ou vazio."
+	 * Caso o idObjetivo seja nulo ou vazio sera lancado um
+	 * IllegalArgumentException: "Campo idObjetivo nao pode ser nulo ou vazio."
+	 * Caso o idObjetivo nao seja encontrado sera lancado um
+	 * IllegalArgumentException: "Objetivo nao encontrado."
+	 * 
+	 * @param idPesquisa e o identificador da pesquisa.
+	 * @param idObjetivo e o identificador do objetivo.
+	 * @return e retornado um boolean indicando se a desassociacao foi
+	 * efetuada com sucesso ou nao.
+	 */
 	public boolean desassociaPesquisa(String idPesquisa, String idObjetivo) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		Util.validaAtributo(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
@@ -224,12 +271,15 @@ public class ControladorMetas implements Serializable {
 	}
 
 	/**
-	 * Metodo que busca na colecao de problemas que possuam o termo informado na
-	 * descricao.
+	 * Busca no mapa de problemas os problemas que possuem o termo
+	 * recebido por parametro em sua descricao, cada elemento que
+	 * possuir e adicionado a string final. Posteriormente e
+	 * retornado a lista de elementos na forma:
+	 * CODIGO1: DESCRICAO1 | CODIGOX: DESCRICAOX
 	 * 
-	 * @param termo termo a ser buscado.
-	 * 
-	 * @return lista de resultados.
+	 * @param termo e o termo a ser buscado na descricao.
+	 * @return e retornado uma string no formato acima, formada pelos
+	 * elementos encontrados com o dado termo.
 	 */
 	public String buscaProblema(String termo) {
 		String listagem = "";
@@ -249,12 +299,15 @@ public class ControladorMetas implements Serializable {
 	}
 
 	/**
-	 * Metodo que busca na colecao de objetivos que possuam o termo informado na
-	 * descricao.
+	 * Busca no mapa de objetivos os objetivos que possuem o termo
+	 * recebido por parametro em sua descricao, cada elemento que
+	 * possuir e adicionado a string final. Posteriormente e
+	 * retornado a lista de elementos na forma:
+	 * CODIGO1: DESCRICAO1 | CODIGOX: DESCRICAOX
 	 * 
-	 * @param termo termo a ser buscado.
-	 * 
-	 * @return lista de resultados.
+	 * @param termo e o termo a ser buscado na descricao.
+	 * @return e retornado a uma string no formato acima formada pelos
+	 * elementos encontrados com o dado termo.
 	 */
 	public String buscaObjetivo(String termo) {
 		String listagem = "";

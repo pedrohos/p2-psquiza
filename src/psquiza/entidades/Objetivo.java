@@ -88,7 +88,7 @@ public class Objetivo implements Serializable, Comparable<Objetivo> {
 	 * Caso o campo IdPesquisa seja nulo ou vazio, sera lancada
 	 * IllegalArgumentException: "Campo idPesquisa nao pode ser nulo ou vazio."
 	 * 
-	 * @param idPesquisa
+	 * @param idPesquisa e o identificador da pesquisa.
 	 * @return retorna true se a associacao deu certo, false caso contrario
 	 */
 	public boolean associaPesquisa(String idPesquisa) {
@@ -108,7 +108,7 @@ public class Objetivo implements Serializable, Comparable<Objetivo> {
 	 * Caso o campo IdPesquisa seja nulo ou vazio, sera lancada
 	 * IllegalArgumentException: "Campo idPesquisa nao pode ser nulo ou vazio."
 	 * 
-	 * @param idPesquisa
+	 * @param idPesquisa e o identificador da pesquisa.
 	 * @return retorna true se a desassociacao deu certo, false caso contrario
 	 */
 	public boolean desassociaPesquisa(String idPesquisa) {

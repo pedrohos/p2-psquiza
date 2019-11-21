@@ -9,7 +9,7 @@ import psquiza.controladores.ControladorAtividade;
 import psquiza.controladores.ControladorPesquisa;
 import psquiza.controladores.Sistema;
 
-class ControladorAtividadeTest {
+class SistemaTest {
 
 	Sistema sistema;
 	

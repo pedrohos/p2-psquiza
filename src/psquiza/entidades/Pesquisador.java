@@ -132,7 +132,7 @@ public class Pesquisador implements Comparable<Pesquisador>, Serializable {
 	/**
 	 * Metodo responsavel por alterar o atributo nome.
 	 * 
-	 * @param ativo novo valor para nome.
+	 * @param nome e o novo valor para nome.
 	 */
 	public void setNome(String nome) {
 		Util.validaAtributo(nome, "Campo nome nao pode ser nulo ou vazio.");
@@ -151,7 +151,7 @@ public class Pesquisador implements Comparable<Pesquisador>, Serializable {
 	/**
 	 * Metodo responsavel por alterar o atributo biografia.
 	 * 
-	 * @param ativo novo valor para biografia.
+	 * @param biografia e o novo valor para biografia.
 	 */
 	public void setBiografia(String biografia) {
 		Util.validaAtributo(biografia, "Campo biografia nao pode ser nulo ou vazio.");
@@ -170,7 +170,7 @@ public class Pesquisador implements Comparable<Pesquisador>, Serializable {
 	/**
 	 * Metodo responsavel por alterar o atributo email.
 	 * 
-	 * @param ativo novo valor para email.
+	 * @param email e o novo valor para email.
 	 */
 	public void setEmail(String email) {
 		Util.validaAtributo(email, "Campo email nao pode ser nulo ou vazio.");
@@ -181,7 +181,7 @@ public class Pesquisador implements Comparable<Pesquisador>, Serializable {
 	/**
 	 * Metodo responsavel por alterar o atributo foto.
 	 * 
-	 * @param ativo novo valor para foto.
+	 * @param foto e o novo valor para foto.
 	 */
 	public void setFoto(String foto) {
 		Util.validaAtributo(foto, "Campo foto nao pode ser nulo ou vazio.");
@@ -192,7 +192,7 @@ public class Pesquisador implements Comparable<Pesquisador>, Serializable {
 	/**
 	 * Metodo responsavel por alterar o atributo funcao.
 	 * 
-	 * @param ativo novo valor para funcao.
+	 * @param funcao e o novo valor para funcao.
 	 */
 	public void setFuncao(String funcao) {
 		Util.validaAtributo(funcao, "Campo funcao nao pode ser nulo ou vazio.");

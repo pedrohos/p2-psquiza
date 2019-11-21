@@ -82,7 +82,6 @@ public class ControladorPesquisa implements Serializable {
 	 * Metodo interno da classe que lança uma excessao caso o codigo do pesquisador
 	 * passado nao exista na colecao de pesquisadores.
 	 * 
-	 * @param pesquisas HasMAp que possui todas pesquisas cadastradas
 	 * @param codigo    codigo da pesquisa solicitada
 	 */
 	private void existePesquisa(String codigo) {
@@ -99,7 +98,7 @@ public class ControladorPesquisa implements Serializable {
 	 * Separados por virgulas, uma pesquisa pode possuir no maximo quatro campos de
 	 * interesses.
 	 * 
-	 * @param campoDeInteresse
+	 * @param campoDeInteresse e o campo a ser validado.
 	 */
 	private void validaCampoDeInteresse(String campoDeInteresse) {
 
@@ -235,7 +234,7 @@ public class ControladorPesquisa implements Serializable {
 	 * IllegalArgumentException: "Pesquisa desativada."
 	 * 
 	 * @param idPesquisa e o id que remete a pesquisa.
-	 * @param idProblema e o id que remete ao problema.
+	 * @param problema e o id que remete ao problema.
 	 * @return e retornado um boolean indicando se a operacao foi efetuada com
 	 *         sucesso ou nao.
 	 */
@@ -261,7 +260,6 @@ public class ControladorPesquisa implements Serializable {
 	 * IllegalArgumentException: "Pesquisa desativada."
 	 * 
 	 * @param idPesquisa e o id que remete a pesquisa.
-	 * @param idProblema e o id que remete ao problema.
 	 * @return e retornado um boolean indicando se a operacao foi efetuada com
 	 *         sucesso ou nao.
 	 */
@@ -287,7 +285,7 @@ public class ControladorPesquisa implements Serializable {
 	 * IllegalArgumentException: "Pesquisa desativada."
 	 * 
 	 * @param idPesquisa e o id que remete a pesquisa.
-	 * @param idObjetivo e o id que remete ao problema.
+	 * @param objetivo e o id que remete ao problema.
 	 * @return e retornado um boolean indicando se a operacao foi efetuada com
 	 *         sucesso ou nao.
 	 */
@@ -313,7 +311,7 @@ public class ControladorPesquisa implements Serializable {
 	 * IllegalArgumentException: "Pesquisa desativada."
 	 * 
 	 * @param idPesquisa e o id que remete a pesquisa.
-	 * @param idObjetivo e o id que remete ao problema.
+	 * @param objetivo e o id que remete ao problema.
 	 * @return e retornado um boolean indicando se a operacao foi efetuada com
 	 *         sucesso ou nao.
 	 */
@@ -519,7 +517,14 @@ public class ControladorPesquisa implements Serializable {
 	}
 
 	/**
-	 * {@link psquiza.controladores.Sistema#configuraEstrategia(String)}
+	 * Configura a estrategia para proxima atividade.
+	 * Podendo ser ela:
+	 * MAIS_ANTIGA, MENOS_PENDENCIAS, MAIOR_RISCO, MAIOR_DURACAO.
+	 * 
+	 * Caso a estrategia seja invalida sera lancada um IllegalArgumentException:
+	 * "Valor invalido da estrategia"
+	 * 
+	 * @param estrategia e a estrategia que sera definida
 	 */
 	public void configuraEstrategia(String estrategia) {
 		Util.validaAtributo(estrategia, "Estrategia nao pode ser nula ou vazia.");
@@ -529,11 +534,18 @@ public class ControladorPesquisa implements Serializable {
 		} else {
 			throw new IllegalArgumentException("Valor invalido da estrategia");
 		}
-
 	}
 
 	/**
-	 * {@link psquiza.controladores.Sistema#proximaAtividade(String)}
+	 * Recolhe a proxima atividade de uma dada pesquisa.
+	 * 
+	 * Caso a pesquisa nao exista sera lancado um IllegalArgumentException:
+	 * "Pesquisa nao encontrada."
+	 * Caso a pesquisa nao seja ativa sera lancado um IllegalArgumentException:
+	 * "Pesquisa desativada."
+	 * 
+	 * @param codigoPesquisa e o codigo da pesquisa.
+	 * @return e retornado o codigo da proxima atividade a ser executada.
 	 */
 	public String proximaAtividade(String codigoPesquisa) {
 		Util.validaAtributo(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
@@ -552,7 +564,7 @@ public class ControladorPesquisa implements Serializable {
 	 * 
 	 * @param path  caminho que o arquivo vai ser criado com o nome do arquivo
 	 * @param texto texto que vai ser gravado dentro do arquivo criado
-	 * @throws IOException
+	 * @throws IOException e lancado caso ocorra um erro ao escrever o arquivo.
 	 */
 	private static void escritor(String path, String texto) throws IOException {
 		new File(path);

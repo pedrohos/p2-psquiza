@@ -217,9 +217,8 @@ public class ControladorPesquisador implements Serializable {
 	/**
 	 * Retorna um pesquisador de acordo com seu email
 	 * 
-	 * @param email
-	 * 
-	 * @return pesquisador solicitado
+	 * @param email e o email que identifica o pesquisador.
+	 * @return e retornado pesquisador solicitado.
 	 */
 	public Pesquisador getPesquisador(String email) {
 		Util.validaAtributo(email, "Campo emailPesquisador nao pode ser nulo ou vazio.");

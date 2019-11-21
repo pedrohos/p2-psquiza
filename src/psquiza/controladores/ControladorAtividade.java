@@ -67,6 +67,9 @@ public class ControladorAtividade implements Serializable {
 	/**
 	 * Constroi o controlador recuperando as informacoes do controlador ja salvo,
 	 * contendo um mapa de atividades, o id gerador atual da atividade e o id final.
+	 * 
+	 * @param atividades e os mapa de atividades.
+	 * @param codigoId e o identificador da proxima atividade.
 	 */
 	public ControladorAtividade(HashMap<String, Atividade> atividades, int codigoId) {
 		this.atividades = atividades;
@@ -231,8 +234,8 @@ public class ControladorAtividade implements Serializable {
 	 * Caso o codigo da atividade nao remeta a nenhuma atividade sera lancado um
 	 * IllegalArgumentException: "Atividade nao encontrada"
 	 * 
-	 * @param codigoAtividade
-	 * @return
+	 * @param codigoAtividade e o identificador da atividade.
+	 * @return e retornado a atividade.
 	 */
 	public Atividade getAtividade(String codigoAtividade) {
 		Util.validaAtributo(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
