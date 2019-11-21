@@ -215,7 +215,7 @@ public class Psquiza {
 	public String listaPesquisas(String ordem) {
 		return sistema.listaPesquisas(ordem);
 	}
-
+	
 	public String busca(String termo) {
 		return sistema.busca(termo);
 	}

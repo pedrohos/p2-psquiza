@@ -1,4 +1,4 @@
-package teste_use_case6;
+package testes_use_case6;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;

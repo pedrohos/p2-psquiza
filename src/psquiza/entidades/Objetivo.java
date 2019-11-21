@@ -6,7 +6,7 @@ import psquiza.Util;
 import psquiza.enums.Tipo;
 
 /**
- * Classe para representar um objetivo
+ * Classe que representa um objetivo que pode compor uma pesquisa
  * 
  * @author Lucian Julio
  *
@@ -16,26 +16,29 @@ public class Objetivo implements Serializable, Comparable<Objetivo> {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Atributo que indica a viabilidade do um objetivo
+	 * Armazena a viabilidade do objetivo
 	 */
 	private int viabilidade;
 	/**
-	 * Atributo que inddica a aderencia de um objetivo
+	 * Armazena a aderencia do objetivo
 	 */
 	private int aderencia;
 	/**
-	 * Atribito que representa a descricao de um objetivo
+	 * Armazena a descricao do objetivo
 	 */
 	private String descricao;
 	/**
-	 * Atributo que representa o tipo do objetivo
+	 * Armazena o tipo do objetivo podendo ser geral ou especifico
 	 */
 	private Tipo tipo;
 	/**
-	 * Atributo que representa o codigo de um objetivo
+	 * Armazena o codigo de um objetivo
 	 */
 	private String codigo;
 
+	/**
+	 * Armazena o id de uma pesquisa na qual o objetivo esta associado
+	 */
 	private String idPesquisa;
 
 	/**
@@ -79,6 +82,15 @@ public class Objetivo implements Serializable, Comparable<Objetivo> {
 		this.idPesquisa = "";
 	}
 
+	/**
+	 * Associa o objetivo a uma pesquisa
+	 * 
+	 * Caso o campo IdPesquisa seja nulo ou vazio, sera lancada
+	 * IllegalArgumentException: "Campo idPesquisa nao pode ser nulo ou vazio."
+	 * 
+	 * @param idPesquisa
+	 * @return retorna true se a associacao deu certo, false caso contrario
+	 */
 	public boolean associaPesquisa(String idPesquisa) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		if (this.idPesquisa.equals(idPesquisa))
@@ -90,6 +102,15 @@ public class Objetivo implements Serializable, Comparable<Objetivo> {
 		return true;
 	}
 
+	/**
+	 * Desassocia a pesquisa ao objetivo
+	 * 
+	 * Caso o campo IdPesquisa seja nulo ou vazio, sera lancada
+	 * IllegalArgumentException: "Campo idPesquisa nao pode ser nulo ou vazio."
+	 * 
+	 * @param idPesquisa
+	 * @return retorna true se a desassociacao deu certo, false caso contrario
+	 */
 	public boolean desassociaPesquisa(String idPesquisa) {
 		Util.validaAtributo(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		if (!this.idPesquisa.equals(idPesquisa))
@@ -141,7 +162,6 @@ public class Objetivo implements Serializable, Comparable<Objetivo> {
 		}
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -187,7 +207,6 @@ public class Objetivo implements Serializable, Comparable<Objetivo> {
 			return false;
 		return true;
 	}
-	
 
 	public String getIdPesquisa() {
 		return idPesquisa;
