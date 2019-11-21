@@ -40,10 +40,19 @@ public class Pesquisa implements Serializable {
 	 */
 	private boolean estado;
 
+	/**
+	 * Armazena um problema que a pesquisa pode possuir
+	 */
 	private Problema problema;
 
+	/**
+	 * Armazena um conjunto de objetivos que a pesquisa pode ter
+	 */
 	private HashSet<Objetivo> objetivos;
 
+	/**
+	 * Armazena um conjunto de atividades que a pesquisa pode ter
+	 */
 	private List<Atividade> atividades;
 	/**
 	 * Array que armazena pesquisadores de uma pesquisa
@@ -79,7 +88,7 @@ public class Pesquisa implements Serializable {
 	}
 
 	/**
-	 * Retorna o estado da pesquisa, se ativada ou nao
+	 * Retorna o estado atual da pesquisa, se ativada ou nao
 	 * 
 	 * @return retorna string que representa se a pesquisa esta ativa ou nao.
 	 */
@@ -167,6 +176,15 @@ public class Pesquisa implements Serializable {
 		this.campoDeInteresse = campoDeInteresse;
 	}
 
+	/**
+	 * Associa um problema a pesquisa
+	 * 
+	 * Caso a pesquisa ja possua o problema, retorna false Caso o problema ja tenha
+	 * um problem associado, retorna false
+	 * 
+	 * @param problema problema que sera associado a pesquisa
+	 * @return retorna true se a associacao deu certo, false caso contrario
+	 */
 	public boolean associaProblema(Problema problema) {
 		if (this.problema != null && this.problema.equals(problema)) {
 			return false;
@@ -178,6 +196,13 @@ public class Pesquisa implements Serializable {
 		return true;
 	}
 
+	/**
+	 * Desassocia um problema de uma pesquisa
+	 * 
+	 * Caso a pesquisa nao possua um problema, retorna false
+	 * 
+	 * @return retorna true se a desassociacao deu certo, false caso nao
+	 */
 	public boolean desassociaProblema() {
 		if (this.problema == null) {
 			return false;
@@ -186,6 +211,12 @@ public class Pesquisa implements Serializable {
 		return true;
 	}
 
+	/**
+	 * Verifica se a pesquisa possui o objetivo passado pelo parametro
+	 * 
+	 * @param objetivo objetivo que vai ser procurado na pesquisa
+	 * @return retorna true caso a pesquisa possua o objetivo, false caso contrario
+	 */
 	private boolean possuiObjetivo(Objetivo objetivo) {
 		for (Objetivo obj : objetivos) {
 			if (obj.getCodigo().equals(objetivo.getCodigo())) {
@@ -195,6 +226,17 @@ public class Pesquisa implements Serializable {
 		return false;
 	}
 
+	/**
+	 * Associa um objetivo a pesquisa passando o objetivo e o id da pesquisa.
+	 * 
+	 * Caso o objetivo ja seja associado a essa pesquisa, retorna false Caso o
+	 * objetivo ja seja associado a alguma pesquisa, lanca IllegalArgumentException:
+	 * "Objetivo ja associado a uma pesquisa."
+	 * 
+	 * @param objetivo   objetivo que vai ser associado
+	 * @param idPesquisa id da pesquisa que vai ter o objetivo associado
+	 * @return retorna true se a associacao der certo, false caso contrario
+	 */
 	public boolean associaObjetivo(Objetivo objetivo, String idPesquisa) {
 		if (objetivo.getIdPesquisa().equals(idPesquisa)) {
 			return false;
@@ -210,6 +252,11 @@ public class Pesquisa implements Serializable {
 		return true;
 	}
 
+	/**
+	 * Verifica se a pesquisa possui um problema
+	 * 
+	 * @return retorna true caso a pesquisa possua um problema, false caso contrario
+	 */
 	public boolean possuiProblema() {
 		if (!(this.problema == null)) {
 			return true;
@@ -217,6 +264,15 @@ public class Pesquisa implements Serializable {
 		return false;
 	}
 
+	/**
+	 * Desassocia um objetivo da pesquisa, passando o objetivo que vai ser
+	 * desassociado
+	 * 
+	 * Caso a pesquisa nao possua o objetivo, retorna false
+	 * 
+	 * @param objetivo objetivo que vai ser desassociado
+	 * @return retorna true se conseguiu remover
+	 */
 	public boolean desassociaObjetivo(Objetivo objetivo) {
 		if (!possuiObjetivo(objetivo))
 			return false;
@@ -272,6 +328,13 @@ public class Pesquisa implements Serializable {
 		return true;
 	}
 
+	/**
+	 * Associa uma ativiade a pesquisa, recebendo a atividade que vai ser associada
+	 * 
+	 * @param atividade atividade que vai ser associada
+	 * @return retorna true caso a atividade seja associada, false caso a atividade
+	 *         ja esteja associada
+	 */
 	public boolean associaAtividade(Atividade atividade) {
 		if (atividades.contains(atividade)) {
 			return false;
@@ -279,6 +342,14 @@ public class Pesquisa implements Serializable {
 		return atividades.add(atividade);
 	}
 
+	/**
+	 * Desassocia uma atividade da pesquisa, recebendo a atividade que vai ser
+	 * desassociada
+	 * 
+	 * @param atividade atividade que vai ser desassociada
+	 * @return retorna true caso a desassociacao de certo, false caso a pesquisa nao
+	 *         possua a atividade
+	 */
 	public boolean desassociaAtividade(Atividade atividade) {
 		if (!atividades.contains(atividade)) {
 			return false;
@@ -287,6 +358,11 @@ public class Pesquisa implements Serializable {
 
 	}
 
+	/**
+	 * Conta quantos objetivos a pesquisa possui
+	 * 
+	 * @return Quantidade de objetivos
+	 */
 	public int qtdObjetivos() {
 		return this.objetivos.size();
 	}
@@ -346,7 +422,8 @@ public class Pesquisa implements Serializable {
 	}
 
 	/**
-	 * Metodo para pegar a proxima atividade
+	 * Pega a proxima atividade, rcebendo a estrategia que sera usada para pegar a
+	 * atividade
 	 * 
 	 * @param estrategia estrategia que vai ser usada para definir a proxima
 	 *                   atividade

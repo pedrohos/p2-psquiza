@@ -9,6 +9,12 @@ import psquiza.entidades.Objetivo;
 import psquiza.entidades.Pesquisador;
 import psquiza.entidades.Problema;
 
+/**
+ * Classe que representa o controller geral do projeto
+ * resposanvel por gerenciar as chamadas de metodos do usuario de forma que seja permitido
+ * uso de logicas pouco complexas, assim atuando como um intermediario entre o facade com os controllers.
+ *
+ */
 public class Sistema {
 
 	/**
@@ -52,19 +58,39 @@ public class Sistema {
 		this.controladorPesquisador = new ControladorPesquisador();
 		this.gerenciadorControladores = new GerenciadorControladores();
 	}
-
+	
+	/**
+	 * Cadastra uma atividade recebendo descricao, nivel de risco e descricao do risco
+	 * @param descricao descricao da atividade 
+	 * @param nivelRisco nivel de risco da atividade 
+	 * @param descricaoRisco descricao do risco
+	 */
 	public void cadastraAtividade(String descricao, String nivelRisco, String descricaoRisco) {
 		controladorAtividade.cadastraAtividade(descricao, nivelRisco, descricaoRisco);
 	}
-
+	
+	/**
+	 * Apaga uma atividade recebendo o identificador unico dela.
+	 * @param id identificador unico da atividade.
+	 */
 	public void apagaAtividade(String id) {
 		controladorAtividade.apagaAtividade(id);
 	}
-
+	
+	/**
+	 * Cadastra um item a uma atividade recebendo o id da atividade e o item.
+	 * @param id identificador da atividade.
+	 * @param item item
+	 */
 	public void cadastraItem(String id, String item) {
 		controladorAtividade.cadastraItem(id, item);
 	}
-
+	
+	/**
+	 * Exibe uma atividade atraves do sue identificador unico
+	 * @param id identificador unico da atividade
+	 * @return representacao da atividade
+	 */
 	public String exibeAtividade(String id) {
 		return controladorAtividade.exibeAtividade(id);
 	}
@@ -215,23 +241,50 @@ public class Sistema {
 	public String exibeObjetivo(String codigo) {
 		return controladorMetas.exibeObjetivo(codigo);
 	}
-
+	
+	/**
+	 * Cadastra um pesquisador recebendo seu nome, funcao, biografia, email e foto
+	 * @param nome nome do pesquisador
+	 * @param funcao funcao do pesquisador
+	 * @param biografia biografia do pesquisador
+	 * @param email email do pesquisador
+	 * @param fotoURL link da foto do pesquisador
+	 */
 	public void cadastraPesquisador(String nome, String funcao, String biografia, String email, String fotoURL) {
 		controladorPesquisador.cadastraPesquisador(nome, funcao, biografia, email, fotoURL);
 	}
-
+	
+	/**
+	 * Altera pesquisador recebendo o email, atributo que vai ser identificado e novo valor do atributo
+	 * @param email email do pesquisador
+	 * @param atributo atributo do pesquisador
+	 * @param novoValor novo valor do pesquisador
+	 */
 	public void alteraPesquisador(String email, String atributo, String novoValor) {
 		controladorPesquisador.alteraPesquisador(email, atributo, novoValor);
 	}
-
+	
+	/**
+	 * Desativa um pesquisador recebendo o email que o identifica unicamente
+	 * @param email email do pesquisador
+	 */
 	public void desativaPesquisador(String email) {
 		controladorPesquisador.desativaPesquisador(email);
 	}
-
+	
+	/**
+	 * Ativa um pesquisador recebdn o o email que o identifica unicamente
+	 * @param email email do pesquisador
+	 */
 	public void ativaPesquisador(String email) {
 		controladorPesquisador.ativaPesquisador(email);
 	}
-
+	
+	/**
+	 * Exibe um pesquisador recebendo o email que o identifica unicamente
+	 * @param email email do pesquisador
+	 * @return representacao do pesquisador
+	 */
 	public String exibePesquisador(String email) {
 		return controladorPesquisador.exibePesquisador(email);
 	}
@@ -246,23 +299,46 @@ public class Sistema {
 	public boolean pesquisadorEhAtivo(String email) {
 		return controladorPesquisador.pesquisadorEhAtivo(email);
 	}
-
+	
+	/**
+	 * Associa um problema a uma pesquisa recebendo o id da pesquisa, e o id do problema
+	 * @param idPesquisa id da pesquisa
+	 * @param idProblema id do problema
+	 * @return retorna true se a associacao deu certo, false caso contrario
+	 */
 	public boolean associaProblema(String idPesquisa, String idProblema) {
 		Problema problema = controladorMetas.getProblema(idProblema);
 		return controladorPesquisa.associaProblema(idPesquisa, problema);
 	}
-
+	
+	/**
+	 * Desassocia um problema de uma pesquisa recebendo o id da pesquisa
+	 * @param idPesquisa id da pesquisa que identifica ela unicamente
+	 * @return retorna true caso a desassociacao deu certo, false caso contrario
+	 */
 	public boolean desassociaProblema(String idPesquisa) {
 		return controladorPesquisa.desassociaProblema(idPesquisa);
 	}
-
+	
+	/**
+	 * Associa um objetivo a uma pesquisa atraves do id da pesquisa e o id do objetivo
+	 * @param idPesquisa id que identifica a pesquisa
+	 * @param idObjetivo id que identifica o objetivo
+	 * @return retorna true caso a assosiacao deu certo, false caso contrario
+	 */
 	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
 		Objetivo objetivo = controladorMetas.getObjetivo(idObjetivo);
 		if (controladorPesquisa.associaObjetivo(idPesquisa, objetivo) == false)
 			return false;
 		return controladorMetas.associaPesquisa(idPesquisa, idObjetivo);
 	}
-
+	
+	/**
+	 * Desassocia um objetivo de uma pesquisa recebendo o id da pesquisa e o id do objetivo
+	 * @param idPesquisa id da pesquisa que a identifica unicamente
+	 * @param idObjetivo id do objetivo que o identifica unicamente
+	 * @return retorna true caso a desassoaicao deu certo, false caso contrario
+	 */
 	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
 		Objetivo objetivo = controladorMetas.getObjetivo(idObjetivo);
 		if (controladorPesquisa.desassociaObjetivo(idPesquisa, objetivo) == false)
@@ -366,7 +442,12 @@ public class Sistema {
 		controladorPesquisa.verificaAssosiacaoAtividade(codigoAtividade);
 		controladorAtividade.executaAtividade(codigoAtividade, item, duracao);
 	}
-
+	
+	/**
+	 * Lista as pesquisa seguindo uma determina ordem
+	 * @param ordem ordem que as pesquisas vao ser listadas
+	 * @return retorna a listagem das pesquisas de acordo com o criterio de ordem
+	 */
 	public String listaPesquisas(String ordem) {
 		return controladorPesquisa.listaPesquisas(ordem);
 	}
@@ -492,23 +573,48 @@ public class Sistema {
 	public int getDuracao(String codigoAtividade) {
 		return controladorAtividade.getDuracao(codigoAtividade);
 	}
-
+	
+	/**
+	 * Define a proxima atividade na ordem de execucao das atividades
+	 * @param idPrecedente id precedente da atividade
+	 * @param idSubsquente id subsquente da atividade
+	 */
 	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
 		controladorAtividade.defineProximaAtividade(idPrecedente, idSubsquente);
 	}
-
+	
+	/**
+	 * Tira a proxima atividade da ordem de execucao das atividades
+	 * @param idPrecedente id precedente da atividade
+	 */
 	public void tiraProximaAtividade(String idPrecedente) {
 		controladorAtividade.tiraProximaAtividade(idPrecedente);
 	}
-
+	
+	/**
+	 * Conta proximos atividades na ordem de execucao
+	 * @param idPrecedente id precedente da atividade
+	 * @return retorna a quantidades de atividades depois da atividade precedente
+	 */
 	public int contaProximos(String idPrecedente) {
 		return controladorAtividade.contaProximos(idPrecedente);
 	}
-
+	
+	/**
+	 * Pega a enesima atividade de uma atividade na ordem de execucao
+	 * @param idAtividade id da atividade 
+	 * @param enesimaAtividade enesima atividade 
+	 * @return retorna o codigo da proxima atividade
+	 */
 	public String pegaProximo(String idAtividade, int enesimaAtividade) {
 		return controladorAtividade.pegaProximo(idAtividade, enesimaAtividade);
 	}
-
+	
+	/**
+	 * Pega a atividade com maior risco na ordem de execucao apos determina atividade
+	 * @param idAtividade id da atividade precedente
+	 * @return retorna o codigo da atividade de maior risco
+	 */
 	public String pegaMaiorRiscoAtividades(String idAtividade) {
 		return controladorAtividade.pegaMaiorRiscoAtividades(idAtividade);
 	}
@@ -596,48 +702,5 @@ public class Sistema {
 	 */
 	public void gravarResultados(String codigoPesquisa) {
 		controladorPesquisa.gravarResultados(codigoPesquisa);
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((controladorAtividade == null) ? 0 : controladorAtividade.hashCode());
-		result = prime * result + ((controladorMetas == null) ? 0 : controladorMetas.hashCode());
-		result = prime * result + ((controladorPesquisa == null) ? 0 : controladorPesquisa.hashCode());
-		result = prime * result + ((controladorPesquisador == null) ? 0 : controladorPesquisador.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Sistema other = (Sistema) obj;
-		if (controladorAtividade == null) {
-			if (other.controladorAtividade != null)
-				return false;
-		} else if (!controladorAtividade.equals(other.controladorAtividade))
-			return false;
-		if (controladorMetas == null) {
-			if (other.controladorMetas != null)
-				return false;
-		} else if (!controladorMetas.equals(other.controladorMetas))
-			return false;
-		if (controladorPesquisa == null) {
-			if (other.controladorPesquisa != null)
-				return false;
-		} else if (!controladorPesquisa.equals(other.controladorPesquisa))
-			return false;
-		if (controladorPesquisador == null) {
-			if (other.controladorPesquisador != null)
-				return false;
-		} else if (!controladorPesquisador.equals(other.controladorPesquisador))
-			return false;
-		return true;
 	}
 }

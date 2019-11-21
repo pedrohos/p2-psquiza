@@ -5,7 +5,7 @@ import java.io.Serializable;
 import psquiza.Util;
 
 /**
- * Clase que representa um problema no sistema
+ * Classe que representa um problema que uma pesquisa pode ter
  * 
  * @author Lucian Julio
  */

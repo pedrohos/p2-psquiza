@@ -11,7 +11,7 @@ import psquiza.Util;
 public class Pesquisador implements Comparable<Pesquisador>, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Atributo que representa o nome do pesquisador.
 	 */
@@ -43,8 +43,10 @@ public class Pesquisador implements Comparable<Pesquisador>, Serializable {
 	 */
 	private boolean ativo;
 
+	/**
+	 * Atributo que identifica a especialidade do pesquisador
+	 */
 	private Especialidade especialidade;
-
 
 	/**
 	 * Metodo responsavel por construir um pesquisador, o pesquisador inicia ativo.
@@ -72,18 +74,24 @@ public class Pesquisador implements Comparable<Pesquisador>, Serializable {
 		this.ativo = true;
 		this.especialidade = null;
 	}
-	
+
+	/**
+	 * Metodo privado que validada a funcao do pesquisador
+	 * 
+	 * @param funcao funcao do pesquisador
+	 * @return retorna a funcao, caso seja uma funcao invalida lanca uma excessao
+	 */
 	private String validaFuncao(String funcao) {
 		String funcaoUpper = funcao.toUpperCase();
 		switch (funcaoUpper) {
-			case "ESTUDANTE":
-				return funcao;
-			case "PROFESSOR":
-				return funcao;
-			case "EXTERNO":
-				return funcao;
-			default:
-				throw new IllegalArgumentException("Funcao invalido.");
+		case "ESTUDANTE":
+			return funcao;
+		case "PROFESSOR":
+			return funcao;
+		case "EXTERNO":
+			return funcao;
+		default:
+			throw new IllegalArgumentException("Funcao invalido.");
 		}
 	}
 

@@ -6,7 +6,7 @@ import psquiza.Util;
  * 
  * Classe que representa a especialidade que um Pesquisador pode assumir. Além
  * das caracteristicas do Pesquisador de outros tipos, ele possui semestre de
- * estudo e iea, um índice de eficiencia academica.
+ * estudo e IEA, um índice de eficiencia academica.
  * 
  * @author Regina Leticia Santos Felipe
  *
@@ -23,7 +23,7 @@ public class Aluno implements Especialidade {
 	private double iea;
 
 	/**
-	 * Constrói um aluno recebendo seu iea e semestre.
+	 * Constroi um aluno recebendo seu iea e semestre.
 	 * 
 	 * @param iea      Indice de Eficiencia Academica
 	 * @param semestre Semestre de Ingresso.
@@ -34,7 +34,7 @@ public class Aluno implements Especialidade {
 	}
 
 	/**
-	 * Funcao que retorna quando solicitado o semestre da aluna
+	 * Retorna o semestre do aluno
 	 * 
 	 * @return semestre da aluna
 	 */
@@ -43,8 +43,7 @@ public class Aluno implements Especialidade {
 	}
 
 	/**
-	 * Funcao que retorna quando solicitado o indice de eficiencia academica da
-	 * aluna
+	 * Retorna o indice de eficiencia do aluno(a)
 	 * 
 	 * @return indice de eficiencia academica
 	 */

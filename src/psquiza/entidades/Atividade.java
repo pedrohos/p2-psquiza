@@ -148,7 +148,7 @@ public class Atividade implements Serializable {
 
 	/**
 	 * Retorna uma string que mostra os itens realizados e as comentarios sobre as
-	 * realizações
+	 * realizacoes
 	 * 
 	 * @return retorna uma string com resultados.
 	 */
